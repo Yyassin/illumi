@@ -2,20 +2,21 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const firebase = require('firebase-admin')
-const serviceAccount = require("./serviceAccountKey.json");
+const database = require('./config/database')
 
-//init firebaseDB
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: "https://illumi-176f9.firebaseio.com"
-});
+const apiLock = require('./src/utilities/apiLock')
 
-const db = firebase.database();
+const courses_route = require('./src/courses/courses.route');
 
 dotenv.config({path: './config.env'});
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(apiLock.check);
+
+app.use('/api/courses', courses_route);
 
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
