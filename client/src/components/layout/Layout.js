@@ -2,28 +2,48 @@ import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 
 import Sidebar from "./Sidebar";
-import InnerHeader from "./Header";
+// import InnerHeader from "./InnerHeader";
+import InnerSidebar from './InnerSidebar';
 
-const { Content, Footer } = Layout;
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+} from '@ant-design/icons';
+
+import InnerRouter from '../../router/InnerRouter'
+
+
+
+const { Content, Footer, Header } = Layout;
 
 class MainLayout extends React.Component {
+
+  state = {
+    collapsed: true,
+  }
+
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  };
+
   render() {
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sidebar/>
-            {/* <InnerSidebar/> */}
+            <InnerSidebar collapsed={this.state.collapsed}/>
 
             <Layout className="site-layout">
-                <InnerHeader/>
+                <Header style={{padding:"0 16px"}}>
+                {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                  className: 'trigger',
+                  onClick: this.toggle,
+            })}
+                </Header>
 
                 <Content style={{ margin: '0 16px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                    Bill is a cat.
-                    </div>
+                <InnerRouter />
                 </Content>
 
                 <Footer style={{ textAlign: 'center' }}>Youfapatra ©2020 Created by Us</Footer>

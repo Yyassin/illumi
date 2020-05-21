@@ -7,22 +7,31 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
+import {NavLink,} from 'react-router-dom'
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-class Sidebar extends React.Component {
+class InnerSidebar extends React.Component {
+
+    onCollapse = collapsed => {
+        console.log(collapsed);
+        this.setState({ collapsed });
+    };
 
     render() {
         return (
-            <Sider  collapsed={true} >
+            <Sider trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
                 <div className="logo" />
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="1" icon={<PieChartOutlined />}>
-                        Option 1
+                        <NavLink to="/"/>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<DesktopOutlined />}>
-                        Option 2
+                    <NavLink to="/home2"/>
+                    </Menu.Item>
+                    <Menu.Item key="10" icon={<DesktopOutlined />}>
+                    <NavLink to="/home3"/>
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<UserOutlined />} title="User">
                         <Menu.Item key="3">Tom</Menu.Item>
@@ -40,4 +49,4 @@ class Sidebar extends React.Component {
     }
 }
 
-export default Sidebar;
+export default InnerSidebar;

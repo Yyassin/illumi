@@ -1,12 +1,16 @@
 import React from 'react';
 import 'antd/dist/antd.dark.css';
-import MainLayout from './components/layout/Layout'
+import BaseRouter from './router/BaseRouter';
+import {HashRouter, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App" style={{background: 'yellow', height: '90vh'}}>
-      <MainLayout />
-    </div>
+    <HashRouter>
+      <div className="App">
+        <BaseRouter />
+      </div>
+    </HashRouter>
+    
   );
 }
 
