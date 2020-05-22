@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 
 const database = require('./config/database')
 const apiLock = require('./src/utilities/apiLock')
-const courses_route = require('./src/courses/courses.route');
+const core_route = require('./src/core/core.route');
+const register_route = require('./src/register/register.route');
 
 dotenv.config({path: './config.env'});
 
@@ -15,7 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(apiLock.check);
 
-app.use('/api/courses', courses_route);
+app.use('/api/core', core_route);
+app.use('/api/register', register_route);
 
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));

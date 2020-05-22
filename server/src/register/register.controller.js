@@ -16,8 +16,3 @@ exports.signup = async (req, res) => {
         console.log(error.message);
     }
 }
-
-exports.test = (req, res) => {
-    //console.log(res)
-    res.json({msg: "hello"});
-}

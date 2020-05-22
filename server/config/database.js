@@ -9,7 +9,7 @@ const fireApp = firebase.initializeApp({
 
 console.log('Connected to Firebase')
 
-exports.db = fireApp.database();
+exports.db = fireApp.firestore();
 exports.auth = fireApp.auth();
 
 /*firebase.auth().createUser({
