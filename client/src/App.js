@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.dark.css';
 import BaseRouter from './router/BaseRouter';
-import {HashRouter, Route} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 
 function App() {
   return (

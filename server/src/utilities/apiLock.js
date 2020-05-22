@@ -2,6 +2,7 @@ const whitelist = [
     'http://localhost:9000/',
 ]
 
+// check if request origin is whitelisted
 exports.check = (req, res, next) => {
     const origin = req.headers.referer;
 

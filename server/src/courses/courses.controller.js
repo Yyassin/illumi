@@ -3,13 +3,12 @@ const database = require("../../config/database")
 
 exports.signup = async (req, res) => {
     try {
-        //console.log(res);
         console.log(req.body);
 
         await database.auth.createUser({
              email: req.body.email,
-             password: 'sadsadsad',
-             displayName: 'test',
+             password: req.body.password,
+             displayName: req.body.email,
          })
 
         console.log('Success saved user ' + req.body.email)
