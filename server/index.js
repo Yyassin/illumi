@@ -2,10 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+
 const database = require('./config/database')
-
 const apiLock = require('./src/utilities/apiLock')
-
 const courses_route = require('./src/courses/courses.route');
 
 dotenv.config({path: './config.env'});

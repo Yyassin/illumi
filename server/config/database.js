@@ -7,7 +7,7 @@ const fireApp = firebase.initializeApp({
     databaseURL: "https://illumi-176f9.firebaseio.com"
 });
 
-console.log('Firebase initilizaed')
+console.log('Connected to Firebase')
 
 exports.db = fireApp.database();
 exports.auth = fireApp.auth();
