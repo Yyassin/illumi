@@ -9,12 +9,25 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width: 900, height: 680});
+  splash = new BrowserWindow({width: 400, height: 400, frame: false,  titleBarStyle: 'hidden',});
+  //always on top??
+
+  mainWindow = new BrowserWindow({width: 900, height: 680, show: false});
   mainWindow.setMinimumSize(400, 400);
   mainWindow.setMenu(null)
   mainWindow.webContents.openDevTools();
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  
+  mainWindow.once('ready-to-show', () => {
+    setTimeout(() => {
+      splash.close();
+      mainWindow.show();
+    }, 0); //idk if we want a delay but wtv
+    
+  });
+
   mainWindow.on('closed', () => mainWindow = null);
+
 }
 
 app.on('ready', createWindow);
