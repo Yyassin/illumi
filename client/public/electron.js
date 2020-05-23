@@ -5,6 +5,7 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+const globalShortcut = electron.globalShortcut;
 
 let mainWindow;
 
@@ -15,7 +16,6 @@ function createWindow() {
   mainWindow = new BrowserWindow({width: 900, height: 680, show: false});
   mainWindow.setMinimumSize(400, 400);
   mainWindow.setMenu(null)
-  mainWindow.webContents.openDevTools();
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   
   mainWindow.once('ready-to-show', () => {
@@ -23,6 +23,10 @@ function createWindow() {
       splash.close();
       mainWindow.show();
     }, 0); //idk if we want a delay but wtv
+
+  globalShortcut.register('Alt+1', () =>
+      mainWindow.webContents.openDevTools({mode: 'detach'})
+  );
     
   });
 
