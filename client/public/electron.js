@@ -5,6 +5,7 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+//remove once local
 const globalShortcut = electron.globalShortcut;
 
 let mainWindow;
@@ -24,6 +25,7 @@ function createWindow() {
       mainWindow.show();
     }, 0); //idk if we want a delay but wtv
 
+  //remove once local
   globalShortcut.register('Alt+1', () =>
       mainWindow.webContents.openDevTools({mode: 'detach'})
   );
