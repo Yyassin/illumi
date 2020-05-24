@@ -1,17 +1,24 @@
 const database = require("../../config/database");
 
-exports.createServer = (data) => {
-    console.log(data);
+exports.serverModel = (data) => {
     const server = {
+        id: '',
         name: data.name,
         description: data.description,
         outline: '',
-        thumbnail: ''
+        thumbnail: '',
     }
-
-    database.db.collection('servers').add(server)
-    .then(console.log(`Success! Saved server: ${server.name}`))
-    .catch(error => console.log(error.message));
    
     return server;
+}
+
+exports.memberModel = (data) => {
+    const member = {
+        id: '',
+        user: data.user,
+        server: data.server,
+        role: data.role,
+    }
+
+    return member;
 }
