@@ -1,5 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.dark.css';
+import './App.css'
 import BaseRouter from './router/BaseRouter';
 import {HashRouter} from 'react-router-dom';
 
