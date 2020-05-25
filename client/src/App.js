@@ -10,10 +10,10 @@ function App() {
   return (
     <HashRouter>
       <div className="App">
-        <Titlebar></Titlebar>
+          <Titlebar></Titlebar>
           <BaseRouter />
-        </div>
-      </HashRouter>
+      </div>
+    </HashRouter>
     
   );
 }

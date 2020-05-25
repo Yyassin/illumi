@@ -32,7 +32,7 @@ class RegisterForm extends React.Component {
       >
         <Form.Item
           name="email"
-          rules={[{ required: true, message: 'Please input email.' },
+          rules={[{ required: true, message: 'Please input email.'},
                             { type: 'email', message: 'Invalid email input'}]}
         >
           <Input id='email' onChange={this.onChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />

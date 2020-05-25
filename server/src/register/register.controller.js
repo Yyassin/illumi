@@ -24,7 +24,6 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res) => {
     try {
         const result =  await database.auth.signInWithEmailAndPassword(req.body.email, req.body.password)
-        
         try {
             const token = await result.user.getIdTokenResult(true)
             res.status(200).json(token)
@@ -57,3 +56,28 @@ exports.validate = (req, res, next) => {
             return res.json({message: 'Invalid token'})
         })
 }
+
+exports.signout = (req, res) => {
+    database.auth.signOut()
+    .then(() => console.log('signed out'))
+    .catch((e) => console.log(e.message))
+}
+
+database.auth.onAuthStateChanged((user) => {
+    database.admin.listUsers(1000, 'www')
+    .then(data => {
+        console.log(data.users)
+        data.users.forEach(user => {
+            console.log(JSON.stringify(user))
+        })})
+        
+    .catch(error => {
+        console.log(error)  
+    })  
+
+    if (user) {
+        console.log("Authenticated.")
+    } else {
+        console.log("Not Authenticated.")
+    }
+})

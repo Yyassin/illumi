@@ -1,14 +1,14 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
 import RegisterForm from './RegisterForm'
+import './Register.css'
 
 
 class RegisterLayout extends React.Component {
     render() {
         return (
-            <div>
+            <div>    
                 <div className="register-bg"></div>
-                
                 <h1 className="logo">illumi</h1>
                 <Row className="register-page">
                     <Card bordered={false} className="register-card">
