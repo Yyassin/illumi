@@ -3,49 +3,41 @@ const database = require("../../config/database")
 
 exports.signup = async (req, res) => {
     try {
-        database.auth.createUserWithEmailAndPassword(req.body.email, req.body.password)
-            .then(result => {
-                result.user.getIdToken(true)
-                    .then(token => {
-                        res.status(200).json(token)
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                        res.status(200).json({message: error.message})
-                    })
-            })
-            .catch(error => {
-                console.log(error.message)
-                res.status(500).json({message: error.message})
-            })
+        const result =  await database.auth.createUserWithEmailAndPassword(req.body.email, req.body.password)
 
-        console.log('Success saved user ' + req.body.email)
+        try {
+            const token = await result.user.getIdTokenResult(true)
+            res.status(200).json(token)
+            console.log('Success signed in as ' + req.body.email)
+        } catch (error) {
+            console.log(error.message)
+            res.status(500).json({message: error.message})
+        }
+
     } catch (error) {
+        console.log(error.message)
+        res.status(500).json({message: error.message})
         console.log(error.message);
     }
 }
 
 exports.signin = async (req, res) => {
     try {
-        database.auth.signInWithEmailAndPassword(req.body.email, req.body.password)
-            .then(result => {
-                result.user.getIdTokenResult(true)
-                    .then(token => {
-                        res.status(200).json(token)
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                        res.status(200).json({message: error.message})
-                    })
-            })
-            .catch(error => {
-                console.log(error.message)
-                res.status(500).json({message: error.message})
-            })
+        const result =  await database.auth.signInWithEmailAndPassword(req.body.email, req.body.password)
+        
+        try {
+            const token = await result.user.getIdTokenResult(true)
+            res.status(200).json(token)
+            console.log('Success signed in as ' + req.body.email)
 
-        console.log('Success signed in as ' + req.body.email)
+        } catch (error) {
+            console.log(error.message)
+            res.status(500).json({message: error.message})
+        }
+        
     } catch (error) {
-        console.log(error.message);
+        console.log("msg: " + error.message)
+        return res.status(200).json({message: error.message})
     }
 }
 
