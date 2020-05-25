@@ -1,5 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.dark.css';
+
+import Titlebar from './components/Titlebar/Titlebar'
 import BaseRouter from './router/BaseRouter';
 import {HashRouter} from 'react-router-dom';
 
@@ -7,9 +9,10 @@ function App() {
   return (
     <HashRouter>
       <div className="App">
-        <BaseRouter />
-      </div>
-    </HashRouter>
+        <Titlebar></Titlebar>
+          <BaseRouter />
+        </div>
+      </HashRouter>
     
   );
 }
