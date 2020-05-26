@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout, Menu} from "antd";
 
-import Scrollbars from 'react-custom-scrollbars'
+import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import {
     DesktopOutlined,
     PieChartOutlined,
@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
     render() {
         return (
             <Sider  collapsed={true} >
-                <Scrollbars style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+                <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
                 
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -46,7 +46,7 @@ class Sidebar extends React.Component {
                         <Menu.Item key="16" icon={<FileOutlined />} />
 
                     </Menu>
-                </Scrollbars>
+                </SidebarScrollbar>
             </Sider>
         )
     }

@@ -43,7 +43,8 @@ class Chat extends React.Component {
                 </ColoredScrollbars>
 
                 <div className="chat-form-container">
-                    <input onChange={this.onChange} type="text" class="message-input" id="messageInput" name="message" placeholder="Type a msg..." />
+                    <Button className="file-send-btn" onClick={this.onSend}><a href=""></a></Button>
+                    <input onChange={this.onChange} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
                     <Button className="message-send-btn" onClick={this.onSend}><a href="">{<SendOutlined />}</a></Button>
                     {/* <Button type="submit" id="message-btn" class="send-button">Send</Button> */}
                 </div>

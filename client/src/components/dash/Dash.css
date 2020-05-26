@@ -16,7 +16,7 @@ li {
     width: 100%;
     color: black;
     
-    background-color: #232323;
+    background-color: #23232390;
     padding: 0px;
     border-radius: 10px;
 }
@@ -42,6 +42,15 @@ li {
     background-color: #16161650;
     border-radius: 10px;
     transition: color 100ms ease-in-out;
+}
+
+.file-send-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.message-send-btn a {
+    transition: transform 200ms ease-in-out;
 }
 
 .message-send-btn:hover {

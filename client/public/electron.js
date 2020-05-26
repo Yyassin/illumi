@@ -6,6 +6,14 @@ const ipcMain = require('electron').ipcMain;
 
 let mainWindow;
 
+app.on('browser-window-focus', () => {
+  mainWindow.webContents.send('focused')
+})
+
+app.on('browser-window-blur', () => {
+  mainWindow.webContents.send('blurred')
+})
+
 app.on('ready', () => {
   mainWindow = config.createWindow();
 });

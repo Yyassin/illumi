@@ -4,7 +4,6 @@ import {NavLink, Redirect,} from 'react-router-dom'
 import {signOut} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 
-import { Scrollbars } from 'react-custom-scrollbars';
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 
 import {
@@ -33,7 +32,7 @@ class InnerSidebar extends React.Component {
         return (
             
             <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
-                <Scrollbars style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+                <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'#333333'}>
                     <Menu className="inner-inner-menu" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined />} onClick={this.logout}/>
                         <Menu.Item key="2" icon={<DesktopOutlined />}>
@@ -60,7 +59,7 @@ class InnerSidebar extends React.Component {
                         <Menu.Item key="15" icon={<FileOutlined />} />
 
                     </Menu>
-                </Scrollbars>
+                </SidebarScrollbar>
 
                 <div className="profile-section">
                         profile

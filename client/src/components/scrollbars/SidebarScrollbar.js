@@ -19,7 +19,6 @@ export default class SidebarScrollbar extends Component {
     renderView({ style, ...props }) {
         const { top } = this.state;
         const viewStyle = {
-            padding: 20,
             // backgroundColor: `232323`,
             // color: `white`
         };
@@ -34,7 +33,7 @@ export default class SidebarScrollbar extends Component {
     renderThumb({ style, ...props }) {
         const { top } = this.state;
         const thumbStyle = {
-            backgroundColor: `#0a0a0a`
+            backgroundColor: this.props.bg || ''
         };
         return (
             <div
@@ -55,7 +54,7 @@ export default class SidebarScrollbar extends Component {
                 renderView={this.renderView}
                 
                 renderTrackVertical={({style, ...props}) =>
-                     <div {...props} className="Vertical" style={{...style, backgroundColor: '#232323', right: '2px', bottom: '2px', top: '2px', borderRadius: '5px', width: '7px'}}/>
+                     <div {...props} className="Vertical" style={{...style, backgroundColor: this.props.tc || '', right: '2px', bottom: '2px', top: '2px', borderRadius: '5px', width: '5px'}}/>
                     }
 
                 renderThumbHorizontal={this.renderThumb}

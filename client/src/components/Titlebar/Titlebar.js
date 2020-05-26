@@ -10,6 +10,7 @@ const Titlebar = (props) => {
 
     ipcRenderer.on('focused', () => {
         setIsActive(true)
+        console.log('active')
     })
 
     ipcRenderer.on('blurred', () => {
@@ -18,6 +19,7 @@ const Titlebar = (props) => {
 
     ipcRenderer.on('maximized', () => {
         setIsMaximized(true)
+        console.log('maxii')
     })
 
     ipcRenderer.on('unmaximized', () => {
@@ -44,7 +46,7 @@ const Titlebar = (props) => {
         <div className="Titlebar">
             <div
                 className={isActive ? 'Title-Bar' : 'Title-Bar-inactive'}
-                style={{'background-color': props.bg}}
+                style={ isActive ? {'background-color': props.bg[1]} : {'background-color': props.bg[0]}}
             >
                 <div className="Titlebar-drag-region"></div>
                 <div className="Title-Bar__section-icon">

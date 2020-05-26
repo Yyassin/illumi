@@ -47,7 +47,7 @@ exports.createWindow = () => {
 
     mainWindow.on('closed', () => mainWindow = null);
     
-  });
+    });
 
   return mainWindow;
 
