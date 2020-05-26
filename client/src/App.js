@@ -9,8 +9,7 @@ import {HashRouter } from 'react-router-dom';
 function App() {
   return (
     <HashRouter>
-      <div className="App">
-          <Titlebar></Titlebar>
+      <div className="App">          
           <BaseRouter />
       </div>
     </HashRouter>

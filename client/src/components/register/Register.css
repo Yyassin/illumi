@@ -11,7 +11,7 @@ Register Layout
     -moz-filter: blur(5px);
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
-    filter: blur(0px);
+    filter: blur(5px);
 
     width: 100vw;
     height: 100vh;
@@ -43,7 +43,7 @@ Register Layout
 .logo {
     position: absolute;
     left: 20px;
-    top: 40px;
+    top: 20px;
     z-index: 999;
 }
 

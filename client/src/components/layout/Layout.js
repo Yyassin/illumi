@@ -11,6 +11,7 @@ import InnerRouter from '../../router/InnerRouter'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
 import InnerHeader from './InnerHeader';
+import Titlebar from '../Titlebar/Titlebar'
 
 const { Content, Footer, Header } = Layout;
 
@@ -28,7 +29,9 @@ class MainLayout extends React.Component {
 
   render() {
     return (
-        <Layout className="main-layout">
+      <div>
+        <Titlebar bg={"#171a1c"} />
+        <Layout className="main-layout">            
             <Sidebar/>
             <InnerSidebar collapsed={this.state.collapsed}/>
 
@@ -41,6 +44,7 @@ class MainLayout extends React.Component {
 
             </Layout>
         </Layout>
+      </div>
     );
   }
 }

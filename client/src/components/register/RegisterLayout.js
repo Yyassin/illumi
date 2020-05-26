@@ -3,6 +3,8 @@ import { Card, Row, Col } from 'antd';
 import RegisterForm from './RegisterForm'
 import './Register.css'
 
+import Titlebar from '../Titlebar/Titlebar'
+
 
 class RegisterLayout extends React.Component {
     render() {
@@ -17,6 +19,8 @@ class RegisterLayout extends React.Component {
                         <RegisterForm />
                     </Card>   
                 </Row>
+
+                <Titlebar bg={"transparent"} />
             </div>
 
 

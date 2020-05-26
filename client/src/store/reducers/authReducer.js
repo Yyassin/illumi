@@ -1,6 +1,6 @@
 const initState = {
     accessToken: '',
-    auth: true,
+    auth: false,
     authMsg: '',
 }
 
@@ -10,6 +10,7 @@ const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 accessToken: action.accessToken,
+                authMsg: '',
                 auth: true
             }
 

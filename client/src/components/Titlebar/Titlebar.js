@@ -1,14 +1,9 @@
-// Designed by Ericarthurc
-// https://github.com/Ericarthurc
-// October 24, 2019
-// Wildwood Tech
-
 import React, { useState } from 'react';
 import './Titlebar.css'
 
 const ipcRenderer = window.require('electron').ipcRenderer
 
-const Titlebar = () => {
+const Titlebar = (props) => {
 
     const [isActive, setIsActive] = useState()
     const [isMaximized, setIsMaximized] = useState()
@@ -49,6 +44,7 @@ const Titlebar = () => {
         <div className="Titlebar">
             <div
                 className={isActive ? 'Title-Bar' : 'Title-Bar-inactive'}
+                style={{'background-color': props.bg}}
             >
                 <div className="Titlebar-drag-region"></div>
                 <div className="Title-Bar__section-icon">

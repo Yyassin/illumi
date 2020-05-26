@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { authenticate } from "../../store/actions/authActions";
@@ -11,6 +11,12 @@ class RegisterForm extends React.Component {
   state={
     email: '',
     password: ''
+  }
+
+  componentDidMount() {
+    message.config({
+      top: 40,
+    })
   }
   
   onChange = values => {
@@ -21,10 +27,18 @@ class RegisterForm extends React.Component {
 
   onSignIn = async () => {
     await this.props.authenticate(this.state, 'signin')
+    this.sendMessage()
   }
 
   onSignUp = async () => {
     await this.props.authenticate(this.state, 'signup')
+    this.sendMessage()
+  }
+
+  sendMessage = () => {
+    if(this.props.authMsg !== "") {
+      message.error(this.props.authMsg, 3)
+    }
   }
 
   render () {
@@ -37,7 +51,7 @@ class RegisterForm extends React.Component {
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Please input email.'},
-                            { type: 'email', message: 'Invalid email input'}]}
+                  { type: 'email', message: 'Invalid email input'}]}
         >
           <Input id='email' onChange={this.onChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
