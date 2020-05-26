@@ -38,8 +38,8 @@ class MainLayout extends React.Component {
             <Layout className="inner-layout">
                 <InnerHeader></InnerHeader>
 
-                <Content className="main-content">
-                <InnerRouter />
+                <Content className="main-content">                  
+                    <InnerRouter />
                 </Content>
 
             </Layout>

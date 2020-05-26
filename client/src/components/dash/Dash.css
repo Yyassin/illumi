@@ -1,5 +1,56 @@
-.site-layout-background,
+li {
+    text-decoration: none;
+    list-style: none;
+}
+
 .chat-container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-form-container {
+    display: flex;
+    justify-content: left;
+    align-content: center;
     width: 100%;
+    color: black;
+    
+    background-color: #232323;
+    padding: 0px;
+    border-radius: 10px;
+}
+
+.message-input {
+    flex: 10;
+    background: transparent;
+    color: #fff;
+    border: none;
+    width: 80%;
+    padding: 8px;
+}
+
+.message-send-btn {
+    font-size: 17px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border: none;
+    color: #fff;
+    background-color: #16161650;
+    border-radius: 10px;
+    transition: color 100ms ease-in-out;
+}
+
+.message-send-btn:hover {
+    color: plum;
+    filter: brightness(1.10);
+    background-color: #16161699;
+    /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1) */
+}
+
+.message-send-btn:hover a {
+    transform: scale(1.2);
 }

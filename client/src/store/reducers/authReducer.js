@@ -1,6 +1,6 @@
 const initState = {
     accessToken: '',
-    auth: false,
+    auth: true,
     authMsg: '',
 }
 
