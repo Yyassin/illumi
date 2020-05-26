@@ -1,6 +1,8 @@
 import React from 'react';
 import {Layout, Menu} from "antd";
-import {NavLink,} from 'react-router-dom'
+import {NavLink, Redirect,} from 'react-router-dom'
+import {signOut} from "../../store/actions/authActions";
+import {connect} from "react-redux";
 
 import {
     DesktopOutlined,
@@ -16,23 +18,25 @@ const { SubMenu } = Menu;
 class InnerSidebar extends React.Component {
 
     onCollapse = collapsed => {
-        console.log(collapsed);
         this.setState({ collapsed });
     };
 
+    logout = async () => {
+        await this.props.signOut(this.props.accessToken)
+    }
+
     render() {
+        if (!this.props.auth) return <Redirect to='/'/>
         return (
             <Sider trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
                 <div className="logo" />
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                    <Menu.Item key="1" icon={<PieChartOutlined />}>
-                        <NavLink to="/"/>
-                    </Menu.Item>
+                    <Menu.Item key="1" icon={<PieChartOutlined />} onClick={this.logout}/>
                     <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    <NavLink to="/home2"/>
+                        <NavLink to="/home/2/"/>
                     </Menu.Item>
                     <Menu.Item key="10" icon={<DesktopOutlined />}>
-                    <NavLink to="/home3"/>
+                        <NavLink to="/home/3/"/>
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<UserOutlined />} title="User">
                         <Menu.Item key="3">Tom</Menu.Item>
@@ -50,4 +54,18 @@ class InnerSidebar extends React.Component {
     }
 }
 
-export default InnerSidebar;
+const mapStateToProps = (state) => {
+    return {
+        accessToken: state.auth.accessToken,
+        auth: state.auth.auth,
+        authMsg: state.auth.authMsg,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: (token) => dispatch(signOut(token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InnerSidebar);

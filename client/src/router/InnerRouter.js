@@ -5,9 +5,9 @@ import Home2 from '../components/dash/Home2'
 
 const InnerRouter = () => (
     <Switch>
-        <Route exact path="/" component={Home}></Route>
-        <Route exact path="/home2" component={Home2}></Route>
-        <Route exact path="/home3" component={Home}></Route>
+        <Route exact path="/home/" component={Home}></Route>
+        <Route exact path="/home/2/" component={Home2}></Route>
+        <Route exact path="/home/3/" component={Home}></Route>
     </Switch>
 )
 

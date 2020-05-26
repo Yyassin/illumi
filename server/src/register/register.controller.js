@@ -8,7 +8,7 @@ exports.signup = async (req, res) => {
         let user = await userModel.findOne({email})
 
         if (user) {
-            return res.json({message: "User already exists."})
+            return res.status(400).json({message: "User already exists."})
         }
 
         user = new userModel(req.body)
@@ -20,7 +20,7 @@ exports.signup = async (req, res) => {
         return res.status(200).json({'token': token})
 
     } catch (error) {
-        return res.json({message: error.message})
+        return res.status(500).json({message: error.message})
     }
 }
 
@@ -30,11 +30,11 @@ exports.signin = async (req, res) => {
         const user = await userModel.findOne({email});
 
         if(!user) {
-            return res.json({message: "User with that email does not exist."})
+            return res.status(400).json({message: 'User with that email does not exist.'});
         }
 
         if(!(password == jwt.verify(user.password, keys.api.key).password)) {
-            return res.json({message: "Incorrect password."})
+            return res.status(400).json({message: "Incorrect password."})
         }
 
         const token = createToken(user)
@@ -42,33 +42,37 @@ exports.signin = async (req, res) => {
         return res.status(200).json({'token': token})
 
     } catch (error) {
-        return res.json({message: error.message})
+        console.log(error.message)
+        return res.status(500).json({message: error.message})
     }
 }
 
-exports.validate = (req, res, next) => {
+exports.validate = async (req, res, next) => {
     if(!req.body.token) {
-        return res.json({message: "Missing token"})
+        return res.status(400).json({message: "Missing token"})
     }
 
     const decoded = jwt.verify(req.body.token, keys.api.key)
 
     if(!decoded.user) {
-        return res.json({message: "Invalid token"})
+        return res.status(400).json({message: "Invalid token"})
     }
 
     if(decoded.exp < Math.floor(Date.now()/1000)) {
-        return res.json({message: "Expired token"})
+        return res.status(400).json({message: "Expired token"})
     }
 
     const token = createToken(decoded.user)
 
-    res.json({token: token})
+    //res.status(200).write({token: token})
+    req.body.token = token
+
     next()
 }
 
 exports.signout = (req, res) => {
-    res.json({token: ''})
+    //return res.status(200).json({token: req.body.token})
+    return res.status(200).json({})
 }
 
 const createToken = (user) => {
