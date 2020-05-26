@@ -16,6 +16,11 @@ General
     user-select: none;
     cursor: default;
 }
+
 button, textarea, :focus {
     outline: none;
 }
+
+
+
+

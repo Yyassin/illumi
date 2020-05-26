@@ -4,6 +4,9 @@ import {NavLink, Redirect,} from 'react-router-dom'
 import {signOut} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 
+import { Scrollbars } from 'react-custom-scrollbars';
+import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
+
 import {
     DesktopOutlined,
     PieChartOutlined,
@@ -28,27 +31,43 @@ class InnerSidebar extends React.Component {
     render() {
         if (!this.props.auth) return <Redirect to='/'/>
         return (
-            <Sider trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
-                <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                    <Menu.Item key="1" icon={<PieChartOutlined />} onClick={this.logout}/>
-                    <Menu.Item key="2" icon={<DesktopOutlined />}>
-                        <NavLink to="/home/2/"/>
-                    </Menu.Item>
-                    <Menu.Item key="10" icon={<DesktopOutlined />}>
-                        <NavLink to="/home/3/"/>
-                    </Menu.Item>
-                    <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-                        <Menu.Item key="3">Tom</Menu.Item>
-                        <Menu.Item key="4">Bill</Menu.Item>
-                        <Menu.Item key="5">Alex</Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-                        <Menu.Item key="6">Team 1</Menu.Item>
-                        <Menu.Item key="8">Team 2</Menu.Item>
-                    </SubMenu>
-                    <Menu.Item key="9" icon={<FileOutlined />} />
-                </Menu>
+            
+            <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
+                <Scrollbars style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+                    <Menu className="inner-inner-menu" defaultSelectedKeys={['1']} mode="inline">
+                        <Menu.Item key="1" icon={<PieChartOutlined />} onClick={this.logout}/>
+                        <Menu.Item key="2" icon={<DesktopOutlined />}>
+                            <NavLink to="/home/2/"/>
+                        </Menu.Item>
+                        <Menu.Item key="10" icon={<DesktopOutlined />}>
+                            <NavLink to="/home/3/"/>
+                        </Menu.Item>
+                        <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+                            <Menu.Item key="3">Tom</Menu.Item>
+                            <Menu.Item key="4">Bill</Menu.Item>
+                            <Menu.Item key="5">Alex</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
+                            <Menu.Item key="6">Team 1</Menu.Item>
+                            <Menu.Item key="8">Team 2</Menu.Item>
+                        </SubMenu>
+                        <Menu.Item key="9" icon={<FileOutlined />} />
+                        <Menu.Item key="10" icon={<FileOutlined />} />
+                        <Menu.Item key="11" icon={<FileOutlined />} />
+                        <Menu.Item key="12" icon={<FileOutlined />} />
+                        <Menu.Item key="13" icon={<FileOutlined />} />
+                        <Menu.Item key="14" icon={<FileOutlined />} />
+                        <Menu.Item key="15" icon={<FileOutlined />} />
+
+                    </Menu>
+                </Scrollbars>
+
+                <div className="profile-section">
+                        profile
+                </div>
+                
+                
+
             </Sider>
         )
     }

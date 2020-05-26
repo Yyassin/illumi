@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
+import './Layout.css'
 
 import {
   MenuUnfoldOutlined,
@@ -9,13 +10,14 @@ import {
 import InnerRouter from '../../router/InnerRouter'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
+import InnerHeader from './InnerHeader';
 
 const { Content, Footer, Header } = Layout;
 
 class MainLayout extends React.Component {
 
   state = {
-    collapsed: true,
+    collapsed: false,
   }
 
   toggle = () => {
@@ -26,23 +28,17 @@ class MainLayout extends React.Component {
 
   render() {
     return (
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout className="main-layout">
             <Sidebar/>
             <InnerSidebar collapsed={this.state.collapsed}/>
 
-            <Layout className="site-layout">
-                <Header style={{padding:"0 16px"}}>
-                {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                  className: 'trigger',
-                  onClick: this.toggle,
-            })}
-                </Header>
+            <Layout className="inner-layout">
+                <InnerHeader></InnerHeader>
 
-                <Content style={{ margin: '0 16px' }}>
+                <Content className="main-content">
                 <InnerRouter />
                 </Content>
 
-                <Footer style={{ textAlign: 'center' }}>Youfapatra ©2020 Created by Us</Footer>
             </Layout>
         </Layout>
     );
@@ -50,3 +46,10 @@ class MainLayout extends React.Component {
 }
 
 export default MainLayout;
+
+{/* <Header style={{padding:"0 16px"}}>
+                {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                  className: 'trigger',
+                  onClick: this.toggle,
+            })}
+                </Header> */}

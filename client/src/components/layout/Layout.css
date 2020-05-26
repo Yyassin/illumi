@@ -1,0 +1,37 @@
+.main-layout {
+    min-height: calc(100vh - 30px);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.main-content {
+    margin: 16px;
+}
+
+.inner-layout {
+    background-color: #454545;
+}
+
+.inner-sidebar,
+.inner-inner-menu {
+    background-color: #232323;
+}
+
+.profile-section {
+    display: flex;
+    margin-top: auto;
+
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+    width: 100%;
+}
+
+.ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+}
