@@ -83,7 +83,6 @@ exports.validate = async (req, res, next) => {
 }
 
 exports.signout = (req, res) => {
-    //return res.status(200).json({token: req.body.token})
     return res.status(200).json({})
 }
 
@@ -96,17 +95,6 @@ const createToken = (user) => {
             },
             keys.api.key,
             {expiresIn: '1h'}
-        )
-    )
-}
-
-const hashPassword = (password) => {
-    return (
-        jwt.sign(
-            {
-                password: password,
-            },
-            keys.api.key
         )
     )
 }
