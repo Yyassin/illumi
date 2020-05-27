@@ -1,5 +1,6 @@
 const keys = require("../../config/keys")
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
 const userModel = require("./register.models")
 
 exports.signup = async (req, res) => {
@@ -12,7 +13,11 @@ exports.signup = async (req, res) => {
         }
 
         user = new userModel(req.body)
-        user.password = hashPassword(user.password)
+        
+        //hash the password before storing
+        user.password = await bcrypt.hash(user.password+keys.api.key, 10);
+
+        // user.password = hashPassword(user.password)
         await user.save()
 
         const token = createToken(user)
@@ -33,9 +38,16 @@ exports.signin = async (req, res) => {
             return res.status(400).json({message: 'User with that email does not exist.'});
         }
 
-        if(!(password == jwt.verify(user.password, keys.api.key).password)) {
+
+        const result = await bcrypt.compare(password+keys.api.key, user.password)
+        
+        if (!result) {
             return res.status(400).json({message: "Incorrect password."})
         }
+        
+        // if(!(password == jwt.verify(user.password, keys.api.key).password)) {
+        //     return res.status(400).json({message: "Incorrect password."})
+        // }
 
         const token = createToken(user)
 
@@ -71,7 +83,6 @@ exports.validate = async (req, res, next) => {
 }
 
 exports.signout = (req, res) => {
-    //return res.status(200).json({token: req.body.token})
     return res.status(200).json({})
 }
 
@@ -84,17 +95,6 @@ const createToken = (user) => {
             },
             keys.api.key,
             {expiresIn: '1h'}
-        )
-    )
-}
-
-const hashPassword = (password) => {
-    return (
-        jwt.sign(
-            {
-                password: password,
-            },
-            keys.api.key
         )
     )
 }
