@@ -1,5 +1,6 @@
 import React from 'react';
 import {Layout, Breadcrumb, Divider } from 'antd';
+import './Dash.css'
 
 
 const Home2 = () => (

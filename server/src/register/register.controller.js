@@ -1,83 +1,112 @@
-const express = require('express')
-const database = require("../../config/database")
+const keys = require("../../config/keys")
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
+const userModel = require("./register.models")
 
 exports.signup = async (req, res) => {
     try {
-        const result =  await database.auth.createUserWithEmailAndPassword(req.body.email, req.body.password)
+        const email = req.body.email
+        let user = await userModel.findOne({email})
 
-        try {
-            const token = await result.user.getIdTokenResult(true)
-            res.status(200).json(token)
-            console.log('Success signed in as ' + req.body.email)
-        } catch (error) {
-            console.log(error.message)
-            res.status(500).json({message: error.message})
+        if (user) {
+            return res.status(400).json({message: "User already exists."})
         }
 
+        user = new userModel(req.body)
+        
+        //hash the password before storing
+        user.password = await bcrypt.hash(user.password+keys.api.key, 10);
+
+        // user.password = hashPassword(user.password)
+        await user.save()
+
+        const token = createToken(user)
+
+        return res.status(200).json({'token': token})
+
     } catch (error) {
-        console.log(error.message)
-        res.status(500).json({message: error.message})
-        console.log(error.message);
+        return res.status(500).json({message: error.message})
     }
 }
 
 exports.signin = async (req, res) => {
     try {
-        const result =  await database.auth.signInWithEmailAndPassword(req.body.email, req.body.password)
-        try {
-            const token = await result.user.getIdTokenResult(true)
-            res.status(200).json(token)
-            console.log('Success signed in as ' + req.body.email)
+        const { email, password } = req.body;
+        const user = await userModel.findOne({email});
 
-        } catch (error) {
-            console.log(error.message)
-            res.status(500).json({message: error.message})
+        if(!user) {
+            return res.status(400).json({message: 'User with that email does not exist.'});
+        }
+
+
+        const result = await bcrypt.compare(password+keys.api.key, user.password)
+        
+        if (!result) {
+            return res.status(400).json({message: "Incorrect password."})
         }
         
+        // if(!(password == jwt.verify(user.password, keys.api.key).password)) {
+        //     return res.status(400).json({message: "Incorrect password."})
+        // }
+
+        const token = createToken(user)
+
+        return res.status(200).json({'token': token})
+
     } catch (error) {
-        console.log("msg: " + error.message)
-        return res.status(200).json({message: error.message})
+        console.log(error.message)
+        return res.status(500).json({message: error.message})
     }
 }
 
-exports.validate = (req, res, next) => {
-    const token = req.body.accessToken
-
-    if(!token) {
-        return res.json({message: 'Missing token'})
+exports.validate = async (req, res, next) => {
+    if(!req.body.token) {
+        return res.status(400).json({message: "Missing token"})
     }
 
-    database.admin.verifyIdToken(token)
-        .then(result => {
-            next();
-        })
-        .catch(error => {
-            console.log(error.message)
-            return res.json({message: 'Invalid token'})
-        })
+    const decoded = jwt.verify(req.body.token, keys.api.key)
+
+    if(!decoded.user) {
+        return res.status(400).json({message: "Invalid token"})
+    }
+
+    if(decoded.exp < Math.floor(Date.now()/1000)) {
+        return res.status(400).json({message: "Expired token"})
+    }
+
+    const token = createToken(decoded.user)
+
+    //res.status(200).write({token: token})
+    req.body.token = token
+
+    next()
 }
 
 exports.signout = (req, res) => {
-    database.auth.signOut()
-    .then(() => console.log('signed out'))
-    .catch((e) => console.log(e.message))
+    //return res.status(200).json({token: req.body.token})
+    return res.status(200).json({})
 }
 
-database.auth.onAuthStateChanged((user) => {
-    database.admin.listUsers(1000, 'www')
-    .then(data => {
-        console.log(data.users)
-        data.users.forEach(user => {
-            console.log(JSON.stringify(user))
-        })})
-        
-    .catch(error => {
-        console.log(error)  
-    })  
+const createToken = (user) => {
+    return (
+        jwt.sign(
+            {
+                user: user,
+                date: Date.now()
+            },
+            keys.api.key,
+            {expiresIn: '1h'}
+        )
+    )
+}
 
-    if (user) {
-        console.log("Authenticated.")
-    } else {
-        console.log("Not Authenticated.")
-    }
-})
+const hashPassword = (password) => {
+    return (
+        jwt.sign(
+            {
+                password: password,
+            },
+            keys.api.key
+        )
+    )
+}

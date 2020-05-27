@@ -5,7 +5,8 @@ import RegisterLayout from '../components/register/RegisterLayout'
 
 const BaseRouter = () => (
     <Switch>
-        <Route path="/" component={RegisterLayout}></Route>
+        <Route exact path="/" component={RegisterLayout}></Route>
+        <Route exact path="/signin" component={RegisterLayout}></Route>
         <Route path="/home" component={MainLayout}></Route>
     </Switch>
 )

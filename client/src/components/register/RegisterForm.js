@@ -1,30 +1,48 @@
 import React from 'react';
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+
+import { authenticate } from "../../store/actions/authActions";
 
 class RegisterForm extends React.Component {
   state={
     email: '',
     password: ''
   }
+
+  componentDidMount() {
+    message.config({
+      top: 40,
+    })
+  }
   
   onChange = values => {
     this.setState({[values.target.id]: values.target.value})
   }
 
-  onFinish = () => {
-    axios.post("/api/auth/signin", this.state)
-    .then(token => {
-      console.log(token);
-    })
-    .catch(e => {
-      console.log(e.message);
-    })
-  };
+  onFinish = () => {};
+
+  onSignIn = async () => {
+    await this.props.authenticate(this.state, 'signin')
+    this.sendMessage()
+  }
+
+  onSignUp = async () => {
+    await this.props.authenticate(this.state, 'signup')
+    this.sendMessage()
+  }
+
+  sendMessage = () => {
+    if(this.props.authMsg !== "") {
+      message.error(this.props.authMsg, 3)
+    }
+  }
 
   render () {
+    if (this.props.auth) return <Redirect to='/home/'/>
     return (
       <Form
         initialValues={{ remember: true }}
@@ -33,7 +51,7 @@ class RegisterForm extends React.Component {
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Please input email.'},
-                            { type: 'email', message: 'Invalid email input'}]}
+                  { type: 'email', message: 'Invalid email input'}]}
         >
           <Input id='email' onChange={this.onChange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
@@ -59,10 +77,10 @@ class RegisterForm extends React.Component {
         </Form.Item>
   
         <Form.Item style={{marginBottom: '7px'}}>
-          <Button htmlType="submit" className="register-btn" style={{float: 'left'}}>
+          <Button id="signin" onClick={this.onSignIn} htmlType="submit" className="register-btn" style={{float: 'left'}}>
             Log in
           </Button>
-          <Button type="primary" htmlType="submit" className="register-btn" style={{float: 'right'}}>
+          <Button id="signup" onClick={this.onSignUp} type="primary" htmlType="submit" className="register-btn" style={{float: 'right'}}>
             Sign Up
           </Button>
         </Form.Item>
@@ -71,6 +89,20 @@ class RegisterForm extends React.Component {
   };
 }
 
-export default RegisterForm;
+const mapStateToProps = (state) => {
+  return {
+    accessToken: state.auth.accessToken,
+    auth: state.auth.auth,
+    authMsg: state.auth.authMsg,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authenticate: (user, type) => dispatch(authenticate(user, type)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
   
 
