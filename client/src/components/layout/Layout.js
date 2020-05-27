@@ -32,7 +32,7 @@ class MainLayout extends React.Component {
       <div>
         <Titlebar bg={["#171a1c", "#141618"]} />
         <Layout className="main-layout">            
-            <Sidebar/>
+            <Sidebar bg={["#171a1c", "#141618"]} />
             <InnerSidebar collapsed={this.state.collapsed}/>
 
             <Layout className="inner-layout">

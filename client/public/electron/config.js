@@ -9,7 +9,13 @@ const isDev = require('electron-is-dev');
 const globalShortcut = electron.globalShortcut;
 
 exports.createWindow = () => {
-    splash = new BrowserWindow({width: 400, height: 400, frame: false,  titleBarStyle: 'hidden',});
+    splash = new BrowserWindow({
+      width: 400, 
+      height: 400, 
+      frame: false,  
+      backgroundColor: '#000',
+      titleBarStyle: 'hidden',
+      alwaysOnTop: true});
     //always on top??
   
     mainWindow = new BrowserWindow({
@@ -17,6 +23,7 @@ exports.createWindow = () => {
       height: 680, 
       show: false,
       frame: false,
+      backgroundColor: '#000',
       webPreferences: { nodeIntegration: true }
     });
   
@@ -34,8 +41,6 @@ exports.createWindow = () => {
     globalShortcut.register('Alt+1', () =>
         mainWindow.webContents.openDevTools({mode: 'detach'})
     );
-
-    mainWindow.on('closed', () => mainWindow = null);
 
     mainWindow.on('maximize', () => {
         mainWindow.webContents.send('maximized')

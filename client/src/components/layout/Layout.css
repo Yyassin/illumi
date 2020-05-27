@@ -1,3 +1,7 @@
+.ant-layout {
+    background-color: #171a1c;
+}
+
 .main-layout {
     min-height: calc(100vh - 30px);
 }
@@ -9,7 +13,17 @@
 }
 
 .main-content {
-    margin: 16px;
+    background-color: #232323;
+}
+
+.main-header {
+    background-color: #232323;
+}
+
+.outer-sidebar,
+.outer-menu {
+    background-color: #171a1c;
+    border: none;
 }
 
 .inner-layout {
@@ -19,6 +33,9 @@
 .inner-sidebar,
 .inner-inner-menu {
     background-color: #232323;
+    border-radius: 15px 0 0 0;
+    overflow: hidden;
+    border: none;
 }
 
 .profile-section {

@@ -22,6 +22,9 @@ export default class ColoredScrollbars extends Component {
             padding: 20,
             backgroundColor: `#454545`,
             color: `white`
+            // padding: 20,
+            // backgroundColor: `#454545`,
+            // color: `white`
         };
         return (
             <div

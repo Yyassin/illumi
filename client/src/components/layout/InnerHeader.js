@@ -6,7 +6,7 @@ const { Header } = Layout;
 class InnerHeader extends React.Component {
     render() {
         return (
-            <Header className="main-header">
+            <Header className="main-header" className="main-header">
                 <Breadcrumb style={{ margin: '0 0' }}>
                     <Breadcrumb.Item>User</Breadcrumb.Item>
                     <Breadcrumb.Item>Bill</Breadcrumb.Item>
