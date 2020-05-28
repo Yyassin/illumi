@@ -1,8 +1,10 @@
 const initState = {
     accessToken: '',
-    auth: false,
+    auth: true,
     authMsg: '',
 }
+
+//comment
 
 const authReducer = (state = initState, action) => {
     switch (action.type) {
