@@ -5,7 +5,9 @@ General
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0
+    padding: 0;
+    transition: color 100ms ease-in;
+    transition: background-color 100ms ease-in;
 }
 
 /* Disable highlighting on UI */

@@ -55,7 +55,7 @@ class InnerSidebar extends React.Component {
                             <Menu.Item key="8">Team 2</Menu.Item>
                         </SubMenu>
                         <Menu.Item key="9" icon={<FileOutlined />} />
-                        <Menu.Item key="10" icon={<FileOutlined />} />
+                        <Menu.Item key="18" icon={<FileOutlined />} />
                         <Menu.Item key="11" icon={<FileOutlined />} />
                         <Menu.Item key="12" icon={<FileOutlined />} />
                         <Menu.Item key="13" icon={<FileOutlined />} />
@@ -74,7 +74,7 @@ class InnerSidebar extends React.Component {
                                     <li>MyEmailIs</li>
                                 </ul>
                             </li>
-                            <li className="settings"><a className="settings-btn" href="#">{<SettingFilled />}</a></li>
+                            <li className="settings"><a onClick={this.props.toggle} className="settings-btn" href="#">{<SettingFilled />}</a></li>
                         </ul>
                 </div>
             </Sider>

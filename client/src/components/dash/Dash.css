@@ -1,3 +1,17 @@
+:root {
+    --message-color: #fff;
+    --chat-container-bg: #454545;
+    --chat-form-bg: #23232390;
+    --message-btn-100: #161616;
+    --message-btn-50: #16161650;
+
+}
+
+.light-mode {
+    --message-color: #000;
+    --chat-container-bg: #999;
+}
+
 li {
     text-decoration: none;
     list-style: none;
@@ -9,7 +23,15 @@ li {
     flex-direction: column;
     padding: 0px 10px 10px 20px;
     border-radius: 10px 0 0 0;
-    background-color: #454545;
+    background-color: var(--chat-container-bg);
+}
+
+.chat-container .box {
+    background-color: var(--chat-container-bg) !important;
+}
+
+.chat-container ul li.message {
+    color: var(--message-color);
 }
 
 .chat-form-container {
@@ -19,7 +41,7 @@ li {
     width: 100%;
     color: black;
     
-    background-color: #23232390;
+    background-color: var(--chat-form-bg);
     padding: 0px;
     border-radius: 10px;
 }
@@ -27,7 +49,7 @@ li {
 .message-input {
     flex: 10;
     background: transparent;
-    color: #fff;
+    color: var(--message-color);
     border: none;
     width: 80%;
     padding: 8px;
@@ -41,8 +63,8 @@ li {
     align-items: center;
     flex: 1;
     border: none;
-    color: #fff;
-    background-color: #16161650;
+    color: var(--message-color);
+    background-color: var(--message-btn-50);
     border-radius: 10px;
     transition: color 100ms ease-in-out;
 }
@@ -59,7 +81,7 @@ li {
 .message-send-btn:hover {
     color: plum;
     filter: brightness(1.10);
-    background-color: #16161699;
+    background-color: var(--message-btn-100);
     /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1) */
 }
 

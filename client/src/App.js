@@ -6,15 +6,23 @@ import './App.css'
 import BaseRouter from './router/BaseRouter';
 import {HashRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <HashRouter>
-      <div className="App">          
-          <BaseRouter />
-      </div>
-    </HashRouter>
-    
-  );
+class App extends React.Component {
+
+  state = {
+    darkMode: true
+  }
+
+  render() {
+    return (
+      <HashRouter>
+        <div className="App">          
+          <div className={this.state.darkMode ? " ": "light-mode"}>
+            <BaseRouter />
+          </div>
+        </div>
+      </HashRouter> 
+    );
+  }
 }
 
 export default App;

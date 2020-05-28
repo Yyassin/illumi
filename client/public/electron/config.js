@@ -20,7 +20,7 @@ exports.createWindow = () => {
     //always on top??
 
     splash.setMenu(null)
-    splash.loadURL(isDev ? 'http://127.0.0.1:5500/client/public/electron/loader.html':`file://${path.join(__dirname, 'loader.html')}`);
+    splash.loadURL(false ? 'http://127.0.0.1:5500/client/public/electron/loader.html':`file://${path.join(__dirname, 'loader.html')}`);
   
     splash.once('ready-to-show', () => splash.show())
 

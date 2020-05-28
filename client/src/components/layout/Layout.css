@@ -1,5 +1,12 @@
+:root {
+    --header-color: #fff;
+    --side-bg: #171a1c;
+    --inner-side-bg: #232323;
+    --chat-container-bg: #454545;
+}
+
 .ant-layout {
-    background-color: #171a1c;
+    background-color: var(--side-bg);
 }
 
 .main-layout {
@@ -14,15 +21,17 @@
 
 .header-bold {
     font-weight: 500;
-    color: #fff;
+    color: var(--header-color);
 }
 
 .main-content {
-    background-color: #232323;
+    background-color: var(--inner-side-bg);
 }
 
 .main-header {
-    background-color: #232323;
+    background-color: var(--inner-side-bg);
+    z-index: 1;
+    box-shadow: 0px 0px 9px 3px rgba(41,41,41, 1);
 }
 
 .sidebar-header {
@@ -30,7 +39,10 @@
     height: 64px;
     padding: 10px 10px 10px 50px;
     line-height: 64px;
+    z-index: 1;
+    box-shadow: 0px 0px 9px 3px rgba(41,41,41, 1);
 }
+
 
 .sidebar-header-content {
     line-height: 3.5715;
@@ -40,17 +52,14 @@
 
 .outer-sidebar,
 .outer-menu {
-    background-color: #171a1c;
+    background-color: var(--side-bg);
     border: none;
 }
 
-.inner-layout {
-    background-color: #454545;
-}
 
 .inner-sidebar,
 .inner-inner-menu {
-    background-color: #232323;
+    background-color: var(--inner-side-bg);
     border-radius: 15px 0 0 0;
     overflow: hidden;
     border: none;
