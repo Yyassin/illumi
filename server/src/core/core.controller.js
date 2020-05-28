@@ -1,5 +1,5 @@
 const database = require("../../config/database")
-const models = require("./core.models")
+const models = require("../models/core.models")
 
 exports.createServer = (req, res) => {
     const serverData = models.serverModel(req.body)

@@ -1,7 +1,7 @@
 const keys = require("../../config/keys")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const userModel = require("./register.models")
+const userModel = require("../models/register.models")
 
 exports.signup = async (req, res) => {
     try {
