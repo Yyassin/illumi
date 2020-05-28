@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken")
 
 module.exports = async (req, res, next) => {
     try {
-        const query = req.body.query
+        const { query, req_auth} = check_query(req)
 
-        if(query.includes('signin') || query.includes('signup')){
+        if(!req_auth){
            return next();
         }
         
@@ -14,14 +14,6 @@ module.exports = async (req, res, next) => {
         }
     
         const decoded = jwt.verify(req.headers.token, keys.api.key)
-    
-        if(!decoded.user) {
-            return res.status(400).json({message: "Invalid token"})
-        }
-    
-        if(decoded.exp < Math.floor(Date.now()/1000)) {
-            return res.status(400).json({message: "Expired token"})
-        }
 
         if (query.includes('signout')) {
             res.append('token', '')
@@ -33,7 +25,22 @@ module.exports = async (req, res, next) => {
         res.append('token', token)
         next()        
     } catch(error) {
-        return res.status(400).send(error.message)    
+        return res.status(400).json({message: error.message})    
+    }
+}
+
+const check_query = (req) => {
+    const query = req.body.query
+
+    if(!query) {
+        return { query, req_auth: true}
+    }
+
+    if (query.includes('signin') || query.includes('signup')) {
+        // query does not require auth
+        return { query, req_auth: false}
+    } else {
+        return { query, req_auth: true}
     }
 }
 
