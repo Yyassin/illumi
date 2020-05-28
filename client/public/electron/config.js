@@ -10,14 +10,20 @@ const globalShortcut = electron.globalShortcut;
 
 exports.createWindow = () => {
     splash = new BrowserWindow({
-      width: 400, 
+      width: 300, 
       height: 400, 
       frame: false,  
-      backgroundColor: '#000',
+      transparent: true,
       titleBarStyle: 'hidden',
-      alwaysOnTop: true});
+      show: false,
+      alwaysOnTop: false});
     //always on top??
+
+    splash.setMenu(null)
+    splash.loadURL(isDev ? 'http://127.0.0.1:5500/client/public/electron/loader.html':`file://${path.join(__dirname, 'loader.html')}`);
   
+    splash.once('ready-to-show', () => splash.show())
+
     mainWindow = new BrowserWindow({
       width: 900, 
       height: 680, 
@@ -34,6 +40,7 @@ exports.createWindow = () => {
     mainWindow.once('ready-to-show', () => {
       setTimeout(() => {
         splash.close();
+        splash.destroy();
         mainWindow.show();
       }, 0); //idk if we want a delay but wtv
   

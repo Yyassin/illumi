@@ -25,6 +25,19 @@
     background-color: #232323;
 }
 
+.sidebar-header {
+    /* border-right: 1px solid gray; */
+    height: 64px;
+    padding: 10px 10px 10px 50px;
+    line-height: 64px;
+}
+
+.sidebar-header-content {
+    line-height: 3.5715;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .outer-sidebar,
 .outer-menu {
     background-color: #171a1c;
@@ -67,15 +80,44 @@
     align-items: center;
     height: 100%;
     background-color: #131313;
-    flex: 7;
+    flex: 3;
+}
+
+.avatar a {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #232323;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    transition: filter 100ms ease-in-out;
+}
+
+.avatar a:hover {
+    filter: brightness(1.4);
+}
+
+.profile-info {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 12px;
+    height: 100%;
+    background-color: #131313;
+    flex: 5;
 }
 
 .settings {
     display: flex;
     justify-content: center;
+    padding-right: 10px;
     align-items: center;
     background-color: #131313;
-    flex: 3;
+    margin: 0 auto;
+    flex: 2;
 }
 
 .settings a {
@@ -84,10 +126,15 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #090909;
+    background-color: transparent;
     line-height: 40px;
     height: 40px;
     width: 40px;
+    transition: background-color 200ms ease-in-out;
+}
+
+.settings a:hover {
+    background-color: #43434350;
 }
 
 .ant-layout-sider-children {

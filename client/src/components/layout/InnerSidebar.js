@@ -12,6 +12,7 @@ import {
     FileOutlined,
     TeamOutlined,
     UserOutlined,
+    SettingFilled,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -30,9 +31,12 @@ class InnerSidebar extends React.Component {
     render() {
         if (!this.props.auth) return <Redirect to='/'/>
         return (
-            
             <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
-                <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'#333333'}>
+                <div className="sidebar-header">
+                        <p className="sidebar-header-content">ServerName</p>
+                </div>
+
+                <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>
                     <Menu className="inner-inner-menu" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined />} onClick={this.logout}/>
                         <Menu.Item key="2" icon={<DesktopOutlined />}>
@@ -63,13 +67,16 @@ class InnerSidebar extends React.Component {
 
                 <div className="profile-section">
                         <ul className="profile-items">
-                            <li className="avatar">avatar</li>
-                            <li className="settings"><a className="settings-btn"href="">{<UserOutlined />}</a></li>
+                            <li className="avatar"><a href="#" className="avatar-btn">{<UserOutlined />}</a></li>
+                            <li className="profile-info">
+                                <ul>
+                                    <li>MyNameIs</li>
+                                    <li>MyEmailIs</li>
+                                </ul>
+                            </li>
+                            <li className="settings"><a className="settings-btn" href="#">{<SettingFilled />}</a></li>
                         </ul>
                 </div>
-                
-                
-
             </Sider>
         )
     }

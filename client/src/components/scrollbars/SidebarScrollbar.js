@@ -55,7 +55,7 @@ export default class SidebarScrollbar extends Component {
                 renderView={this.renderView}
                 
                 renderTrackVertical={({style, ...props}) =>
-                     <div {...props} className="Vertical" style={{...style, backgroundColor: this.props.tc || '', right: '2px', bottom: '2px', top: '2px', borderRadius: '5px', width: '5px'}}/>
+                     <div {...props} className="Vertical" style={{...style, backgroundColor: this.props.tc || '', right: '2px', bottom: '2px', top: '2px', borderRadius: '5px', width: '4px'}}/>
                     }
 
                 renderThumbHorizontal={this.renderThumb}
