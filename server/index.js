@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const path = require('path');
 
 // graphQL componenets
 const graphql_http = require('express-graphql')
@@ -10,6 +11,7 @@ const graphql_schema = require('./src/graphql/schema')
 const graphql_resolvers = require('./src/graphql/resolvers/root.resolver')
 
 const database = require('./config/database')
+const docs_route = require('./src/docs/docs.route')
 const apiLock = require('./src/middleware/apiLock')
 const validate = require('./src/middleware/validate')
 
@@ -20,6 +22,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(apiLock.check);
+
+// static views for docs rendering
+app.set("views", path.join(__dirname, "src/docs/views"));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, "src/docs/views/partials")))
+app.use(docs_route);
 
 app.use('/graphql', validate, graphql_http( (req, res) => (
     {
