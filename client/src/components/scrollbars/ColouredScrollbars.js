@@ -19,6 +19,7 @@ export default class ColoredScrollbars extends Component {
     renderView({ style, ...props }) {
         const { top } = this.state;
         const viewStyle = {
+            'overscroll-behavior': 'contain',
             padding: 20,
             backgroundColor: `#454545`,
             color: `white`

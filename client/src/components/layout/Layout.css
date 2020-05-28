@@ -9,7 +9,12 @@
 .main-header {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 10px 10px 10px 50px;
+}
+
+.header-bold {
+    font-weight: 500;
+    color: #fff;
 }
 
 .main-content {
@@ -44,8 +49,45 @@
 
     justify-content: center;
     background-color: black;
-    padding: 20px;
+    height: 60px;
     width: 100%;
+}
+
+.profile-items {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #131313;
+    flex: 7;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #131313;
+    flex: 3;
+}
+
+.settings a {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #090909;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
 }
 
 .ant-layout-sider-children {

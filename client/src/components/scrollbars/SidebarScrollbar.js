@@ -19,6 +19,7 @@ export default class SidebarScrollbar extends Component {
     renderView({ style, ...props }) {
         const { top } = this.state;
         const viewStyle = {
+            'overscroll-behavior': 'contain',
             // backgroundColor: `232323`,
             // color: `white`
         };

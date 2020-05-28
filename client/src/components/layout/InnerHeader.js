@@ -8,8 +8,8 @@ class InnerHeader extends React.Component {
         return (
             <Header className="main-header" className="main-header">
                 <Breadcrumb style={{ margin: '0 0' }}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                    <Breadcrumb.Item className="header-bold">Server</Breadcrumb.Item>
+                    <Breadcrumb.Item>Name</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
         )

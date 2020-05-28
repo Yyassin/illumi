@@ -62,7 +62,10 @@ class InnerSidebar extends React.Component {
                 </SidebarScrollbar>
 
                 <div className="profile-section">
-                        profile
+                        <ul className="profile-items">
+                            <li className="avatar">avatar</li>
+                            <li className="settings"><a className="settings-btn"href="">{<UserOutlined />}</a></li>
+                        </ul>
                 </div>
                 
                 
