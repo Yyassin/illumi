@@ -24,14 +24,17 @@ li {
     padding: 0px 10px 10px 20px;
     border-radius: 10px 0 0 0;
     background-color: var(--chat-container-bg);
+    transition: background-color 500ms ease-in-out;
 }
 
-.chat-container .box {
+.chat-container div.box {
     background-color: var(--chat-container-bg) !important;
+    transition: background-color 500ms ease-in-out;
 }
 
 .chat-container ul li.message {
     color: var(--message-color);
+    transition: color 1000ms ease-in-out;;
 }
 
 .chat-form-container {

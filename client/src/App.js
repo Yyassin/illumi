@@ -11,13 +11,19 @@ class App extends React.Component {
   state = {
     darkMode: true
   }
+  
+  toggleTheme = () => {
+    this.setState({
+      darkMode: !this.state.darkMode,
+    });
+  };
 
   render() {
     return (
       <HashRouter>
         <div className="App">          
           <div className={this.state.darkMode ? " ": "light-mode"}>
-            <BaseRouter />
+            <BaseRouter toggleTheme = {this.toggleTheme}/>
           </div>
         </div>
       </HashRouter> 

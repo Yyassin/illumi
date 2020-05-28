@@ -18,7 +18,7 @@ import {
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-class InnerSidebar extends React.Component {
+class InnerSidebar extends React.PureComponent {
 
     onCollapse = collapsed => {
         this.setState({ collapsed });
@@ -74,7 +74,7 @@ class InnerSidebar extends React.Component {
                                     <li>MyEmailIs</li>
                                 </ul>
                             </li>
-                            <li className="settings"><a onClick={this.props.toggle} className="settings-btn" href="#">{<SettingFilled />}</a></li>
+                            <li className="settings"><a onClick={this.props.toggleTheme} className="settings-btn" href="#">{<SettingFilled />}</a></li>
                         </ul>
                 </div>
             </Sider>
