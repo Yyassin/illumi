@@ -29,10 +29,9 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, "src/docs/views/partials")))
 app.use(docs_route);
 
-app.use('/api', graphql_http( (req, res) => (
+app.use('/api', validate,  graphql_http( (req, res) => (
     {
         schema: graphql_schema,
-        rootValue: graphql_resolvers,
         graphiql: true,
         context: { body: req.body.token, res: res }
     }

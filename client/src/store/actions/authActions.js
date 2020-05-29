@@ -6,6 +6,12 @@ export const authenticate = (user, type) => {
         try {
             const query = (type==='signin') ? queries.signin(user) : queries.signup(user)
             const result = await axios.post("/api", { query })
+            
+            console.log(result)
+            console.log(result.data.errors)
+            if (result.data.errors) {
+                return dispatch({type: 'AUTH_ERROR', authMsg: result.data.errors[0].message})
+            }
 
             const data = result.data.data
             let token;
@@ -17,8 +23,9 @@ export const authenticate = (user, type) => {
             }
         
             dispatch({type: 'AUTH_SUCCESS', accessToken: token })
+            
         } catch (error) {
-            console.log(error.response)
+            console.log(error)
             dispatch({type: 'AUTH_ERROR', authMsg: error.response.data.errors[0].message})
         }
     }

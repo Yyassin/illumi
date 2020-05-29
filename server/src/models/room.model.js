@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
 
 const roomSchema = mongoose.Schema({
-    name : {
-        type: String,
-        required: true
-    },
     role_filter : {
         type: String,
         required: false
-    }
+    },
+    pageID : {
+        type: String,
+        required: true
+    },
 });
+
 const register = mongoose.model('room', roomSchema);
 module.exports = register;

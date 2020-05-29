@@ -1,22 +1,18 @@
 const mongoose = require("mongoose");
 
-const messageSchema = mongoose.Schema({
-    content : {
+const memberSchema = mongoose.Schema({
+    role : {
         type: String,
         required: true
     },
-    date : {
-        type: Date,
+    serverID : {
+        type: String,
         required: true
     },
     userID : {
         type: String,
         required: true
-    },
-    roomID : {
-        type: String,
-        required: true
     }
 });
-const register = mongoose.model('message', messageSchema);
+const register = mongoose.model('member', memberSchema);
 module.exports = register;

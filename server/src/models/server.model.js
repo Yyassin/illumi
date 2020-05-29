@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
-    email : {
-        type: String,
-        required: true
-    },
-    password : {
-        type: String,
-        required: true
-    },
+const serverSchema = mongoose.Schema({
     name : {
+        type: String,
+        required: true
+    },
+    description : {
+        type: String,
+        required: false
+    },
+    outline : {
         type: String,
         required: false
     },
@@ -18,5 +18,5 @@ const userSchema = mongoose.Schema({
         required: false
     }
 });
-const register = mongoose.model('user', userSchema, "auth");
+const register = mongoose.model('server', serverSchema);
 module.exports = register;
