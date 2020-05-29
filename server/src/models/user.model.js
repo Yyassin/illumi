@@ -17,6 +17,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    messages: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'message'
+        }
+    ]
 });
 const register = mongoose.model('user', userSchema, "auth");
 module.exports = register;

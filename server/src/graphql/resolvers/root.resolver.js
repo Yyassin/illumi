@@ -1,7 +1,9 @@
 const authResolver = require('./auth.resolver')
+const msgResolver = require('./messages.resolver')
 
 const rootResolver = {
-    ...authResolver
+    ...authResolver,
+    ...msgResolver
 }
 
 module.exports = rootResolver;
