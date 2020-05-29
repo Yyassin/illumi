@@ -26,7 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"SET BROWSER=none&&npm start \" \"wait-on http://localhost:3000 && electron .\"",
-    "dev-guest": "concurrently \"SET BROWSER=none&&npm start \" \"wait-on http://localhost:4000 && electron .\""
+    "dev-guest": "wait-on http://localhost:3000 && electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
