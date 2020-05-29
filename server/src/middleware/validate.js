@@ -8,12 +8,10 @@ module.exports = async (req, res, next) => {
         if(!req_auth){
            return next();
         }
-        
+    
         if(!req.headers.token) {
             return res.status(400).json({message: "Missing token"})
         }
-    
-        const decoded = jwt.verify(req.headers.token, keys.api.key)
 
         if (query.includes('signout')) {
             res.append('token', '')
@@ -25,6 +23,7 @@ module.exports = async (req, res, next) => {
         res.append('token', token)
         next()        
     } catch(error) {
+        console.log(error)
         return res.status(400).json({message: error.message})    
     }
 }
