@@ -67,11 +67,14 @@ class InnerSidebar extends React.PureComponent {
 
                 <div className="profile-section">
                         <ul className="profile-items">
-                            <li className="avatar"><a href="#" className="avatar-btn">{<UserOutlined />}</a></li>
+                            <li className="avatar" ><a href="#" className="avatar-btn"
+                                style={{background: "url('https://images2.alphacoders.com/980/980117.jpg')",
+                                'background-size': 'cover',
+                                'background-position': 'center'}}></a></li>
                             <li className="profile-info">
                                 <ul>
-                                    <li>MyNameIs</li>
-                                    <li>MyEmailIs</li>
+                                    <li className="info-name">Shrish Mohapatra</li>
+                                    <li className="info-email">shrish.mohapatra@gmail.com</li>
                                 </ul>
                             </li>
                             <li className="settings"><a onClick={this.props.toggleTheme} className="settings-btn" href="#">{<SettingFilled />}</a></li>

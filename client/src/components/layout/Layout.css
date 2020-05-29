@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap');
+
 :root {
     --header-color: #fff;
     --side-bg: #171a1c;
-    --inner-side-bg: #232323;
-    --chat-container-bg: #454545;
+    --inner-side-bg: #1f1f1f;
+    --chat-container-bg: #232323;
 }
 
 .ant-layout {
@@ -56,13 +58,21 @@
     border: none;
 }
 
-
 .inner-sidebar,
 .inner-inner-menu {
     background-color: var(--inner-side-bg);
     border-radius: 15px 0 0 0;
     overflow: hidden;
     border: none;
+}
+
+.inner-sidebar {
+    min-width: 240px !important;
+    max-width: 240px !important;
+}
+
+.chat-container div.box {
+    padding: 15px 15px 10px 10px !important; 
 }
 
 .profile-section {
@@ -97,6 +107,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 10px;
     border-radius: 50%;
     background-color: #232323;
     line-height: 40px;
@@ -114,15 +125,26 @@
     justify-content: left;
     align-items: center;
     font-size: 12px;
+    padding: 0 1px;
     height: 100%;
     background-color: #131313;
     flex: 5;
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-info .info-name {
+    font-weight: 600;
+}
+
+.profile-info .info-email {
+    font-size: 8px;
+    font-weight: 300;
 }
 
 .settings {
     display: flex;
     justify-content: center;
-    padding-right: 10px;
+    padding: 5px;
     align-items: center;
     background-color: #131313;
     margin: 0 auto;
