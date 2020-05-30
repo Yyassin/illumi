@@ -7,9 +7,11 @@ const ipcMain = require('electron').ipcMain;
 //tray
 const path = require('path')
 const tray = electron.Tray;
+const Notification = electron.Notification;
 const Menu = electron.Menu;
 
 let Tray = null;
+let notification = null;
 
 let mainWindow;
 
@@ -68,6 +70,16 @@ app.on('ready', () => {
 
   Tray.setContextMenu(trayMenu);
   Tray.setToolTip("illumi")
+
+  //check render notis next
+  notification = new Notification()
+  notification.title = "New Message"
+  notification.body = "@MATH1107 from Shrish Mohapatra"
+  // notification.icon = './favicon.ico'; notworking
+  notification.on("click",function(){
+    console.log('clicked')
+  },false);
+
 });
 
 app.on('window-all-closed', () => {
@@ -101,4 +113,9 @@ ipcMain.handle('close-event', (e) => {
     mainWindow.hide();
     e.returnValue = false;
   }
+})
+
+ipcMain.on('notification-send-event', () => {
+  console.log('show')
+  notification.show();
 })

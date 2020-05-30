@@ -17,6 +17,8 @@ import {
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
+const ipcRenderer = window.require('electron').ipcRenderer
+
 
 class InnerSidebar extends React.PureComponent {
 
@@ -26,6 +28,11 @@ class InnerSidebar extends React.PureComponent {
 
     logout = async () => {
         await this.props.signOut(this.props.accessToken)
+    }
+
+    notificationHandler = () => {
+        console.log('noti')
+        ipcRenderer.send('notification-send-event')
     }
 
     render() {
@@ -69,7 +76,7 @@ class InnerSidebar extends React.PureComponent {
 
                 <div className="profile-section">
                         <ul className="profile-items">
-                            <li className="avatar" ><a href="#" className="avatar-btn"
+                            <li className="avatar" ><a onClick={this.notificationHandler} href="#" className="avatar-btn"
                                 style={{background: "url('https://images2.alphacoders.com/980/980117.jpg')",
                                 'background-size': 'cover',
                                 'background-position': 'center'}}></a></li>
