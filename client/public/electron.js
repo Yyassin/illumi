@@ -9,6 +9,8 @@ const path = require('path')
 const tray = electron.Tray;
 const Menu = electron.Menu;
 
+let Tray = null;
+
 let mainWindow;
 
 app.on('browser-window-focus', () => {
@@ -26,7 +28,6 @@ app.on('before-quit', function () {
 app.on('ready', () => {
   mainWindow = config.createWindow();
 
-  let Tray = null;
   const iconPath = path.join(__dirname, 'logo192.png');
   Tray = new tray(iconPath);
   Tray.setIgnoreDoubleClickEvents(true)

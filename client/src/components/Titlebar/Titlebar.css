@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
 
+
 .Titlebar {
     /* -webkit-app-region: drag; */
 }
@@ -61,10 +62,10 @@
 }
 
 .section-icon__title {
-    padding-left: 7px;
-    padding-top: 5px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.3);
+    filter: brightness(0.5);
+    font-size: 17px;
+    padding-top: 6px;
+    padding-left: 24px;
 }
 
 .Title-Bar__section-menubar {

@@ -50,6 +50,9 @@ const Titlebar = (props) => {
             >
                 <div className="Titlebar-drag-region"></div>
                 <div className="Title-Bar__section-icon">
+                    <div className="section-icon__title">
+                        {props.title}
+                    </div>   
                 </div>
                 <div className="Title-Bar__section-menubar">
                 </div>

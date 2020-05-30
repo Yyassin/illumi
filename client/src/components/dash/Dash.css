@@ -1,7 +1,7 @@
 :root {
     --message-color: #fff;
     --chat-container-bg: #232323;
-    --chat-form-bg: #23232360;
+    --chat-form-bg: #ffffff07;
     --message-btn-100: #161616;
     --message-btn-50: #16161650;
 
@@ -10,6 +10,7 @@
 .light-mode {
     --message-color: #000;
     --chat-container-bg: #fff;
+    --chat-form-bg: #23232320;
 }
 
 li {
@@ -89,7 +90,6 @@ li {
     align-content: center;
     width: 100%;
     color: black;
-    
     background-color: var(--chat-form-bg);
     padding: 0px;
     border-radius: 10px;
