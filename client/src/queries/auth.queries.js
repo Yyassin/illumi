@@ -8,6 +8,7 @@ const queries = {
                 password:"${password}")
                 {
                     token
+                    uid
                 }
             }
             `
@@ -23,6 +24,7 @@ const queries = {
                 password:"${password}")
                 {
                     token
+                    uid
                 }
             }
             `

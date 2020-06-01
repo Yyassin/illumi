@@ -18,6 +18,8 @@ module.exports = async (req, res, next) => {
             return next();
         }
         
+        console.log(req.headers.token)
+        const decoded = jwt.verify(req.headers.token, keys.api.key)
         const token = createToken(decoded.user);
 
         res.append('token', token)
@@ -32,7 +34,7 @@ const check_query = (req) => {
     const query = req.body.query
 
     if(!query) {
-        return { query, req_auth: true}
+        return { query, req_auth: false}
     }
 
     if (query.includes('signin') || query.includes('signup')) {

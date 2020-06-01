@@ -6,7 +6,7 @@ const User = require('../../models/user.model')
 const msgResolver = require('./messages.resolver')
 
 module.exports = {    
-    signup: async({email, password}) => {
+    signup: async({email, password, thumbnail, name}) => {
         try {
             let user = await User.findOne({email})
     
@@ -16,7 +16,9 @@ module.exports = {
     
             user = new User({
                 email: email,
-                password: await bcrypt.hash(password+keys.api.key, 10)
+                password: await bcrypt.hash(password+keys.api.key, 10),
+                name: name ? name : "",
+                thumbnail: thumbnail ? thumbnail : "",
             })
     
             await user.save()

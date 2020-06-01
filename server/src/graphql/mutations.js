@@ -31,7 +31,9 @@ module.exports = new GraphQLObjectType({
             type: types.AuthDataType,
             args: {
                 email: { type: GraphQLString},
-                password: { type: GraphQLString}
+                password: { type: GraphQLString},
+                name: { type: GraphQLString},
+                thumbnail: { type: GraphQLString},
             },
             resolve(parent, args) {
                 return auth.signup(args)
@@ -39,21 +41,21 @@ module.exports = new GraphQLObjectType({
         },
 
         // create schemas
-        addUser: {
-            type: types.UserType,
-            args: {
-                email: { type: GraphQLString },
-                password: { type: GraphQLString }
-            },
-            resolve(parent, args) {
-                let user = new User({
-                    email: args.email,
-                    password: args.password
-                })
+        // addUser: {
+        //     type: types.UserType,
+        //     args: {
+        //         email: { type: GraphQLString },
+        //         password: { type: GraphQLString }
+        //     },
+        //     resolve(parent, args) {
+        //         let user = new User({
+        //             email: args.email,
+        //             password: args.password
+        //         })
 
-                return user.save();
-            }
-        },
+        //         return user.save();
+        //     }
+        // },
 
         addMember: {
             type: types.MemberType,
@@ -77,10 +79,12 @@ module.exports = new GraphQLObjectType({
             type: types.ServerType,
             args: {
                 name: { type: GraphQLString },
+                thumbnail: { type: GraphQLString},
             },
             resolve(parent, args) {
                 let server = new Server({
-                    name: args.name
+                    name: args.name,
+                    thumbnail: args.thumbnail
                 })
 
                 return server.save();
@@ -96,7 +100,7 @@ module.exports = new GraphQLObjectType({
             resolve(parent, args) {
                 let page = new Page({
                     title: args.title,
-                    serverID : args.serverID
+                    serverID : args.serverID,
                 })
 
                 return page.save();

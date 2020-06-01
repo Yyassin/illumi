@@ -25,6 +25,7 @@ const UserType = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString },
         name: { type: GraphQLString },
+        thumbnail: { type: GraphQLString },
 
         members: {
             type: new GraphQLList(MemberType),
@@ -65,11 +66,19 @@ const ServerType = new GraphQLObjectType({
         name: {type: GraphQLID},
         description: { type: GraphQLString },
         outline: {type: GraphQLString},
+        thumbnail: { type: GraphQLString },
 
         members: {
             type: new GraphQLList(MemberType),
             resolve(parent, args) {
                 return Member.find({ serverID: parent._id })
+            }
+        },
+
+        pages: {
+            type: new GraphQLList(PageType),
+            resolve(parent, args) {
+                return Page.find({ serverID: parent._id })
             }
         }
     })
@@ -92,12 +101,13 @@ const PageType = new GraphQLObjectType({
             }
         },
 
-        room: {
-            type: RoomType,
+        rooms: {
+            type: new GraphQLList(RoomType),
             resolve(parent, args) {
-                return Room.findById(parent.roomID)
+                return Room.find({ pageID: parent._id })
             }
         }
+
     })
 })
 
@@ -111,6 +121,13 @@ const RoomType = new GraphQLObjectType({
             type: PageType,
             resolve(parent, args) {
                 return Page.findById(parent.pageID)
+            }
+        },
+
+        messages: {
+            type: new GraphQLList(MessageType),
+            resolve(parent, args) {
+                return Message.find({ roomID: parent._id })
             }
         },
     })
