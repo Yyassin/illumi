@@ -8,9 +8,10 @@ import {HashRouter } from 'react-router-dom';
 
 class App extends React.Component {
 
-  // state = {
-  //   darkMode: true
-  // }
+  state = {
+    darkTheme: true
+  }
+
   modeDiv = createRef()
 
   componentDidMount = () => {
@@ -18,10 +19,12 @@ class App extends React.Component {
     console.log(this.modeDiv.current)
   }
   toggleTheme = () => {
-    this.modeDiv.current.classList.toggle('light-mode');
-    // this.setState({
-    //   darkMode: !this.state.darkMode,
-    // });
+    // this.modeDiv.current.classList.toggle('light-theme');
+    
+    this.setState({
+      darkTheme: !this.state.darkTheme,
+    });
+
     console.log(this.modeDiv.current)
   };
 
@@ -29,8 +32,8 @@ class App extends React.Component {
     return (
       <HashRouter>
         <div className="App">          
-          <div ref={this.modeDiv} className="">
-            <BaseRouter toggleTheme = {this.toggleTheme}/>
+          <div className={this.state.darkTheme ? "dark-theme" : "light-theme"}>
+            <BaseRouter darkTheme={this.state.darkTheme} toggleTheme = {this.toggleTheme}/>
           </div>
         </div>
       </HashRouter> 

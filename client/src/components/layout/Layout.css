@@ -2,9 +2,28 @@
 
 :root {
     --header-color: #fff;
+    --text-color: #fff;
     --side-bg: #171a1c;
     --inner-side-bg: #1f1f1f;
+    --outer-side-bg: #171a1c;
     --chat-container-bg: #232323;
+    --menu-after: #ffffff50;
+    --profile-bg: #131313;
+    --text-highlight: #9370DB;
+    --head-shadow: rgba(41,41,41, 1);
+}
+
+.light-theme {
+    --header-color: #000;
+    --text-color: #000;
+    --side-bg: #ECECEC;
+    --inner-side-bg: #f5f5f5;
+    --outer-side-bg:  #ECECEC;
+    --chat-container-bg: #fff;
+    --menu-after: #000050;
+    --profile-bg: #DCDCDC;
+    --text-highlight: #7289da;
+    --head-shadow: rgba(41,41,41, .2)
 }
 
 .ant-layout {
@@ -26,6 +45,11 @@
     color: var(--header-color);
 }
 
+.header-light {
+    font-weight: 400;
+    color: var(--header-color);
+}
+
 .main-content {
     background-color: var(--inner-side-bg);
 }
@@ -33,20 +57,22 @@
 .main-header {
     background-color: var(--inner-side-bg);
     z-index: 1;
-    box-shadow: 0px 0px 9px 3px rgba(41,41,41, 1);
+    box-shadow: 0px 0px 9px 3px var(--head-shadow);
 }
 
 .sidebar-header {
     /* border-right: 1px solid gray; */
+    background-color: var(--inner-side-bg);
     height: 64px;
     padding: 10px 10px 10px 50px;
     line-height: 64px;
     z-index: 1;
-    box-shadow: 0px 0px 9px 3px rgba(41,41,41, 1);
+    box-shadow: 0px 0px 9px 3px var(--head-shadow);
 }
 
 
 .sidebar-header-content {
+    color: var(--text-color);
     line-height: 3.5715;
     font-size: 14px;
     font-weight: 500;
@@ -58,22 +84,24 @@
     border: none;
 }
 
-/* .outer-menu {
+.outer-sidebar {
+    background-color: var(--outer-side-bg) !important;
+}
+
+.outer-menu {
     display: flex;
+    background-color: var(--outer-side-bg) !important;
     flex-direction: column;
     justify-content: center;
 }
-.outer-menu li {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    background-color: red;
-    border-radius: 50%;
-} */
 
-/* .outer-menu .ant-menu-submenu,
+.outer-menu li{
+    color: var(--text-color);
+} 
+
+/*
+.outer-menu .ant-menu-submenu,
 .outer-menu .ant-menu-item {
-
     color: white;
 } */
 
@@ -97,8 +125,8 @@
 }
 
 .inner-sidebar .ant-layout-sider-children div.box ul li span {
-    color: white;
-    transition: color 200ms ease-in;
+    color: var(--text-color);
+    /* transition: color 200ms ease-in; */
 }
 
 .inner-sidebar .ant-layout-sider-children div.box ul li:hover{
@@ -106,7 +134,7 @@
 }
 
 .inner-sidebar .ant-layout-sider-children div.box ul li:hover  span{
-    color: plum;
+    color: var(--text-highlight);
 }
 
 .inner-sidebar .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
@@ -115,11 +143,11 @@
 }
 
 .inner-sidebar .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected span {
-    color: plum !important;
+    color: var(--text-highlight) !important;
 }
 
 .inner-sidebar .ant-menu-item::after {
-    border-right: 3px solid #ffffff50 !important;
+    border-right: 3px solid var(--menu-after) !important;
 }
 
 .chat-container div.box {
@@ -129,9 +157,7 @@
 .profile-section {
     display: flex;
     margin-top: auto;
-
     justify-content: center;
-    background-color: black;
     height: 60px;
     width: 100%;
 }
@@ -149,7 +175,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #131313;
+    background-color: var(--profile-bg);
     flex: 3;
 }
 
@@ -160,7 +186,6 @@
     align-items: center;
     padding-left: 10px;
     border-radius: 50%;
-    background-color: #232323;
     line-height: 40px;
     height: 40px;
     width: 40px;
@@ -178,16 +203,18 @@
     font-size: 12px;
     padding: 0 1px;
     height: 100%;
-    background-color: #131313;
+    background-color: var(--profile-bg);
     flex: 5;
     font-family: 'Poppins', sans-serif;
 }
 
 .profile-info .info-name {
+    color: var(--text-color);
     font-weight: 600;
 }
 
 .profile-info .info-email {
+    color: var(--text-color);
     font-size: 8px;
     font-weight: 300;
 }
@@ -197,13 +224,13 @@
     justify-content: center;
     padding: 5px;
     align-items: center;
-    background-color: #131313;
+    background-color: var(--profile-bg);
     margin: 0 auto;
     flex: 2;
 }
 
 .settings a {
-    color: #fff;
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;

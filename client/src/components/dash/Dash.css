@@ -7,7 +7,7 @@
 
 }
 
-.light-mode {
+.light-theme {
     --message-color: #000;
     --chat-container-bg: #fff;
     --chat-form-bg: #23232320;
@@ -35,6 +35,21 @@ li {
     background-color: transparent;
     padding-right: 15px;
     flex: 1;
+}
+
+.month-date-line{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--text-color);
+}
+
+.month-date {
+    position: relative;
+    top: -10px;
+    padding: 0 10px;
+    color: var(--text-color);
+    background-color: var(--chat-container-bg);
 }
 
 .message-content {

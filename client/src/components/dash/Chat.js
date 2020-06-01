@@ -37,11 +37,14 @@ class Chat extends React.Component {
             <div className="chat-container">
                 <ColoredScrollbars style={{ height: "100%" }}>
                     <ul className="message-area">
-                        {this.state.messages.map((value, index) => {
-                            return <li className="message" >
-                                <Message key={index} message={value} />
-                            </li>
-                        })}
+                        <div className="month-date-line">
+                            <p className="month-date">May 27, 2020</p>
+                        </div>
+                            {this.state.messages.map((value, index) => {
+                                return <li className="message" >
+                                    <Message key={index} message={value} />
+                                </li>
+                            })}
                     </ul>
                 </ColoredScrollbars>
 
