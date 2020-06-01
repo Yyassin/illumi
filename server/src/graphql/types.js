@@ -6,6 +6,7 @@ const Member = require('../models/member.model')
 const Server = require('../models/server.model')
 const Page = require('../models/page.model')
 const Room = require('../models/room.model')
+const Message = require('../models/message.model')
 
 const {
     GraphQLObjectType,
@@ -115,6 +116,30 @@ const RoomType = new GraphQLObjectType({
     })
 })
 
+const MessageType = new GraphQLObjectType({
+    name: 'Message',
+    fields: () => ({
+        id: { type: GraphQLID },
+        content: { type: GraphQLString },
+        date: { type: GraphQLString },
+
+        user: {
+            type: UserType,
+            resolve(parent, args) {
+                return User.findById(parent.userID)
+            }
+        },
+
+        room: {
+            type: RoomType,
+            resolve(parent, args) {
+                return Room.findById(parent.roomID)
+            }
+        },
+    })
+})
+
+
 const AuthDataType = new GraphQLObjectType({   
     name: 'AuthData',
     fields: () => ({
@@ -124,5 +149,6 @@ const AuthDataType = new GraphQLObjectType({
 })
 
 module.exports = {
-    UserType, MemberType, ServerType, PageType, RoomType, AuthDataType
+    UserType, MemberType, ServerType, PageType,
+    RoomType, AuthDataType, MessageType
 }

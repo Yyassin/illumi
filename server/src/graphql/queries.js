@@ -6,6 +6,7 @@ const Member = require('../models/member.model')
 const Server = require('../models/server.model')
 const Page = require('../models/page.model')
 const Room = require('../models/room.model')
+const Message = require('../models/message.model')
 
 // resolvers
 const auth = require('./resolvers/auth.resolver')
@@ -112,6 +113,21 @@ module.exports = new GraphQLObjectType({
             type: new GraphQLList(types.RoomType),
             resolve(parent, args) {
                 return Room.find({})
+            }
+        },
+
+        message: {
+            type: types.MessageType,
+            args: { id: { type: GraphQLID } },
+            resolve(parent, args) {
+                return Message.findById(args.id)
+            }
+        },        
+
+        messages: {
+            type: new GraphQLList(types.MessageType),
+            resolve(parent, args) {
+                return Message.find({})
             }
         },
 

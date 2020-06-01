@@ -7,6 +7,7 @@ const Member = require('../models/member.model')
 const Server = require('../models/server.model')
 const Room = require('../models/room.model')
 const Page = require('../models/page.model')
+const Message = require('../models/message.model')
 
 // resolvers
 const auth = require('./resolvers/auth.resolver')
@@ -115,6 +116,25 @@ module.exports = new GraphQLObjectType({
                 return room.save();
             }
         },
+
+        addMessage: {
+            type: types.MessageType,
+            args: {
+                roomID: { type: GraphQLString },
+                userID: { type: GraphQLString },
+                content: { type: GraphQLString },
+            },
+            resolve(parent, args) {
+                let message = new Message({
+                    roomID: args.roomID,
+                    userID: args.userID,
+                    content: args.content,
+                    date: new Date(),
+                })
+
+                return message.save();
+            }
+        }
 
         
 
