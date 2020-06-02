@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu} from "antd";
+import {Layout, Menu, Tooltip} from "antd";
 import {NavLink, Redirect,} from 'react-router-dom'
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
@@ -65,10 +65,13 @@ class InnerSidebar extends React.PureComponent {
 
                 <div className="profile-section">
                         <ul className="profile-items">
+                        <Tooltip placement="topLeft" title="Logout">
                             <li className="avatar" ><a onClick={this.props.signout} href="#" className="avatar-btn"
                                 style={{background: `url('${this.props.user.thumbnail}')`,
                                 'background-size': 'cover',
                                 'background-position': 'center'}}></a></li>
+                        </Tooltip>
+                            
                             <li className="profile-info">
                                 <ul>
                                     <li className="info-name">{this.props.user.name}</li>

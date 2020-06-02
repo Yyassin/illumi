@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu} from "antd";
+import {Layout, Menu, Tooltip} from "antd";
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import {
@@ -42,7 +42,7 @@ class Sidebar extends React.Component {
     // }
 
     selectServer = async (e) => {
-        this.props.selectServer(e.key)
+        this.props.selectServer(e.currentTarget.dataset.id);
     }
 
     render() {
@@ -54,19 +54,29 @@ class Sidebar extends React.Component {
                     <Menu className="outer-menu" defaultSelectedKeys={['0']} mode="inline"
                         style={ this.state.isActive ? {'background-color': this.props.bg[1]} : {'background-color': this.props.bg[0]}}>
 
+                            <ul className="servers">
+                                {
+                                
+                                    this.props.members.map((member, index) => {
+                                        console.log(this.props.members)
+                                        return (
+                                            <Tooltip placement="rightTop" title={member.server.name}>
+                                                <li data-id={index} 
+                                                    onClick={this.selectServer.bind(this)}>
+                                                    <a href="#" className="server-thumbnail"
+                                                    style={{background: `url('${member.server.thumbnail}')`,
+                                                        backgroundSize: 'cover',
+                                                        backgroundPosition: 'center'}}></a>
+                                                </li>
+                                            </Tooltip>
+                                        // <Menu.Item key={index} onClick={this.selectServer} icon={<PieChartOutlined />}>
+                                        //     {member.server.name}
+                                        // </Menu.Item>
+                                        )
+                                    })
 
-                            {
-                            
-                                this.props.members.map((member, index) => {
-                                    console.log(this.props.members)
-                                    return (
-                                    <Menu.Item key={index} onClick={this.selectServer} icon={<PieChartOutlined />}>
-                                        {member.server.name}
-                                    </Menu.Item>
-                                    )
-                                })
-
-                            }
+                                }
+                            </ul>
 
                     </Menu>
                 </SidebarScrollbar>
