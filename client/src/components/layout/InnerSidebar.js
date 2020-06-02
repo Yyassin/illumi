@@ -20,6 +20,45 @@ const ipcRenderer = window.require('electron').ipcRenderer
 
 class InnerSidebar extends React.PureComponent {
 
+    state = {
+        pages: {},
+        /*
+        pages = {
+            lessons: [
+                page1
+                [age2]
+            ],
+            tutorials: [
+                page1
+                [age2]
+            ],
+        }
+
+        forloop (tag in pages)
+            create submenu
+            forloop (page in tag's pages)
+                create menu
+
+        */
+    }
+
+    componentDidMount = () => {
+        let newPages = {};
+        
+        this.props.server.pages.map((page) => {
+            if(page.tag in this.state.pages){
+                //console.log("is in: " + page.tag)
+                newPages[page.tag].push(page)              
+              } else {     
+                //console.log("created: " + page.tag)           
+                newPages[page.tag] = []
+                newPages[page.tag].push(page)
+            }
+        });
+        
+        this.setState({pages: newPages})
+    }
+
     onCollapse = collapsed => {
         this.setState({ collapsed });
     };
@@ -30,7 +69,54 @@ class InnerSidebar extends React.PureComponent {
     }
 
     selectPage = async (e) => {
-        this.props.selectPage(e.key)
+        let key;
+        const title = e.key
+
+        this.props.server.pages.map((page, index) => {
+            if (page.title == title) {
+                key = index
+            }
+        })
+
+        this.props.selectPage(key)        
+    }    
+
+    renderPages = () => {
+        return (
+           
+            Object.keys(this.state.pages).map((tag, index) => {
+                if (tag == "null") {
+                    return (
+                        this.state.pages[tag].map((page, index) => {
+                            return (
+                                <Menu.Item key={page.title} onClick={this.selectPage} icon={<TeamOutlined />}>
+                                    {page.title}
+                                </Menu.Item>
+                            )
+                        })
+                    )
+                }
+                
+                return (
+                    <SubMenu key={tag} onClick={this.selectPage} title={tag} icon={<PieChartOutlined />}>
+                        
+                        {
+
+                            this.state.pages[tag].map((page, index) => {
+                                return (
+                                    <Menu.Item key={page.title} onClick={this.selectPage} icon={<PieChartOutlined />}>
+                                        {page.title}
+                                    </Menu.Item>
+                                )
+                            })
+
+                        }
+
+                    </SubMenu>
+                )
+            })
+
+        )
     }
 
     render() {
@@ -43,22 +129,7 @@ class InnerSidebar extends React.PureComponent {
                 <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>
                     <Menu className="inner-inner-menu" defaultSelectedKeys={['0']} mode="inline">
                         
-                        {
-                            
-                            this.props.server.pages.map((page, index) => {
-                                return (
-                                    <Menu.Item key={index} onClick={this.selectPage} icon={<PieChartOutlined />}>
-                                        {page.title}
-                                    </Menu.Item>
-                                )
-                            })
-
-                        }
-                        
-                        <SubMenu key="sub2" icon={<TeamOutlined />} title="Lessons">
-                            <Menu.Item key="6">Topic 1 - Limits</Menu.Item>
-                            <Menu.Item key="8">Topic 2 - Derivative</Menu.Item>
-                        </SubMenu>
+                        {this.renderPages()}
 
                     </Menu>
                 </SidebarScrollbar>

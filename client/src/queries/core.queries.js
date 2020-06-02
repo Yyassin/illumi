@@ -14,12 +14,14 @@ const queries = {
                             thumbnail
                             pages {
                                 title
+                                tag
                                 rooms {
                                     messages {
                                         content
                                         date
                                         user{
                                             email
+                                            name
                                             thumbnail
                                         }
                                     }

@@ -58,7 +58,6 @@ class Sidebar extends React.Component {
                                 {
                                 
                                     this.props.members.map((member, index) => {
-                                        console.log(this.props.members)
                                         return (
                                             <Tooltip placement="rightTop" title={member.server.name}>
                                                 <li data-id={index} 

@@ -129,11 +129,19 @@ module.exports = new GraphQLObjectType({
                 content: { type: GraphQLString },
             },
             resolve(parent, args) {
+                const today = new Date()
+                // 2020-06-02 14:14
+                const date = today.getFullYear() + '-' 
+                            + (today.getMonth()+1) + '-' 
+                            + today.getDate() + ' ' 
+                            + today.getHours() + ':'
+                            + today.getMinutes()
+
                 let message = new Message({
                     roomID: args.roomID,
                     userID: args.userID,
                     content: args.content,
-                    date: new Date(),
+                    date: date,
                 })
 
                 return message.save();

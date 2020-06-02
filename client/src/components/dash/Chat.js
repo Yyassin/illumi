@@ -33,19 +33,25 @@ class Chat extends React.Component {
     }
 
     render() {
+        console.log(this.props.page.rooms)
         return(
             <div className="chat-container">
                 <ColoredScrollbars style={{ height: "100%" }}>
+
                     <ul className="message-area">
+
                         <div className="month-date-line">
                             <p className="month-date">May 27, 2020</p>
                         </div>
-                            {this.state.messages.map((value, index) => {
+                        
+                            {this.props.page.rooms[0].messages.map((message, index) => {
                                 return <li className="message" >
-                                    <Message key={index} message={value} />
+                                    <Message key={index} message={message} />
                                 </li>
                             })}
+                            
                     </ul>
+                    
                 </ColoredScrollbars>
 
                 <div className="chat-form-container">
@@ -53,7 +59,7 @@ class Chat extends React.Component {
                     <input onChange={this.onChange} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
                     <Button className="message-send-btn" onClick={this.onSend}><a href="">{<SendOutlined />}</a></Button>
                     {/* <Button type="submit" id="message-btn" class="send-button">Send</Button> */}
-                </div>
+                </div>                
             </div>
 
         )

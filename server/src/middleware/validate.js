@@ -18,7 +18,6 @@ module.exports = async (req, res, next) => {
             return next();
         }
         
-        console.log(req.headers.token)
         const decoded = jwt.verify(req.headers.token, keys.api.key)
         const token = createToken(decoded.user);
 
@@ -53,7 +52,7 @@ const createToken = (user) => {
                 date: Date.now()
             },
             keys.api.key,
-            {expiresIn: '1h'}
+            {expiresIn: 60}
         )
     )
 }

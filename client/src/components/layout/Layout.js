@@ -12,7 +12,8 @@ import {
   MenuFoldOutlined,
 } from '@ant-design/icons';
 
-import InnerRouter from '../../router/InnerRouter'
+//import InnerRouter from '../../router/InnerRouter'
+import Chat from '../dash/Chat'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
 import InnerHeader from './InnerHeader';
@@ -24,6 +25,7 @@ class MainLayout extends React.Component {
 
   state = {
     collapsed: false,
+    data: {},
   }
 
   toggle = () => {
@@ -33,9 +35,15 @@ class MainLayout extends React.Component {
   };
 
   componentDidMount = async() => {
+    this.fetchData()
+  }
+
+  fetchData = async() => {
+    console.log('fetching data')
     await this.props.toggleLoading()
     this.props.init(this.props.uid, this.props.accessToken)
   }
+
 
   render() {
     if (!this.props.auth) return <Redirect to='/'/>
@@ -46,7 +54,7 @@ class MainLayout extends React.Component {
       )
   
     } else {
-      console.log(this.props.data.user.members)
+      
       return (        
         <div>
           <Titlebar bg={this.props.darkTheme ? ["#171a1c", "#141618"] : ["#ECECEC", "#DCDCDC"]} title={"illumi"} />
@@ -67,7 +75,7 @@ class MainLayout extends React.Component {
                     />
 
                   <Content className="main-content">                  
-                      <InnerRouter />
+                      <Chat page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]} />
                   </Content>
 
               </Layout>
