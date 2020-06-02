@@ -32,6 +32,20 @@ class Chat extends React.Component {
         console.log(this.state)
     }
 
+    renderMessages = () => {
+        if(!this.props.page.rooms[0]) {
+            return
+        }
+
+        return (
+            this.props.page.rooms[0].messages.map((message, index) => {
+                return <li className="message" >
+                    <Message key={index} message={message} />
+                </li>
+            })
+        )
+    }
+
     render() {
         console.log(this.props.page.rooms)
         return(
@@ -44,12 +58,7 @@ class Chat extends React.Component {
                             <p className="month-date">May 27, 2020</p>
                         </div>
                         
-                            {this.props.page.rooms[0].messages.map((message, index) => {
-                                return <li className="message" >
-                                    <Message key={index} message={message} />
-                                </li>
-                            })}
-                            
+                        {this.renderMessages()}                            
                     </ul>
                     
                 </ColoredScrollbars>

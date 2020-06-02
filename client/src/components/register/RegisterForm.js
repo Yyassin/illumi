@@ -41,6 +41,15 @@ class RegisterForm extends React.Component {
     }
   }
 
+  // remove in production
+  autoSignIn = async () => {
+    await this.props.authenticate({
+      email: 'test@gmail.com',
+      password: 'password'
+    }, 'signin')
+    this.sendMessage()
+  }
+
   render () {
     if (this.props.auth) return <Redirect to='/home/'/>
     return (
@@ -71,8 +80,8 @@ class RegisterForm extends React.Component {
             <Checkbox style={{float: 'left'}}>Remember me</Checkbox>
           </Form.Item>
   
-          <a className="login-form-forgot" href="" style={{float: 'right'}}>
-            Forgot password
+          <a className="login-form-forgot" onClick={this.autoSignIn} style={{float: 'right'}}>
+            Auto Signin
           </a>
         </Form.Item>
   
