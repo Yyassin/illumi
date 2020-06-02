@@ -1,6 +1,9 @@
 const keys = require("../../config/keys")
 const jwt = require("jsonwebtoken")
 
+// origin can make calls without token
+const ORIGIN = 'http://localhost:5000'
+
 module.exports = async (req, res, next) => {
     try {
         const { query, req_auth} = check_query(req)
@@ -30,6 +33,10 @@ module.exports = async (req, res, next) => {
 }
 
 const check_query = (req) => {
+    if(req.headers.origin && req.headers.origin == ORIGIN) {
+        return { req_auth: false }
+    }
+
     const query = req.body.query
 
     if(!query) {

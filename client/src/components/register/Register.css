@@ -19,6 +19,7 @@ Register Layout
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    transform: scale(1.1);
 }
 
 .register-page {
