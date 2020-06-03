@@ -14,6 +14,7 @@ const database = require('./config/database')
 const docs_route = require('./src/docs/docs.route')
 const apiLock = require('./src/middleware/apiLock')
 const validate = require('./src/middleware/validate')
+const socket = require('./src/chat/socket')
 
 dotenv.config({path: './config.env'});
 

@@ -16,6 +16,7 @@ const queries = {
                                 title
                                 tag
                                 rooms {
+                                    id
                                     messages {
                                         content
                                         date

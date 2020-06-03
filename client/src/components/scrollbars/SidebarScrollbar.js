@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 export default class SidebarScrollbar extends Component {
+    scrollbar = React.createRef()
+
+    state = {
+        mounted: false
+    }
 
     constructor(props, ...rest) {
         super(props, ...rest);
@@ -14,6 +19,16 @@ export default class SidebarScrollbar extends Component {
     handleUpdate(values) {
         const { top } = values;
         this.setState({ top });
+    }
+
+    componentDidMount() {
+        this.setState({mounted: true})
+    }
+
+    componentDidUpdate() { 
+        console.log(this.scrollbar.current)
+        this.state.mounted && this.props.isChat && this.scrollbar.current.scrollToBottom(); 
+        this.state.mounted = false;
     }
     
     renderView({ style, ...props }) {
@@ -46,6 +61,8 @@ export default class SidebarScrollbar extends Component {
     render() {
         return (
             <Scrollbars
+                ref={ this.props.isChat ? this.scrollbar : " "}
+                
                 autoHide
                 // Hide delay in ms
                 autoHideTimeout={500}

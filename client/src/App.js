@@ -14,18 +14,15 @@ class App extends React.Component {
 
   modeDiv = createRef()
 
-  componentDidMount = () => {
-    console.log(this.modeDiv)
-    console.log(this.modeDiv.current)
-  }
+  // componentDidMount = () => {
+  // }
+
   toggleTheme = () => {
     // this.modeDiv.current.classList.toggle('light-theme');
     
     this.setState({
       darkTheme: !this.state.darkTheme,
     });
-
-    console.log(this.modeDiv.current)
   };
 
   render() {

@@ -75,7 +75,10 @@ class MainLayout extends React.Component {
                     />
 
                   <Content className="main-content">                  
-                      <Chat page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]} />
+                      <Chat 
+                        page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
+                        uid={this.props.uid}
+                        />
                   </Content>
 
               </Layout>
