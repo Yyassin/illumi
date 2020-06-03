@@ -182,6 +182,10 @@
     border-right: 3px solid var(--menu-after) !important;
 }
 
+ul.ant-menu-sub {
+    background: var(--profile-bg) !important;
+}
+
 .chat-container div.box {
     padding: 15px 15px 10px 10px !important; 
 }

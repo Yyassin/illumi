@@ -20,7 +20,7 @@ class Message extends React.Component {
                 <div className="message-content">
                     <div className="meta-data">
                         <div className="message-name">{this.props.message.user.name}</div>
-                        <div className="message-time">{this.props.message.date}</div>
+                        <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
                     </div>
                     <div className="message-text">{this.props.message.content}</div>
                 </div>
