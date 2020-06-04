@@ -25,8 +25,20 @@ export default class SidebarScrollbar extends Component {
         this.setState({mounted: true})
     }
 
+    //scroll down on initial render
     componentDidUpdate() { 
-        console.log(this.scrollbar.current)
+        this.scrollDown();
+    }
+
+    //scroll down on ping
+    newMessage = () => {
+        this.state.mounted = true;
+        this.scrollDown();
+    }
+
+    //scroll down function
+    scrollDown = () => {
+        console.log('scrolling')
         this.state.mounted && this.props.isChat && this.scrollbar.current.scrollToBottom(); 
         this.state.mounted = false;
     }

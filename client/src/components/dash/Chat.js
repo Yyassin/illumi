@@ -17,6 +17,8 @@ class Chat extends React.Component {
         messageInput: '',
     }
 
+    scrollbar = React.createRef()
+
     componentDidMount = () => {
         if(!this.props.page.rooms[0]) {
             return
@@ -30,6 +32,11 @@ class Chat extends React.Component {
             messages = this.state.messages;
             messages.push(msg)
             this.setState({messages: messages})
+
+            //scrolls down if client receives message
+            if (this.scrollbar.current) {
+                this.scrollbar.current.newMessage();
+            }
         })
     }
     
@@ -48,11 +55,17 @@ class Chat extends React.Component {
         })
     }
 
+
     render() {
         console.log(this.props.page.rooms)
         return(
             <div className="chat-container">
-                <SidebarScrollbars isChat={true} ref={this.scrollbar} style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>
+                <SidebarScrollbars 
+                    isChat={true}
+                    ref={this.scrollbar} 
+                    style={{ width: '100%', height: '100%', overflow: 'hidden' }} 
+                    bg={'#444444'} 
+                    tc={'transparent'}>
 
                     <ul className="message-area">
 
