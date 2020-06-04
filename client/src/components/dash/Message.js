@@ -1,4 +1,4 @@
-import React from 'react';
+        import React from 'react';
 import { Button } from 'antd'
 import './Dash.css'
 
@@ -7,24 +7,40 @@ import {
 } from '@ant-design/icons';
 
 class Message extends React.Component {
+    renderAvatar = () => {
+        if(!this.props.message.chain) {
+            return (
+                <div className="avatar">
+                    <a href="#" className="avatar-btn"
+                    style={{'background': `url("${this.props.message.user.thumbnail}")`,
+                            'background-size': 'cover',
+                            'background-position': 'center'}}>
+                    </a>
+                </div>
+            )
+        }
+    }
+
+    renderMeta = () => {
+        if(!this.props.message.chain) {
+            return (
+                <div className="meta-data">
+                    <div className="message-name">{this.props.message.user.name}</div>
+                    <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
+                </div>
+            )
+        }
+    }
 
     render() {
         return(
             <li className='message-container'>
-
-                <div className="avatar"><a href="#" className="avatar-btn"
-                                style={{'background': `url("${this.props.message.user.thumbnail}")`,
-                                'background-size': 'cover',
-                                'background-position': 'center'}}></a></div>
-                                
+                {this.renderAvatar()}            
                 <div className="message-content">
-                    <div className="meta-data">
-                        <div className="message-name">{this.props.message.user.name}</div>
-                        <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
-                    </div>
+                    {this.renderMeta()}
+                    <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
                     <div className="message-text">{this.props.message.content}</div>
                 </div>
-
             </li>
         )
     }    

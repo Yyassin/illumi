@@ -11,9 +11,72 @@ import {
 
 const socket = io.connect("http://localhost:4000")
 
+/*
+messages = [message1, message 2, ...] -> message = {content, date, user}
+
+date= [date1, date2, ...]
+users = [[user1, user2], [user1, user2], ... ]
+messages = [[[messages], [messages]], [[messages], [messages]]]
+
+
+goal : messages = [date:
+                      [user:
+                            [messages] 
+                 ]
+
+message = {
+    content
+    date        
+    chain: bool
+    user {
+        ...
+    }
+}
+
+sortedMessages = {
+    2020-06-04: [
+        message = {
+        content
+        date        
+        chain: bool
+        user {
+            ...
+        }
+    , msg2, msg3
+    ]
+}
+
+messages -> message -> date:
+add date field if date not in formatedMessages
+let users = {} stored all users in here, indexed by name
+let saveMessages = {}, add all date fields saveMessage[date] = {}
+saveMessage ={ date: {}, date: {}, ...}
+
+
+ yousef: hi
+        hello
+        bye
+shrish: hi man
+yousef: hi
+shrish: hello
+        hi
+
+let userIndex = {}, yousef-0
+                    shrish-0
+                    yousef-1: mes
+
+*/
+
+
+
+
+
+
+
 class Chat extends React.Component {
     state = {
         messages: [],
+        sortedMessages: {},
         messageInput: '',
     }
 
@@ -26,12 +89,13 @@ class Chat extends React.Component {
 
         let messages = this.props.page.rooms[0].messages      
         this.setState({messages: messages})
-        //this.sortMessages(messages)
+        this.sortMessages(messages)
 
         socket.on("chat message", (msg) => {
             messages = this.state.messages;
             messages.push(msg)
             this.setState({messages: messages})
+            this.sortMessages(messages)
 
             //scrolls down if client receives message
             // (maybe we dont want this)
@@ -39,6 +103,36 @@ class Chat extends React.Component {
                 this.scrollbar.current.newMessage();
             }
         })
+    }
+
+    sortMessages = (messages) => {
+        let newMessages = {};
+        let messageDate;
+        messages.map((message, index) => {
+            messageDate = message.date.split(" ")[0];
+
+            if (index > 0 && 
+                messages[index - 1].date.split(" ")[0] == messageDate) {
+                if (messages[index - 1].user.name == message.user.name) {
+                    message['chain'] = true;
+                } else {
+                    message['chain'] = false;
+                }
+            } else {
+                message['chain'] = false;
+            }
+
+            //list by date 
+            if(messageDate in newMessages){
+                newMessages[messageDate].push(message)              
+              } else {            
+                newMessages[messageDate] = []
+                newMessages[messageDate].push(message)
+            }
+        });
+
+        this.setState({sortedMessages: newMessages})
+
     }
     
 
@@ -56,6 +150,33 @@ class Chat extends React.Component {
         })
     }
 
+    renderMessages() {
+        return (
+            <ul className="message-area">
+                {
+                    Object.keys(this.state.sortedMessages).map((date) => {
+                        return (
+                            <div className="">
+                                <div className="month-date-line">
+                                    <p className="month-date">{date}</p>
+                                </div>
+                                {
+                                    this.state.sortedMessages[date].map((message, index) => {
+                                        return (
+                                            <li className="message" >
+                                                <Message key={index} message={message} />
+                                            </li>
+                                        )
+                                    })    
+                                }
+                            </div>
+                        )     
+                    })     
+                }                    
+            </ul>            
+        )
+    }
+
 
     render() {
         console.log(this.props.page.rooms)
@@ -68,19 +189,7 @@ class Chat extends React.Component {
                     bg={'#444444'} 
                     tc={'transparent'}>
 
-                    <ul className="message-area">
-
-                        <div className="month-date-line">
-                            <p className="month-date">May 27, 2020</p>
-                        </div>
-                        
-                            {this.state.messages.map((message, index) => {
-                                return <li className="message" >
-                                    <Message key={index} message={message} />
-                                </li>
-                            })}
-                            
-                    </ul>
+                    {this.renderMessages()}
                     
                 </SidebarScrollbars>
 
