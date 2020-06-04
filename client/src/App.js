@@ -17,12 +17,23 @@ class App extends React.Component {
   // componentDidMount = () => {
   // }
 
-  toggleTheme = () => {
-    // this.modeDiv.current.classList.toggle('light-theme');
+  toggleTheme = (child) => {
     
-    this.setState({
-      darkTheme: !this.state.darkTheme,
-    });
+    // this.modeDiv.current.classList.toggle('light-theme');
+    //=lse ifs-> add more themes (with refs and classlist)
+    if (child.key === 'light') {
+      //need to add to body since nav sits outside .app
+      document.body.classList.add('light-theme')
+      this.setState({
+        darkTheme: false,
+      });
+    } else {
+      document.body.classList.remove('light-theme')
+      this.setState({
+        darkTheme: true,
+      });
+    }
+    
   };
 
   render() {

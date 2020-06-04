@@ -3,6 +3,7 @@ import {Layout, Menu, Tooltip} from "antd";
 import {NavLink, Redirect,} from 'react-router-dom'
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
+import NavMenu from './NavMenu'
 
 import {
     DesktopOutlined,
@@ -136,12 +137,10 @@ class InnerSidebar extends React.PureComponent {
 
                 <div className="profile-section">
                         <ul className="profile-items">
-                        <Tooltip placement="topLeft" title="Logout">
-                            <li className="avatar" ><a onClick={this.props.signout} href="#" className="avatar-btn"
+                            <li className="avatar" ><a href="#" className="avatar-btn"
                                 style={{background: `url('${this.props.user.thumbnail}')`,
                                 'background-size': 'cover',
                                 'background-position': 'center'}}></a></li>
-                        </Tooltip>
                             
                             <li className="profile-info">
                                 <ul>
@@ -149,7 +148,17 @@ class InnerSidebar extends React.PureComponent {
                                     <li className="info-email">{this.props.user.email}</li>
                                 </ul>
                             </li>
-                            <li className="settings"><a onClick={this.props.toggleTheme} className="settings-btn" href="#">{<SettingFilled />}</a></li>
+
+                            
+                            {/* <li className="settings"><a onClick={this.props.toggleTheme} className="settings-btn" href="#">{<SettingFilled />}</a></li> */}
+                            <li className="settings">
+                                <NavMenu
+                                logout = {this.props.signout}
+                                toggleTheme = {this.props.toggleTheme}
+                                darkTheme={this.props.darkTheme}/>
+                                
+                            </li>
+                        
                         </ul>
                 </div>
             </Sider>

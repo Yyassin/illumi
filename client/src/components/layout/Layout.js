@@ -66,6 +66,7 @@ class MainLayout extends React.Component {
                 user={this.props.data.user}
                 collapsed={this.state.collapsed}
                 toggleTheme={this.props.toggleTheme}
+                darkTheme = {this.props.darkTheme}
                 signout={this.props.signOut}/>
 
               <Layout className="inner-layout">

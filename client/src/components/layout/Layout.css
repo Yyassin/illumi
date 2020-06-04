@@ -12,6 +12,8 @@
     --text-highlight: #9370DB;
     --head-shadow: rgba(41,41,41, 1);
     --selected: #5c555220;
+    --menu-bg: #1f1f1f;
+    --group-title-col: rgba(255, 255, 255, 0.45);
 }
 
 .light-theme {
@@ -26,6 +28,8 @@
     --text-highlight: #7289da;
     --head-shadow: rgba(41,41,41, .2);
     --selected: #5c555220;
+    --menu-bg: #ECECEC;
+    --group-title-col: #000;
 }
 
 .ant-layout {
@@ -281,6 +285,36 @@ ul.ant-menu-sub {
 .settings a:hover {
     background-color: #43434350;
 }
+
+ul.ant-dropdown-menu,
+.ant-dropdown-menu-submenu-title {
+    border-radius: 5px !important;
+    color: var(--text-color);
+}
+
+ul.ant-dropdown-menu {
+    background-color: var(--menu-bg) !important;
+}
+
+ul.ant-dropdown-menu li {
+    border-radius: 2px !important;
+}
+
+.ant-dropdown-menu-item-group-title {
+    font-weight: 500;
+    color: var(--group-title-col);
+}
+
+.tag {
+    color:var(--text-color);
+}
+
+li.logout-tag,
+li.close-tag {
+    color: #A64452;
+}
+
+
 
 .ant-layout-sider-children {
     display: flex;

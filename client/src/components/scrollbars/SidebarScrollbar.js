@@ -38,7 +38,6 @@ export default class SidebarScrollbar extends Component {
 
     //scroll down function
     scrollDown = () => {
-        console.log('scrolling')
         this.state.mounted && this.props.isChat && this.scrollbar.current.scrollToBottom(); 
         this.state.mounted = false;
     }

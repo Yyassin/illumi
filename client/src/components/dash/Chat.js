@@ -34,6 +34,7 @@ class Chat extends React.Component {
             this.setState({messages: messages})
 
             //scrolls down if client receives message
+            // (maybe we dont want this)
             if (this.scrollbar.current) {
                 this.scrollbar.current.newMessage();
             }
