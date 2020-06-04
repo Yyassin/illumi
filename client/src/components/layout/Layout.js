@@ -50,7 +50,7 @@ class MainLayout extends React.Component {
     if (!this.props.data) {
       console.log('loading...')
       return (
-        <div style={{background: "#fff", height: "100vh"}}></div>
+        <div style={{background: "#000", height: "100vh"}}></div>
       )
   
     } else {
@@ -59,7 +59,13 @@ class MainLayout extends React.Component {
         <div>
           <Titlebar bg={this.props.darkTheme ? ["#171a1c", "#141618"] : ["#ECECEC", "#DCDCDC"]} title={"illumi"} />
           <Layout className="main-layout">            
-              <Sidebar bg={["#171a1c", "#141618"]} members={this.props.data.user.members} selectServer={this.props.selectServer}/>
+              <Sidebar
+                bg={["#171a1c", "#141618"]}
+                members={this.props.data.user.members}
+                selectServer={this.props.selectServer}
+                serverIndex={this.props.serverIndex}
+                />
+
               <InnerSidebar 
                 server={this.props.data.user.members[this.props.serverIndex].server}
                 selectPage={this.props.selectPage}

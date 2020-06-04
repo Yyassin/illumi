@@ -3,6 +3,7 @@ import {Layout, Menu, Tooltip} from "antd";
 import {NavLink, Redirect,} from 'react-router-dom'
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
+import PageForm from '../forms/PageForm'
 import NavMenu from './NavMenu'
 
 import {
@@ -20,27 +21,18 @@ const ipcRenderer = window.require('electron').ipcRenderer
 
 
 class InnerSidebar extends React.PureComponent {
+    formRef = React.createRef();
 
     state = {
         pages: {},
-        /*
-        pages = {
-            lessons: [
-                page1
-                [age2]
-            ],
-            tutorials: [
-                page1
-                [age2]
-            ],
-        }
+        showModal: false,
 
-        forloop (tag in pages)
-            create submenu
-            forloop (page in tag's pages)
-                create menu
-
-        */
+        // modal fields
+        title: '',
+        image: '',
+        video: '',
+        tag: '',
+        text: '',
     }
 
     componentDidMount = () => {
@@ -80,7 +72,44 @@ class InnerSidebar extends React.PureComponent {
         })
 
         this.props.selectPage(key)        
+    }
+    
+    // modal controller
+    showModal = (e) => {
+        e.preventDefault()
+        this.setState({
+            showModal: true,
+        });
+    };
+
+    onModalChange = values => {
+        this.setState({[values.target.id]: values.target.value})
+    }
+
+    onSelectChange = values => {
+        this.setState({tag: values})
     }    
+
+    handleOk = (e) => {
+        console.log(this.state);
+        // call dispatch
+
+        this.setState({
+            showModal: false,
+            title: '',
+            image: '',
+            video: '',
+            tag: '',
+            text: '',
+        });
+        this.formRef.current.resetFields()
+    };
+
+    handleCancel = e => {
+        this.setState({
+            showModal: false,
+        });
+    };
 
     renderPages = () => {
         return (
@@ -124,7 +153,11 @@ class InnerSidebar extends React.PureComponent {
         return (
             <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
                 <div className="sidebar-header">
-                        <p className="sidebar-header-content">{this.props.server.name}</p>
+                        <p className="sidebar-header-content">
+                        {this.props.server.name}
+                        <a href="#" onClick={this.showModal} className="create-page"><DesktopOutlined /></a>
+                        </p>
+                        
                 </div>
 
                 <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>
@@ -161,6 +194,15 @@ class InnerSidebar extends React.PureComponent {
                         
                         </ul>
                 </div>
+
+                <PageForm
+                    visible={this.state.showModal}
+                    formRef={this.formRef}
+                    handleOk={this.handleOk}
+                    handleCancel={this.handleCancel}
+                    onModalChange={this.onModalChange}
+                    onSelectChange={this.onSelectChange}
+                    />
             </Sider>
         )
     }
