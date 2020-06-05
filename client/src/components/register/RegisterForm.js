@@ -51,7 +51,7 @@ class RegisterForm extends React.Component {
   }
 
   render () {
-    if (this.props.auth) return <Redirect to='/home/'/>
+    if (this.props.auth) return <Redirect to='/welcome'/>
     return (
       <Form
         initialValues={{ remember: true }}

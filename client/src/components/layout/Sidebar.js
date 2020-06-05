@@ -74,7 +74,7 @@ class Sidebar extends React.Component {
                                                 <li data-id={index} 
                                                     onClick={this.selectServer.bind(this)}>
                                                     <a href="#"
-                                                    className={(this.props.serverIndex === index) ? "server-thumbnail selected" : "server-thumbnail"}
+                                                    className={(parseInt(this.props.serverIndex) === parseInt(index)) ? "server-thumbnail selected" : "server-thumbnail"}
                                                     style={{background: `url('${member.server.thumbnail}')`,
                                                         backgroundSize: 'cover',
                                                         backgroundPosition: 'center'}}></a>

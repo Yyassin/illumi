@@ -23,6 +23,13 @@ const coreReducer = (state = initState, action) => {
                 loading: false
             }
 
+        case 'CLEAR_SESSION':
+            return {
+                ...state,
+                data: null,
+                loading: false
+            }
+
         case 'IS_LOADING':
             return {
                 ...state,

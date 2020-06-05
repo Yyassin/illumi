@@ -32,6 +32,12 @@ export const init = (uid, token) => {
     }
 }
 
+export const clearSession = () => {
+    return (dispatch) => {
+        return dispatch({type: 'CLEAR_SESSION'})
+    }
+}
+
 export const selectServer = (index) => {
     return async (dispatch) => {
         return dispatch({type: 'SELECT_SERVER', index})

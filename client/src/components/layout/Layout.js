@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import './Layout.css'
 
 import {signOut} from "../../store/actions/authActions";
-import {init, toggleLoading, selectServer, selectPage} from "../../store/actions/coreActions";
+import {init, clearSession, toggleLoading, selectServer, selectPage} from "../../store/actions/coreActions";
 import {connect} from "react-redux";
 
 //import InnerRouter from '../../router/InnerRouter
@@ -18,38 +18,13 @@ const { Content } = Layout;
 
 class MainLayout extends React.Component {
 
-  state = {
-    collapsed: false,
-    data: {},
+  endSession = async() => {    
+    await this.props.signOut()
+    this.props.clearSession()
   }
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  };
-
-  componentDidMount = async() => {
-    this.fetchData()
-  }
-
-  fetchData = async() => {
-    console.log('fetching data')
-    await this.props.toggleLoading()
-    this.props.init(this.props.uid, this.props.accessToken)
-  }
-
 
   render() {
-    if (!this.props.auth) return <Redirect to='/'/>
-    if (!this.props.data) {
-      console.log('loading...')
-      return (
-        <div style={{background: "#000", height: "100vh"}}></div>
-      )
-  
-    } else {
-      
+    if (!this.props.auth) return <Redirect to='/'/> 
       return (        
         <div>
           <Titlebar bg={["#171a1c", "#141618"]} title={"illumi"} />
@@ -65,8 +40,8 @@ class MainLayout extends React.Component {
                 server={this.props.data.user.members[this.props.serverIndex].server}
                 selectPage={this.props.selectPage}
                 user={this.props.data.user}
-                collapsed={this.state.collapsed}
-                signout={this.props.signOut}/>
+                collapsed={false}
+                signout={this.endSession}/>
 
               <Layout className="inner-layout">
                   <InnerHeader 
@@ -87,7 +62,6 @@ class MainLayout extends React.Component {
       );
     }
   }
-}
 
 const mapStateToProps = (state) => {
     return {
@@ -108,6 +82,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         signOut: (token) => dispatch(signOut(token)),
         init: (uid, token) => dispatch(init(uid, token)),
+        clearSession: () => dispatch(clearSession()),
 
         toggleLoading: () => dispatch(toggleLoading()),
         selectServer: (index) => dispatch(selectServer(index)),
