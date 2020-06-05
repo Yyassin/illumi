@@ -29,17 +29,25 @@ class Message extends React.Component {
         }
     }
 
+    renderDate = () => {
+        if (this.props.message.chain){
+            return (
+                <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
+            )
+        }
+    }
+
     render() {
         return(
             <li className='message-container'>
                 {this.renderAvatar()}            
                 <div className="message-content">
                     {this.renderMeta()}
-                    <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
+                    {this.renderDate()}
                     <div className="message-text">{this.props.message.content}</div>
                 </div>
             </li>
-        )
+        ) 
     }    
 }
 

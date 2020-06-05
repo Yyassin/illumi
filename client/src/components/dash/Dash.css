@@ -18,13 +18,17 @@ li {
     list-style: none;
 }
 
+.message:last-child {
+    padding-bottom: 10px;
+}
+
 .message-container {
     display: flex;
     flex-direction: row;
-    padding: 5px;
+    align-items: center;
     transition: filter 200ms ease-in;
     border-radius: 5px;
-    margin-bottom: 8px;
+    padding: 2px;
 }
 
 .message-container:hover {
@@ -32,9 +36,10 @@ li {
 }
 
 .message-container .avatar {
+    padding-top: 15px;
     background-color: transparent;
     padding-right: 15px;
-    flex: 1;
+    flex: 0;
 }
 
 .month-date-line{
@@ -48,11 +53,15 @@ li {
     position: relative;
     top: -10px;
     padding: 0 10px;
+    margin: 0;
     color: var(--text-color);
     background-color: var(--chat-container-bg);
 }
 
-.message-content {
+.message-content:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     flex: 10;
 }
 
@@ -63,6 +72,7 @@ li {
 }
 
 .message-name {
+    padding-top: 15px;
     font-size: 14px;
     font-weight: 500;
     padding-right: 8px;
@@ -70,11 +80,22 @@ li {
 
 .message-time {
     font-size: 11px;
+    padding-left: 3px;
     font-weight: 300;
+    padding-right: 26px;
+}
+
+.message-content:first-child .message-time {
+    color: transparent;
+}
+
+.message-container:first-child:hover .message-time {
+    color: var(--text-col)
 }
 
 .message-text {
-    padding-top: 5px;
+    display: flex;
+    align-items: center;
     min-width: 100%;
 }
 
