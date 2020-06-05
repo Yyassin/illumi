@@ -8,10 +8,6 @@ General
     padding: 0;
 }
 
-*:not(.ant-layout-sider) {
-    transition: all 1ms ease-in-out !important;
-}
-
 /* Disable highlighting on UI */
 :not(input):not(textarea),
 :not(input):not(textarea)::after,

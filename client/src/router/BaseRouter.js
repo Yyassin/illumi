@@ -7,7 +7,7 @@ const BaseRouter = (props) => (
     <Switch>
         <Route exact path="/" component={RegisterLayout}></Route>
         <Route exact path="/signin" component={RegisterLayout}></Route>
-        <Route path="/home" component={() => <MainLayout darkTheme={props.darkTheme} toggleTheme={props.toggleTheme}/>}></Route>
+        <Route exact path="/home" component={MainLayout}></Route>
     </Switch>
 )
 

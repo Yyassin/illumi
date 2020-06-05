@@ -15,8 +15,8 @@ class NavMenu extends React.Component {
                     
                     <SubMenu title="Themes">
                         <Menu.ItemGroup title="Themes">
-                            <Menu.Item className="tag" key='light' onClick={this.props.toggleTheme}>Light Theme</Menu.Item>
-                            <Menu.Item className="tag" key='dark' onClick={this.props.toggleTheme}>Dark Theme</Menu.Item>
+                            <Menu.Item>Light Theme</Menu.Item>
+                            <Menu.Item>Dark Theme</Menu.Item>
                         </Menu.ItemGroup>
                     </SubMenu>
                     <Menu.Item className="close-tag" key="3">Close</Menu.Item>

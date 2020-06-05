@@ -168,6 +168,7 @@ class InnerSidebar extends React.Component {
                     </Menu>
                 </SidebarScrollbar>
 
+
                 <div className="profile-section">
                         <ul className="profile-items">
                             <li className="avatar" ><a href="#" className="avatar-btn"
@@ -186,9 +187,7 @@ class InnerSidebar extends React.Component {
                             {/* <li className="settings"><a onClick={this.props.toggleTheme} className="settings-btn" href="#">{<SettingFilled />}</a></li> */}
                             <li className="settings">
                                 <NavMenu
-                                logout = {this.props.signout}
-                                toggleTheme = {this.props.toggleTheme}
-                                darkTheme={this.props.darkTheme}/>
+                                logout = {this.props.signout}/>
                                 
                             </li>
                         

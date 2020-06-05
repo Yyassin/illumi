@@ -52,7 +52,7 @@ class MainLayout extends React.Component {
       
       return (        
         <div>
-          <Titlebar bg={this.props.darkTheme ? ["#171a1c", "#141618"] : ["#ECECEC", "#DCDCDC"]} title={"illumi"} />
+          <Titlebar bg={["#171a1c", "#141618"]} title={"illumi"} />
           <Layout className="main-layout">            
               <Sidebar
                 bg={["#171a1c", "#141618"]}
@@ -66,8 +66,6 @@ class MainLayout extends React.Component {
                 selectPage={this.props.selectPage}
                 user={this.props.data.user}
                 collapsed={this.state.collapsed}
-                toggleTheme={this.props.toggleTheme}
-                darkTheme = {this.props.darkTheme}
                 signout={this.props.signOut}/>
 
               <Layout className="inner-layout">
