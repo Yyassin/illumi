@@ -4,9 +4,8 @@ import { Scrollbars } from 'react-custom-scrollbars';
 export default class SidebarScrollbar extends Component {
     scrollbar = React.createRef()
 
-    state = {
-        mounted: false
-    }
+    isScrolling = true;
+
 
     constructor(props, ...rest) {
         super(props, ...rest);
@@ -21,9 +20,6 @@ export default class SidebarScrollbar extends Component {
         this.setState({ top });
     }
 
-    componentDidMount() {
-        this.setState({mounted: true})
-    }
 
     //scroll down on initial render
     componentDidUpdate() { 
@@ -32,18 +28,18 @@ export default class SidebarScrollbar extends Component {
 
     //scroll down on ping
     newMessage = () => {
-        this.state.mounted = true;
+        this.isScrolling = true;
         this.scrollDown();
     }
 
     //scroll down function
     scrollDown = () => {
-        this.state.mounted && this.props.isChat && this.scrollbar.current.scrollToBottom(); 
-        this.state.mounted = false;
+        this.isScrolling && this.props.isChat && this.scrollbar.current.scrollToBottom(); 
+        //this.state.mounted = false;
+        this.isScrolling = false;
     }
     
     renderView({ style, ...props }) {
-        const { top } = this.state;
         const viewStyle = {
             'overscroll-behavior': 'contain',
             // backgroundColor: `232323`,
@@ -58,7 +54,6 @@ export default class SidebarScrollbar extends Component {
     }
 
     renderThumb({ style, ...props }) {
-        const { top } = this.state;
         const thumbStyle = {
             backgroundColor: this.props.bg || ''
         };

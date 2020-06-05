@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, Form, Input, Checkbox, message } from 'antd';
+import { Modal, Form, Input} from 'antd';
 
 class ServerForm extends React.Component {    
 

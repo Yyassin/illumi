@@ -1,10 +1,7 @@
-        import React from 'react';
-import { Button } from 'antd'
+import React from 'react';
 import './Dash.css'
 
-import {
-    SendOutlined,
-} from '@ant-design/icons';
+
 
 class Message extends React.Component {
     renderAvatar = () => {

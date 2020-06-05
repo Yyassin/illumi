@@ -3,16 +3,8 @@ import {Layout, Menu, Tooltip} from "antd";
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import ServerForm from '../forms/ServerForm'
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 class Sidebar extends React.Component {
     formRef = React.createRef();
@@ -28,7 +20,7 @@ class Sidebar extends React.Component {
         thumbnail: '',
     }
     
-    selectServer = async (e) => {
+    selectServer = async (e) => {        
         this.props.selectServer(e.currentTarget.dataset.id);
     }
 
@@ -81,8 +73,8 @@ class Sidebar extends React.Component {
                                             <Tooltip placement="rightTop" title={member.server.name}>
                                                 <li data-id={index} 
                                                     onClick={this.selectServer.bind(this)}>
-                                                    <a href="#" 
-                                                    className={(this.props.serverIndex == index) ? "server-thumbnail selected" : "server-thumbnail"}
+                                                    <a href="#"
+                                                    className={(this.props.serverIndex === index) ? "server-thumbnail selected" : "server-thumbnail"}
                                                     style={{background: `url('${member.server.thumbnail}')`,
                                                         backgroundSize: 'cover',
                                                         backgroundPosition: 'center'}}></a>
@@ -95,10 +87,10 @@ class Sidebar extends React.Component {
 
                                 <Tooltip placement="rightTop" title="Create Server">
                                     <li onClick={this.showModal}>
-                                        <a href="#" className="server-thumbnail"
+                                        <p href="#" className="server-thumbnail"
                                             style={{background: `#333`,
                                                     backgroundSize: 'cover',
-                                                    backgroundPosition: 'center'}}></a>
+                                                    backgroundPosition: 'center'}}></p>
                                     </li>
                                 </Tooltip>
                             </ul>

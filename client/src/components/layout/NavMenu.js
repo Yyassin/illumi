@@ -4,10 +4,6 @@ import { SettingFilled } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
-
-
-
-
 class NavMenu extends React.Component {
     
     render() {
@@ -23,9 +19,6 @@ class NavMenu extends React.Component {
                             <Menu.Item className="tag" key='dark' onClick={this.props.toggleTheme}>Dark Theme</Menu.Item>
                         </Menu.ItemGroup>
                     </SubMenu>
-                    {/* <SubMenu title="disabled sub menu" disabled>
-                    <Menu.Item key="3">Close</Menu.Item>
-                    </SubMenu> */}
                     <Menu.Item className="close-tag" key="3">Close</Menu.Item>
                 </Menu.ItemGroup>
             </Menu>
@@ -33,10 +26,10 @@ class NavMenu extends React.Component {
 
         return (
             <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['click']} overlay={menu}>
-            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-            <SettingFilled />
-            </a>
-        </Dropdown>
+                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <SettingFilled />
+                </a>
+            </Dropdown>
         )
     } 
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import {Layout, Menu, Tooltip} from "antd";
-import {NavLink, Redirect,} from 'react-router-dom'
+import {Layout, Menu} from "antd";
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import PageForm from '../forms/PageForm'
@@ -9,10 +8,7 @@ import NavMenu from './NavMenu'
 import {
     DesktopOutlined,
     PieChartOutlined,
-    FileOutlined,
     TeamOutlined,
-    UserOutlined,
-    SettingFilled,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -20,7 +16,7 @@ const { SubMenu } = Menu;
 const ipcRenderer = window.require('electron').ipcRenderer
 
 
-class InnerSidebar extends React.PureComponent {
+class InnerSidebar extends React.Component {
     formRef = React.createRef();
 
     state = {
@@ -36,6 +32,10 @@ class InnerSidebar extends React.PureComponent {
     }
 
     componentDidMount = () => {
+        this.setState({pages: this.sortingPages()})
+    }
+
+    sortingPages = () => {
         let newPages = {};
         
         this.props.server.pages.map((page) => {
@@ -48,8 +48,8 @@ class InnerSidebar extends React.PureComponent {
                 newPages[page.tag].push(page)
             }
         });
-        
-        this.setState({pages: newPages})
+
+        return newPages;
     }
 
     onCollapse = collapsed => {
@@ -66,7 +66,7 @@ class InnerSidebar extends React.PureComponent {
         const title = e.key
 
         this.props.server.pages.map((page, index) => {
-            if (page.title == title) {
+            if (page.title === title) {
                 key = index
             }
         })
@@ -115,7 +115,7 @@ class InnerSidebar extends React.PureComponent {
         return (
            
             Object.keys(this.state.pages).map((tag, index) => {
-                if (tag == "null") {
+                if (tag === "null") {
                     return (
                         this.state.pages[tag].map((page, index) => {
                             return (

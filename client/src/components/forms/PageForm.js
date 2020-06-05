@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, Form, Input, Checkbox, Select, message } from 'antd';
+import { Modal, Form, Input, Select } from 'antd';
 
 class PageForm extends React.Component {        
 

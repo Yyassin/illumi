@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import MainLayout from '../components/layout/Layout'
 import RegisterLayout from '../components/register/RegisterLayout'
-import { OmitProps } from 'antd/lib/transfer/renderListBody';
 
 const BaseRouter = (props) => (
     <Switch>

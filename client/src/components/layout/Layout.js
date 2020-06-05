@@ -1,25 +1,20 @@
 import React from 'react';
-import {NavLink, Redirect,} from 'react-router-dom'
-import { Layout, Breadcrumb } from 'antd';
+import { Redirect } from 'react-router-dom'
+import { Layout } from 'antd';
 import './Layout.css'
 
 import {signOut} from "../../store/actions/authActions";
 import {init, toggleLoading, selectServer, selectPage} from "../../store/actions/coreActions";
 import {connect} from "react-redux";
 
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons';
-
-//import InnerRouter from '../../router/InnerRouter'
+//import InnerRouter from '../../router/InnerRouter
 import Chat from '../dash/Chat'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
 import InnerHeader from './InnerHeader';
 import Titlebar from '../Titlebar/Titlebar'
 
-const { Content, Footer, Header } = Layout;
+const { Content } = Layout;
 
 class MainLayout extends React.Component {
 

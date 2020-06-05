@@ -80,9 +80,9 @@ class RegisterForm extends React.Component {
             <Checkbox style={{float: 'left'}}>Remember me</Checkbox>
           </Form.Item>
   
-          <a className="login-form-forgot" onClick={this.autoSignIn} style={{float: 'right'}}>
+          <Button type="link" className="login-form-forgot" onClick={this.autoSignIn} style={{float: 'right'}}>
             Auto Signin
-          </a>
+          </Button>
         </Form.Item>
   
         <Form.Item style={{marginBottom: '7px'}}>

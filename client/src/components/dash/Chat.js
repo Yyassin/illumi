@@ -112,8 +112,8 @@ class Chat extends React.Component {
             messageDate = message.date.split(" ")[0];
 
             if (index > 0 && 
-                messages[index - 1].date.split(" ")[0] == messageDate) {
-                if (messages[index - 1].user.name == message.user.name) {
+                messages[index - 1].date.split(" ")[0] === messageDate) {
+                if (messages[index - 1].user.name === message.user.name) {
                     message['chain'] = true;
                 } else {
                     message['chain'] = false;

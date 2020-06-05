@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col } from 'antd';
+import { Card, Row } from 'antd';
 import RegisterForm from './RegisterForm'
 import './Register.css'
 

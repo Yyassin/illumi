@@ -1,7 +1,6 @@
 import React, { createRef} from 'react';
 import 'antd/dist/antd.dark.css';
 
-import Titlebar from './components/Titlebar/Titlebar'
 import './App.css'
 import BaseRouter from './router/BaseRouter';
 import {HashRouter } from 'react-router-dom';
@@ -13,9 +12,6 @@ class App extends React.Component {
   }
 
   modeDiv = createRef()
-
-  // componentDidMount = () => {
-  // }
 
   toggleTheme = (child) => {
     
