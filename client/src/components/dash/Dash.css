@@ -60,9 +60,12 @@ li {
 
 .message-content:first-child {
     display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-basis: 100%;
     flex-direction: row;
     align-items: center;
-    flex: 10;
+    flex: 0;
 }
 
 .meta-data {

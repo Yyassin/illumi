@@ -9,7 +9,7 @@ class Message extends React.Component {
             return (
                 <div className="avatar">
                     <a href="#" className="avatar-btn"
-                    style={{'background': `url("${this.props.message.user.thumbnail}")`,
+                    style={{'background': `url("${this.props.message.member.user.thumbnail}")`,
                             'background-size': 'cover',
                             'background-position': 'center'}}>
                     </a>
@@ -22,7 +22,7 @@ class Message extends React.Component {
         if(!this.props.message.chain) {
             return (
                 <div className="meta-data">
-                    <div className="message-name">{this.props.message.user.name}</div>
+                    <div className="message-name">{this.props.message.member.user.name}</div>
                     <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
                 </div>
             )

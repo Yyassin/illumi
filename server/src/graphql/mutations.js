@@ -125,7 +125,7 @@ module.exports = new GraphQLObjectType({
             type: types.MessageType,
             args: {
                 roomID: { type: GraphQLString },
-                userID: { type: GraphQLString },
+                memberID: { type: GraphQLString },
                 content: { type: GraphQLString },
             },
             resolve(parent, args) {
@@ -139,7 +139,7 @@ module.exports = new GraphQLObjectType({
 
                 let message = new Message({
                     roomID: args.roomID,
-                    userID: args.userID,
+                    memberID: args.memberID,
                     content: args.content,
                     date: date,
                 })

@@ -20,10 +20,14 @@ const queries = {
                                     messages {
                                         content
                                         date
-                                        user{
-                                            email
-                                            name
-                                            thumbnail
+                                        member{
+                                            id
+                                            role
+                                            user{
+                                                email
+                                                name
+                                                thumbnail
+                                            }
                                         }
                                     }
                                 }

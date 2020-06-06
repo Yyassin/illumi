@@ -140,10 +140,10 @@ const MessageType = new GraphQLObjectType({
         content: { type: GraphQLString },
         date: { type: GraphQLString },
 
-        user: {
-            type: UserType,
+        member: {
+            type: MemberType,
             resolve(parent, args) {
-                return User.findById(parent.userID)
+                return Member.findById(parent.memberID)
             }
         },
 

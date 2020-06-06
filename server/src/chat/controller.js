@@ -1,37 +1,50 @@
 const Message = require('../models/message.model')
+const Member = require('../models/member.model')
 const User = require('../models/user.model')
+const Room = require('../models/room.model')
+const Page = require('../models/page.model')
 
 exports.addMessage = async (msgInput) => {
-    const today = new Date()
+    try {        
+        const user = await User.findById(msgInput.userID);
+        const room = await Room.findById(msgInput.roomID);
+        const page = await Page.findById(room.pageID);        
+
+        const members = await Member.find({serverID: page.serverID, userID: msgInput.userID})
+        const member = members[0]       
+
+        const today = new Date()
                 // 2020-06-02 14:14
-    const date = today.getFullYear() + '-' 
-                + (today.getMonth()+1) + '-' 
-                + today.getDate() + ' ' 
-                + today.getHours() + ':'
-                + today.getMinutes() 
+        const date = today.getFullYear() + '-' 
+                    + (today.getMonth()+1) + '-' 
+                    + today.getDate() + ' ' 
+                    + today.getHours() + ':'
+                    + today.getMinutes() 
 
-    let message = new Message({
-        roomID: msgInput.roomID,
-        userID: msgInput.userID,
-        content: msgInput.content,
-        date: date,
-    })
+        let message = new Message({
+            roomID: msgInput.roomID,
+            memberID: member.id,
+            content: msgInput.content,
+            date: date,
+        })
 
-    message.save()
-
-    try {
-        const user = await User.findById(msgInput.userID)
+        message.save()
 
         return {
             content: msgInput.content,
             date: date,
-            user: {
-                email: user.email,
-                name: user.name,
-                thumbnail: user.thumbnail
-            }
+            member: {
+                id: member.id,
+                role: member.role,
+                user: {
+                    email: user.email,
+                    name: user.name,
+                    thumbnail: user.thumbnail
+                }
+            }   
         }
     } catch(error) {
+        console.log(error.message)
         return error.message
     }  
 }

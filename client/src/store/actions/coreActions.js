@@ -21,6 +21,7 @@ export const init = (uid, token) => {
             }
 
             const data = result.data.data
+            
             // console.log(data)
         
             dispatch({type: 'FETCH_SUCCESS', data: data })

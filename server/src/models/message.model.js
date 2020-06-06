@@ -9,7 +9,7 @@ const messageSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    userID : {
+    memberID : {
         type: String,
         required: true
     },
