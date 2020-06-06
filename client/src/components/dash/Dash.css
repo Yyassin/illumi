@@ -32,7 +32,7 @@ li {
 }
 
 .message-container:hover {
-    backdrop-filter: brightness(0.92);    
+    background-color: var(--selected);
 }
 
 .message-container .avatar {
@@ -60,18 +60,15 @@ li {
 
 .message-content:first-child {
     display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    flex-basis: 100%;
-    flex-direction: row;
-    align-items: center;
-    flex: 0;
+    max-width: 90%;
+    flex-basis: 100% !important;
+    flex-direction: row !important;
+    /* align-items: center; */
 }
 
 .meta-data {
     display: flex;
     align-items: baseline;
-    flex-direction: row;
 }
 
 .message-name {
@@ -82,6 +79,7 @@ li {
 }
 
 .message-time {
+    flex: 1;
     font-size: 11px;
     padding-left: 3px;
     font-weight: 300;
@@ -90,6 +88,8 @@ li {
 
 .message-content:first-child .message-time {
     color: transparent;
+    position: relative;
+    top: 3px;
 }
 
 .message-container:first-child:hover .message-time {
@@ -97,6 +97,7 @@ li {
 }
 
 .message-text {
+    flex: 1;
     display: flex;
     align-items: center;
     min-width: 100%;

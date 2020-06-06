@@ -11,7 +11,7 @@
     --profile-bg: #131313;
     --text-highlight: #9370DB;
     --head-shadow: rgba(41,41,41, 1);
-    --selected: #5c555220;
+    --selected: #5c555210;
     --menu-bg: #1f1f1f;
     --group-title-col: rgba(255, 255, 255, 0.45);
 }
@@ -27,7 +27,7 @@
     --profile-bg: #DCDCDC;
     --text-highlight: #7289da;
     --head-shadow: rgba(41,41,41, .2);
-    --selected: #5c555220;
+    --selected: #5c555210;
     --menu-bg: #ECECEC;
     --group-title-col: #000;
 }

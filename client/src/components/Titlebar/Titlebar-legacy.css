@@ -95,13 +95,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 135px;
+    width: 90px;
     /* needs no-drag for color changing div*/
     -webkit-app-region: no-drag;
 }
 
-[class^="section-windows-control_box-"]{
-    width: 45px;
+.section-windows-control_box {
+    width: 30px;
     height: 30px;
     /* background-color: purple; */
     display: flex;
@@ -110,16 +110,10 @@
     transition: all 0.05s ease-in;
 }
 
-.section-windows-control_box-min:hover,
-.section-windows-control_box-unmax:hover,
-.section-windows-control_box-max:hover {
-    backdrop-filter: brightness(1.5);
+/*only if windows */
+.section-windows-control_box:hover {
+    backdrop-filter: brightness(1.2);
 }
-
-.section-windows-control_box-close:hover {
-    background-color: red;
-}
-
 
 .minimize-active_logo {
     fill: #525252;
@@ -201,22 +195,3 @@
     transition: all 0.05s ease-in;
 }
 
-.Titlebar svg path, 
-.Titlebar svg rect, 
-.Titlebar svg polygon {
-    fill: #ffffff60;
-    /* stroke: #ffffff40;
-    stroke-width: 1; */
-}
-
-.section-windows-control_box-min:hover svg rect,
-.section-windows-control_box-unmax:hover svg path,
-.section-windows-control_box-max:hover svg path,
-.section-windows-control_box-close:hover svg polygon{
-    fill: #fff;
-}
-
-.Titlebar svg {
-  width: 10px;
-  height: 10px;
-}
