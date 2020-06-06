@@ -91,11 +91,19 @@ class Chat extends React.Component {
         this.setState({messages: messages})
         this.sortMessages(messages)
 
+        socket.on('invalid token', () => {
+            this.props.signout();            
+        })
+
         socket.on("chat message", (msg) => {
-            messages = this.state.messages;
-            messages.push(msg)
-            this.setState({messages: messages})
-            this.sortMessages(messages)
+            console.log(msg.roomID)
+            console.log(this.props.page.rooms[0].id)
+            if (msg.roomID == this.props.page.rooms[0].id) {
+                messages = this.state.messages;
+                messages.push(msg)
+                this.setState({messages: messages})
+                this.sortMessages(messages)
+            }
 
             //scrolls down if client receives message
             // (maybe we dont want this)
@@ -103,6 +111,7 @@ class Chat extends React.Component {
                 this.scrollbar.current.newMessage();
             }
         })
+
     }
 
     sortMessages = (messages) => {
@@ -146,7 +155,8 @@ class Chat extends React.Component {
         socket.emit("chat message", {
             content: this.state.messageInput,
             userID: this.props.uid,
-            roomID: this.props.page.rooms[0].id
+            roomID: this.props.page.rooms[0].id,
+            token: this.props.token
         })
     }
 

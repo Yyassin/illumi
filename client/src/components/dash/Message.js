@@ -2,7 +2,6 @@ import React from 'react';
 import './Dash.css'
 
 
-
 class Message extends React.Component {
     renderAvatar = () => {
         if(!this.props.message.chain) {

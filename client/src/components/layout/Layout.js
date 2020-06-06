@@ -53,6 +53,8 @@ class MainLayout extends React.Component {
                       <Chat 
                         page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
                         uid={this.props.uid}
+                        token={this.props.accessToken}
+                        signout={this.endSession}
                         />
                   </Content>
 

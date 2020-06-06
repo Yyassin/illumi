@@ -10,10 +10,16 @@ console.log(`Socket listening on port ${chat_port}`);
 
 server.on("connection", socket => {
     const { id } = socket.client;
-    console.log('user connected')
+    console.log('user connected: ' + id)
 
-    socket.on("chat message", async (msgInput) => {
+    socket.on("chat message", async (msgInput, idMes) => {
         const msg = await controller.addMessage(msgInput)
-        server.emit("chat message", msg)
+        
+        if(msg) {
+            server.emit("chat message", msg)
+        } else {
+            console.log(server.clients)
+            server.to(id).emit('invalid token')
+        }
     })
 })

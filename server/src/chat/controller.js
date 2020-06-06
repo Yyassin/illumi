@@ -1,11 +1,30 @@
+const keys = require("../../config/keys")
+const jwt = require("jsonwebtoken")
+
 const Message = require('../models/message.model')
 const Member = require('../models/member.model')
 const User = require('../models/user.model')
 const Room = require('../models/room.model')
 const Page = require('../models/page.model')
 
+const validate = (token) => {
+    try {
+        const decoded = jwt.verify(token, keys.api.key)
+        return true;
+        
+    } catch (error){
+        console.log(error.message)
+        return false;
+    }
+}
+
 exports.addMessage = async (msgInput) => {
-    try {        
+    try {     
+
+        if(!validate(msgInput.token)) {
+            return null
+        }
+        
         const user = await User.findById(msgInput.userID);
         const room = await Room.findById(msgInput.roomID);
         const page = await Page.findById(room.pageID);        
@@ -33,6 +52,7 @@ exports.addMessage = async (msgInput) => {
         return {
             content: msgInput.content,
             date: date,
+            roomID: msgInput.roomID,
             member: {
                 id: member.id,
                 role: member.role,
@@ -41,7 +61,7 @@ exports.addMessage = async (msgInput) => {
                     name: user.name,
                     thumbnail: user.thumbnail
                 }
-            }   
+            }
         }
     } catch(error) {
         console.log(error.message)
