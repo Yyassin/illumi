@@ -10,7 +10,7 @@ console.log(`Socket listening on port ${chat_port}`);
 
 server.on("connection", socket => {
     const { id } = socket.client;
-    console.log('user connected: ' + id)
+    //console.log('user connected: ' + id)
 
     socket.on("chat message", async (msgInput, idMes) => {
         const msg = await controller.addMessage(msgInput)

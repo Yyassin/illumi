@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import './Layout.css'
 
 import {signOut} from "../../store/actions/authActions";
-import {init, clearSession, toggleLoading, selectServer, selectPage} from "../../store/actions/coreActions";
+import {init, clearSession, toggleLoading, selectServer, selectPage, addServer, addPage} from "../../store/actions/coreActions";
 import {connect} from "react-redux";
 
 //import InnerRouter from '../../router/InnerRouter
@@ -23,6 +23,19 @@ class MainLayout extends React.Component {
     this.props.clearSession()
   }
 
+  addServer = async(serverData) => {
+    this.props.addServer(serverData, this.props.uid, this.props.accessToken)
+  }
+
+  addPage = async(pageData) => {
+    console.log(this.props.data.user.members[this.props.serverIndex].server.id)
+    this.props.addPage(pageData, this.props.data.user.members[this.props.serverIndex].server.id, this.props.accessToken)
+  }
+
+  fetchData = async() => {
+    this.props.init(this.props.uid, this.props.accessToken);
+  }
+
   render() {
     if (!this.props.auth) return <Redirect to='/'/> 
       return (        
@@ -34,6 +47,8 @@ class MainLayout extends React.Component {
                 members={this.props.data.user.members}
                 selectServer={this.props.selectServer}
                 serverIndex={this.props.serverIndex}
+                addServer={this.addServer}
+                fetchData = {this.fetchData}
                 />
 
               <InnerSidebar 
@@ -41,7 +56,10 @@ class MainLayout extends React.Component {
                 selectPage={this.props.selectPage}
                 user={this.props.data.user}
                 collapsed={false}
-                signout={this.endSession}/>
+                signout={this.endSession}
+                addPage={this.addPage}
+                fetchData = {this.fetchData}
+                />
 
               <Layout className="inner-layout">
                   <InnerHeader 
@@ -87,8 +105,12 @@ const mapDispatchToProps = (dispatch) => {
         clearSession: () => dispatch(clearSession()),
 
         toggleLoading: () => dispatch(toggleLoading()),
+
         selectServer: (index) => dispatch(selectServer(index)),
         selectPage: (index) => dispatch(selectPage(index)),
+
+        addServer: (serverData, uid, token) => dispatch(addServer(serverData, uid, token)),
+        addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
     }
 }
 

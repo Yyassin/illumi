@@ -36,8 +36,12 @@ class Sidebar extends React.Component {
         this.setState({[values.target.id]: values.target.value})
     }
 
-    handleOk = (e) => {
+    handleOk = async (e) => {
         console.log(this.state);
+
+        await this.props.addServer(this.state)
+        this.props.fetchData()
+
         this.setState({
             showModal: false,
             name: '',

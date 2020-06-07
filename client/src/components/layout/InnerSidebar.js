@@ -90,9 +90,11 @@ class InnerSidebar extends React.Component {
         this.setState({tag: values})
     }    
 
-    handleOk = (e) => {
+    handleOk = async(e) => {
         console.log(this.state);
-        // call dispatch
+        
+        await this.props.addPage(this.state)
+        this.props.fetchData()
 
         this.setState({
             showModal: false,
@@ -115,7 +117,7 @@ class InnerSidebar extends React.Component {
         return (
            
             Object.keys(this.state.pages).map((tag, index) => {
-                if (tag === "null") {
+                if (tag === "" || tag === "null") {
                     return (
                         this.state.pages[tag].map((page, index) => {
                             return (

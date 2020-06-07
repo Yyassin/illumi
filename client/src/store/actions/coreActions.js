@@ -50,3 +50,41 @@ export const selectPage = (index) => {
         return dispatch({type: 'SELECT_PAGE', index})
     }
 }
+
+export const addServer = (serverData, uid, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.addServer(serverData, uid);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Created server.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
+export const addPage = (pageData, serverID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.addPage(pageData, serverID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Created page.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}

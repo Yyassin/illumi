@@ -83,7 +83,6 @@ class Chat extends React.Component {
 
     }
     
-
     onChange = (e) => {
         this.setState({[e.target.id]: e.target.value})
     }
@@ -134,9 +133,7 @@ class Chat extends React.Component {
         )
     }
 
-
     render() {
-        console.log(this.props.page.rooms)
         return(
             <div className="chat-container">
                 <SidebarScrollbars 

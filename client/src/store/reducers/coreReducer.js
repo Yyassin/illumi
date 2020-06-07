@@ -2,7 +2,8 @@ const initState = {
     loading: false,
     data: null,
     serverIndex: 0,
-    pageIndex: 0
+    pageIndex: 0,
+    msg: '',
 }
 
 //comment
@@ -13,24 +14,17 @@ const coreReducer = (state = initState, action) => {
             return {
                 ...state,
                 data: null,
-                loading: false
+                loading: false,
+                msg: "Error making request."
             }
 
         case 'FETCH_SUCCESS':
             return {
                 ...state,
                 data: action.data,
-                loading: false
-            }
-
-        case 'CLEAR_SESSION':
-            return initState
-
-        case 'IS_LOADING':
-            return {
-                ...state,
-                loading: true
-            }
+                loading: false,
+                msg: '',
+            }        
         
         case 'SELECT_SERVER':
             return {
@@ -43,6 +37,21 @@ const coreReducer = (state = initState, action) => {
             return {
                 ...state,
                 pageIndex: action.index
+            }
+
+        case 'EDIT_SUCCESS':
+            return {
+                ...state,
+                msg: action.msg
+            }
+
+        case 'CLEAR_SESSION':
+            return initState
+
+        case 'IS_LOADING':
+            return {
+                ...state,
+                loading: true
             }
 
         default:

@@ -10,6 +10,7 @@ const queries = {
                     members {
                         role
                         server {
+                            id
                             name
                             thumbnail
                             pages {
@@ -34,6 +35,45 @@ const queries = {
                             }
                         }
                     }
+                }
+            }
+            `
+        )
+    },
+
+    addServer: (serverData, uid) => {
+        const { name, description, outline, thumbnail } = serverData
+        //console.log(name + description + outline + thumbnail)
+        return(
+            `
+            mutation{addServer(
+                name:"${name}",
+                description: "${description}",
+                outline:"${outline}",
+                thumbnail:"${thumbnail}",
+                uid:"${uid}",)
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
+    addPage: (pageData, serverID) => {
+        const { title, image, video, tag, content } = pageData
+        //console.log(name + description + outline + thumbnail)
+        return(
+            `
+            mutation{addPage(
+                title:"${title}",
+                image: "${image}",
+                video:"${video}",
+                tag:"${tag}",
+                content:"${content}",
+                serverID:"${serverID}")
+                {
+                    id
                 }
             }
             `

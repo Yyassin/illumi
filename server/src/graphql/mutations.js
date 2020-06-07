@@ -40,23 +40,6 @@ module.exports = new GraphQLObjectType({
             }
         },
 
-        // create schemas
-        // addUser: {
-        //     type: types.UserType,
-        //     args: {
-        //         email: { type: GraphQLString },
-        //         password: { type: GraphQLString }
-        //     },
-        //     resolve(parent, args) {
-        //         let user = new User({
-        //             email: args.email,
-        //             password: args.password
-        //         })
-
-        //         return user.save();
-        //     }
-        // },
-
         addMember: {
             type: types.MemberType,
             args: {
@@ -79,15 +62,39 @@ module.exports = new GraphQLObjectType({
             type: types.ServerType,
             args: {
                 name: { type: GraphQLString },
-                thumbnail: { type: GraphQLString},
+                description: { type: GraphQLString },
+                outline: {type: GraphQLString},
+                thumbnail: { type: GraphQLString },
+                uid: { type: GraphQLString }
             },
             resolve(parent, args) {
                 let server = new Server({
-                    name: args.name,
-                    thumbnail: args.thumbnail
+                    name: args.name,                    
+                    description: args.description,
+                    outline: args.outline,
+                    thumbnail: args.thumbnail,
                 })
 
-                return server.save();
+                server.save();
+
+                page = new Page({
+                    title: 'General',
+                    serverID : server.id,
+                })
+
+                page.save();
+
+                if(args.uid){
+                    let member = new Member({
+                        serverID: server.id,
+                        userID: args.uid,
+                        role: 'admin'
+                    })
+
+                    member.save();
+                }
+
+                return server;
             }
         },
 
@@ -95,11 +102,19 @@ module.exports = new GraphQLObjectType({
             type: types.PageType,
             args: {
                 title: { type: GraphQLString },
+                image: { type: GraphQLString },
+                video: { type: GraphQLString },
+                tag: { type: GraphQLString },
+                content: { type: GraphQLString },
                 serverID: { type: GraphQLString }
             },
             resolve(parent, args) {
                 let page = new Page({
                     title: args.title,
+                    image: args.image,
+                    video: args.video,
+                    tag: args.tag,
+                    content: args.content,
                     serverID : args.serverID,
                 })
 
