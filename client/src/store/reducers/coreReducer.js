@@ -24,11 +24,7 @@ const coreReducer = (state = initState, action) => {
             }
 
         case 'CLEAR_SESSION':
-            return {
-                ...state,
-                data: null,
-                loading: false
-            }
+            return initState
 
         case 'IS_LOADING':
             return {

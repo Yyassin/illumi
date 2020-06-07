@@ -11,68 +11,6 @@ import {
 
 const socket = io.connect("http://localhost:4000")
 
-/*
-messages = [message1, message 2, ...] -> message = {content, date, user}
-
-date= [date1, date2, ...]
-users = [[user1, user2], [user1, user2], ... ]
-messages = [[[messages], [messages]], [[messages], [messages]]]
-
-
-goal : messages = [date:
-                      [user:
-                            [messages] 
-                 ]
-
-message = {
-    content
-    date        
-    chain: bool
-    user {
-        ...
-    }
-}
-
-sortedMessages = {
-    2020-06-04: [
-        message = {
-        content
-        date        
-        chain: bool
-        user {
-            ...
-        }
-    , msg2, msg3
-    ]
-}
-
-messages -> message -> date:
-add date field if date not in formatedMessages
-let users = {} stored all users in here, indexed by name
-let saveMessages = {}, add all date fields saveMessage[date] = {}
-saveMessage ={ date: {}, date: {}, ...}
-
-
- yousef: hi
-        hello
-        bye
-shrish: hi man
-yousef: hi
-shrish: hello
-        hi
-
-let userIndex = {}, yousef-0
-                    shrish-0
-                    yousef-1: mes
-
-*/
-
-
-
-
-
-
-
 class Chat extends React.Component {
     state = {
         messages: [],
@@ -81,6 +19,7 @@ class Chat extends React.Component {
     }
 
     scrollbar = React.createRef()
+    inputField = React.createRef()
 
     componentDidMount = () => {
         if(!this.props.page.rooms[0]) {
@@ -150,7 +89,8 @@ class Chat extends React.Component {
     }
 
     onSend = (e) => {
-        e.preventDefault()
+        if(e) e.preventDefault()
+
         console.log(this.state)
         socket.emit("chat message", {
             content: this.state.messageInput,
@@ -158,6 +98,13 @@ class Chat extends React.Component {
             roomID: this.props.page.rooms[0].id,
             token: this.props.token
         })
+        this.inputField.current.value = "";
+    }
+
+    onKeyPressed = (event) => {
+        if(event.key === "Enter") {
+            this.onSend(null);
+        }
     }
 
     renderMessages() {
@@ -205,7 +152,7 @@ class Chat extends React.Component {
 
                 <div className="chat-form-container">
                     <Button className="file-send-btn" onClick={this.onSend}><a href=""></a></Button>
-                    <input onChange={this.onChange} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
+                    <input ref={this.inputField} onKeyPress={this.onKeyPressed} onChange={this.onChange} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
                     <Button className="message-send-btn" onClick={this.onSend}><a href="">{<SendOutlined />}</a></Button>
                     {/* <Button type="submit" id="message-btn" class="send-button">Send</Button> */}
                 </div>                
