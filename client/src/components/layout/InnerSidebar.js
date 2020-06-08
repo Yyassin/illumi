@@ -3,7 +3,7 @@ import {Layout, Menu} from "antd";
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import PageForm from '../forms/PageForm'
-import NavMenu from './NavMenu'
+import Profile from './Profile'
 
 import {
     DesktopOutlined,
@@ -179,30 +179,12 @@ class InnerSidebar extends React.Component {
                 </SidebarScrollbar>
 
 
-                <div className="profile-section">
-                        <ul className="profile-items">
-                            <li className="avatar" ><a href="#" className="avatar-btn"
-                                style={{background: `url('${this.props.user.thumbnail}')`,
-                                'background-size': 'cover',
-                                'background-position': 'center'}}></a></li>
-                            
-                            <li className="profile-info">
-                                <ul>
-                                    <li className="info-name">{this.props.user.name}</li>
-                                    <li className="info-email">{this.props.user.email}</li>
-                                </ul>
-                            </li>
-
-                            
-                            {/* <li className="settings"><a onClick={this.props.toggleTheme} className="settings-btn" href="#">{<SettingFilled />}</a></li> */}
-                            <li className="settings">
-                                <NavMenu
-                                logout = {this.props.signout}/>
-                                
-                            </li>
-                        
-                        </ul>
-                </div>
+                <Profile
+                    user={this.props.user}
+                    signout={this.props.signout}
+                    fetchData={this.props.fetchData}
+                    editProfile = {this.props.editProfile}
+                    />
 
                 <PageForm
                     visible={this.state.showModal}

@@ -40,6 +40,28 @@ module.exports = new GraphQLObjectType({
             }
         },
 
+        editProfile: {
+            type: types.UserType,
+            args: {
+                name: { type: GraphQLString},
+                password: { type: GraphQLString},                
+                thumbnail: { type: GraphQLString},
+                uid: {type: GraphQLString},
+            },
+            async resolve(parent, args) {
+                const user = await User.findById(args.uid)
+                if(!user) return null;
+
+                if(!(args.password === "")) {
+                    user.password = await auth.newPassword(args.password)
+                } 
+                
+                user.name = args.name
+                user.thumbnail = args.thumbnail
+                return user.save()
+            }
+        },
+
         addMember: {
             type: types.MemberType,
             args: {

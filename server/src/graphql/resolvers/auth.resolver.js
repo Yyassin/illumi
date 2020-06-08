@@ -16,7 +16,7 @@ module.exports = {
     
             user = new User({
                 email: email,
-                password: await bcrypt.hash(password+keys.api.key, 10),
+                password: hashPassword(password),
                 name: name ? name : "",
                 thumbnail: thumbnail ? thumbnail : "",
             })
@@ -64,6 +64,14 @@ module.exports = {
             throw new Error("Internal Server Error") 
         }
     },
+
+    newPassword: async (password) => {
+        return hashPassword(password)
+    }
+}
+
+const hashPassword = async(password) => {
+    return bcrypt.hash(password+keys.api.key, 10)
 }
 
 const createToken = (user) => {

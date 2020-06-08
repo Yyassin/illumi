@@ -79,6 +79,24 @@ const queries = {
             `
         )
     },
+
+    editProfile: (userData, uid) => {
+        const { name, thumbnail, password } = userData
+        //console.log(name + description + outline + thumbnail)
+        return(
+            `
+            mutation{editProfile(
+                name:"${name}",
+                thumbnail:"${thumbnail}",
+                password:"${password}",
+                uid:"${uid}")
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
 }
 
 export default queries;

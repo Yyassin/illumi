@@ -2,16 +2,62 @@ import React from 'react';
 import { Menu, Dropdown } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 
+import ProfileForm from '../forms/ProfileForm'
+
 const { SubMenu } = Menu;
 
 class NavMenu extends React.Component {
+
+    formRef = React.createRef();
+
+    state = {
+        showModal: false,
+
+        // modal fields
+        initFields: {
+            name: this.props.user.name,
+            email: this.props.user.email,
+            thumbnail: this.props.user.thumbnail,
+            password: '',
+        }
+    }
+
+    // modal controller
+    showModal = (e) => {
+        this.setState({
+            showModal: true,
+        });
+    }; 
+
+    handleOk = async(e) => {        
+        const formData = this.formRef.current.getFieldsValue()
+
+        if(JSON.stringify(formData) !== JSON.stringify(this.state.initFields)) {
+            console.log("editing user")
+            await this.props.editProfile(formData)
+            this.props.fetchData()
+        }
+        
+        this.setState({
+            showModal: false,
+        });
+
+        this.formRef.current.resetFields()
+    };
+
+    handleCancel = e => {
+        this.setState({
+            showModal: false,
+        });
+    };
     
     render() {
+        console.log(this.props.user)
         const menu = (
             <Menu>
                 <Menu.ItemGroup title="Settings">
                     <Menu.Item className="logout-tag" key="1" onClick={this.props.logout}>Logout</Menu.Item>
-                    <Menu.Item className="tag" key="2">Edit Profile</Menu.Item>
+                    <Menu.Item className="tag" key="2" onClick={this.showModal}>Edit Profile</Menu.Item>
                     
                     <SubMenu title="Themes">
                         <Menu.ItemGroup title="Themes">
@@ -25,11 +71,24 @@ class NavMenu extends React.Component {
             );
 
         return (
-            <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['click']} overlay={menu}>
-                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    <SettingFilled />
-                </a>
-            </Dropdown>
+            <li className="settings">
+                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['click']} overlay={menu}>
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        <SettingFilled />
+                    </a>
+                </Dropdown>
+
+                <ProfileForm
+                    visible={this.state.showModal}
+                    formRef={this.formRef}
+                    handleOk={this.handleOk}
+                    handleCancel={this.handleCancel}
+                    user={this.props.user}
+                    initFields={this.state.initFields}
+                    />
+            </li>
+
+            
         )
     } 
 }
