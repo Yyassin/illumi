@@ -47,8 +47,8 @@ class PageForm extends React.Component {
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                   }
                                 >
-                                <Select.Option value="lesson">Lesson</Select.Option>
-                                <Select.Option value="tutorial">Tutorial</Select.Option>
+                                <Select.Option value="Lessons">Lesson</Select.Option>
+                                <Select.Option value="Tutorials">Tutorial</Select.Option>
                             </Select>
                         </Form.Item>
                         

@@ -21,24 +21,17 @@ class Chat extends React.Component {
     scrollbar = React.createRef()
     inputField = React.createRef()
 
-    componentDidMount = () => {
-        if(!this.props.page.rooms[0]) {
-            return
-        }
+    componentDidMount = () => {         
+        this.synchronize()  
 
-        let messages = this.props.page.rooms[0].messages      
-        this.setState({messages: messages})
-        this.sortMessages(messages)
-
+        // socket
         socket.on('invalid token', () => {
             this.props.signout();            
         })
 
         socket.on("chat message", (msg) => {
-            console.log(msg.roomID)
-            console.log(this.props.page.rooms[0].id)
             if (msg.roomID == this.props.page.rooms[0].id) {
-                messages = this.state.messages;
+                let messages = this.state.messages;
                 messages.push(msg)
                 this.setState({messages: messages})
                 this.sortMessages(messages)
@@ -50,7 +43,14 @@ class Chat extends React.Component {
                 this.scrollbar.current.newMessage();
             }
         })
+    }
 
+    synchronize = () => {
+        if (this.props.page.rooms[0].messages !== this.state.messages) {
+            let messages = this.props.page.rooms[0].messages  
+            this.setState({messages: messages})
+            this.sortMessages(messages)
+        }
     }
 
     sortMessages = (messages) => {
@@ -134,6 +134,11 @@ class Chat extends React.Component {
     }
 
     render() {
+        if (this.scrollbar.current) {
+            console.log('scrolling')
+            this.scrollbar.current.newMessage();
+        }
+        this.synchronize();
         return(
             <div className="chat-container">
                 <SidebarScrollbars 

@@ -19,8 +19,7 @@ const validate = (token) => {
 }
 
 exports.addMessage = async (msgInput) => {
-    try {     
-
+    try {
         if(!validate(msgInput.token)) {
             return null
         }

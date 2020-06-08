@@ -33,10 +33,11 @@ export default class SidebarScrollbar extends Component {
     }
 
     //scroll down function
-    scrollDown = () => {
-        this.isScrolling && this.props.isChat && this.scrollbar.current.scrollToBottom(); 
-        //this.state.mounted = false;
-        this.isScrolling = false;
+    scrollDown = async() => {
+        if(this.isScrolling && this.props.isChat){
+            await this.scrollbar.current.scrollToBottom()
+            this.isScrolling = false;
+        }
     }
     
     renderView({ style, ...props }) {

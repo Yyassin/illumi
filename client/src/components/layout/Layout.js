@@ -8,7 +8,7 @@ import {init, clearSession, toggleLoading, selectServer, selectPage, addServer, 
 import {connect} from "react-redux";
 
 //import InnerRouter from '../../router/InnerRouter
-import Chat from '../dash/Chat'
+import Page from '../dash/Page'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
 import InnerHeader from './InnerHeader';
@@ -68,7 +68,7 @@ class MainLayout extends React.Component {
                     />
 
                   <Content className="main-content">                  
-                      <Chat 
+                      <Page 
                         page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
                         uid={this.props.uid}
                         token={this.props.accessToken}

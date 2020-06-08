@@ -20,7 +20,8 @@ class InnerSidebar extends React.Component {
     formRef = React.createRef();
 
     state = {
-        pages: {},
+        oldPagesData: {},
+        pages: {}, //sorted
         showModal: false,
 
         // modal fields
@@ -32,18 +33,23 @@ class InnerSidebar extends React.Component {
     }
 
     componentDidMount = () => {
-        this.setState({pages: this.sortingPages()})
+        this.synchronize();
+    }
+
+    synchronize = () => {
+        if (this.props.server.pages !== this.state.oldPagesData) {
+            this.setState({oldPagesData: this.props.server.pages})
+            this.setState({pages: this.sortingPages()})
+        }
     }
 
     sortingPages = () => {
         let newPages = {};
         
         this.props.server.pages.map((page) => {
-            if(page.tag in this.state.pages){
-                //console.log("is in: " + page.tag)
+            if(page.tag in newPages){
                 newPages[page.tag].push(page)              
               } else {     
-                //console.log("created: " + page.tag)           
                 newPages[page.tag] = []
                 newPages[page.tag].push(page)
             }
@@ -114,8 +120,10 @@ class InnerSidebar extends React.Component {
     };
 
     renderPages = () => {
+        console.log("render")
+        this.synchronize();
         return (
-           
+    
             Object.keys(this.state.pages).map((tag, index) => {
                 if (tag === "" || tag === "null") {
                     return (
