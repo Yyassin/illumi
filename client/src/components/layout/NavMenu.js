@@ -14,12 +14,7 @@ class NavMenu extends React.Component {
         showModal: false,
 
         // modal fields
-        initFields: {
-            name: this.props.user.name,
-            email: this.props.user.email,
-            thumbnail: this.props.user.thumbnail,
-            password: '',
-        }
+        initFields: {}
     }
 
     // modal controller
@@ -30,6 +25,7 @@ class NavMenu extends React.Component {
     }; 
 
     handleOk = async(e) => {        
+        console.log(this.formRef.current)
         const formData = this.formRef.current.getFieldsValue()
 
         if(JSON.stringify(formData) !== JSON.stringify(this.state.initFields)) {
@@ -41,8 +37,6 @@ class NavMenu extends React.Component {
         this.setState({
             showModal: false,
         });
-
-        this.formRef.current.resetFields()
     };
 
     handleCancel = e => {
@@ -52,7 +46,6 @@ class NavMenu extends React.Component {
     };
     
     render() {
-        console.log(this.props.user)
         const menu = (
             <Menu>
                 <Menu.ItemGroup title="Settings">
@@ -84,7 +77,6 @@ class NavMenu extends React.Component {
                     handleOk={this.handleOk}
                     handleCancel={this.handleCancel}
                     user={this.props.user}
-                    initFields={this.state.initFields}
                     />
             </li>
 

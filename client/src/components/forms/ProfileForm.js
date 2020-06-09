@@ -1,7 +1,32 @@
 import React from 'react';
 import { Modal, Form, Input} from 'antd';
 
-class ProfileForm extends React.Component {    
+class ProfileForm extends React.Component {
+    
+    state = {
+        initFields: {}
+    }
+
+    componentDidMount = () => {
+        this.handleUpdate();
+    }
+    
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps!== this.props) {
+            this.handleUpdate();
+        }
+    }
+
+    handleUpdate = async () => {
+        console.log(this.props.user.name, this.props.user.email, this.props.user.thumbnail)              
+        
+        await this.setState({initFields: {
+            name: this.props.user.name,
+            email: this.props.user.email,
+            thumbnail: this.props.user.thumbnail,
+            password: '',
+        }})
+    }
 
     render() {
         return (
@@ -13,12 +38,12 @@ class ProfileForm extends React.Component {
                     onOk={this.props.handleOk}
                     onCancel={this.props.handleCancel}
                 >
-                    <Form onFinish={this.props.handleOk} ref={this.props.formRef} initialValues={this.props.initFields}>
+                    <Form onFinish={this.props.handleOk} ref={this.props.formRef} initialValues={this.state.initFields}>
                         <Form.Item
                             name="name"
                             rules={[{ required: true, message: 'Please input user name.'}]}
                         >
-                            <Input id='name' onChange={this.props.onModalChange} placeholder={this.props.user.name} value={'dsadsa'}/>
+                            <Input id='name' onChange={this.props.onModalChange} placeholder={this.props.user.name}/>
                         </Form.Item>
 
                         <Form.Item

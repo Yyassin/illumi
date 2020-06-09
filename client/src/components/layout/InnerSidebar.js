@@ -33,14 +33,18 @@ class InnerSidebar extends React.Component {
     }
 
     componentDidMount = () => {
-        this.synchronize();
+        this.handleUpdate();
     }
 
-    synchronize = () => {
-        if (this.props.server.pages !== this.state.oldPagesData) {
-            this.setState({oldPagesData: this.props.server.pages})
-            this.setState({pages: this.sortingPages()})
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps!== this.props) {
+            this.handleUpdate();
         }
+    }
+
+    handleUpdate = () => {
+        this.setState({oldPagesData: this.props.server.pages})
+        this.setState({pages: this.sortingPages()})
     }
 
     sortingPages = () => {
@@ -63,7 +67,6 @@ class InnerSidebar extends React.Component {
     };
 
     notificationHandler = () => {
-        console.log('noti')
         ipcRenderer.send('notification-send-event')
     }
 
@@ -96,9 +99,7 @@ class InnerSidebar extends React.Component {
         this.setState({tag: values})
     }    
 
-    handleOk = async(e) => {
-        console.log(this.state);
-        
+    handleOk = async(e) => {        
         await this.props.addPage(this.state)
         this.props.fetchData()
 
@@ -120,8 +121,6 @@ class InnerSidebar extends React.Component {
     };
 
     renderPages = () => {
-        console.log("render")
-        this.synchronize();
         return (
     
             Object.keys(this.state.pages).map((tag, index) => {

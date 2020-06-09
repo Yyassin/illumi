@@ -171,9 +171,9 @@
     backdrop-filter: brightness(1.2);
 }
 
-.inner-sidebar .ant-layout-sider-children div.box ul li:hover  span{
+/* .inner-sidebar .ant-layout-sider-children div.box ul li:hover span{
     color: var(--text-highlight);
-}
+} */
 
 .inner-sidebar .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     backdrop-filter: brightness(1.2);
