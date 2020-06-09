@@ -58,7 +58,8 @@ exports.addMessage = async (msgInput) => {
                 user: {
                     email: user.email,
                     name: user.name,
-                    thumbnail: user.thumbnail
+                    thumbnail: user.thumbnail,
+                    id: user.id,
                 }
             }
         }

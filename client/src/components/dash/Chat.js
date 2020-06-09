@@ -5,11 +5,13 @@ import SidebarScrollbars from '../scrollbars/SidebarScrollbar'
 import Message from './Message';
 import './Dash.css'
 
+
 import {
     SendOutlined,
 } from '@ant-design/icons';
 
 const socket = io.connect("http://localhost:4000")
+const ipcRenderer = window.require('electron').ipcRenderer
 
 class Chat extends React.Component {
     state = {
@@ -41,8 +43,9 @@ class Chat extends React.Component {
             if (msg.roomID == this.props.page.rooms[0].id) {
                 let messages = this.state.messages;
                 messages.push(msg)
+
                 this.setState({messages: messages})
-                this.sortMessages(messages)
+                this.sortMessages(messages)                
             }
 
             //scrolls down if client receives message
@@ -50,6 +53,21 @@ class Chat extends React.Component {
             if (this.scrollbar.current) {
                 this.scrollbar.current.newMessage();
             }
+        })
+
+        socket.on("chat noti", (msg) => {
+            if(this.props.uid !== msg.member.user.id) {
+                console.log('diff user')
+                this.notificationHandler(msg)
+            }
+        })
+    }
+
+    notificationHandler = (msg) => {
+        ipcRenderer.send('notification-send-event', {
+            server: this.props.server.name,
+            user: msg.member.user.name,
+            message: msg.content
         })
     }
 

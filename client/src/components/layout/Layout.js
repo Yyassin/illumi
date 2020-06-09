@@ -74,6 +74,7 @@ class MainLayout extends React.Component {
                   <Content className="main-content">                  
                       <Page 
                         page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
+                        server={this.props.data.user.members[this.props.serverIndex].server}
                         uid={this.props.uid}
                         token={this.props.accessToken}
                         signout={this.endSession}

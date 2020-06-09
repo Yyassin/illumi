@@ -28,6 +28,7 @@ const queries = {
                                                 email
                                                 name
                                                 thumbnail
+                                                id
                                             }
                                         }
                                     }

@@ -13,7 +13,6 @@ import {
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
-const ipcRenderer = window.require('electron').ipcRenderer
 
 
 class InnerSidebar extends React.Component {
@@ -65,10 +64,6 @@ class InnerSidebar extends React.Component {
     onCollapse = collapsed => {
         this.setState({ collapsed });
     };
-
-    notificationHandler = () => {
-        ipcRenderer.send('notification-send-event')
-    }
 
     selectPage = async (e) => {
         let key;

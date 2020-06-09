@@ -17,6 +17,7 @@ server.on("connection", socket => {
         
         if(msg) {
             server.emit("chat message", msg)
+            server.emit("chat noti", msg)
         } else {
             console.log(server.clients)
             server.to(id).emit('invalid token')

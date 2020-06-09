@@ -71,14 +71,15 @@ app.on('ready', () => {
   Tray.setContextMenu(trayMenu);
   Tray.setToolTip("illumi")
 
-  //check render notis next
-  notification = new Notification()
-  notification.title = "New Message"
-  notification.body = "@MATH1107 from Shrish Mohapatra"
-  // notification.icon = './favicon.ico'; notworking
-  notification.on("click",function(){
-    console.log('clicked')
-  },false);
+  notification = new Notification("title", {icon: "logo192.png"})
+  
+  notification.on("click", function()
+  {
+    if (!mainWindow.isVisible() || mainWindow.isMinimized()) {
+      mainWindow.show()
+    }
+  },
+  false);
 
 });
 
@@ -115,7 +116,10 @@ ipcMain.handle('close-event', (e) => {
   }
 })
 
-ipcMain.on('notification-send-event', () => {
-  console.log('show')
+ipcMain.on('notification-send-event', (data, msgData) => {
+
+  notification.title = msgData.user
+  notification.body = `@${msgData.server}: ` + msgData.message
+  notification.icon = `logo192.png`;
   notification.show();
 })

@@ -9,6 +9,7 @@ class Page extends React.Component {
         return(
             <Chat
                 page={this.props.page}
+                server={this.props.server}
                 uid={this.props.uid}
                 token={this.props.token}
                 signout={this.props.signout}/>
