@@ -7,12 +7,9 @@ const ipcMain = require('electron').ipcMain;
 //tray
 const path = require('path')
 const tray = electron.Tray;
-const Notification = electron.Notification;
 const Menu = electron.Menu;
 
 let Tray = null;
-let notification = null;
-
 let mainWindow;
 
 app.on('browser-window-focus', () => {
@@ -70,17 +67,6 @@ app.on('ready', () => {
 
   Tray.setContextMenu(trayMenu);
   Tray.setToolTip("illumi")
-
-  notification = new Notification("title", {icon: "logo192.png"})
-  
-  notification.on("click", function()
-  {
-    if (!mainWindow.isVisible() || mainWindow.isMinimized()) {
-      mainWindow.show()
-    }
-  },
-  false);
-
 });
 
 app.on('window-all-closed', () => {
@@ -94,6 +80,14 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+//notis
+ipcMain.handle('noti-event', () => {
+  if (!mainWindow.isVisible() || mainWindow.isMinimized()) {
+    mainWindow.show()
+    }
+  },
+  false)
 
 //titlebar
 ipcMain.handle('minimize-event', () => {
@@ -114,12 +108,4 @@ ipcMain.handle('close-event', (e) => {
     mainWindow.hide();
     e.returnValue = false;
   }
-})
-
-ipcMain.on('notification-send-event', (data, msgData) => {
-
-  notification.title = msgData.user
-  notification.body = `@${msgData.server}: ` + msgData.message
-  notification.icon = `logo192.png`;
-  notification.show();
 })

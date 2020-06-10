@@ -14,6 +14,7 @@ exports.createWindow = () => {
       height: 400, 
       frame: false,  
       transparent: true,
+      title: 'illumi',
       titleBarStyle: 'hidden',
       show: false,
       alwaysOnTop: false});
@@ -21,6 +22,10 @@ exports.createWindow = () => {
 
     splash.setMenu(null)
     splash.loadURL(false ? 'http://127.0.0.1:5500/client/public/electron/loader.html':`file://${path.join(__dirname, 'loader.html')}`);
+
+    splash.webContents.on('did-finish-load', () => {
+      splash.setTitle('illumi | Loading...');
+    })
   
     splash.once('ready-to-show', () => splash.show())
 
@@ -29,6 +34,7 @@ exports.createWindow = () => {
       height: 680, 
       show: false,
       frame: false,
+      title: 'illumi',
       backgroundColor: '#000',
       webPreferences: { nodeIntegration: true }
     });
@@ -36,6 +42,10 @@ exports.createWindow = () => {
     mainWindow.setMinimumSize(400, 400);
     mainWindow.setMenu(null)
     mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+
+    mainWindow.webContents.on('did-finish-load', () => {
+      mainWindow.setTitle('illumi');
+    })
     
     mainWindow.once('ready-to-show', () => {
       setTimeout(() => {

@@ -12,6 +12,7 @@ import {
 
 const socket = io.connect("http://localhost:4000")
 const ipcRenderer = window.require('electron').ipcRenderer
+const path = require('path');
 
 class Chat extends React.Component {
     state = {
@@ -64,12 +65,21 @@ class Chat extends React.Component {
     }
 
     notificationHandler = (msg) => {
-        ipcRenderer.send('notification-send-event', {
-            server: this.props.server.name,
-            user: msg.member.user.name,
-            message: msg.content
+
+        let myNotification = new Notification(msg.member.user.name, {
+            body: `@${this.props.server.name}: ` + msg.content,
+            icon: `${msg.member.user.thumbnail}`
         })
+        
+        myNotification.onclick = () => {
+            ipcRenderer.invoke('noti-event')
+        }
     }
+        // ipcRenderer.send('notification-send-event', {
+        //     server: this.props.server.name,
+        //     user: msg.member.user.name,
+        //     message: msg.content
+        // })
 
     handleUpdate = () => {
         let messages = this.props.page.rooms[0].messages  
