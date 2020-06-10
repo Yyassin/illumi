@@ -1,5 +1,8 @@
 import React from 'react';
 import {Layout, Menu, Tooltip} from "antd";
+import {
+    PlusOutlined,
+} from '@ant-design/icons';
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import ServerForm from '../forms/ServerForm'
@@ -77,11 +80,11 @@ class Sidebar extends React.Component {
                                             <Tooltip placement="rightTop" title={member.server.name}>
                                                 <li data-id={index} 
                                                     onClick={this.selectServer.bind(this)}>
-                                                    <a href="#"
+                                                    <p href="#"
                                                     className={(parseInt(this.props.serverIndex) === parseInt(index)) ? "server-thumbnail selected" : "server-thumbnail"}
                                                     style={{background: `url('${member.server.thumbnail}')`,
                                                         backgroundSize: 'cover',
-                                                        backgroundPosition: 'center'}}></a>
+                                                        backgroundPosition: 'center'}}></p>
                                                 </li>
                                             </Tooltip>
                                         )
@@ -91,10 +94,10 @@ class Sidebar extends React.Component {
 
                                 <Tooltip placement="rightTop" title="Create Server">
                                     <li onClick={this.showModal}>
-                                        <p href="#" className="server-thumbnail"
+                                        <p  className="server-thumbnail create-server"
                                             style={{background: `#333`,
                                                     backgroundSize: 'cover',
-                                                    backgroundPosition: 'center'}}></p>
+                                                    backgroundPosition: 'center'}}><PlusOutlined /></p>
                                     </li>
                                 </Tooltip>
                             </ul>

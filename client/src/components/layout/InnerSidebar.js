@@ -9,6 +9,7 @@ import {
     DesktopOutlined,
     PieChartOutlined,
     TeamOutlined,
+    DownOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -158,8 +159,8 @@ class InnerSidebar extends React.Component {
             <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
                 <div className="sidebar-header">
                         <p className="sidebar-header-content">
-                        {this.props.server.name}
-                        <a href="#" onClick={this.showModal} className="create-page"><DesktopOutlined /></a>
+                        <p className="server-name">{this.props.server.name}</p>
+                        <a href="#" onClick={this.showModal} className="create-page"><DownOutlined /></a>
                         </p>
                         
                 </div>

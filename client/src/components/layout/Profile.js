@@ -18,10 +18,10 @@ class Profile extends React.Component {
         return(
             <div className="profile-section">
                 <ul className="profile-items">
-                    <li className="avatar" ><a href="#" className="avatar-btn"
+                    <li className="avatar" ><p href="#" className="avatar-btn"
                         style={{background: `url('${this.props.user.thumbnail}')`,
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center'}}></a></li>
+                        backgroundPosition: 'center'}}></p></li>
                     
                     <li className="profile-info">
                         <ul>

@@ -3,15 +3,23 @@ import './Dash.css'
 
 
 class Message extends React.Component {
+
+    state = {
+        roleColors: {
+            "TA" : '#00a5a7'
+        }
+    }
+    role = "TA" //replace with member roles later**
+
     renderAvatar = () => {
         if(!this.props.message.chain) {
             return (
                 <div className="avatar">
-                    <a href="#" className="avatar-btn"
+                    <p href="#" className="avatar-btn"
                     style={{'background': `url("${this.props.message.member.user.thumbnail}")`,
                             'background-size': 'cover',
                             'background-position': 'center'}}>
-                    </a>
+                    </p>
                 </div>
             )
         }
@@ -21,7 +29,10 @@ class Message extends React.Component {
         if(!this.props.message.chain) {
             return (
                 <div className="meta-data">
-                    <div className="message-name">{this.props.message.member.user.name}</div>
+                    <div className={"message-name " + this.role}
+                    style={{color: this.state.roleColors[this.role]}}>
+                        {this.props.message.member.user.name}
+                    </div>
                     <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
                 </div>
             )

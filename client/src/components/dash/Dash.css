@@ -36,7 +36,8 @@ li {
 }
 
 .message-container .avatar {
-    padding-top: 15px;
+    position: relative;
+    top: 7px;
     background-color: transparent;
     padding-right: 15px;
     flex: 0;
@@ -72,7 +73,7 @@ li {
 }
 
 .message-name {
-    padding-top: 15px;
+    padding-top: 10px;
     font-size: 14px;
     font-weight: 500;
     padding-right: 8px;
