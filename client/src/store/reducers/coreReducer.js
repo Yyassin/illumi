@@ -55,7 +55,7 @@ const coreReducer = (state = initState, action) => {
             } else {
                 return {
                     ...state,
-                    
+                    msg: action.msg,
                     pageIndex: 0
                 }
             }
