@@ -120,6 +120,36 @@ module.exports = new GraphQLObjectType({
             }
         },
 
+        // editServer()
+
+        deleteServer: {
+            type: GraphQLString,
+            args: {
+                serverID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {
+                let server = await Server.findById(args.serverID)
+                let pages = await Page.find({serverID: args.serverID})                
+              
+                pages.map( async (page) => {
+                    
+                    let room = await Room.find({pageID: page.id})
+
+                    if(room[0]) {
+                        await Message.deleteMany({roomID: room[0].id})
+                        await Room.findByIdAndDelete(room[0].id)
+                    }
+                    
+                    await Page.findByIdAndDelete(page.id)
+                })
+
+                await Member.deleteMany({serverID: args.serverID})
+                await Server.findByIdAndDelete(args.serverID)
+                
+                return "Successfully deleted server";
+            }
+        },
+
         addPage: {
             type: types.PageType,
             args: {

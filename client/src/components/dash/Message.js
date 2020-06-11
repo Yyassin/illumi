@@ -6,10 +6,11 @@ class Message extends React.Component {
 
     state = {
         roleColors: {
-            "TA" : '#00a5a7'
+            "student" : '#fff',
+            "admin" : '#00a5a7',
         }
     }
-    role = "TA" //replace with member roles later**
+     //replace with member roles later**
 
     renderAvatar = () => {
         if(!this.props.message.chain) {
@@ -30,7 +31,7 @@ class Message extends React.Component {
             return (
                 <div className="meta-data">
                     <div className={"message-name " + this.role}
-                    style={{color: this.state.roleColors[this.role]}}>
+                    style={{color: this.state.roleColors[this.props.message.member.role]}}>
                         {this.props.message.member.user.name}
                     </div>
                     <div className="message-time">{this.props.message.date.split(" ")[1]}</div>

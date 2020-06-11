@@ -4,7 +4,13 @@ import { Layout } from 'antd';
 import './Layout.css'
 
 import {signOut} from "../../store/actions/authActions";
-import {init, clearSession, toggleLoading, selectServer, selectPage, addServer, addPage, editProfile} from "../../store/actions/coreActions";
+
+import {
+  init, clearSession, toggleLoading, 
+  selectServer, selectPage, addServer,
+  deleteServer, addPage, editProfile
+} from "../../store/actions/coreActions";
+
 import {connect} from "react-redux";
 
 //import InnerRouter from '../../router/InnerRouter
@@ -25,6 +31,10 @@ class MainLayout extends React.Component {
 
   addServer = async(serverData) => {
     this.props.addServer(serverData, this.props.uid, this.props.accessToken)
+  }
+
+  deleteServer = async(serverID, serverIndex) => {
+    this.props.deleteServer(serverID, serverIndex, this.props.accessToken)
   }
 
   addPage = async(pageData) => {
@@ -48,9 +58,13 @@ class MainLayout extends React.Component {
               <Sidebar
                 bg={["#171a1c", "#141618"]}
                 members={this.props.data.user.members}
+
                 selectServer={this.props.selectServer}
                 serverIndex={this.props.serverIndex}
+
                 addServer={this.addServer}
+                deleteServer={this.deleteServer}
+
                 fetchData = {this.fetchData}
                 />
 
@@ -118,6 +132,8 @@ const mapDispatchToProps = (dispatch) => {
         addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
 
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
+
+        deleteServer: (serverID, serverIndex, token) => dispatch(deleteServer(serverID, serverIndex, token)),
     }
 }
 

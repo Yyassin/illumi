@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu, Tooltip} from "antd";
+import {Layout, Menu, Tooltip, Dropdown} from "antd";
 import {
     PlusOutlined,
 } from '@ant-design/icons';
@@ -16,6 +16,9 @@ class Sidebar extends React.Component {
         isActive: false,
         showModal: false,
 
+        serverID: '',
+        serverIndex: 0,
+
         // modal fields
         name: '',
         description: '',
@@ -25,6 +28,24 @@ class Sidebar extends React.Component {
     
     selectServer = async (e) => {        
         this.props.selectServer(e.currentTarget.dataset.id);
+    }
+
+    setServerID = (e) => {
+        const index = e.currentTarget.dataset.id
+        const serverID = this.props.members[index].server.id
+
+        this.setState({
+            serverID: serverID, 
+            serverIndex: index
+        })        
+        
+        console.log(serverID)
+    }
+
+    // context menu methods
+    menuDeleteServer = async() => {
+        await this.props.deleteServer(this.state.serverID, this.state.serverIndex)
+        this.props.fetchData()
     }
 
     // modal controller
@@ -62,47 +83,66 @@ class Sidebar extends React.Component {
         });
     };
 
-    render() {
-        console.log('sidebar rerender')
+    // render methods
+    renderServers = () => {
+        const menu = (
+            <Menu>
+                <Menu.ItemGroup title="Server Options">
+                    <Menu.Item className="server-edit-tag" key="1">Edit Server</Menu.Item>
+                    <Menu.Item className="server-delete-tag" key="2" onClick={this.menuDeleteServer}>Delete Server</Menu.Item>
+                    <Menu.Item className="server-invite-tag" key="3">Leave Server</Menu.Item>
+                    <Menu.Item className="server-invite-tag" key="4">Invite Members</Menu.Item>
+                </Menu.ItemGroup>
+            </Menu>
+        )
+
         return (
-            <Sider  className="outer-sidebar" collapsed={true} 
+            <ul className="servers">
+                {
+                    this.props.members.map((member, index) => {
+                        return (
+                            <li>
+                                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['contextMenu']} overlay={menu} onContextMenu={this.setServerID.bind(this)}>
+                                    <Tooltip placement="rightTop" title={member.server.name}>
+                                        <p
+                                            data-id={index} 
+                                            onClick={this.selectServer.bind(this)}                                            
+                                            className={(parseInt(this.props.serverIndex) === parseInt(index)) ? "server-thumbnail selected" : "server-thumbnail"}
+                                            style={{background: `url('${member.server.thumbnail}')`,
+                                                backgroundSize: 'cover',
+                                                backgroundPosition: 'center'}}></p>
+                                    </Tooltip>
+                                </Dropdown>
+                            </li>
+                        )
+                    })
+
+                }
+
+                <Tooltip placement="rightTop" title="Create Server">
+                    <li onClick={this.showModal}>
+                        <p  className="server-thumbnail create-server"
+                            style={{background: `#333`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'}}><PlusOutlined /></p>
+                    </li>
+                </Tooltip>
+            </ul>
+        )
+    }
+
+    render() {
+        return (
+            <Sider  className="outer-sidebar"
                 style={ this.state.isActive ? {'background-color': this.props.bg[1]} : {'background-color': this.props.bg[0]}}>
                 <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
                 
                     <Menu className="outer-menu" defaultSelectedKeys={['0']} mode="inline"
                         style={ this.state.isActive ? {'background-color': this.props.bg[1]} : {'background-color': this.props.bg[0]}}>
 
-                            <ul className="servers">
-                                {
-                                
-                                    this.props.members.map((member, index) => {
-                                        return (
-                                            <Tooltip placement="rightTop" title={member.server.name}>
-                                                <li data-id={index} 
-                                                    onClick={this.selectServer.bind(this)}>
-                                                    <p href="#"
-                                                    className={(parseInt(this.props.serverIndex) === parseInt(index)) ? "server-thumbnail selected" : "server-thumbnail"}
-                                                    style={{background: `url('${member.server.thumbnail}')`,
-                                                        backgroundSize: 'cover',
-                                                        backgroundPosition: 'center'}}></p>
-                                                </li>
-                                            </Tooltip>
-                                        )
-                                    })
+                        {this.renderServers()}
 
-                                }
-
-                                <Tooltip placement="rightTop" title="Create Server">
-                                    <li onClick={this.showModal}>
-                                        <p  className="server-thumbnail create-server"
-                                            style={{background: `#333`,
-                                                    backgroundSize: 'cover',
-                                                    backgroundPosition: 'center'}}><PlusOutlined /></p>
-                                    </li>
-                                </Tooltip>
-                            </ul>
-
-                    </Menu>
+                    </Menu>                    
                 </SidebarScrollbar>
 
                 <ServerForm

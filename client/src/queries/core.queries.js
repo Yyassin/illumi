@@ -61,6 +61,16 @@ const queries = {
         )
     },
 
+    deleteServer: (serverID, uid) => {
+        return(
+            `
+            mutation{
+                deleteServer(serverID: "${serverID}")
+            }
+            `
+        )
+    },
+
     addPage: (pageData, serverID) => {
         const { title, image, video, tag, content } = pageData
         //console.log(name + description + outline + thumbnail)

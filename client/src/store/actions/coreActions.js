@@ -70,6 +70,25 @@ export const addServer = (serverData, uid, token) => {
     }
 }
 
+export const deleteServer = (serverID, serverIndex, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.deleteServer(serverID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'DELETE_SERVER', serverIndex: serverIndex, msg: 'Deleted server.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
 export const addPage = (pageData, serverID, token) => {
     return async (dispatch) => {
         try {
