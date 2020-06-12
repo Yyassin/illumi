@@ -5,7 +5,6 @@ class Page extends React.Component {
     
     render() {
         if(this.props.page.rooms.length === 0) return <div/>
-        console.log(this.props.page.title)
         return(
             <Chat
                 page={this.props.page}

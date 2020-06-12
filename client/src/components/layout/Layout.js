@@ -7,8 +7,9 @@ import {signOut} from "../../store/actions/authActions";
 
 import {
   init, clearSession, toggleLoading, 
-  selectServer, selectPage, addServer,
-  deleteServer, addPage, editProfile
+  selectServer, selectPage, addServer, 
+  editServer, deleteServer, addPage, 
+  editProfile
 } from "../../store/actions/coreActions";
 
 import {connect} from "react-redux";
@@ -31,6 +32,10 @@ class MainLayout extends React.Component {
 
   addServer = async(serverData) => {
     this.props.addServer(serverData, this.props.uid, this.props.accessToken)
+  }
+
+  editServer = async(serverData, serverID) => {
+    this.props.editServer(serverData, serverID, this.props.accessToken)
   }
 
   deleteServer = async(serverID, serverIndex) => {
@@ -64,6 +69,7 @@ class MainLayout extends React.Component {
 
                 addServer={this.addServer}
                 deleteServer={this.deleteServer}
+                editServer={this.editServer}
 
                 fetchData = {this.fetchData}
                 />
@@ -132,6 +138,7 @@ const mapDispatchToProps = (dispatch) => {
         addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
 
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
+        editServer: (serverData, serverID, token) => dispatch(editServer(serverData, serverID, token)),
 
         deleteServer: (serverID, serverIndex, token) => dispatch(deleteServer(serverID, serverIndex, token)),
     }

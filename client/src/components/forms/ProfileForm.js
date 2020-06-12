@@ -17,9 +17,7 @@ class ProfileForm extends React.Component {
         }
     }
 
-    handleUpdate = async () => {
-        console.log(this.props.user.name, this.props.user.email, this.props.user.thumbnail)              
-        
+    handleUpdate = async () => {        
         await this.setState({initFields: {
             name: this.props.user.name,
             email: this.props.user.email,

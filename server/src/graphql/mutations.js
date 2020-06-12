@@ -120,7 +120,26 @@ module.exports = new GraphQLObjectType({
             }
         },
 
-        // editServer()
+        editServer: {
+            type: types.ServerType,
+            args: {
+                name: { type: GraphQLString },
+                description: { type: GraphQLString },
+                outline: {type: GraphQLString},
+                thumbnail: { type: GraphQLString },
+                serverID: {type: GraphQLString}
+            },
+            async resolve(parent, args) {
+                const server = await Server.findById(args.serverID)
+                if(!server) return null;
+                
+                server.name = args.name
+                server.thumbnail = args.thumbnail
+                server.outline = args.outline
+                server.description = args.description
+                return server.save()
+            }
+        },
 
         deleteServer: {
             type: GraphQLString,

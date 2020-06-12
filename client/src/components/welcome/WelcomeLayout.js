@@ -17,7 +17,6 @@ class WelcomeLayout extends React.Component {
     }
     
     fetchData = async() => {
-        console.log('fetching data')
         await this.props.toggleLoading()
         this.props.init(this.props.uid, this.props.accessToken)
     }

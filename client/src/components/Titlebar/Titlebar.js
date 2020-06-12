@@ -10,7 +10,6 @@ const Titlebar = (props) => {
 
     ipcRenderer.on('focused', () => {
         setIsActive(true)
-        console.log('active')
     })
 
     ipcRenderer.on('blurred', () => {
@@ -19,7 +18,6 @@ const Titlebar = (props) => {
 
     ipcRenderer.on('maximized', () => {
         setIsMaximized(true)
-        console.log('maxii')
     })
 
     ipcRenderer.on('unmaximized', () => {

@@ -13,6 +13,7 @@ const queries = {
                             id
                             name
                             thumbnail
+                            description
                             pages {
                                 title
                                 tag
@@ -101,6 +102,25 @@ const queries = {
                 thumbnail:"${thumbnail}",
                 password:"${password}",
                 uid:"${uid}")
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
+    editServer: (serverData, serverID) => {
+        const { name, description, outline, thumbnail } = serverData
+        //console.log(name + description + outline + thumbnail)
+        return(
+            `
+            mutation{editServer(
+                name:"${name}",
+                description: "${description}",
+                outline:"${outline}",
+                thumbnail:"${thumbnail}",
+                serverID:"${serverID}",)
                 {
                     id
                 }

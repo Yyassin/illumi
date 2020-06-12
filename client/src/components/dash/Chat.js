@@ -58,7 +58,6 @@ class Chat extends React.Component {
 
         socket.on("chat noti", (msg) => {
             if(this.props.uid !== msg.member.user.id) {
-                console.log('diff user')
                 this.notificationHandler(msg)
             }
         })
@@ -119,7 +118,6 @@ class Chat extends React.Component {
 
     scrollDown = () => {
         if (this.scrollbar.current) {
-            console.log('scrolling')
             this.scrollbar.current.newMessage();
         }
     }
@@ -131,7 +129,6 @@ class Chat extends React.Component {
     onSend = (e) => {
         if(e) e.preventDefault()
 
-        console.log(this.state)
         socket.emit("chat message", {
             content: this.state.messageInput,
             userID: this.props.uid,
@@ -175,7 +172,6 @@ class Chat extends React.Component {
     }
 
     render() {
-        console.log('render chat')
         this.scrollDown();
         return(
             <div className="chat-container">

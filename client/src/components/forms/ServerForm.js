@@ -1,19 +1,58 @@
 import React from 'react';
 import { Modal, Form, Input} from 'antd';
 
-class ServerForm extends React.Component {    
+class ServerForm extends React.Component {
+    
+    state = {
+        initFields: {}
+    }
+
+    componentDidMount = () => {
+        this.handleUpdate();
+    }
+    
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps.server != this.props.server) {
+            this.handleUpdate();
+        }
+    }
+
+    handleUpdate = async () => {
+        await this.setState({initFields: {
+            name: this.props.server.name,
+            thumbnail: this.props.server.thumbnail,
+            outline: this.props.server.outline,
+            description: this.props.server.description,
+        }})
+
+        if(this.props.formRef.current) {
+            this.props.formRef.current.setFieldsValue(this.state.initFields)
+        }
+    }
 
     render() {
         return (
             <div className="server-form">
                 <Modal
                     value={this.state}
-                    title="Create Server"
+                    
+                    title={this.props.formType.charAt(0).toUpperCase() + this.props.formType.slice(1) + " Server"}
                     visible={this.props.visible}
-                    onOk={this.props.handleOk}
+                    onOk={() => {
+                        if(!this.props.formRef.current) return
+
+                        this.props.formRef.current
+                            .validateFields()
+                            .then(values => {
+                                this.props.handleOk(values)
+                            })
+                    }}
                     onCancel={this.props.handleCancel}
                 >
-                    <Form onFinish={this.props.handleOk} ref={this.props.formRef}>
+                    <Form
+                        ref={this.props.formRef}
+                        initialValues={this.state.initFields}>
+
                         <Form.Item
                             name="name"
                             rules={[{ required: true, message: 'Please input server name.'}]}
