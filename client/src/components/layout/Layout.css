@@ -11,7 +11,7 @@
     --profile-bg: #131313;
     --text-highlight: #9370DB;
     --head-shadow: rgba(41,41,41, 1);
-    --selected: #5c555210;
+    --selected: #5c555220;
     --menu-bg: #1f1f1f;
     --group-title-col: rgba(255, 255, 255, 0.45);
     --tooltip-col: #181716;
@@ -102,26 +102,15 @@
 }
 
 .menu-icon-tray span:hover {
-    background-color: #ffffff30;
+    background-color: var(--selected);
+}
+
+.page-settings-icon{
+    color: var(--text-color)
 }
 
 .page-settings-icon:hover {
-    color: black;
-}
-
-.sidebar-header-content .create-page {
-    position: relative;
-    right: 4px;
-    bottom: 6px;
-    margin: auto;
-}
-
-.create-page svg {
-    fill: var(--text-color)
-}
-
-.create-page:hover svg {
-    fill: var(--text-highlight)
+    color: var(--text-highlight)
 }
 
 .outer-sidebar,

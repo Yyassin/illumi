@@ -1,4 +1,5 @@
 import React from 'react';
+import {Tooltip, Dropdown, Menu} from "antd";
 import './Dash.css'
 
 
@@ -49,14 +50,24 @@ class Message extends React.Component {
     }
 
     render() {
+        const menu = (
+            <Menu>
+                <Menu.ItemGroup title="Message Options">
+                    <Menu.Item className="server-delete-tag" key="2" onClick={this.menuDeleteServer}>Delete Server</Menu.Item>
+                </Menu.ItemGroup>
+            </Menu>
+        )
+
         return(
-            <li className='message-container'>
-                {this.renderAvatar()}            
-                <div className="message-content">
-                    {this.renderMeta()}
-                    {this.renderDate()}
-                    <div className="message-text">{this.props.message.content}</div>
-                </div>
+            <li className='message-container'>  
+                {this.renderAvatar()}     
+                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['contextMenu']} overlay={menu} onContextMenu={()=> console.log('oi')}>
+                    <div className="message-content">
+                        {this.renderMeta()}
+                        {this.renderDate()}
+                        <div className="message-text">{this.props.message.content}</div>
+                    </div>
+                </Dropdown> 
             </li>
         ) 
     }    

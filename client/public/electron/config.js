@@ -39,7 +39,7 @@ exports.createWindow = () => {
       webPreferences: { nodeIntegration: true }
     });
   
-    mainWindow.setMinimumSize(400, 400);
+    mainWindow.setMinimumSize(500, 500);
     mainWindow.setMenu(null)
     mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 
