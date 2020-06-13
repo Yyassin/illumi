@@ -1,19 +1,68 @@
 import React from 'react';
 import { Modal, Form, Input, Select } from 'antd';
 
-class PageForm extends React.Component {        
+class PageForm extends React.Component {
+    
+    state = {
+        initFields: {}
+    }
+
+    componentDidMount = () => {
+        this.handleUpdate();
+    }
+    
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps.formType != this.props.formType) {
+            this.handleUpdate();
+        }
+    }
+
+    handleUpdate = async () => {
+        console.log('handle update')
+        if(this.props.formType === 'edit') {
+            await this.setState({initFields: {
+                title: this.props.page.title,
+                image: this.props.page.image,
+                video: this.props.page.video,
+                tag: this.props.page.tag,
+                content: this.props.page.content,
+            }})
+        } else {
+            await this.setState({initFields: {
+                title: '',
+                image: '',
+                video: '',
+                tag: '',
+                content: '',
+            }})
+        }
+
+        if(this.props.formRef.current) {
+            this.props.formRef.current.setFieldsValue(this.state.initFields)
+        }
+    }
 
     render() {
         return (
             <div className="page-form">
                 <Modal
                     value={this.state}
-                    title="Create Page"
+                    title={this.props.formType.charAt(0).toUpperCase() + this.props.formType.slice(1) + " Page"}
                     visible={this.props.visible}
-                    onOk={this.props.handleOk}
+
+                    onOk={() => {
+                        if(!this.props.formRef.current) return
+
+                        this.props.formRef.current
+                            .validateFields()
+                            .then(values => {
+                                this.props.handleOk(values)
+                            })
+                    }}
+
                     onCancel={this.props.handleCancel}
                 >
-                    <Form onFinish={this.props.handleOk} ref={this.props.formRef}>
+                    <Form ref={this.props.formRef} initialValues={this.state.initFields}>
                         <Form.Item
                             name="title"
                             rules={[{ required: true, message: 'Please input page title.'}]}
@@ -53,9 +102,9 @@ class PageForm extends React.Component {
                         </Form.Item>
                         
                         <Form.Item
-                            name="text"
+                            name="content"
                         >
-                            <Input.TextArea id='text' onChange={this.props.onModalChange} placeholder="Content Text" />
+                            <Input.TextArea id='content' onChange={this.props.onModalChange} placeholder="Content" />
                         </Form.Item>
                     </Form>                    
                 </Modal>

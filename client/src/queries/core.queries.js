@@ -15,7 +15,11 @@ const queries = {
                             thumbnail
                             description
                             pages {
+                                id
                                 title
+                                image
+                                video
+                                content
                                 tag
                                 rooms {
                                     id
@@ -62,6 +66,25 @@ const queries = {
         )
     },
 
+    editServer: (serverData, serverID) => {
+        const { name, description, outline, thumbnail } = serverData
+        //console.log(name + description + outline + thumbnail)
+        return(
+            `
+            mutation{editServer(
+                name:"${name}",
+                description: "${description}",
+                outline:"${outline}",
+                thumbnail:"${thumbnail}",
+                serverID:"${serverID}",)
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
     deleteServer: (serverID, uid) => {
         return(
             `
@@ -74,7 +97,6 @@ const queries = {
 
     addPage: (pageData, serverID) => {
         const { title, image, video, tag, content } = pageData
-        //console.log(name + description + outline + thumbnail)
         return(
             `
             mutation{addPage(
@@ -87,6 +109,35 @@ const queries = {
                 {
                     id
                 }
+            }
+            `
+        )
+    },
+
+    editPage: (pageData, pageID) => {
+        const { title, image, video, tag, content } = pageData
+        return(
+            `
+            mutation{editPage(
+                title:"${title}",
+                image: "${image}",
+                video:"${video}",
+                tag:"${tag}",
+                content:"${content}",
+                pageID:"${pageID}")
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
+    deletePage: (pageID) => {
+        return(
+            `
+            mutation{
+                deletePage(pageID: "${pageID}")
             }
             `
         )
@@ -108,26 +159,7 @@ const queries = {
             }
             `
         )
-    },
-
-    editServer: (serverData, serverID) => {
-        const { name, description, outline, thumbnail } = serverData
-        //console.log(name + description + outline + thumbnail)
-        return(
-            `
-            mutation{editServer(
-                name:"${name}",
-                description: "${description}",
-                outline:"${outline}",
-                thumbnail:"${thumbnail}",
-                serverID:"${serverID}",)
-                {
-                    id
-                }
-            }
-            `
-        )
-    },
+    },    
 }
 
 export default queries;

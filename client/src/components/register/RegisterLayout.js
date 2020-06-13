@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Row } from 'antd';
 import RegisterForm from './RegisterForm'
+import CanvasBlob from './CanvasBlob'
 import './Register.css'
 
 import Titlebar from '../Titlebar/Titlebar'
@@ -11,6 +12,7 @@ class RegisterLayout extends React.Component {
         return (
             <div>    
                 <div className="register-bg"></div>
+                <CanvasBlob />
                 <h1 className="logo">illumi</h1>
                 <Row className="register-page">
                     <Card bordered={false} className="register-card">

@@ -56,6 +56,14 @@ Register Layout
     margin-bottom: 25px;
 }
 
+.canvas-blob {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70%;
+    height: 70%;
+}
+
 
 @media (max-width: 500px ) {
     .register-card {

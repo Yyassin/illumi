@@ -7,9 +7,10 @@ import {signOut} from "../../store/actions/authActions";
 
 import {
   init, clearSession, toggleLoading, 
-  selectServer, selectPage, addServer, 
-  editServer, deleteServer, addPage, 
-  editProfile
+  selectServer, selectPage, 
+  addServer, editServer, deleteServer, 
+  addPage, editPage, deletePage,
+  editProfile, 
 } from "../../store/actions/coreActions";
 
 import {connect} from "react-redux";
@@ -25,11 +26,16 @@ const { Content } = Layout;
 
 class MainLayout extends React.Component {
 
+  fetchData = async() => {
+    this.props.init(this.props.uid, this.props.accessToken);
+  }
+
   endSession = async() => {    
     await this.props.signOut()
     this.props.clearSession()
   }
 
+  // server CRUD
   addServer = async(serverData) => {
     this.props.addServer(serverData, this.props.uid, this.props.accessToken)
   }
@@ -42,17 +48,22 @@ class MainLayout extends React.Component {
     this.props.deleteServer(serverID, serverIndex, this.props.accessToken)
   }
 
+  // page CRUD
   addPage = async(pageData) => {
     this.props.addPage(pageData, this.props.data.user.members[this.props.serverIndex].server.id, this.props.accessToken)
   }
 
-  editProfile = async(profileData) => {
-    this.props.editProfile(profileData, this.props.uid, this.props.accessToken)
+  editPage = async(pageData, pageID) => {
+    this.props.editPage(pageData, pageID, this.props.accessToken)
   }
 
-  fetchData = async() => {
-    this.props.init(this.props.uid, this.props.accessToken);
+  deletePage = async(pageID) => {
+    this.props.deletePage(pageID, this.props.accessToken)
   }
+
+  editProfile = async(profileData) => {
+    this.props.editProfile(profileData, this.props.uid, this.props.accessToken)
+  }  
 
   render() {
     if (!this.props.auth) return <Redirect to='/'/> 
@@ -89,6 +100,10 @@ class MainLayout extends React.Component {
                   <InnerHeader 
                     server={this.props.data.user.members[this.props.serverIndex].server}
                     page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
+                    fetchData = {this.fetchData}
+                    addPage={this.addPage}
+                    editPage={this.editPage}
+                    deletePage={this.deletePage}
                     />
 
                   <Content className="main-content">                  
@@ -136,11 +151,13 @@ const mapDispatchToProps = (dispatch) => {
 
         addServer: (serverData, uid, token) => dispatch(addServer(serverData, uid, token)),
         addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
-
+        
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
         editServer: (serverData, serverID, token) => dispatch(editServer(serverData, serverID, token)),
+        editPage: (pageData, pageID, token) => dispatch(editPage(pageData, pageID, token)),
 
         deleteServer: (serverID, serverIndex, token) => dispatch(deleteServer(serverID, serverIndex, token)),
+        deletePage: (pageID, token) => dispatch(deletePage(pageID, token))
     }
 }
 

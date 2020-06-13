@@ -60,6 +60,13 @@ const coreReducer = (state = initState, action) => {
                 }
             }
 
+        case 'DELETE_PAGE':
+            return {
+                ...state,
+                msg: action.msg,
+                pageIndex: 0
+            }
+
         case 'CLEAR_SESSION':
             return initState
 

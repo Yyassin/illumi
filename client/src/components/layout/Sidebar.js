@@ -50,7 +50,6 @@ class Sidebar extends React.Component {
     }
 
     createForm = async () => {
-
         this.setState({
             showModal: true,
             formType: 'create',

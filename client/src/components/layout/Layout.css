@@ -94,6 +94,21 @@
     flex: 1;
 }
 
+.menu-icon-tray span {
+    width: 30px;
+    height: 30px;
+    line-height: 33px;
+    border-radius: 15px;
+}
+
+.menu-icon-tray span:hover {
+    background-color: #ffffff30;
+}
+
+.page-settings-icon:hover {
+    color: black;
+}
+
 .sidebar-header-content .create-page {
     position: relative;
     right: 4px;

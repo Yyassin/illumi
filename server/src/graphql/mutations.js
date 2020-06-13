@@ -193,6 +193,48 @@ module.exports = new GraphQLObjectType({
             }
         },
 
+        editPage: {
+            type: types.PageType,
+            args: {
+                title: { type: GraphQLString },
+                image: { type: GraphQLString },
+                video: { type: GraphQLString },
+                tag: { type: GraphQLString },
+                content: { type: GraphQLString },
+                pageID: { type: GraphQLString }
+            },
+            async resolve(parent, args) {
+                const page = await Page.findById(args.pageID)
+                if(!page) return null;
+                
+                page.title = args.title
+                page.image = args.image
+                page.video = args.video
+                page.tag = args.tag
+                page.content = args.content
+                return page.save()
+            }
+        },
+
+        deletePage: {
+            type: GraphQLString,
+            args: {
+                pageID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {                
+                let room = await Room.find({pageID: args.pageID})
+
+                if(room[0]) {
+                    await Message.deleteMany({roomID: room[0].id})
+                    await Room.findByIdAndDelete(room[0].id)
+                }
+                
+                await Page.findByIdAndDelete(args.pageID)
+
+                return "Successfully deleted pag";
+            }
+        },
+
         addRoom: {
             type: types.RoomType,
             args: {
