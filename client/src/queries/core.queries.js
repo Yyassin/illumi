@@ -171,6 +171,22 @@ const queries = {
             `
         )
     },
+
+    editMember: (memberData, memberID) => {
+        const { role } = memberData
+
+        return(
+            `
+            mutation{editMember(
+                role:"${role}",
+                memberID:"${memberID}",)
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
 }
 
 export default queries;

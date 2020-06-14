@@ -10,7 +10,8 @@ import {
   selectServer, selectPage, 
   addServer, editServer, deleteServer, 
   addPage, editPage, deletePage,
-  editProfile, deleteMessage
+  editProfile, deleteMessage,
+  editMember
 } from "../../store/actions/coreActions";
 
 import {connect} from "react-redux";
@@ -69,6 +70,10 @@ class MainLayout extends React.Component {
     this.props.deleteMessage(messageID, this.props.accessToken)
   }
 
+  editMember = async(memberData, memberID) => {
+    this.props.editMember(memberData, memberID, this.props.accessToken)
+  }
+
   render() {
     if (!this.props.auth) return <Redirect to='/'/> 
       return (        
@@ -119,6 +124,7 @@ class MainLayout extends React.Component {
                         token={this.props.accessToken}
                         signout={this.endSession}
                         deleteMessage={this.deleteMessage}
+                        editMember={this.editMember}
                         fetchData = {this.fetchData}
                         />
                   </Content>
@@ -162,6 +168,7 @@ const mapDispatchToProps = (dispatch) => {
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
         editServer: (serverData, serverID, token) => dispatch(editServer(serverData, serverID, token)),
         editPage: (pageData, pageID, token) => dispatch(editPage(pageData, pageID, token)),
+        editMember: (memberData, memberID, token) => dispatch(editMember(memberData, memberID, token)),
 
         deleteServer: (serverID, serverIndex, token) => dispatch(deleteServer(serverID, serverIndex, token)),
         deletePage: (pageID, token) => dispatch(deletePage(pageID, token)),

@@ -18,7 +18,6 @@ class Chat extends React.Component {
     state = {
         messages: [],
         sortedMessages: {},
-        messageInput: '',
     }
 
     scrollbar = React.createRef()
@@ -122,15 +121,15 @@ class Chat extends React.Component {
         }
     }
     
-    onChange = (e) => {
-        this.setState({[e.target.id]: e.target.value})
-    }
+    // onChange = (e) => {
+    //     this.setState({[e.target.id]: e.target.value})
+    // }
 
     onSend = (e) => {
         if(e) e.preventDefault()
 
         socket.emit("chat message", {
-            content: this.state.messageInput,
+            content: this.inputField.current.value,
             userID: this.props.uid,
             roomID: this.props.page.rooms[0].id,
             token: this.props.token
@@ -163,6 +162,7 @@ class Chat extends React.Component {
                                                     uid={this.props.uid}
                                                     member={this.props.member}
                                                     message={message}
+                                                    editMember={this.props.editMember}
                                                     deleteMessage={this.props.deleteMessage}
                                                     fetchData = {this.props.fetchData}
                                                     />
@@ -195,7 +195,7 @@ class Chat extends React.Component {
 
                 <div className="chat-form-container">
                     <Button className="file-send-btn" onClick={this.onSend}><a href=""></a></Button>
-                    <input ref={this.inputField} onKeyPress={this.onKeyPressed} onChange={this.onChange} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
+                    <input ref={this.inputField} onKeyPress={this.onKeyPressed} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
                     <Button className="message-send-btn" onClick={this.onSend}><a href="">{<SendOutlined />}</a></Button>
                     {/* <Button type="submit" id="message-btn" class="send-button">Send</Button> */}
                 </div>                

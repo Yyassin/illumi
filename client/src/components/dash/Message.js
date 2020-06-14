@@ -1,15 +1,18 @@
 import React from 'react';
-import {Tooltip, Dropdown, Menu} from "antd";
+import {Popover, Dropdown, Menu, Form, Input, Select, Button} from "antd";
 import './Dash.css'
 
 
 class Message extends React.Component {
 
+    formRef = React.createRef()
+
     state = {
         roleColors: {
             "student" : '#fff',
             "admin" : '#00a5a7',
-        }
+        },
+        visible: false,
     }
      //replace with member roles later**
 
@@ -18,15 +21,37 @@ class Message extends React.Component {
         this.props.fetchData()
     }
 
+    updateRole = async () => {
+        const formData = this.formRef.current.getFieldsValue()
+        await this.props.editMember(formData, this.props.message.member.id)
+        this.props.fetchData()
+
+        this.setState({visible: false})
+    }
+
+    handleVisibleChange = visible => {
+        this.setState({visible})
+    }
+
     renderAvatar = () => {
         if(!this.props.message.chain) {
             return (
                 <div className="avatar">
-                    <p href="#" className="avatar-btn"
-                    style={{'background': `url("${this.props.message.member.user.thumbnail}")`,
-                            'background-size': 'cover',
-                            'background-position': 'center'}}>
-                    </p>
+                    <Popover
+                        placement="right"
+                        title="Edit Member"
+                        content={this.renderPopover()}
+                        trigger="click"
+                        visible={this.state.visible}
+                        onVisibleChange={this.handleVisibleChange}
+                    >
+
+                        <p href="#" className="avatar-btn"
+                        style={{'background': `url("${this.props.message.member.user.thumbnail}")`,
+                                'background-size': 'cover',
+                                'background-position': 'center'}}>
+                        </p>
+                    </Popover>
                 </div>
             )
         }
@@ -79,6 +104,62 @@ class Message extends React.Component {
                     <Menu.Item className="server-delete-tag" key="2" onClick={this.deleteMessage}>Delete Message</Menu.Item>
                 </Menu.ItemGroup>
             </Menu>
+        )
+    }
+
+    renderPopover = () => {
+        let isAdmin;
+
+        if(this.props.uid === this.props.message.member.user.id) {
+            isAdmin = false;
+        } else {
+            isAdmin = (this.props.member.role === 'admin')
+        }
+
+        return(
+            <div>
+                <p>{this.props.message.member.user.name}</p>
+                <p>{this.props.message.member.user.email}</p>
+
+                <Form 
+                    ref = {this.formRef}
+                    initialValues={{
+                        role: this.props.message.member.role
+                }}>
+                    <Form.Item
+                        name="role"
+                    >
+                        <Select
+                            disabled={!isAdmin}
+                            showSearch
+                            placeholder="Select Role"
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                            <Select.Option value="admin">Admin</Select.Option>
+                            <Select.Option value="student">Student</Select.Option>
+                        </Select>
+                    </Form.Item>                    
+                    
+                    <Form.Item>
+
+                    { 
+                        (isAdmin) ? 
+                        <Button id="submit" onClick={this.updateRole} htmlType="submit">
+                            Update
+                        </Button>
+                    :
+                        <Button htmlType="submit">
+                            Close
+                        </Button>
+                    }
+
+                    </Form.Item>
+
+                </Form>
+            </div>
         )
     }
 

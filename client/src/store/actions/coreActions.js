@@ -202,3 +202,22 @@ export const deleteMessage = (pageID, token) => {
         }
     }
 }
+
+export const editMember = (memberData, memberID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.editMember(memberData, memberID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Edited member.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}

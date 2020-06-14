@@ -13,6 +13,7 @@ class Page extends React.Component {
                 member={this.props.member}
                 token={this.props.token}
                 signout={this.props.signout}
+                editMember={this.props.editMember}
                 deleteMessage={this.props.deleteMessage}
                 fetchData = {this.props.fetchData}/>
         )

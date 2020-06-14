@@ -80,6 +80,19 @@ module.exports = new GraphQLObjectType({
             }
         },
 
+        editMember: {
+            type: types.MemberType,
+            args: {
+                role: { type: GraphQLString },
+                memberID: { type: new GraphQLNonNull(GraphQLString) }
+            },
+            async resolve(parent, args) {
+                let member = await Member.findById(args.memberID)
+                member.role = args.role
+                return member.save()
+            }
+        },
+
         addServer: {
             type: types.ServerType,
             args: {
