@@ -8,6 +8,7 @@ class Profile extends React.Component {
             <NavMenu
                 user = {this.props.user} //need to sync this  
                 logout = {this.props.signout}  
+                addInvite={this.props.addInvite}
                 fetchData = {this.props.fetchData}
                 editProfile={this.props.editProfile}                    
             />

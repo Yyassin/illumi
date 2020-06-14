@@ -125,6 +125,7 @@ class InnerSidebar extends React.Component {
                     user={this.props.user}
                     signout={this.props.signout}
                     fetchData={this.props.fetchData}
+                    addInvite={this.props.addInvite}
                     editProfile = {this.props.editProfile}
                     />                
             </Sider>

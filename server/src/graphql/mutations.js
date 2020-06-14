@@ -335,7 +335,7 @@ module.exports = new GraphQLObjectType({
                 email: { type: GraphQLString },
                 role: { type: GraphQLString },
             },
-            async resolve(parent, args) {                
+            async resolve(parent, args) {               
                 const user = await User.findOne({email: args.email})
 
                 if(!user) {

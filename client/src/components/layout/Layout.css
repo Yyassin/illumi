@@ -466,6 +466,13 @@ li.close-tag {
     padding-top: 10px;
 }
 
+.popover-content .popover-dark .popover-email {
+    color: currentColor;
+    font-weight: 500;
+    font-size: 13px;
+    padding-top: 10px;
+}
+
 .popover-form {
     padding: 10px;
     display: flex;

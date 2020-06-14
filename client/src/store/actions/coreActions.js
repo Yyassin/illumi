@@ -221,3 +221,22 @@ export const editMember = (memberData, memberID, token) => {
         }
     }
 }
+
+export const addInvite = (inviteData, senderID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.addInvite(inviteData, senderID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Sent invite.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}

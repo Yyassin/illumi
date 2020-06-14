@@ -8,6 +8,7 @@ const queries = {
                     name
                     thumbnail
                     members {
+                        id
                         role
                         server {
                             id
@@ -180,6 +181,23 @@ const queries = {
             mutation{editMember(
                 role:"${role}",
                 memberID:"${memberID}",)
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
+    addInvite: (inviteData, senderID) => {
+        const { email, role } = inviteData
+
+        return(
+            `
+            mutation{addInvite(
+                role:"${role}",
+                senderID:"${senderID}",
+                email:"${email}")
                 {
                     id
                 }
