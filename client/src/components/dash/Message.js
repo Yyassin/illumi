@@ -117,11 +117,19 @@ class Message extends React.Component {
         }
 
         return(
-            <div>
-                <p>{this.props.message.member.user.name}</p>
-                <p>{this.props.message.member.user.email}</p>
+            <div className="popover-content">
+                <div className="popover-dark">
+                    <p href="#" className="popover-avatar"
+                            style={{'background': `url("${this.props.message.member.user.thumbnail}")`,
+                                    'background-size': 'cover',
+                                    'background-position': 'center'}}>
+                    </p>
+                    <p className="popover-name">{this.props.message.member.user.name}</p>
+                    <p className="popover-email">{this.props.message.member.user.email}</p>
+                </div>
 
                 <Form 
+                    className="popover-form"
                     ref = {this.formRef}
                     initialValues={{
                         role: this.props.message.member.role

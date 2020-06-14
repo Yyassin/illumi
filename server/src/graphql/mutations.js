@@ -8,6 +8,7 @@ const Server = require('../models/server.model')
 const Room = require('../models/room.model')
 const Page = require('../models/page.model')
 const Message = require('../models/message.model')
+const Invite = require('../models/invite.model')
 
 // resolvers
 const auth = require('./resolvers/auth.resolver')
@@ -182,6 +183,32 @@ module.exports = new GraphQLObjectType({
             }
         },
 
+        leaveServer: {
+            type: GraphQLString,
+            args: {
+                memberID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {
+                let message = ""
+
+                let member = await Member.findById(args.memberID)
+                let server = await Server.findById(member.serverID)
+
+                await member.delete()
+                message += "Successfully deleted member."
+
+                let members = await Member.find({serverID: server.id})
+                console.log(members.length)
+
+                if(members.length < 1) {
+                    await server.delete()
+                    message += " Successfully deleted server."
+                }
+                
+                return message;
+            }
+        },
+
         addPage: {
             type: types.PageType,
             args: {
@@ -299,7 +326,67 @@ module.exports = new GraphQLObjectType({
 
                 return "Successfully deleted message";
             }
-        },        
+        },
+        
+        addInvite: {
+            type: types.InviteType,
+            args: {
+                senderID: { type: GraphQLString },
+                email: { type: GraphQLString },
+                role: { type: GraphQLString },
+            },
+            async resolve(parent, args) {                
+                const user = await User.findOne({email: args.email})
+
+                if(!user) {
+                    return Error("User with that email does not exist.")
+                }
+
+                const invite = await new Invite({
+                    senderID: args.senderID,
+                    targetID: user.id,
+                    role: args.role
+                })
+
+                return invite.save()
+            }
+        },
+
+        acceptInvite: {
+            type: types.MemberType,
+            args: {
+                inviteID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {                
+                const invite = await Invite.findById(args.inviteID)
+
+                const target = await User.findById(invite.targetID)
+                const sender = await Member.findById(invite.senderID)
+                const server = await Server.findById(sender.serverID)
+
+                const member = await new Member({
+                    serverID: server.id,
+                    userID: target.id,
+                    role: invite.role
+                })
+
+                await Invite.findByIdAndDelete(args.inviteID)
+
+                return member.save()
+            }
+        },
+
+        declineInvite: {
+            type: GraphQLString,
+            args: {
+                inviteID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {                
+                await Invite.findByIdAndDelete(args.inviteID)
+
+                return "Succesfully deleted invitation."
+            }
+        },
 
     }
 })

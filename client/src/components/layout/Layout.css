@@ -121,7 +121,7 @@
 
 .outer-sidebar {
     background-color: var(--outer-side-bg) !important;
-    background-color: rgb(23, 26, 28) !important; 
+    background-color: var(--outer-side-bg) !important; 
     flex: 0 0 80px !important; 
     max-width: 80px !important; 
     min-width: 80px !important; 
@@ -419,4 +419,61 @@ li.close-tag {
 .ant-layout-sider-children {
     display: flex;
     flex-direction: column;
+}
+
+.ant-popover-inner-content {
+    margin: 0;
+    padding: 0;
+}
+
+.ant-popover-title {
+    display: flex;
+    justify-content: center;
+    background-color: var(--side-bg);
+    border: none !important;
+}
+
+.popover-content,
+.popover-dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popover-dark p {
+    padding: 0;
+    margin: 0;
+}
+
+.popover-dark {
+    padding: 10px;
+    background-color: var(--side-bg);
+    width: 100%;
+}
+
+.popover-avatar {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+}
+
+.popover-content .popover-dark .popover-name {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.popover-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.popover-form button {
+    margin-left: 10px;
 }

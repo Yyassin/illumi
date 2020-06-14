@@ -7,6 +7,7 @@ const Server = require('../models/server.model')
 const Page = require('../models/page.model')
 const Room = require('../models/room.model')
 const Message = require('../models/message.model')
+const Invite = require('../models/invite.model')
 
 const {
     GraphQLObjectType,
@@ -165,7 +166,30 @@ const AuthDataType = new GraphQLObjectType({
     })
 })
 
+const InviteType = new GraphQLObjectType({
+    name: 'Invite',
+    fields: () => ({
+        id: { type: GraphQLID },
+        role: { type: GraphQLString },
+
+        target: {
+            type: UserType,
+            resolve(parent, args) {
+                return User.findById(parent.targetID)
+            }
+        },
+
+        sender: {
+            type: MemberType,
+            resolve(parent, args) {
+                return Member.findById(parent.senderID)
+            }
+        },
+
+    })
+})
+
 module.exports = {
     UserType, MemberType, ServerType, PageType,
-    RoomType, AuthDataType, MessageType
+    RoomType, AuthDataType, MessageType, InviteType
 }

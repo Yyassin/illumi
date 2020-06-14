@@ -21,7 +21,7 @@ class CanvasBlob extends React.Component {
         this.c.save();
         this.c.translate(-10, -10);
         this.c.scale(0.5, 0.5);
-        this.c.fillStyle = "#10121395";
+        this.c.fillStyle = "rgba(16,18,19, .95)";
         this.c.beginPath();
         this.c.moveTo(0, 0);
         this.bezierSkin(anchors, false);

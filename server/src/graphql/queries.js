@@ -7,6 +7,7 @@ const Server = require('../models/server.model')
 const Page = require('../models/page.model')
 const Room = require('../models/room.model')
 const Message = require('../models/message.model')
+const Invite = require('../models/invite.model')
 
 // resolvers
 const auth = require('./resolvers/auth.resolver')
@@ -130,6 +131,31 @@ module.exports = new GraphQLObjectType({
                 return Message.find({})
             }
         },
+
+        invite: {
+            type: types.InviteType,
+            args: { id: { type: GraphQLID } },
+            resolve(parent, args) {
+                return Invite.findById(args.id)
+            }
+        },        
+
+        invites: {
+            type: new GraphQLList(types.InviteType),
+            resolve(parent, args) {
+                return Invite.find({})
+            }
+        },
+
+        getInvites: {
+            args: {
+                targetID: { type: GraphQLString },
+            },
+            type: new GraphQLList(types.InviteType),
+            resolve(parent, args) {
+                return Invite.find({targetID: args.targetID})
+            }            
+        }
 
     }
 })

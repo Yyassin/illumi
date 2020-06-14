@@ -1,13 +1,14 @@
 import React from 'react';
 import CanvasBlob from './CanvasBlob'
 
+//credits: https://codepen.io/ZevanRosser/pen/bde8e879b344202cf06379e44f9e80b2
 const HALF_PI = Math.PI / 2;
 const bumpRadius = 100;
 const halfBumpRadius = bumpRadius / 2;
 
 class Animation extends React.Component {
 
-  wobbleIncrement = 0;
+  wobbleIncrement = 10;
   // use this to change the size of the blob
   radius = 1000;
   // think of this as detail level
@@ -19,7 +20,7 @@ class Animation extends React.Component {
   thetaOff = [];
   theta = 0;
   thetaRamp = 0;
-  thetaRampDest = 20;
+  thetaRampDest = 30;
   rampDamp = 100;
 
   constructor(props) {
