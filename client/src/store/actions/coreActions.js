@@ -183,3 +183,22 @@ export const editProfile = (profileData, uid, token) => {
         }
     }
 }
+
+export const deleteMessage = (pageID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.deleteMessage(pageID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Deleted message.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}

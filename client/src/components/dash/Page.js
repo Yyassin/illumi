@@ -10,8 +10,11 @@ class Page extends React.Component {
                 page={this.props.page}
                 server={this.props.server}
                 uid={this.props.uid}
+                member={this.props.member}
                 token={this.props.token}
-                signout={this.props.signout}/>
+                signout={this.props.signout}
+                deleteMessage={this.props.deleteMessage}
+                fetchData = {this.props.fetchData}/>
         )
     }
 }

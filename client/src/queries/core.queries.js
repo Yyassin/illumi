@@ -24,6 +24,7 @@ const queries = {
                                 rooms {
                                     id
                                     messages {
+                                        id
                                         content
                                         date
                                         member{
@@ -159,7 +160,17 @@ const queries = {
             }
             `
         )
-    },    
+    },
+    
+    deleteMessage: (messageID) => {
+        return(
+            `
+            mutation{
+                deleteMessage(messageID: "${messageID}")
+            }
+            `
+        )
+    },
 }
 
 export default queries;

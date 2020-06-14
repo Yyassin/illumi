@@ -13,6 +13,11 @@ class Message extends React.Component {
     }
      //replace with member roles later**
 
+    deleteMessage = async () => {
+        await this.props.deleteMessage(this.props.message.id)
+        this.props.fetchData()
+    }
+
     renderAvatar = () => {
         if(!this.props.message.chain) {
             return (
@@ -49,19 +54,39 @@ class Message extends React.Component {
         }
     }
 
-    render() {
-        const menu = (
+    renderContextMenu = () => {
+        if(this.props.member.role !== 'admin') {
+            if(this.props.uid !== this.props.message.member.user.id) {
+                return (
+                    <Menu/>
+                )
+            }
+        }
+
+        const words = this.props.message.content.split(' ')
+        let msgExcerpt = '';
+
+        for(let i=0; i<3; i++) {
+            if(!words[i]) break;
+            msgExcerpt += `${words[i]} `
+        }
+
+        msgExcerpt += '...'
+
+        return (
             <Menu>
-                <Menu.ItemGroup title="Message Options">
-                    <Menu.Item className="server-delete-tag" key="2" onClick={this.menuDeleteServer}>Delete Server</Menu.Item>
+                <Menu.ItemGroup title={msgExcerpt}>
+                    <Menu.Item className="server-delete-tag" key="2" onClick={this.deleteMessage}>Delete Message</Menu.Item>
                 </Menu.ItemGroup>
             </Menu>
         )
+    }
 
+    render() {
         return(
             <li className='message-container'>  
                 {this.renderAvatar()}     
-                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['contextMenu']} overlay={menu} onContextMenu={()=> console.log('oi')}>
+                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['contextMenu']} overlay={this.renderContextMenu()} onContextMenu={()=> console.log('oi')}>
                     <div className="message-content">
                         {this.renderMeta()}
                         {this.renderDate()}

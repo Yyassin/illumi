@@ -158,7 +158,14 @@ class Chat extends React.Component {
                                     this.state.sortedMessages[date].map((message, index) => {
                                         return (
                                             <li className="message" >
-                                                <Message key={index} message={message} />
+                                                <Message 
+                                                    key={index}
+                                                    uid={this.props.uid}
+                                                    member={this.props.member}
+                                                    message={message}
+                                                    deleteMessage={this.props.deleteMessage}
+                                                    fetchData = {this.props.fetchData}
+                                                    />
                                             </li>
                                         )
                                     })    

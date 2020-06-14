@@ -231,7 +231,7 @@ module.exports = new GraphQLObjectType({
                 
                 await Page.findByIdAndDelete(args.pageID)
 
-                return "Successfully deleted pag";
+                return "Successfully deleted page";
             }
         },
 
@@ -274,9 +274,19 @@ module.exports = new GraphQLObjectType({
 
                 return message.save();
             }
-        }
+        },
 
-        
+        deleteMessage: {
+            type: GraphQLString,
+            args: {
+                messageID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {                
+                await Message.findByIdAndDelete(args.messageID)
+
+                return "Successfully deleted message";
+            }
+        },        
 
     }
 })
