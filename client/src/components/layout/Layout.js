@@ -11,7 +11,7 @@ import {
   addServer, editServer, deleteServer, 
   addPage, editPage, deletePage,
   editProfile, deleteMessage,
-  editMember, addInvite
+  editMember, addInvite, acceptInvite
 } from "../../store/actions/coreActions";
 
 import {connect} from "react-redux";
@@ -78,6 +78,10 @@ class MainLayout extends React.Component {
     this.props.addInvite(inviteData, senderID, this.props.accessToken)
   }
 
+  acceptInvite = async(inviteID) => {
+    this.props.acceptInvite(inviteID, this.props.accessToken)
+  }
+
   render() {
     if (!this.props.auth) return <Redirect to='/'/> 
       return (        
@@ -108,6 +112,7 @@ class MainLayout extends React.Component {
                 fetchData = {this.fetchData}
                 editProfile = {this.editProfile}
                 addInvite={this.addInvite}
+                acceptInvite={this.acceptInvite}
                 />
 
               <Layout className="inner-layout">
@@ -171,6 +176,8 @@ const mapDispatchToProps = (dispatch) => {
         addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
         addInvite: (inviteData, senderID, token) => dispatch(addInvite(inviteData, senderID, token)),
         
+        acceptInvite: (inviteID, token) => dispatch(acceptInvite(inviteID, token)),
+
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
         editServer: (serverData, serverID, token) => dispatch(editServer(serverData, serverID, token)),
         editPage: (pageData, pageID, token) => dispatch(editPage(pageData, pageID, token)),

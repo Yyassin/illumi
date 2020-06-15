@@ -99,6 +99,8 @@ class NavMenu extends React.Component {
                     user={this.props.user}
                     title="Manage Invitations"
                     addInvite={this.props.addInvite}
+                    acceptInvite={this.props.acceptInvite}
+                    fetchData={this.props.fetchData}
                     onClose={this.drawerClose}
                     visible={this.state.showDrawer}
                 />

@@ -7,6 +7,19 @@ const queries = {
                     email
                     name
                     thumbnail
+                    invites {
+                        id
+                        sender{
+                            user{
+                                name
+                                thumbnail
+                            }
+                            server{
+                                name
+                                thumbnail
+                            }
+                        }
+                    }
                     members {
                         id
                         role
@@ -200,6 +213,23 @@ const queries = {
                 email:"${email}")
                 {
                     id
+                }
+            }
+            `
+        )
+    },
+
+    acceptInvite: (inviteID) => {
+        return(
+            `
+            mutation{acceptInvite(
+                inviteID:"${inviteID}",
+                )
+                {
+                    id
+                    server{
+                        name
+                    }
                 }
             }
             `

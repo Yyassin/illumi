@@ -2,6 +2,7 @@ import React from 'react';
 import { Drawer, Form, Button, Space, Input, Select, Table } from 'antd';
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import {  MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import '../dash/Dash.css'
 
 class ManageInvite extends React.Component {
 
@@ -9,13 +10,53 @@ class ManageInvite extends React.Component {
 
     state = {
         selectedRows: {},
+        data: []
+    }
+
+    componentDidMount = () => {
+        this.handleUpdate();
+    }
+    
+    componentDidUpdate = (prevProps, prevState) => {
+        console.log('comp did update')
+        if (prevProps.user.invites !== this.props.user.invites) {
+            console.log(prevProps.user.invites)
+            console.log(this.props.user.invites)
+            this.handleUpdate();
+        }
+    }
+
+    handleUpdate = () => {
+        console.log('handle update')        
+        let data = []
+
+        this.props.user.invites.map((invite, index) => {
+            data.push({
+                key: index,
+                id: invite.id,
+                sender: invite.sender.user.name,
+                senderThumbnail: invite.sender.user.thumbnail,
+                server: invite.sender.server.name,
+                serverThumbnail: invite.sender.server.thumbnail,
+            })
+        })
+
+        this.setState({
+            data: data
+        })
     }
 
     columns = [
         {
             title: 'From',
             dataIndex: 'sender',
-            // render: what => <p style={{color:'green'}}>oi</p>
+            //render: senderThumbnail => <p style={{color:'green'}}>{senderThumbnail}</p>
+        },
+        {
+            dataIndex: 'senderThumbnail',
+            render: image => <p className="avatar-btn"
+            style={{'background': `url("${image}")`}}>
+            </p>
         },
         {
             title: 'Server',
@@ -23,28 +64,6 @@ class ManageInvite extends React.Component {
         },
     ]
 
-    data = [
-        {
-            key: 1,
-            sender: 'Yousef',
-            server: 'Math 1104',
-        },
-        {
-            key: 2,
-            sender: 'Yousef',
-            server: 'Math 1104'
-        },
-        {
-            key: 3,
-            sender: 'Yousef',
-            server: 'Math 1104'
-        },
-        {
-            key: 4,
-            sender: 'Yousef',
-            server: 'Math 1104'
-        },
-    ]
 
     rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
@@ -60,15 +79,13 @@ class ManageInvite extends React.Component {
 
     onFinish = () => {
         const formData = this.formRef.current.getFieldsValue()
-        console.log(formData)
-        console.log(this.rowSelection.getCheckboxProps())
 
         if(!formData.invites || formData.invites.length === 0) return;
 
-        // formData.invites.map((invite, index) => {
-        //     const senderID = this.getSenderID(invite);
-        //     this.props.addInvite(invite, senderID)
-        // })
+        formData.invites.map((invite, index) => {
+            const senderID = this.getSenderID(invite);
+            this.props.addInvite(invite, senderID)
+        })
         
         this.formRef.current.resetFields()
 
@@ -76,8 +93,25 @@ class ManageInvite extends React.Component {
         
     }
 
-    acceptInvites = () => {
-        console.log(this.state.selectedRows)
+    acceptInvites = async () => {
+        const rowData = this.state.selectedRows          
+        let acceptInvites = [];
+
+        if(!rowData || rowData.length === 0) return
+
+        rowData.map((invite, index) => {
+            console.log(invite.id)
+            //acceptInvites.push(this.props.acceptInvite(invite.id))
+
+            var promise = new Promise( async(resolve, reject) => {
+                resolve (await this.props.acceptInvite(invite.id))
+            });
+            acceptInvites.push(promise)
+        })
+
+        await Promise.all(acceptInvites)
+
+        this.props.fetchData()
     }
 
     getSenderID = (invite) => {
@@ -95,7 +129,6 @@ class ManageInvite extends React.Component {
     renderServers = () => {     
         return (
             this.props.user.members.map((member, index) => {
-                console.log(member.server.name)
                 return (
                     <Select.Option value={member.server.id}>{member.server.name}</Select.Option>
                 )
@@ -192,7 +225,7 @@ class ManageInvite extends React.Component {
                 <Table
                     rowSelection={this.rowSelection}
                     columns={this.columns}
-                    dataSource={this.data}
+                    dataSource={this.state.data}
                 />
                 <Button type="primary" onClick={this.acceptInvites}>
                     Accept Invites

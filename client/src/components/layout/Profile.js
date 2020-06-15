@@ -9,6 +9,7 @@ class Profile extends React.Component {
                 user = {this.props.user} //need to sync this  
                 logout = {this.props.signout}  
                 addInvite={this.props.addInvite}
+                acceptInvite={this.props.acceptInvite}
                 fetchData = {this.props.fetchData}
                 editProfile={this.props.editProfile}                    
             />

@@ -240,3 +240,22 @@ export const addInvite = (inviteData, senderID, token) => {
         }
     }
 }
+
+export const acceptInvite = (inviteID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.acceptInvite(inviteID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Accepted invite.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}

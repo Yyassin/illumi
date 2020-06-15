@@ -49,12 +49,14 @@
 }
 
 .header-bold {
-    font-weight: 500;
+    font-family: 'Whitney', sans-serif;;
+    font-weight: 700;
     color: var(--header-color);
 }
 
 .header-light {
-    font-weight: 400;
+    font-family: 'Whitney', sans-serif;;
+    font-weight: 600;
     color: var(--header-color);
 }
 
@@ -70,7 +72,6 @@
 
 .sidebar-header {
     /* border-right: 1px solid gray; */
-    
     background-color: var(--inner-side-bg);
     height: 64px;
     padding: 10px 10px 10px 50px;

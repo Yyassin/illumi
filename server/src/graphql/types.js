@@ -33,6 +33,13 @@ const UserType = new GraphQLObjectType({
             resolve(parent, args) {
                 return Member.find({ userID: parent._id })
             }
+        },
+
+        invites: {
+            type: new GraphQLList(InviteType),
+            resolve(parent, args) {
+                return Invite.find({ targetID: parent._id })
+            }
         }
     })
 })
