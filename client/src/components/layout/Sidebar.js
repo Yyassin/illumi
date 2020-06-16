@@ -19,6 +19,8 @@ class Sidebar extends React.Component {
 
         formType: '',
 
+        member: '', //alernative            ?       ?       ?
+
         server: '',
         serverIndex: 0,
 
@@ -39,13 +41,19 @@ class Sidebar extends React.Component {
 
         this.setState({
             server: server, 
-            serverIndex: index
+            serverIndex: index,
+            member: this.props.members[index]
         })
     }
 
     // context menu methods
     menuDeleteServer = async() => {
         await this.props.deleteServer(this.state.server.id, this.state.serverIndex)
+        this.props.fetchData()
+    }
+
+    menuLeaveServer = async() => {
+        await this.props.leaveServer(this.state.member.id, this.state.serverIndex)
         this.props.fetchData()
     }
 
@@ -117,7 +125,7 @@ class Sidebar extends React.Component {
                 <Menu.ItemGroup title="Server Options">
                     <Menu.Item className="server-edit-tag" key="1" onClick={this.editForm}>Edit Server</Menu.Item>
                     <Menu.Item className="server-delete-tag" key="2" onClick={this.menuDeleteServer}>Delete Server</Menu.Item>
-                    <Menu.Item className="server-invite-tag" key="3">Leave Server</Menu.Item>
+                    <Menu.Item className="server-invite-tag" key="3" onClick={this.menuLeaveServer}>Leave Server</Menu.Item>
                     <Menu.Item className="server-invite-tag" key="4">Invite Members</Menu.Item>
                 </Menu.ItemGroup>
             </Menu>

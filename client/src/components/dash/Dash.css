@@ -19,7 +19,7 @@ li {
 }
 
 .message:last-child {
-    padding-bottom: 10px;
+    padding-bottom: 25px;
 }
 
 .message-container {
@@ -28,7 +28,7 @@ li {
     align-items: center;
     transition: filter 200ms ease-in;
     border-radius: 5px;
-    padding: 2px;
+    margin-top: 1px;
 }
 
 .message-container:hover {
@@ -43,19 +43,27 @@ li {
     flex: 0;
 }
 
+.message-container .avatar-btn:hover  {
+    cursor: pointer;
+}
+
 .month-date-line{
     position: relative;
     display: flex;
+    height: 2px;
     justify-content: center;
-    border-top: 1px solid var(--text-color);
+    border-top: 1px solid #ffffff20;
 }
 
 .month-date {
+    font-family: 'Whitney', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
     position: relative;
-    top: -10px;
-    padding: 0 10px;
-    margin: 0;
-    color: var(--text-color);
+    top: -9.5px;
+    height: 10px;
+    padding: 0 8px;
+    color: #ffffff60;
     background-color: var(--chat-container-bg);
 }
 
@@ -73,18 +81,26 @@ li {
 }
 
 .message-name {
+    font-family: 'Whitney', sans-serif;
+    font-weight: 650;
     padding-top: 10px;
     font-size: 14px;
-    font-weight: 500;
     padding-right: 8px;
 }
 
+.message-name:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .message-time {
-    flex: 1;
-    font-size: 11px;
-    padding-left: 3px;
+    font-family: 'Whitney', sans-serif;
     font-weight: 300;
-    padding-right: 26px;
+    font-size: 11px;
+    flex: 2 0;
+    min-width: 55px;
+    width: 55px;
+    max-width: 55px;
 }
 
 .message-content:first-child .message-time {
@@ -98,10 +114,13 @@ li {
 }
 
 .message-text {
-    flex: 1;
+    font-family: 'Whitney', sans-serif;
+    font-weight: 500;
+    flex: 8 ;
     display: flex;
+    justify-content: left;
     align-items: center;
-    min-width: 100%;
+    min-width: 50%;
 }
 
 

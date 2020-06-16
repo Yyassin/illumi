@@ -92,8 +92,11 @@ class Chat extends React.Component {
             messageDate = message.date.split(" ")[0];
 
             if (index > 0 && 
+                //same day
                 messages[index - 1].date.split(" ")[0] === messageDate) {
-                if (messages[index - 1].member.user.name === message.member.user.name) {
+                //same user, same hour
+                if (messages[index - 1].member.user.name === message.member.user.name
+                    && messages[index - 1].date.split(" ")[1].split(':')[0] === message.date.split(" ")[1].split(':')[0]) {
                     message['chain'] = true;
                 } else {
                     message['chain'] = false;
@@ -151,7 +154,8 @@ class Chat extends React.Component {
                         return (
                             <div className="">
                                 <div className="month-date-line">
-                                    <p className="month-date">{date}</p>
+                                    <p className="month-date">{date.split('-')[0] + ' ' +
+                                        date.split('-')[1] + ', ' + date.split('-')[2]}</p>
                                 </div>
                                 {
                                     this.state.sortedMessages[date].map((message, index) => {

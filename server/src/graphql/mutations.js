@@ -120,6 +120,12 @@ module.exports = new GraphQLObjectType({
 
                 page.save();
 
+                room = new Room({
+                    pageID: page.id,
+                })
+
+                room.save();
+
                 if(args.uid){
                     let member = new Member({
                         serverID: server.id,
@@ -198,8 +204,7 @@ module.exports = new GraphQLObjectType({
                 message += "Successfully deleted member."
 
                 let members = await Member.find({serverID: server.id})
-                console.log(members.length)
-
+                
                 if(members.length < 1) {
                     await server.delete()
                     message += " Successfully deleted server."

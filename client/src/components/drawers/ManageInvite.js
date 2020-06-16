@@ -2,7 +2,7 @@ import React from 'react';
 import { Drawer, Form, Button, Space, Input, Select, Table } from 'antd';
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import {  MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import '../dash/Dash.css'
+import './Popup.css'
 
 class ManageInvite extends React.Component {
 
@@ -48,14 +48,24 @@ class ManageInvite extends React.Component {
 
     columns = [
         {
+            dataIndex: 'senderThumbnail',
+            render: image => <p className="invite-thumb"
+            style={{'background': `url("${image}")`,
+            'background-size': 'cover',
+            'background-position': 'center'}}>
+            </p>
+        },
+        {
             title: 'From',
             dataIndex: 'sender',
             //render: senderThumbnail => <p style={{color:'green'}}>{senderThumbnail}</p>
         },
         {
-            dataIndex: 'senderThumbnail',
-            render: image => <p className="avatar-btn"
-            style={{'background': `url("${image}")`}}>
+            dataIndex: 'serverThumbnail',
+            render: image => <p className="invite-thumb"
+            style={{'background': `url("${image}")`,
+            'background-size': 'cover',
+            'background-position': 'center'}}>
             </p>
         },
         {

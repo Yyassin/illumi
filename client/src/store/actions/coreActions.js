@@ -108,6 +108,26 @@ export const deleteServer = (serverID, serverIndex, token) => {
     }
 }
 
+export const leaveServer = (memberID, serverIndex, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.leaveServer(memberID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            //might want to make new type, using delete to go back one
+            dispatch({type: 'DELETE_SERVER', serverIndex: serverIndex, msg: 'Left Server.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
 export const addPage = (pageData, serverID, token) => {
     return async (dispatch) => {
         try {

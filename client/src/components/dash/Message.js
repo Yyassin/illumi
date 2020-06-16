@@ -61,11 +61,11 @@ class Message extends React.Component {
         if(!this.props.message.chain) {
             return (
                 <div className="meta-data">
-                    <div className={"message-name " + this.role}
+                    <div onClick={() => this.setState({visible: true})} className={"message-name " + this.role}
                     style={{color: this.state.roleColors[this.props.message.member.role]}}>
                         {this.props.message.member.user.name}
                     </div>
-                    <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
+                    <div className="message-time">{this.props.message.date.split(" ")[1] + ' ' + this.props.message.date.split(" ")[2]}</div>
                 </div>
             )
         }
@@ -74,7 +74,7 @@ class Message extends React.Component {
     renderDate = () => {
         if (this.props.message.chain){
             return (
-                <div className="message-time">{this.props.message.date.split(" ")[1]}</div>
+                <div className="message-time">{this.props.message.date.split(" ")[1] + ' ' + this.props.message.date.split(" ")[2]}</div>
             )
         }
     }
@@ -93,10 +93,10 @@ class Message extends React.Component {
 
         for(let i=0; i<3; i++) {
             if(!words[i]) break;
-            msgExcerpt += `${words[i]} `
+            msgExcerpt += ` ${words[i]}`
         }
 
-        msgExcerpt += '...'
+        (words.length > 3) ? msgExcerpt += '...' : msgExcerpt += '';
 
         return (
             <Menu>
@@ -159,7 +159,7 @@ class Message extends React.Component {
                             Update
                         </Button>
                     :
-                        <Button htmlType="submit">
+                        <Button htmlType="submit" onClick={() => this.setState({visible: false})}>
                             Close
                         </Button>
                     }

@@ -33,11 +33,26 @@ exports.addMessage = async (msgInput) => {
 
         const today = new Date()
                 // 2020-06-02 14:14
-        const date = today.getFullYear() + '-' 
-                    + (today.getMonth()+1) + '-' 
-                    + today.getDate() + ' ' 
-                    + today.getHours() + ':'
-                    + today.getMinutes() 
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December']
+
+        let minutes = today.getMinutes()
+        minutes < 10 ? minutes = '0' + minutes : minutes;
+
+        let hours = today.getHours()
+        let am_pm = 'AM'
+
+        if (hours > 12) {
+            am_pm = 'PM'
+            hours -= 12
+        }
+
+        const date = (months[today.getMonth()]) + '-' 
+                    + today.getDate() + '-' 
+                    + today.getFullYear() + ' '
+                    + hours + ':'
+                    + minutes + ' ' 
+                    + am_pm
 
         let message = new Message({
             roomID: msgInput.roomID,

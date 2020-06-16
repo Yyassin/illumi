@@ -8,7 +8,7 @@ import {signOut} from "../../store/actions/authActions";
 import {
   init, clearSession, toggleLoading, 
   selectServer, selectPage, 
-  addServer, editServer, deleteServer, 
+  addServer, editServer, deleteServer, leaveServer,
   addPage, editPage, deletePage,
   editProfile, deleteMessage,
   editMember, addInvite, acceptInvite
@@ -47,6 +47,10 @@ class MainLayout extends React.Component {
 
   deleteServer = async(serverID, serverIndex) => {
     this.props.deleteServer(serverID, serverIndex, this.props.accessToken)
+  }
+
+  leaveServer = async(memberID, serverIndex) => {
+    this.props.leaveServer(memberID, serverIndex, this.props.accessToken)
   }
 
   // page CRUD
@@ -98,6 +102,7 @@ class MainLayout extends React.Component {
                 addServer={this.addServer}
                 deleteServer={this.deleteServer}
                 editServer={this.editServer}
+                leaveServer={this.leaveServer}
 
                 fetchData = {this.fetchData}
                 />
@@ -177,6 +182,8 @@ const mapDispatchToProps = (dispatch) => {
         addInvite: (inviteData, senderID, token) => dispatch(addInvite(inviteData, senderID, token)),
         
         acceptInvite: (inviteID, token) => dispatch(acceptInvite(inviteID, token)),
+
+        leaveServer: (memberID, serverIndex, token) => dispatch(leaveServer(memberID, serverIndex, token)),
 
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
         editServer: (serverData, serverID, token) => dispatch(editServer(serverData, serverID, token)),

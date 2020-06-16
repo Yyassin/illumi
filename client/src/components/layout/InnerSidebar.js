@@ -106,10 +106,7 @@ class InnerSidebar extends React.Component {
         return (
             <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
                 <div className="sidebar-header">
-                        <p className="sidebar-header-content">
-                        <p className="server-name">{this.props.server.name}</p>
-                        </p>
-                        
+                        <p className="server-name">{this.props.server.name}</p>                
                 </div>
 
                 <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>

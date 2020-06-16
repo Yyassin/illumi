@@ -1,5 +1,6 @@
 import React from 'react';
 import PureCanvas from './PureCanvas'
+import Particles from 'react-particles-js'
 
 class CanvasBlob extends React.Component {
 
@@ -68,10 +69,61 @@ class CanvasBlob extends React.Component {
       }
     
       render() {
-        return <PureCanvas 
+        return (
+          <div>
+            <div className="cover"></div>
+            <Particles
+              params={{
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": {
+                            "enable": false
+                        }
+                    },
+                    "color": {
+                      "value": ["#ffffff","#000000","#7289da","#99aab5","#2c2f33"]
+                    },
+                    "size": {
+                        "value": 5,
+                        "random": true,
+                        "anim": {
+                            "speed": 7,
+                            "size_min": 0.5
+                        }
+                    },
+                    "line_linked": {
+                        "enable": false
+                    },
+                    "move": {
+                        "random": true,
+                        "speed": 0.5,
+                        "direction": "top",
+                        "out_mode": "out"
+                    }
+                },
+                interactivity: {
+                  detect_on: "window",
+                  events: {
+                    onHover: {
+                      mode: 'remove',
+                      enable: true,
+                      parallax: {
+                        enable: true,
+                        smooth: 1000
+                      }
+                    },
+                    resize: false
+                  }
+                }
+              }
+	          } />
+            <PureCanvas 
             height={500}
             width={500}
-            contextRef={this.saveContext} />;
+            contextRef={this.saveContext} />
+          </div>
+        )
       }
     }
 

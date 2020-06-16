@@ -110,6 +110,16 @@ const queries = {
         )
     },
 
+    leaveServer: (memberID) => {
+        return(
+            `
+            mutation{
+                leaveServer(memberID: "${memberID}")
+            }
+            `
+        )
+    },
+
     addPage: (pageData, serverID) => {
         const { title, image, video, tag, content } = pageData
         return(
