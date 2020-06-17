@@ -31,7 +31,6 @@ class InnerHeader extends React.Component {
 
     deletePage = async(e) => {
         await this.props.deletePage(this.props.page.id)
-        this.props.fetchData()
     }
 
     // modal controller
@@ -70,8 +69,6 @@ class InnerHeader extends React.Component {
             await this.props.editPage(formData, this.props.page.id)
             console.log('edit page')
         }
-            
-        this.props.fetchData()
 
         this.setState({
             title: '',

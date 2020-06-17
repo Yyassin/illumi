@@ -49,12 +49,10 @@ class Sidebar extends React.Component {
     // context menu methods
     menuDeleteServer = async() => {
         await this.props.deleteServer(this.state.server.id, this.state.serverIndex)
-        this.props.fetchData()
     }
 
     menuLeaveServer = async() => {
         await this.props.leaveServer(this.state.member.id, this.state.serverIndex)
-        this.props.fetchData()
     }
 
     createForm = async () => {
@@ -96,8 +94,6 @@ class Sidebar extends React.Component {
         } else if(JSON.stringify(formData) !== JSON.stringify(initialFields)) {
             await this.props.editServer(formData, this.state.server.id)
         }
-            
-        this.props.fetchData()
 
         this.setState({
             showModal: false,

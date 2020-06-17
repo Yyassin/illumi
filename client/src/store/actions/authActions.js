@@ -34,14 +34,6 @@ export const authenticate = (user, type) => {
 
 export const signOut = (token) => {
     return async (dispatch, getState) => {
-        try {
-            const query = queries.signout()
-            await axios.post("/api", { query }, {headers:{'token': token} })
-
-            dispatch({type: 'SIGN_OUT'})
-        } catch (error) {
-            console.log(error.response)
-            dispatch({type: 'SIGN_OUT'})
-        }
+        dispatch({type: 'SIGN_OUT'})
     }
 }

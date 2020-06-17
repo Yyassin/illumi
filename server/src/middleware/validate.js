@@ -1,5 +1,6 @@
 const keys = require("../../config/keys")
 const jwt = require("jsonwebtoken")
+const server = require('../chat/socket')
 
 // origin can make calls without token
 const ORIGIN = 'http://localhost:5000'
@@ -25,7 +26,12 @@ module.exports = async (req, res, next) => {
         const token = createToken(decoded.user);
 
         res.append('token', token)
-        next()        
+
+        next()
+
+        if(query.includes('mutation')) {
+            server.emit("refresh")
+        }
     } catch(error) {
         console.log(error)
         return res.status(400).json({message: error.message})    

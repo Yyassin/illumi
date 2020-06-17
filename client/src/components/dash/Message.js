@@ -18,13 +18,11 @@ class Message extends React.Component {
 
     deleteMessage = async () => {
         await this.props.deleteMessage(this.props.message.id)
-        this.props.fetchData()
     }
 
     updateRole = async () => {
         const formData = this.formRef.current.getFieldsValue()
         await this.props.editMember(formData, this.props.message.member.id)
-        this.props.fetchData()
 
         this.setState({visible: false})
     }

@@ -15,7 +15,7 @@ class Page extends React.Component {
                 signout={this.props.signout}
                 editMember={this.props.editMember}
                 deleteMessage={this.props.deleteMessage}
-                fetchData = {this.props.fetchData}/>
+                />
         )
     }
 }

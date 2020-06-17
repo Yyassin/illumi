@@ -36,7 +36,7 @@ module.exports = new GraphQLObjectType({
                 email: { type: GraphQLString},
                 password: { type: GraphQLString}
             },
-            resolve(parent, args) {
+            resolve(parent, args) {                
                 return auth.signin(args)
             }
         },

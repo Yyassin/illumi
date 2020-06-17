@@ -10,7 +10,14 @@ console.log(`Socket listening on port ${chat_port}`);
 
 server.on("connection", socket => {
     const { id } = socket.client;
-    //console.log('user connected: ' + id)
+    console.log('user connected: ' + id)
+
+    socket.on('forceDisconnect', () => {
+        console.log('dis')
+        socket.client.close();
+        socket.client.close(true);
+    })
+    
 
     socket.on("chat message", async (msgInput, idMes) => {
         const msg = await controller.addMessage(msgInput)
@@ -23,4 +30,7 @@ server.on("connection", socket => {
             server.to(id).emit('invalid token')
         }
     })
+
 })
+
+module.exports = server;

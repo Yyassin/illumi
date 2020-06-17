@@ -15,6 +15,7 @@ import {
 } from "../../store/actions/coreActions";
 
 import {connect} from "react-redux";
+import io from 'socket.io-client';
 
 //import InnerRouter from '../../router/InnerRouter
 import Page from '../dash/Page'
@@ -23,16 +24,52 @@ import InnerSidebar from './InnerSidebar';
 import InnerHeader from './InnerHeader';
 import Titlebar from '../Titlebar/Titlebar'
 
+/*
+
+#1: socket emit during every dispatch
+
+#2: socket emit called from backend after every call to server
+
+*/
+
 const { Content } = Layout;
 
 class MainLayout extends React.Component {
+
+  socket;
+
+  componentDidMount = () => {
+    this.socket = io.connect("http://localhost:4000");
+    this.initSocket();
+  }
+
+  componentWillUnmount = () => {
+    
+    this.socket.emit('forceDisconnect')
+    this.socket.close();
+  
+  }
+
+  initSocket = () => {
+    this.socket.on('invalid token', () => {
+        this.endSession();                    
+    })
+
+    this.socket.on("refresh", () => {
+      this.fetchData()
+    })
+  }
 
   fetchData = async() => {
     this.props.init(this.props.uid, this.props.accessToken);
   }
 
-  endSession = async() => {    
-    await this.props.signOut()
+  endSession = async() => {
+    console.log('end session')
+    this.socket.emit('forceDisconnect')
+
+    await this.props.signOut()  
+    console.log(this.props.uid)
     this.props.clearSession()
   }
 
@@ -103,8 +140,6 @@ class MainLayout extends React.Component {
                 deleteServer={this.deleteServer}
                 editServer={this.editServer}
                 leaveServer={this.leaveServer}
-
-                fetchData = {this.fetchData}
                 />
 
               <InnerSidebar 
@@ -114,7 +149,6 @@ class MainLayout extends React.Component {
                 collapsed={false}
                 signout={this.endSession}
                 addPage={this.addPage}
-                fetchData = {this.fetchData}
                 editProfile = {this.editProfile}
                 addInvite={this.addInvite}
                 acceptInvite={this.acceptInvite}
@@ -124,7 +158,6 @@ class MainLayout extends React.Component {
                   <InnerHeader 
                     server={this.props.data.user.members[this.props.serverIndex].server}
                     page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
-                    fetchData = {this.fetchData}
                     addPage={this.addPage}
                     editPage={this.editPage}
                     deletePage={this.deletePage}
@@ -140,7 +173,6 @@ class MainLayout extends React.Component {
                         signout={this.endSession}
                         deleteMessage={this.deleteMessage}
                         editMember={this.editMember}
-                        fetchData = {this.fetchData}
                         />
                   </Content>
 

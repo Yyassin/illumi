@@ -10,11 +10,13 @@ import {
     SendOutlined,
 } from '@ant-design/icons';
 
-const socket = io.connect("http://localhost:4000")
 const ipcRenderer = window.require('electron').ipcRenderer
 const path = require('path');
 
 class Chat extends React.Component {
+
+    socket;
+
     state = {
         messages: [],
         sortedMessages: {},
@@ -23,7 +25,8 @@ class Chat extends React.Component {
     scrollbar = React.createRef()
     inputField = React.createRef()
 
-    componentDidMount = () => {         
+    componentDidMount = () => {   
+        this.socket = io.connect("http://localhost:4000");      
         this.handleUpdate();
         this.initSocket();
     }
@@ -34,12 +37,13 @@ class Chat extends React.Component {
         }
     }
 
-    initSocket = () => {
-        socket.on('invalid token', () => {
-            this.props.signout();            
-        })
+    componentWillUnmount = () => {
+        this.socket.emit('forceDisconnect')
+        this.socket.close();
+    }
 
-        socket.on("chat message", (msg) => {
+    initSocket = () => {
+        this.socket.on("chat message", (msg) => {
             if (msg.roomID == this.props.page.rooms[0].id) {
                 let messages = this.state.messages;
                 messages.push(msg)
@@ -55,8 +59,10 @@ class Chat extends React.Component {
             }
         })
 
-        socket.on("chat noti", (msg) => {
+        this.socket.on("chat noti", (msg) => {
             if(this.props.uid !== msg.member.user.id) {
+                console.log('props uid: ' + this.props.uid)
+                console.log('msg uid: ' + msg.member.user.id)
                 this.notificationHandler(msg)
             }
         })
@@ -130,8 +136,7 @@ class Chat extends React.Component {
 
     onSend = (e) => {
         if(e) e.preventDefault()
-
-        socket.emit("chat message", {
+        this.socket.emit("chat message", {
             content: this.inputField.current.value,
             userID: this.props.uid,
             roomID: this.props.page.rooms[0].id,
@@ -168,7 +173,6 @@ class Chat extends React.Component {
                                                     message={message}
                                                     editMember={this.props.editMember}
                                                     deleteMessage={this.props.deleteMessage}
-                                                    fetchData = {this.props.fetchData}
                                                     />
                                             </li>
                                         )

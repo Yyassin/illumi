@@ -33,7 +33,6 @@ class NavMenu extends React.Component {
         if(JSON.stringify(formData) !== JSON.stringify(this.state.initFields)) {
             console.log("editing user")
             await this.props.editProfile(formData)
-            this.props.fetchData()
         }
         
         this.setState({
@@ -100,7 +99,6 @@ class NavMenu extends React.Component {
                     title="Manage Invitations"
                     addInvite={this.props.addInvite}
                     acceptInvite={this.props.acceptInvite}
-                    fetchData={this.props.fetchData}
                     onClose={this.drawerClose}
                     visible={this.state.showDrawer}
                 />
