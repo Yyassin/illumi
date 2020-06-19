@@ -9,6 +9,7 @@ const Room = require('../models/room.model')
 const Page = require('../models/page.model')
 const Message = require('../models/message.model')
 const Invite = require('../models/invite.model')
+const Event = require('../models/event.model')
 
 // resolvers
 const auth = require('./resolvers/auth.resolver')
@@ -168,7 +169,8 @@ module.exports = new GraphQLObjectType({
             },
             async resolve(parent, args) {
                 let server = await Server.findById(args.serverID)
-                let pages = await Page.find({serverID: args.serverID})                
+                let pages = await Page.find({serverID: args.serverID})
+                let events = await Event.find({serverID: args.serverID})                 
               
                 pages.map( async (page) => {
                     
@@ -180,6 +182,10 @@ module.exports = new GraphQLObjectType({
                     }
                     
                     await Page.findByIdAndDelete(page.id)
+                })
+
+                events.map (async (event) => {
+                    await Event.findByIdAndDelete(event.id);
                 })
 
                 await Member.deleteMany({serverID: args.serverID})
@@ -206,7 +212,31 @@ module.exports = new GraphQLObjectType({
                 let members = await Member.find({serverID: server.id})
                 
                 if(members.length < 1) {
-                    await server.delete()
+                    console.log(members.length)
+                    //modularize
+                    let pages = await Page.find({serverID: member.serverID})
+                    let events = await Event.find({serverID: member.serverID})                 
+                
+                    pages.map( async (page) => {
+                        
+                        let room = await Room.find({pageID: page.id})
+
+                        if(room[0]) {
+                            await Message.deleteMany({roomID: room[0].id})
+                            await Room.findByIdAndDelete(room[0].id)
+                        }
+                        
+                        await Page.findByIdAndDelete(page.id)
+                    })
+
+                    events.map (async (event) => {
+                        await Event.findByIdAndDelete(event.id);
+                    })
+
+                    await Member.deleteMany({serverID: member.serverID})
+                    await Server.findByIdAndDelete(member.serverID)
+                    
+                    //need to do mutation here?
                     message += " Successfully deleted server."
                 }
                 
@@ -277,6 +307,62 @@ module.exports = new GraphQLObjectType({
                 await Page.findByIdAndDelete(args.pageID)
 
                 return "Successfully deleted page";
+            }
+        },
+
+        addEvent: {
+            type: types.EventType,
+            args: {
+                name: { type: GraphQLString },
+                description: { type: GraphQLString },
+                location: { type: GraphQLString },
+                time: { type: GraphQLString },
+                serverID: { type: GraphQLString }
+            },
+            resolve(parent, args) {
+                let event = new Event({
+                    name: args.name,
+                    description: args.description,
+                    location: args.location,
+                    time: args.time,
+                    serverID : args.serverID,
+                })
+
+                return event.save();
+            }
+        },
+
+        editEvent: {
+            type: types.EventType,
+            args: {
+                name: { type: GraphQLString },
+                description: { type: GraphQLString },
+                location: { type: GraphQLString },
+                time: { type: GraphQLString },
+                eventID: { type: GraphQLString }
+            },
+            async resolve(parent, args) {
+                const event = await Event.findById(args.eventID)
+                if(!event) return null;
+                
+                event.name = args.name
+                event.description = args.description
+                event.location = args.location
+                event.time = args.time
+
+                return event.save()
+            }
+        },
+
+        deleteEvent: {
+            type: GraphQLString,
+            args: {
+                eventID: { type: GraphQLString },
+            },
+            async resolve(parent, args) {                
+                await Event.findByIdAndDelete(args.eventID)
+
+                return "Successfully deleted event";
             }
         },
 

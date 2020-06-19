@@ -12,6 +12,7 @@ exports.createWindow = () => {
     splash = new BrowserWindow({
       width: 300, 
       height: 400, 
+      icon: path.join(__dirname, '../illumi-logo.png'),
       frame: false,  
       transparent: true,
       title: 'illumi',
@@ -32,6 +33,7 @@ exports.createWindow = () => {
     mainWindow = new BrowserWindow({
       width: 900, 
       height: 680, 
+      icon: path.join(__dirname, '../illumi-logo.png'),
       show: false,
       frame: false,
       title: 'illumi',
