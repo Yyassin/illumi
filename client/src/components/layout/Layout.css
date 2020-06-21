@@ -104,7 +104,7 @@
 }
 
 .menu-icon-tray span:hover {
-    background-color: var(--selected);
+    background-color: rgb(44, 44, 44);
 }
 
 .page-settings-icon{

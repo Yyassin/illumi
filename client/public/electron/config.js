@@ -61,6 +61,10 @@ exports.createWindow = () => {
         mainWindow.webContents.openDevTools({mode: 'detach'})
     );
 
+    globalShortcut.register('Alt+2', () =>
+        console.log(mainWindow.webContents.getURL())
+    );
+
     mainWindow.on('maximize', () => {
         mainWindow.webContents.send('maximized')
     })

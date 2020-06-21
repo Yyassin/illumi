@@ -27,6 +27,7 @@ const queries = {
                             id
                             name
                             thumbnail
+                            outline
                             description
                             pages {
                                 id

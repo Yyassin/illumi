@@ -197,3 +197,106 @@ li {
 .message-send-btn:hover a {
     transform: scale(1.2);
 }
+
+/*--------------------- 
+ServerHome 
+-----------------------*/
+
+.main {
+    height: 100%;
+}
+
+.home-content {
+    font-family: 'Whitney', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--chat-container-bg);
+    height: 100%;
+}
+
+.home-content h1.server-title {
+    color: var(--message-color);
+    font-size: 35px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.home-content .greeting {
+    padding: 0 100px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.home-content .description {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--message-color);
+    text-align: center;
+    padding-top: 15px;
+}
+
+.home-content .outline {
+    text-align: center;
+    margin-top: 20px;
+    backdrop-filter: brightness(0.70);
+    color: var(--message-color);
+    height: 35px;
+    width: 120px;
+    line-height: 35px;
+    border-radius: 5px;
+    transition: backdrop-filter 100ms ease-in-out;
+}
+
+.home-content .outline:hover {
+    backdrop-filter: brightness(1.2);
+}
+
+.home-content .link:hover {
+    cursor: pointer;
+}
+
+.home-content .event {
+    padding-top: 30px;
+    font-size: 25px;
+    font-weight: 650;
+}
+
+.home-content .event-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content .event-container .add-event {
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    top: 19px;
+    left: 20px;
+    backdrop-filter: brightness(0.70) ;
+    color: var(--text-highlight);
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    transition: background-color 400ms ease-in-out, color 200ms ease-in-out;
+}
+
+.home-content .event-container .add-event:hover {
+    background-color: var(--text-highlight);
+    color: #fff;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 2px;  /* Remove scrollbar space */
+    border-radius: 1px;
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #444444;
+}
