@@ -316,7 +316,8 @@ module.exports = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
                 location: { type: GraphQLString },
-                time: { type: GraphQLString },
+                start: { type: GraphQLString },
+                end: { type: GraphQLString },
                 serverID: { type: GraphQLString }
             },
             resolve(parent, args) {
@@ -324,7 +325,8 @@ module.exports = new GraphQLObjectType({
                     name: args.name,
                     description: args.description,
                     location: args.location,
-                    time: args.time,
+                    start: args.start,
+                    end: args.end,
                     serverID : args.serverID,
                 })
 
@@ -338,7 +340,8 @@ module.exports = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
                 location: { type: GraphQLString },
-                time: { type: GraphQLString },
+                start: { type: GraphQLString },
+                end: { type: GraphQLString },
                 eventID: { type: GraphQLString }
             },
             async resolve(parent, args) {
@@ -348,7 +351,8 @@ module.exports = new GraphQLObjectType({
                 event.name = args.name
                 event.description = args.description
                 event.location = args.location
-                event.time = args.time
+                event.start = args.start
+                event.end = args.end
 
                 return event.save()
             }

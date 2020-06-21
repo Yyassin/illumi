@@ -29,6 +29,14 @@ const queries = {
                             thumbnail
                             outline
                             description
+                            events {
+                                id
+                                name
+                                description
+                                location
+                                start
+                                end
+                            }
                             pages {
                                 id
                                 title
@@ -164,6 +172,54 @@ const queries = {
             `
             mutation{
                 deletePage(pageID: "${pageID}")
+            }
+            `
+        )
+    },
+
+    addEvent: (eventData, serverID) => {
+        const { name, description, location, start, end } = eventData
+        return(
+            `
+            mutation{addEvent(
+                name:"${name}",
+                description: "${description}",
+                location:"${location}",
+                start:"${start}",
+                end:"${end}",
+                serverID:"${serverID}")
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
+    editEvent: (eventData, eventID) => {
+        const { name, description, location, start, end } = eventData
+        return(
+            `
+            mutation{addEvent(
+                name:"${name}",
+                description: "${description}",
+                location:"${location}",
+                start:"${start}",
+                end:"${end}",
+                eventID:"${eventID}")
+                {
+                    id
+                }
+            }
+            `
+        )
+    },
+
+    deleteEvent: (eventID) => {
+        return(
+            `
+            mutation{
+                deleteEvent(eventID: "${eventID}")
             }
             `
         )

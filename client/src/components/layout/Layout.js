@@ -10,6 +10,7 @@ import {
   selectServer, selectPage, 
   addServer, editServer, deleteServer, leaveServer,
   addPage, editPage, deletePage,
+  addEvent, editEvent, deleteEvent,
   editProfile, deleteMessage,
   editMember, addInvite, acceptInvite
 } from "../../store/actions/coreActions";
@@ -103,6 +104,19 @@ class MainLayout extends React.Component {
     this.props.deletePage(pageID, this.props.accessToken)
   }
 
+  //event CRUD
+  addEvent = async(eventData) => {
+    this.props.addEvent(eventData, this.props.data.user.members[this.props.serverIndex].server.id, this.props.accessToken)
+  }
+
+  editEvent = async(eventData, eventID) => {
+    this.props.editEvent(eventData, eventID, this.props.accessToken)
+  }
+
+  deleteEvent = async(eventID) => {
+    this.props.deleteEvent(eventID, this.props.accessToken)
+  }
+
   editProfile = async(profileData) => {
     this.props.editProfile(profileData, this.props.uid, this.props.accessToken)
   }  
@@ -171,6 +185,7 @@ class MainLayout extends React.Component {
                         member={this.props.data.user.members[this.props.serverIndex]}
                         token={this.props.accessToken}
                         signout={this.endSession}
+                        addEvent={this.addEvent}
                         deleteMessage={this.deleteMessage}
                         editMember={this.editMember}
                         />
@@ -211,6 +226,7 @@ const mapDispatchToProps = (dispatch) => {
 
         addServer: (serverData, uid, token) => dispatch(addServer(serverData, uid, token)),
         addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
+        addEvent: (eventData, serverID, token) => dispatch(addEvent(eventData, serverID, token)),
         addInvite: (inviteData, senderID, token) => dispatch(addInvite(inviteData, senderID, token)),
         
         acceptInvite: (inviteID, token) => dispatch(acceptInvite(inviteID, token)),
@@ -220,10 +236,12 @@ const mapDispatchToProps = (dispatch) => {
         editProfile: (profileData, uid, token) => dispatch(editProfile(profileData, uid, token)),
         editServer: (serverData, serverID, token) => dispatch(editServer(serverData, serverID, token)),
         editPage: (pageData, pageID, token) => dispatch(editPage(pageData, pageID, token)),
+        editEvent: (eventData, eventID, token) => dispatch(editEvent(eventData, eventID, token)),
         editMember: (memberData, memberID, token) => dispatch(editMember(memberData, memberID, token)),
 
         deleteServer: (serverID, serverIndex, token) => dispatch(deleteServer(serverID, serverIndex, token)),
         deletePage: (pageID, token) => dispatch(deletePage(pageID, token)),
+        deleteEvent: (eventID, token) => dispatch(deleteEvent(eventID, token)),
         deleteMessage: (messageID, token) => dispatch(deleteMessage(messageID, token))
     }
 }

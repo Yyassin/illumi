@@ -89,6 +89,13 @@ const ServerType = new GraphQLObjectType({
             resolve(parent, args) {
                 return Page.find({ serverID: parent._id })
             }
+        },
+
+        events: {
+            type: new GraphQLList(EventType),
+            resolve(parent, args) {
+                return Event.find({ serverID: parent._id })
+            }
         }
     })
 })
@@ -204,15 +211,8 @@ const EventType = new GraphQLObjectType({
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         location: { type: GraphQLString },
-        time: { type: GraphQLString },
-
-        server: {
-            type: ServerType,
-            resolve(parent, args) {
-                return Server.findById(parent.serverID)
-            }
-        },
-
+        start: { type: GraphQLString },
+        end: { type: GraphQLString },
     })
 })
 

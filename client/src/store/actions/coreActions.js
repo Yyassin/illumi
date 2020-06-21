@@ -185,6 +185,63 @@ export const deletePage = (pageID, token) => {
     }
 }
 
+export const addEvent = (eventData, serverID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.addEvent(eventData, serverID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Created event.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
+export const editEvent = (eventData, eventID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.editEvent(eventData, eventID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Edited event.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
+export const deleteEvent = (eventID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.deleteEvent(eventID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Deleted event.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
 export const editProfile = (profileData, uid, token) => {
     return async (dispatch) => {
         try {
