@@ -336,3 +336,22 @@ export const acceptInvite = (inviteID, token) => {
         }
     }
 }
+
+export const declineInvite = (inviteID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.declineInvite(inviteID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Declined invite.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}

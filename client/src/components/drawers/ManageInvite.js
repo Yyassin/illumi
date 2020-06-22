@@ -105,23 +105,22 @@ class ManageInvite extends React.Component {
 
     acceptInvites = async () => {
         const rowData = this.state.selectedRows          
-        let acceptInvites = [];
 
         if(!rowData || rowData.length === 0) return
 
         rowData.map((invite, index) => {
-            console.log(invite.id)
-            //acceptInvites.push(this.props.acceptInvite(invite.id))
-
-            var promise = new Promise( async(resolve, reject) => {
-                resolve (await this.props.acceptInvite(invite.id))
-            });
-            acceptInvites.push(promise)
+            this.props.acceptInvite(invite.id)
         })
+    }
 
-        await Promise.all(acceptInvites)
+    declineInvites = async () => {
+        const rowData = this.state.selectedRows          
 
-        this.props.fetchData()
+        if(!rowData || rowData.length === 0) return
+
+        rowData.map((invite, index) => {
+            this.props.declineInvite(invite.id)
+        })
     }
 
     getSenderID = (invite) => {
@@ -239,6 +238,9 @@ class ManageInvite extends React.Component {
                 />
                 <Button type="primary" onClick={this.acceptInvites}>
                     Accept Invites
+                </Button>
+                <Button onClick={this.declineInvites}>
+                    Decline Invites
                 </Button>
             </div>
         )

@@ -135,6 +135,7 @@ class InnerSidebar extends React.Component {
                     signout={this.props.signout}
                     addInvite={this.props.addInvite}
                     acceptInvite={this.props.acceptInvite}
+                    declineInvite={this.props.declineInvite}
                     editProfile = {this.props.editProfile}
                     />                
             </Sider>

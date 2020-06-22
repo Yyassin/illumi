@@ -310,6 +310,17 @@ const queries = {
             `
         )
     },
+
+    declineInvite: (inviteID) => {
+        return(
+            `
+            mutation{declineInvite(
+                inviteID:"${inviteID}",
+                )
+            }
+            `
+        )
+    },
 }
 
 export default queries;

@@ -10,6 +10,7 @@ class Profile extends React.Component {
                 logout = {this.props.signout}  
                 addInvite={this.props.addInvite}
                 acceptInvite={this.props.acceptInvite}
+                declineInvite={this.props.declineInvite}
                 editProfile={this.props.editProfile}                    
             />
         )
