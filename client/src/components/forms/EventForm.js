@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Select } from 'antd';
+import { Row, Col, Modal, Form, Input, Select, DatePicker, TimePicker } from 'antd';
 
 class EventForm extends React.Component {
     
@@ -42,6 +42,14 @@ class EventForm extends React.Component {
         }
     }
 
+    onModalChange = () => {
+        // if(this.props.formRef.current) {
+        //     console.log(this.props.formRef.current.getFieldsValue())
+        //     console.log(this.props.formRef.current.getFieldsValue()
+        //         .start.toString())
+        // }
+    }
+
     render() {
         return (
             <div className="event-form">
@@ -67,36 +75,73 @@ class EventForm extends React.Component {
                             name="name"
                             rules={[{ required: true, message: 'Please input event name.'}]}
                         >
-                            <Input id='event' onChange={this.props.onModalChange} placeholder="Event Name" />
+                            <Input id='event' onChange={this.onModalChange} placeholder="Event Name" />
                         </Form.Item>
 
                         <Form.Item
                             name="description"
                             extra="Include an event description."
                         >
-                            <Input id='description' onChange={this.props.onModalChange} placeholder="Description" />
+                            <Input id='description' onChange={this.onModalChange} placeholder="Description" />
                         </Form.Item>
 
                         <Form.Item
                             name="location"
                             extra="Include a location for the event"
                         >
-                            <Input id='location' onChange={this.props.onModalChange} placeholder="Location" />
+                            <Input id='location' onChange={this.onModalChange} placeholder="Location" />
                         </Form.Item>
 
-                        <Form.Item
-                            name="start"
-                            extra="Enter a start time."
-                        >
-                            <Input id='start' onChange={this.props.onModalChange} placeholder="Start time" />
-                        </Form.Item>
+                        <Row>
+                            <Col span={12}>
+                                <Form.Item
+                                    name="startDate"
+                                    extra="Enter a start date."
+                                    rules={[{ required: true, message: 'Please input event start date.'}]}
 
-                        <Form.Item
-                            name="end"
-                            extra="Enter an ending time."
-                        >
-                            <Input id='end' onChange={this.props.onModalChange} placeholder="End time" />
-                        </Form.Item>
+                                >
+                                    {/* <Input id='start' onChange={this.props.onModalChange} placeholder="Start time" /> */}
+                                    <DatePicker style={{width: '100%'}}/>
+                                </Form.Item>
+                            </Col>
+
+                            <Col span={12}>
+                                <Form.Item
+                                    name="startTime"
+                                    extra="Enter a start time."
+                                    style={{'padding': '0 0 0 10px'}}
+                                    rules={[{ required: true, message: 'Please input event start time'}]}
+
+                                >
+                                    {/* <Input id='start' onChange={this.props.onModalChange} placeholder="Start time" /> */}
+                                    <TimePicker style={{width: '100%'}} format='HH:mm' />
+                                </Form.Item>
+                            </Col>
+                        </Row>   
+
+                        <Row>
+                            <Col span={12}>
+                                <Form.Item
+                                    name="endDate"
+                                    extra="Enter a end date"
+                                    rules={[{ required: true, message: 'Please input event end date.'}]}
+                                >
+                                    {/* <Input id='start' onChange={this.props.onModalChange} placeholder="Start time" /> */}
+                                    <DatePicker/>
+                                </Form.Item>
+                            </Col>
+
+                            <Col span={12}>
+                                <Form.Item
+                                name="endTime"
+                                extra="Enter a end time."
+                                rules={[{ required: true, message: 'Please input event end time.'}]}
+                                >
+                                    {/* <Input id='start' onChange={this.props.onModalChange} placeholder="Start time" /> */}
+                                    <TimePicker format='HH:mm'/>
+                                </Form.Item>
+                            </Col>
+                        </Row>                         
                     </Form>                    
                 </Modal>
             </div>

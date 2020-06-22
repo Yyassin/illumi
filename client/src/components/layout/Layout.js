@@ -18,7 +18,7 @@ import {
 import {connect} from "react-redux";
 import io from 'socket.io-client';
 
-//import InnerRouter from '../../router/InnerRouter
+import InnerRouter from '../../router/InnerRouter'
 import Page from '../dash/Page'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
@@ -178,7 +178,7 @@ class MainLayout extends React.Component {
                     />
 
                   <Content className="main-content">                  
-                      <Page 
+                      <InnerRouter 
                         page={this.props.data.user.members[this.props.serverIndex].server.pages[this.props.pageIndex]}
                         server={this.props.data.user.members[this.props.serverIndex].server}
                         uid={this.props.uid}

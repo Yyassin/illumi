@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink, Redirect} from 'react-router-dom'
 import {Layout, Menu, Dropdown} from "antd";
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
@@ -22,6 +23,7 @@ class InnerSidebar extends React.Component {
     state = {
         oldPagesData: {},
         pages: {}, //sorted
+        pageToggle: true,
     }
 
     componentDidMount = () => {
@@ -68,7 +70,8 @@ class InnerSidebar extends React.Component {
             }
         })
 
-        this.props.selectPage(key)        
+        this.props.selectPage(key)
+        this.setState({pageToggle: true})        
     }
     
     renderPage = (tag) => {
@@ -77,7 +80,8 @@ class InnerSidebar extends React.Component {
             this.state.pages[tag].map((page, index) => {
                 return (
                     <Menu.Item className="page-menu-item" key={page.title} onClick={this.selectPage} icon={<TeamOutlined />}>                      
-                        {page.title}     
+                        {page.title}  
+                        <NavLink className="navlink" to='/home/'/>     
                     </Menu.Item>
                 )
             })
@@ -103,6 +107,11 @@ class InnerSidebar extends React.Component {
     }
 
     render() {
+        if(this.state.pageToggle) {
+            this.setState({pageToggle: false})
+            return <Redirect to='/home'/>
+        }
+
         return (
             <Sider className="inner-sidebar" trigger={null} collapsible collapsed={this.props.collapsed} onCollapse={this.onCollapse}>
                 <div className="sidebar-header">
@@ -111,7 +120,10 @@ class InnerSidebar extends React.Component {
 
                 <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>
                     <Menu className="inner-inner-menu" defaultSelectedKeys={['0']} mode="inline">
-                        
+                        <Menu.Item key='w' icon={<TeamOutlined />}>                      
+                            Welcome
+                            <NavLink to='/home/serverhome/' />  
+                        </Menu.Item>
                         {this.renderMenu()}
 
                     </Menu>

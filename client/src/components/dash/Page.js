@@ -29,7 +29,8 @@ class Page extends React.Component {
     }
     
     render() {
-        // return(
+
+        return (
         //     <ServerHome
         //         page={this.props.page}
         //         server={this.props.server}
@@ -42,8 +43,6 @@ class Page extends React.Component {
         //         deleteMessage={this.props.deleteMessage}
         //         />
         // )
-
-        return (
             <div className="page">
                 <div className="page-meta">
                     <p className="page-banner"

@@ -8,7 +8,7 @@ const BaseRouter = (props) => (
     <Switch>
         <Route exact path="/" component={RegisterLayout}></Route>
         <Route exact path="/signin" component={RegisterLayout}></Route>
-        <Route exact path="/home" component={MainLayout}></Route>
+        <Route path="/home" component={MainLayout}></Route>
         <Route exact path="/welcome" component={WelcomeLayout}></Route>
     </Switch>
 )

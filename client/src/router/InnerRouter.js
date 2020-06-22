@@ -1,13 +1,35 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Chat from '../components/dash/Chat'
-import Home2 from '../components/dash/Home2'
+import Page from '../components/dash/Page'
+import ServerHome from '../components/dash/ServerHome'
 
-const InnerRouter = () => (
+const InnerRouter = (props) => (
     <Switch>
-        <Route exact path="/home/" component={Chat}></Route>
-        <Route exact path="/home/2/" component={Home2}></Route>
-        <Route exact path="/home/3/" component={Chat}></Route>
+        <Route exact path="/home/" component={() =>
+            <Page
+                page={props.page}
+                server={props.server}
+                uid={props.uid}
+                member={props.member}
+                token={props.token}
+                signout={props.endSession}
+                addEvent={props.addEvent}
+                deleteMessage={props.deleteMessage}
+                editMember={props.editMember}
+            />
+        }></Route>
+        <Route path="/home/serverhome/" component={() => 
+            <ServerHome
+                page={props.page}
+                server={props.server}
+                uid={props.uid}
+                member={props.member}
+                token={props.token}
+                signout={props.endSession}
+                addEvent={props.addEvent}
+                deleteMessage={props.deleteMessage}
+                editMember={props.editMember}/>
+        }></Route>
     </Switch>
 )
 

@@ -34,8 +34,10 @@ const queries = {
                                 name
                                 description
                                 location
-                                start
-                                end
+                                startDate
+                                startTime
+                                endDate
+                                endTime
                             }
                             pages {
                                 id
@@ -178,15 +180,18 @@ const queries = {
     },
 
     addEvent: (eventData, serverID) => {
-        const { name, description, location, start, end } = eventData
+        const { name, description, location, startDate, startTime, 
+            endDate, endTime } = eventData
         return(
             `
             mutation{addEvent(
                 name:"${name}",
                 description: "${description}",
                 location:"${location}",
-                start:"${start}",
-                end:"${end}",
+                startDate:"${startDate}",
+                startTime:"${startTime}",
+                endDate:"${endDate}",
+                endTime:"${endTime}",
                 serverID:"${serverID}")
                 {
                     id
@@ -197,15 +202,18 @@ const queries = {
     },
 
     editEvent: (eventData, eventID) => {
-        const { name, description, location, start, end } = eventData
+        const { name, description, location, startDate, startTime, 
+        endDate, endTime } = eventData
         return(
             `
             mutation{addEvent(
                 name:"${name}",
                 description: "${description}",
                 location:"${location}",
-                start:"${start}",
-                end:"${end}",
+                startDate:"${startDate}",
+                startTime:"${startTime}",
+                endDate:"${endDate}",
+                endTime:"${endTime}",
                 eventID:"${eventID}")
                 {
                     id

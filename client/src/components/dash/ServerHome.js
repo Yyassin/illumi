@@ -1,8 +1,9 @@
 import React from 'react';
-import EventCalendar from './EventCalendar';
 import SidebarScrollbars from '../scrollbars/SidebarScrollbar'
 import EventForm from '../forms/EventForm'
 import './Dash.css'
+
+import {List} from 'antd'
 
 
 const { shell } = window.require('electron')
@@ -22,8 +23,49 @@ class ServerHome extends React.Component {
         name: '',
         location: '',
         description: '',
-        start: '',
-        end: '',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+
+        events: [],
+    }
+
+    data = this.state.events
+
+    componentDidMount = () => {
+        this.parseEvents();
+    }
+
+    parseEvents = () => {
+        let events = this.props.server.events
+
+        events.map((event, index) => {
+            event.startDate = this.parseDate(event.startDate)
+            event.endDate = this.parseDate(event.endDate)            
+            event.startTime = this.parseTime(event.startTime) 
+            event.endTime = this.parseTime(event.endTime) 
+        })
+
+        this.setState({events : events})
+    }
+
+    parseDate = (eventDate) => {
+        if(!eventDate) {
+            return ''
+        }
+
+        eventDate = eventDate.split(' ')
+        return `${eventDate[0]} ${eventDate[1]} ${eventDate[2]} ${eventDate[3]}`
+    }
+
+    parseTime = (eventTime) => {
+        if(!eventTime) {
+            return ''
+        }
+
+        eventTime = eventTime.split(' ')[4].split(':')
+        return `${eventTime[0]}:${eventTime[1]}`
     }
 
     createForm = async () => {
@@ -51,7 +93,7 @@ class ServerHome extends React.Component {
         }
 
         if (this.state.formType === 'create') {
-            await this.props.addEvent(this.state)
+            await this.props.addEvent(formData)
 
         } 
         // else if(JSON.stringify(formData) !== JSON.stringify(initialFields)) {
@@ -105,9 +147,27 @@ class ServerHome extends React.Component {
                         
                         <div className="event-container">
                             <h2 className="event">Important Events</h2>
-                            <p onClick={this.createForm} className="add-event">+</p>
+                            <p onClick={this.createForm} className="add-event">+</p>                            
                         </div>
-                        {/* <EventCalendar /> */}
+
+                        <List
+                            className="event-list"
+                            grid={{gutter: 10, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 8}}
+                            dataSource={this.state.events}
+                            renderItem={item => (
+                            <List.Item>
+                                <div className="event-card">
+                                    <p>{item.name}</p>
+                                    <p>{item.location}</p>
+                                    <p>{item.description}</p>
+                                    <p>{item.startDate}</p>
+                                    <p>{item.startTime}</p>
+                                    <p>{item.endDate}</p>
+                                    <p>{item.endTime}</p>
+                                </div>
+                            </List.Item>
+                            )}
+                        />
                     </div>
                 </SidebarScrollbars>
 

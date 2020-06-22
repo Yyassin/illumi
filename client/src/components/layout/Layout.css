@@ -141,6 +141,12 @@
     color: var(--text-color);
 } 
 
+/* .page-menu-item span:not(.anticon) {
+    display: inline-block;
+    width: 150px !important;
+    height: auto !important;
+} */
+
 /*
 .outer-menu .ant-menu-submenu,
 .outer-menu .ant-menu-item {
