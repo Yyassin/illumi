@@ -316,8 +316,10 @@ module.exports = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
                 location: { type: GraphQLString },
-                start: { type: GraphQLString },
-                end: { type: GraphQLString },
+                startDate: { type: GraphQLString },
+                startTime: { type: GraphQLString },
+                endDate: { type: GraphQLString },
+                endTime: { type: GraphQLString },
                 serverID: { type: GraphQLString }
             },
             resolve(parent, args) {
@@ -325,8 +327,10 @@ module.exports = new GraphQLObjectType({
                     name: args.name,
                     description: args.description,
                     location: args.location,
-                    start: args.start,
-                    end: args.end,
+                    startDate: args.startDate,
+                    startTime: args.startTime,
+                    endDate: args.endDate,
+                    endTime: args.endTime,
                     serverID : args.serverID,
                 })
 
@@ -340,8 +344,10 @@ module.exports = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
                 location: { type: GraphQLString },
-                start: { type: GraphQLString },
-                end: { type: GraphQLString },
+                startDate: { type: GraphQLString },
+                startTime: { type: GraphQLString },
+                endDate: { type: GraphQLString },
+                endTime: { type: GraphQLString },
                 eventID: { type: GraphQLString }
             },
             async resolve(parent, args) {
@@ -351,8 +357,10 @@ module.exports = new GraphQLObjectType({
                 event.name = args.name
                 event.description = args.description
                 event.location = args.location
-                event.start = args.start
-                event.end = args.end
+                event.startDate = args.startDate
+                event.startTime = args.startTime
+                event.endDate = args.endDate
+                event.endTime = args.endTime
 
                 return event.save()
             }
