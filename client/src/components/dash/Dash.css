@@ -310,6 +310,14 @@ ServerHome
     cursor: pointer;
 }
 
+.event-list {
+    width: 100%
+}
+
+.event-card {
+    width: 100%;
+}
+
 ::-webkit-scrollbar {
     width: 2px;  /* Remove scrollbar space */
     border-radius: 1px;

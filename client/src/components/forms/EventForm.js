@@ -135,6 +135,7 @@ class EventForm extends React.Component {
                                 <Form.Item
                                 name="endTime"
                                 extra="Enter a end time."
+                                style={{'padding': '0 0 0 10px'}}
                                 rules={[{ required: true, message: 'Please input event end time.'}]}
                                 >
                                     {/* <Input id='start' onChange={this.props.onModalChange} placeholder="Start time" /> */}

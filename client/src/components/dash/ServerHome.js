@@ -1,6 +1,7 @@
 import React from 'react';
 import SidebarScrollbars from '../scrollbars/SidebarScrollbar'
 import EventForm from '../forms/EventForm'
+import EventCard from './EventCard'
 import './Dash.css'
 
 import {List} from 'antd'
@@ -27,45 +28,32 @@ class ServerHome extends React.Component {
         startTime: '',
         endDate: '',
         endTime: '',
-
-        events: [],
     }
 
     data = this.state.events
 
     componentDidMount = () => {
-        this.parseEvents();
-    }
-
-    parseEvents = () => {
-        let events = this.props.server.events
-
-        events.map((event, index) => {
-            event.startDate = this.parseDate(event.startDate)
-            event.endDate = this.parseDate(event.endDate)            
-            event.startTime = this.parseTime(event.startTime) 
-            event.endTime = this.parseTime(event.endTime) 
-        })
-
-        this.setState({events : events})
+        this.setState({events:this.props.server.events})
     }
 
     parseDate = (eventDate) => {
-        if(!eventDate) {
-            return ''
+        eventDate = eventDate.toString()
+        try {
+            eventDate = eventDate.split(' ')
+            return `${eventDate[0]} ${eventDate[1]} ${eventDate[2]} ${eventDate[3]}`
+        } catch (e) {
+            return eventDate            
         }
-
-        eventDate = eventDate.split(' ')
-        return `${eventDate[0]} ${eventDate[1]} ${eventDate[2]} ${eventDate[3]}`
     }
 
     parseTime = (eventTime) => {
-        if(!eventTime) {
-            return ''
+        eventTime = eventTime.toString()
+        try {
+            eventTime = eventTime.split(' ')[4].split(':')
+            return `${eventTime[0]}:${eventTime[1]}`
+        } catch (e){
+            return eventTime
         }
-
-        eventTime = eventTime.split(' ')[4].split(':')
-        return `${eventTime[0]}:${eventTime[1]}`
     }
 
     createForm = async () => {
@@ -92,6 +80,11 @@ class ServerHome extends React.Component {
             initialFields = this.initEvent.current.state.initFields
         }
 
+        formData.startDate = this.parseDate(formData.startDate)
+        formData.endDate = this.parseDate(formData.endDate)            
+        formData.startTime = this.parseTime(formData.startTime) 
+        formData.endTime = this.parseTime(formData.endTime)
+
         if (this.state.formType === 'create') {
             await this.props.addEvent(formData)
 
@@ -113,12 +106,7 @@ class ServerHome extends React.Component {
         this.setState({
             showModal: false,
         });
-
-        // if(this.formRef.current) {
-        //     this.formRef.current.resetFields()
-        // }
     };
-
 
     openOutline = () => {
         shell.openExternal(`${this.props.server.outline}`)
@@ -156,15 +144,11 @@ class ServerHome extends React.Component {
                             dataSource={this.state.events}
                             renderItem={item => (
                             <List.Item>
-                                <div className="event-card">
-                                    <p>{item.name}</p>
-                                    <p>{item.location}</p>
-                                    <p>{item.description}</p>
-                                    <p>{item.startDate}</p>
-                                    <p>{item.startTime}</p>
-                                    <p>{item.endDate}</p>
-                                    <p>{item.endTime}</p>
-                                </div>
+                                <EventCard 
+                                    item = {item}
+                                    member={this.props.member}
+                                    uid={this.props.uid}
+                                />
                             </List.Item>
                             )}
                         />
@@ -173,6 +157,8 @@ class ServerHome extends React.Component {
 
                 <EventForm
                     ref={this.initEvent}
+                    uid={this.props.uid}
+                    member={this.props.member}
                     visible={this.state.showModal}
                     handleOk={this.handleOk}
                     handleCancel={this.handleCancel}
