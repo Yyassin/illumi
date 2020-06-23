@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^5.6.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.2.4",
     "axios": "^0.19.2",
+    "craco-less": "^1.17.0",
     "electron-is-dev": "^1.2.0",
     "http-proxy-middleware": "^1.0.4",
     "react": "^16.13.1",
@@ -23,10 +25,10 @@
     "yarn": "^1.22.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "dev": "concurrently \"SET BROWSER=none&&npm start \" \"wait-on http://localhost:3000 && electron .\"",
     "dev-guest": "wait-on http://localhost:3000 && electron ."
   },

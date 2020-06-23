@@ -27,7 +27,12 @@ export const authenticate = (user, type) => {
             
         } catch (error) {
             console.log(error)
-            dispatch({type: 'AUTH_ERROR', authMsg: error.response.data.errors[0].message})
+            
+            try {
+                dispatch({type: 'AUTH_ERROR', authMsg: error.response.data.errors[0].message})
+            } catch (error){
+                dispatch({type: 'AUTH_ERROR', authMsg: 'Could not connect to server.'})
+            }
         }
     }
 }

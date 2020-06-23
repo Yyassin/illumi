@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.dark.css';
+import 'antd/dist/antd.dark.less';
 
 import './App.css'
 import BaseRouter from './router/BaseRouter';
