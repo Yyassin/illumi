@@ -16,7 +16,7 @@ module.exports = {
     
             user = new User({
                 email: email,
-                password: hashPassword(password),
+                password: await hashPassword(password),
                 name: name ? name : "",
                 thumbnail: thumbnail ? thumbnail : "",
             })
@@ -27,8 +27,8 @@ module.exports = {
             return {uid: user._id, token: token }
     
         } catch (error) {
-            throw new Error("Internal Server Error")
-    
+            console.log(error.message)
+            throw new Error("Internal Server Error")            
         }
     },
 

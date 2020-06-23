@@ -97,8 +97,10 @@ class ServerHome extends React.Component {
             name: '',
             location: '',
             description: '',
-            start: '',
-            end: '',
+            startDate: '',
+            startTime: '',
+            endDate: '',
+            endTime: '',
         });
     };
 
@@ -128,7 +130,7 @@ class ServerHome extends React.Component {
                         <p className="greeting">
                             This is the beginning of this server. Here's some information to help you get started.
                         </p>
-                        <div className="main-content">{this.props.server.description}</div>
+                        <div className="main-home-content">{this.props.server.description}</div>
                         <div className="outline">
                             <p onClick={this.openOutline} className="link">Course Outline</p>
                         </div>
@@ -140,13 +142,17 @@ class ServerHome extends React.Component {
 
                         <List
                             className="event-list"
-                            grid={{gutter: 10, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 8}}
+                            grid={{gutter: 20, xs: 1, sm: 1, md: 2, lg: 3, xl: 4, xxl: 5}}
                             dataSource={this.state.events}
                             renderItem={item => (
                             <List.Item>
                                 <EventCard 
                                     item = {item}
                                     member={this.props.member}
+                                    parseDate={this.parseDate}
+                                    parseTime={this.parseTime}
+                                    deleteEvent={this.props.deleteEvent}
+                                    editEvent={this.props.editEvent}
                                     uid={this.props.uid}
                                 />
                             </List.Item>

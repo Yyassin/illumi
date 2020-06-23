@@ -192,6 +192,8 @@ class MainLayout extends React.Component {
                         token={this.props.accessToken}
                         signout={this.endSession}
                         addEvent={this.addEvent}
+                        deleteEvent={this.deleteEvent}
+                        editEvent={this.editEvent}
                         deleteMessage={this.deleteMessage}
                         editMember={this.editMember}
                         />

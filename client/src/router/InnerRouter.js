@@ -27,6 +27,8 @@ const InnerRouter = (props) => (
                 token={props.token}
                 signout={props.endSession}
                 addEvent={props.addEvent}
+                editEvent={props.editEvent}
+                deleteEvent={props.deleteEvent}
                 deleteMessage={props.deleteMessage}
                 editMember={props.editMember}/>
         }></Route>

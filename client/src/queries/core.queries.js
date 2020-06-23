@@ -206,7 +206,7 @@ const queries = {
         endDate, endTime } = eventData
         return(
             `
-            mutation{addEvent(
+            mutation{editEvent(
                 name:"${name}",
                 description: "${description}",
                 location:"${location}",

@@ -219,6 +219,7 @@ ServerHome
     font-family: 'Whitney', sans-serif;
     display: flex;
     flex-direction: column;
+    flex: auto;
     align-items: center;
     padding: 15px 20px;
     background-color: var(--chat-container-bg);
@@ -236,14 +237,21 @@ ServerHome
     padding: 0 100px;
     text-align: center;
     font-weight: 500;
+    min-width: 500px;
+    max-width: 500px;
+    width: 500px;
 }
 
-.main-content{
+.main-content,
+.main-home-content{
     font-size: 15px;
     font-weight: 600;
     color: var(--message-color);
     text-align: center;
-    padding-top: 15px;
+}
+
+.main-home-content {
+    max-width: 800px;
 }
 
 .home-content .outline {
@@ -311,12 +319,69 @@ ServerHome
 }
 
 .event-list {
-    width: 100%
+    width: 100%;
 }
 
 .event-card {
     width: 100%;
+    background-color: var(--side-bg);
+    border-radius: 10px;
+    transition: transform 200ms ease-in-out;
 }
+
+.event-card div p {
+    margin: 0;
+}
+
+.ant-list-item:hover {
+    cursor: pointer;
+}
+
+.event .meta {
+    background-color: var(--side-bg);
+}
+.event-card .meta .event-location {
+    font-weight: 500;
+    font-size: 12px;
+    position: relative;
+    bottom: -8px;
+}
+
+.event-card .meta .event-name {
+    font-weight: 650;
+    font-size: 30px;
+    color: var(--message-color);
+}
+
+.event-card .description {
+    background-color: #1d1d1d;
+    min-height: 140px;
+    padding: 10px 15px;
+}
+
+.event-card .start,
+.event-card .end {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.event-card .start span, 
+.event-card .end span {
+    font-weight: 700;
+}
+
+.event-card .start .time, 
+.event-card .end .time {
+    font-weight: 500;
+    position: relative;
+    left: 2px;
+    font-size: 13px;
+}
+
+
 
 ::-webkit-scrollbar {
     width: 2px;  /* Remove scrollbar space */

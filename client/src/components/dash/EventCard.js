@@ -1,4 +1,5 @@
 import React from 'react'
+import './Dash.css'
 
 import {Popover, Form, Button, DatePicker, TimePicker, Input, Row, Col} from 'antd'
 
@@ -51,7 +52,7 @@ class EventCard extends React.Component {
                     initialValues={{
                         name: item.name,
                         location: item.location,
-                        description: item.location,
+                        description: item.description,
                         startDate: this.convertDateMoment(item.startDate),
                         startTime: this.convertTimeMoment(item.startTime),
                         endDate: this.convertDateMoment(item.endDate),
@@ -66,17 +67,17 @@ class EventCard extends React.Component {
                     </Form.Item>
 
                     <Form.Item
-                        name="description"
-                        extra="Include an event description."
-                    >
-                        <Input id='description' onChange={this.onModalChange} placeholder="Description" />
-                    </Form.Item>
-
-                    <Form.Item
                         name="location"
                         extra="Include a location for the event"
                     >
                         <Input id='location' onChange={this.onModalChange} placeholder="Location" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="description"
+                        extra="Include an event description."
+                    >
+                        <Input.TextArea id='description' onChange={this.onModalChange} placeholder="Description" />
                     </Form.Item>
 
                     <Row>
@@ -135,9 +136,15 @@ class EventCard extends React.Component {
 
                     { 
                         (isAdmin) ? 
-                        <Button id="submit" onClick={this.updateRole} htmlType="submit">
-                            Update
-                        </Button>
+                        <div>
+                            <Button id="submit" onClick={this.updateEvent} htmlType="submit">
+                                Update
+                            </Button>
+
+                            <Button id="submit" onClick={this.deleteEvent} htmlType="submit">
+                            Delete
+                            </Button>
+                        </div>
                     :
                         <Button htmlType="submit" onClick={() => this.setState({visible: false})}>
                             Close
@@ -156,6 +163,26 @@ class EventCard extends React.Component {
         //this.setState({[values.target.id]: values.target.value})
       }
 
+    updateEvent = async () => {
+        const formData = this.formRef.current.getFieldsValue()
+
+        formData.startDate = this.props.parseDate(formData.startDate)
+        formData.endDate = this.props.parseDate(formData.endDate)            
+        formData.startTime = this.props.parseTime(formData.startTime) 
+        formData.endTime = this.props.parseTime(formData.endTime)
+
+        if (formData !== this.formRef.current.initialValues) {
+            await this.props.editEvent(formData, this.props.item.id)
+        }
+
+        this.setState({visible: false})
+    }
+    deleteEvent = async () => {
+        await this.props.deleteEvent(this.props.item.id)
+        
+        this.setState({visible: false})
+    }
+
     render() {
         console.log('render event card')
         return(
@@ -168,13 +195,23 @@ class EventCard extends React.Component {
                 onVisibleChange={this.handleVisibleChange}
                 >
                 <div className="event-card">
-                    <p>{this.props.item.name}</p>                    
-                    <p>{this.props.item.location}</p>
-                    <p>{this.props.item.description}</p>
-                    <p>{this.props.item.startDate}</p>
-                    <p>{this.props.item.startTime}</p>
-                    <p>{this.props.item.endDate}</p>
-                    <p>{this.props.item.endTime}</p>
+                    <div className="meta">
+                        <p className="event-location">{this.props.item.location}</p>              
+                        <p className="event-name">{this.props.item.name}</p>      
+                    </div>
+                    <div className="description">
+                        <p className="event-description">{this.props.item.description}</p>
+                    </div>
+                    <div className="start">
+                        <span>Starts</span>
+                        <p className="date">{`: ${this.props.item.startDate} `}</p>
+                        <p className="time">{` @${this.props.item.startTime}`}</p>
+                    </div>
+                    <div className="end">
+                        <span>Ends</span>
+                        <p className="date">{`: ${this.props.item.endDate} `}</p>
+                        <p className="time">{` @${this.props.item.endTime}`}</p>
+                    </div>
                 </div>
             </Popover>
         )
