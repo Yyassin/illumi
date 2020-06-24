@@ -120,9 +120,13 @@ class InnerSidebar extends React.Component {
 
                 <SidebarScrollbar style={{ width: '100%', height: '100%', overflow: 'hidden' }} bg={'#444444'} tc={'transparent'}>
                     <Menu className="inner-inner-menu" defaultSelectedKeys={['0']} mode="inline">
-                        <Menu.Item key='w' icon={<TeamOutlined />}>                      
+                        <Menu.Item key='welcome' icon={<TeamOutlined />}>                      
                             Welcome
                             <NavLink to='/home/serverhome/' />  
+                        </Menu.Item>
+                        <Menu.Item key='whiteboard' icon={<TeamOutlined />}>                      
+                            Whiteboard
+                            <NavLink to='/home/whiteboard/' />  
                         </Menu.Item>
                         {this.renderMenu()}
 

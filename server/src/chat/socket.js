@@ -17,7 +17,15 @@ server.on("connection", socket => {
         socket.client.close();
         socket.client.close(true);
     })
-    
+
+    socket.on('mouse', (data) => {
+        socket.broadcast.emit('mouse2', data)
+    })
+
+    socket.on('friendMouseup', () => {
+        console.log('mouseup')
+        socket.broadcast.emit('friendMouseup')
+    })
 
     socket.on("chat message", async (msgInput, idMes) => {
         const msg = await controller.addMessage(msgInput)

@@ -54,9 +54,10 @@ class Chat extends React.Component {
 
             //scrolls down if client receives message
             // (maybe we dont want this)
-            if (this.scrollbar.current) {
-                this.scrollbar.current.newMessage();
-            }
+            //SHOW NEW MESSAGE ICON instead -------
+            // if (this.scrollbar.current) {
+            //     this.scrollbar.current.newMessage();
+            // }
         })
 
         this.socket.on("chat noti", (msg) => {

@@ -27,39 +27,33 @@ class Page extends React.Component {
                 </div>
             )
     }
+
+    renderMeta = () => {
+        if (this.props.page.image || this.props.page.content || this.props.page.video) return (
+            <div className="page-meta">
+                <p className="page-banner"
+                style={{
+                'padding': this.props.page.image ? '70px' : '0',
+                'background': `url("${this.props.page.image || null}")`,
+                'background-size': 'cover',
+                'background-position': 'center'}}>
+                </p>
+                <p className="main-content">
+                    {this.props.page.content || null}
+                </p>
+                <p className="video-link"
+                    onClick={this.openResource}>
+                    {this.props.page.video ? 'Link to lecture resources.' : null}
+                </p>
+            </div>
+        )
+    }
     
     render() {
 
         return (
-        //     <ServerHome
-        //         page={this.props.page}
-        //         server={this.props.server}
-        //         uid={this.props.uid}
-        //         member={this.props.member}
-        //         token={this.props.token}
-        //         signout={this.props.signout}
-        //         editMember={this.props.editMember}
-        //         addEvent={this.props.addEvent}
-        //         deleteMessage={this.props.deleteMessage}
-        //         />
-        // )
             <div className="page">
-                <div className="page-meta">
-                    <p className="page-banner"
-                    style={{
-                    'padding': this.props.page.image ? '70px' : '0',
-                    'background': `url("${this.props.page.image || null}")`,
-                    'background-size': 'cover',
-                    'background-position': 'center'}}>
-                    </p>
-                    <p className="main-content">
-                        {this.props.page.content || null}
-                    </p>
-                    <p className="video-link"
-                        onClick={this.openResource}>
-                        {this.props.page.video ? 'Link to lecture resources.' : null}
-                    </p>
-                </div>
+                {this.renderMeta()}
                 { this.renderChat()}
             </div>
         )

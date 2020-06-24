@@ -381,6 +381,11 @@ ServerHome
     font-size: 13px;
 }
 
+.whiteboard {
+    position: relative;
+    left: 0;
+    top: 0;
+}
 
 
 ::-webkit-scrollbar {
