@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
         name: '',
         description: '',
         outline: '',
-        thumbnail: '',
+        thumbnail: 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png',
     }
     
     selectServer = async (e) => {        
@@ -100,7 +100,7 @@ class Sidebar extends React.Component {
             name: '',
             description: '',
             outline: '',
-            thumbnail: '',
+            thumbnail: 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png',
         });
     };
 
@@ -139,7 +139,7 @@ class Sidebar extends React.Component {
                                             data-id={index} 
                                             onClick={this.selectServer.bind(this)}                                            
                                             className={(parseInt(this.props.serverIndex) === parseInt(index)) ? "server-thumbnail selected" : "server-thumbnail"}
-                                            style={{background: `url('${member.server.thumbnail}')`,
+                                            style={{background: `url('${member.server.thumbnail || 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png'}')`,
                                                 backgroundSize: 'cover',
                                                 backgroundPosition: 'center'}}></p>
                                     </Tooltip>

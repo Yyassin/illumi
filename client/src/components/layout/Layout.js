@@ -9,7 +9,7 @@ import {
   init, clearSession, toggleLoading, 
   selectServer, selectPage, 
   addServer, editServer, deleteServer, leaveServer,
-  addPage, editPage, deletePage,
+  addPage, editPage, deletePage, addRoom,
   addEvent, editEvent, deleteEvent,
   editProfile, deleteMessage,
   editMember, addInvite, acceptInvite,
@@ -105,6 +105,10 @@ class MainLayout extends React.Component {
     this.props.deletePage(pageID, this.props.accessToken)
   }
 
+  addRoom = async(pageID) => {
+    this.props.addRoom(pageID, this.props.accessToken)
+  }
+
   //event CRUD
   addEvent = async(eventData) => {
     this.props.addEvent(eventData, this.props.data.user.members[this.props.serverIndex].server.id, this.props.accessToken)
@@ -181,6 +185,7 @@ class MainLayout extends React.Component {
                     addPage={this.addPage}
                     editPage={this.editPage}
                     deletePage={this.deletePage}
+                    addRoom={this.addRoom}
                     />
 
                   <Content className="main-content">                  
@@ -234,6 +239,7 @@ const mapDispatchToProps = (dispatch) => {
 
         addServer: (serverData, uid, token) => dispatch(addServer(serverData, uid, token)),
         addPage: (pageData, serverID, token) => dispatch(addPage(pageData, serverID, token)),
+        addRoom: (pageID, token) => dispatch(addRoom(pageID, token)),
         addEvent: (eventData, serverID, token) => dispatch(addEvent(eventData, serverID, token)),
         addInvite: (inviteData, senderID, token) => dispatch(addInvite(inviteData, senderID, token)),
         

@@ -34,6 +34,7 @@ const queries = {
                                 name
                                 description
                                 location
+                                thumbnail
                                 startDate
                                 startTime
                                 endDate
@@ -179,8 +180,20 @@ const queries = {
         )
     },
 
+    addRoom: (pageID) => {
+        return(
+            `
+            mutation{
+                addRoom(pageID: "${pageID}"){
+                    id
+                }
+            }
+            `
+        )
+    },
+
     addEvent: (eventData, serverID) => {
-        const { name, description, location, startDate, startTime, 
+        const { name, description, location, thumbnail, startDate, startTime, 
             endDate, endTime } = eventData
         return(
             `
@@ -188,6 +201,7 @@ const queries = {
                 name:"${name}",
                 description: "${description}",
                 location:"${location}",
+                thumbnail:"${thumbnail}",
                 startDate:"${startDate}",
                 startTime:"${startTime}",
                 endDate:"${endDate}",
@@ -202,7 +216,7 @@ const queries = {
     },
 
     editEvent: (eventData, eventID) => {
-        const { name, description, location, startDate, startTime, 
+        const { name, description, location, thumbnail, startDate, startTime, 
         endDate, endTime } = eventData
         return(
             `
@@ -210,6 +224,7 @@ const queries = {
                 name:"${name}",
                 description: "${description}",
                 location:"${location}",
+                thumbnail:"${thumbnail}",
                 startDate:"${startDate}",
                 startTime:"${startTime}",
                 endDate:"${endDate}",

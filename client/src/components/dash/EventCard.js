@@ -2,6 +2,9 @@ import React from 'react'
 import './Dash.css'
 
 import {Popover, Form, Button, DatePicker, TimePicker, Input, Row, Col} from 'antd'
+import {
+    EditOutlined
+} from '@ant-design/icons';
 
 const moment = require('moment')
 
@@ -19,6 +22,7 @@ class EventCard extends React.Component {
         startTime: '',
         endDate: '',
         endTime: '',
+        thumbnail: '',
 
     }
     
@@ -53,6 +57,7 @@ class EventCard extends React.Component {
                         name: item.name,
                         location: item.location,
                         description: item.description,
+                        thumbnail: item.thumbnail,
                         startDate: this.convertDateMoment(item.startDate),
                         startTime: this.convertTimeMoment(item.startTime),
                         endDate: this.convertDateMoment(item.endDate),
@@ -78,6 +83,13 @@ class EventCard extends React.Component {
                         extra="Include an event description."
                     >
                         <Input.TextArea id='description' onChange={this.onModalChange} placeholder="Description" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="thumbnail"
+                        extra="Include an event thumbnail link"
+                    >
+                        <Input.TextArea id='thumbnail' onChange={this.onModalChange} placeholder="thumbnail" />
                     </Form.Item>
 
                     <Row>
@@ -186,15 +198,45 @@ class EventCard extends React.Component {
     render() {
         console.log('render event card')
         return(
-            <Popover
-                placement="right"
-                title="Event Detail"
-                content={this.renderPopover(this.props.item)}
-                trigger="click"
-                visible={this.state.visible}
-                onVisibleChange={this.handleVisibleChange}
-                >
-                <div className="event-card">
+            
+               <div class="example-1 card">
+                    <div class="wrapper" 
+                        style={{'background':`url('${this.props.item.thumbnail || 'https://i0.wp.com/bestlifeonline.com/wp-content/uploads/2017/05/beautiful_places_to_visit_in_europe-wallpaper-2560x1440.jpg?resize=1024%2C576&ssl=1'}') 20% 1%/cover no-repeat`}}>
+                        
+                        <div class="date">
+                            <span class="day">{this.props.item.startDate.split(" ")[2]}</span>
+                            <span class="month">{this.props.item.startDate.split(" ")[1]}</span>
+                            <span class="year">{this.props.item.startDate.split(" ")[0]}</span>
+                        </div>
+                        <Popover
+                            placement="right"
+                            title="Event Detail"
+                            content={this.renderPopover(this.props.item)}
+                            trigger="click"
+                            visible={this.state.visible}
+                            onVisibleChange={this.handleVisibleChange}
+                        >
+                            <p className="add-event"><EditOutlined/></p>    
+                        </Popover>
+                        <div class="data">
+                            <div class="content">
+                                <span class="location">{this.props.item.location || "TBA"}</span>
+                                <h1 class="title"><a href="#">{this.props.item.name}</a></h1>
+                                <div className="text">
+                                    <p class="text">{this.props.item.description || "No description is available."}</p>
+                                    <p className="start-date">{`Starts: ${this.props.item.startDate} @ ${this.props.item.startTime}`}</p>
+                                    <p className="end-date">{`Ends: ${this.props.item.endDate} @ ${this.props.item.endTime}`}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+        )
+    }
+}
+
+/* <div className="event-card">
                     <div className="meta">
                         <p className="event-location">{this.props.item.location}</p>              
                         <p className="event-name">{this.props.item.name}</p>      
@@ -212,10 +254,6 @@ class EventCard extends React.Component {
                         <p className="date">{`: ${this.props.item.endDate} `}</p>
                         <p className="time">{` @${this.props.item.endTime}`}</p>
                     </div>
-                </div>
-            </Popover>
-        )
-    }
-}
+                </div> */
 
 export default EventCard;

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     email : {
         type: String,
         required: true
@@ -10,12 +10,13 @@ const userSchema = mongoose.Schema({
         required: true
     },
     name : {
-        type: String,
-        required: false
+        required: false , 
+        type: String
     },
     thumbnail : {
-        type: String,
-        required: false
+        default: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+        required: false , 
+        type: String
     }
 });
 const register = mongoose.model('user', userSchema, "auth");

@@ -185,6 +185,26 @@ export const deletePage = (pageID, token) => {
     }
 }
 
+
+export const addRoom = (pageID, token) => {
+    return async (dispatch) => {
+        try {
+            const query = queries.addRoom(pageID);
+            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+
+            if (result.data.errors) {
+                return dispatch({type: 'FETCH_ERROR'})
+            }
+        
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Created room.'})
+            
+        } catch (error) {
+            console.log(error.response)
+            return dispatch({type: 'FETCH_ERROR'})
+        }
+    }
+}
+
 export const addEvent = (eventData, serverID, token) => {
     return async (dispatch) => {
         try {

@@ -5,6 +5,7 @@ import EventCard from './EventCard'
 import './Dash.css'
 
 import {List} from 'antd'
+import DescriptionsItem from 'antd/lib/descriptions/Item';
 
 
 const { shell } = window.require('electron')
@@ -28,6 +29,7 @@ class ServerHome extends React.Component {
         startTime: '',
         endDate: '',
         endTime: '',
+        thumbnail: '',
     }
 
     data = this.state.events
@@ -74,6 +76,7 @@ class ServerHome extends React.Component {
         });
 
         const formData = this.formRef.current.getFieldsValue()
+        console.log(formData)
         let initialFields;
         
         if (this.initEvent.current) {
@@ -101,6 +104,7 @@ class ServerHome extends React.Component {
             startTime: '',
             endDate: '',
             endTime: '',
+            thumbnail: '',
         });
     };
 
@@ -142,10 +146,11 @@ class ServerHome extends React.Component {
 
                         <List
                             className="event-list"
-                            grid={{gutter: 20, xs: 1, sm: 1, md: 2, lg: 3, xl: 4, xxl: 5}}
+                            grid={{gutter: 20, xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3}}
                             dataSource={this.state.events}
                             renderItem={item => (
                             <List.Item>
+                                {console.log(DescriptionsItem)}
                                 <EventCard 
                                     item = {item}
                                     member={this.props.member}

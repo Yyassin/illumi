@@ -316,6 +316,7 @@ module.exports = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
                 location: { type: GraphQLString },
+                thumbnail: { type: GraphQLString },
                 startDate: { type: GraphQLString },
                 startTime: { type: GraphQLString },
                 endDate: { type: GraphQLString },
@@ -327,6 +328,7 @@ module.exports = new GraphQLObjectType({
                     name: args.name,
                     description: args.description,
                     location: args.location,
+                    thumbnail: args.thumbnail,
                     startDate: args.startDate,
                     startTime: args.startTime,
                     endDate: args.endDate,
@@ -344,6 +346,7 @@ module.exports = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
                 location: { type: GraphQLString },
+                thumbnail: { type: GraphQLString },
                 startDate: { type: GraphQLString },
                 startTime: { type: GraphQLString },
                 endDate: { type: GraphQLString },
@@ -357,6 +360,7 @@ module.exports = new GraphQLObjectType({
                 event.name = args.name
                 event.description = args.description
                 event.location = args.location
+                event.thumbnail = args.thumbnail
                 event.startDate = args.startDate
                 event.startTime = args.startTime
                 event.endDate = args.endDate

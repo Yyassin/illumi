@@ -92,6 +92,13 @@ class EventForm extends React.Component {
                             <Input id='location' onChange={this.onModalChange} placeholder="Location" />
                         </Form.Item>
 
+                        <Form.Item
+                            name="thumbnail"
+                            extra="Include a thumbail link"
+                        >
+                            <Input id='thumbnail' onChange={this.onModalChange} placeholder="Thumbnail" />
+                        </Form.Item>
+
                         <Row>
                             <Col span={12}>
                                 <Form.Item

@@ -1,12 +1,13 @@
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Layout, Breadcrumb, Tooltip } from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
     TeamOutlined,
     PlusOutlined,
     SettingOutlined,
-    CloseOutlined
+    CloseOutlined,
+    WechatOutlined
 } from '@ant-design/icons';
 
 import PageForm from '../forms/PageForm'
@@ -99,6 +100,16 @@ class InnerHeader extends React.Component {
         });
     }
 
+    addRoom = async () => {
+        await this.props.addRoom(this.props.page.id)
+    }
+
+    addRoomBtn = () => {
+        if (this.props.page.rooms.length < 1) return    <Tooltip placement="rightTop" title='Add room'>
+                                                            <span onClick={this.addRoom}><WechatOutlined className="page-settings-icon" /></span>                                            
+                                                        </Tooltip>
+    }
+
     render() {
         return (
             <Header className="main-header">
@@ -108,7 +119,11 @@ class InnerHeader extends React.Component {
                     <div className="menu-icon-tray" style={{display: "inline-block"}}>
                         <span onClick={this.editForm}><SettingOutlined className="page-settings-icon"/></span>
                         <span onClick={this.deletePage}><CloseOutlined className="page-settings-icon"/></span>
-                        <span onClick={this.createForm}><PlusOutlined className="page-settings-icon" /></span>                        
+                        <span onClick={this.createForm}><PlusOutlined className="page-settings-icon" /></span>    
+                        {
+                            this.addRoomBtn()
+                        }
+                        
                     </div>      
                 </Breadcrumb>
 

@@ -12,7 +12,7 @@ class PageForm extends React.Component {
     }
     
     componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps.formType != this.props.formType) {
+        if (prevProps.formType != this.props.formType || prevProps.page != this.props.page) {
             this.handleUpdate();
         }
     }

@@ -82,7 +82,7 @@ class CanvasBlob extends React.Component {
                         }
                     },
                     "color": {
-                      "value": ["#ffffff","#000000","#7289da","#99aab5","#2c2f33"]
+                      "value": ["#ffffff","#000000","#7289da","#99aab5","#2c2f33", "#9370DB"]
                     },
                     "size": {
                         "value": 5,

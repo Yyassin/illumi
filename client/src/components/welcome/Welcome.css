@@ -6,9 +6,8 @@
     -webkit-box-pack: center;
             justify-content: center;
     min-height: 100vh;
-    background-color: #23272a;
+    background-color: #171a1c;
     -webkit-app-region: drag;
-    border-radius: 2%;
   }
   
   .loader {

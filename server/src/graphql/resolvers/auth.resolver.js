@@ -17,8 +17,8 @@ module.exports = {
             user = new User({
                 email: email,
                 password: await hashPassword(password),
-                name: name ? name : "",
-                thumbnail: thumbnail ? thumbnail : "",
+                name: name || email,
+                thumbnail: thumbnail,
             })
     
             await user.save()

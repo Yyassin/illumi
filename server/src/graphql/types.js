@@ -211,6 +211,7 @@ const EventType = new GraphQLObjectType({
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         location: { type: GraphQLString },
+        thumbnail: { type: GraphQLString },
         startDate: { type: GraphQLString },
         startTime: { type: GraphQLString },
         endDate: { type: GraphQLString },
