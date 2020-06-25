@@ -53,5 +53,11 @@
     "electron-builder": "^22.6.1",
     "wait-on": "^5.0.0"
   },
+  "build": {
+    "appId": "illumi",
+    "mac": {
+      "category": "messaging"
+    }
+  },
   "main": "public/electron.js"
 }

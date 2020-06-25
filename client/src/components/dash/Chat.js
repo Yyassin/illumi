@@ -204,7 +204,7 @@ class Chat extends React.Component {
 
                 <div className="chat-form-container">
                     <Button className="file-send-btn" onClick={this.onSend}><a href=""></a></Button>
-                    <input ref={this.inputField} onKeyPress={this.onKeyPressed} type="text" class="message-input" id="messageInput" name="message" placeholder="Message @ServerName" />
+                    <input ref={this.inputField} onKeyPress={this.onKeyPressed} type="text" class="message-input" id="messageInput" name="message" placeholder={"Message @" + this.props.server.name} />
                     <Button className="message-send-btn" onClick={this.onSend}><a href="">{<SendOutlined />}</a></Button>
                     {/* <Button type="submit" id="message-btn" class="send-button">Send</Button> */}
                 </div>                

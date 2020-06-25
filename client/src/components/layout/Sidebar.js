@@ -121,7 +121,7 @@ class Sidebar extends React.Component {
                 <Menu.ItemGroup title="Server Options">
                     <Menu.Item className="server-edit-tag" key="1" onClick={this.editForm}>Edit Server</Menu.Item>
                     <Menu.Item className="server-delete-tag" key="2" onClick={this.menuDeleteServer}>Delete Server</Menu.Item>
-                    <Menu.Item className="server-invite-tag" key="3" onClick={this.menuLeaveServer}>Leave Server</Menu.Item>
+                    <Menu.Item className="server-leave-tag" key="3" onClick={this.menuLeaveServer}>Leave Server</Menu.Item>
                     <Menu.Item className="server-invite-tag" key="4">Invite Members</Menu.Item>
                 </Menu.ItemGroup>
             </Menu>

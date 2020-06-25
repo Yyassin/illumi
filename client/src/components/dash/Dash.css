@@ -3,7 +3,7 @@
     --chat-container-bg: #232323;
     --chat-form-bg: #ffffff07;
     --message-btn-100: #161616;
-    --message-btn-50: #16161650;
+    --message-btn-80: #16161680;
 
 }
 
@@ -49,11 +49,11 @@ li {
     flex: 0;
 }
 
-.message-container .avatar-btn:hover  {
+.message-container .avatar-btn:hover {
     cursor: pointer;
 }
 
-.month-date-line{
+.month-date-line {
     position: relative;
     display: flex;
     height: 2px;
@@ -122,7 +122,7 @@ li {
 .message-text {
     font-family: 'Whitney', sans-serif;
     font-weight: 500;
-    flex: 8 ;
+    flex: 8;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -150,7 +150,8 @@ li {
 
 .chat-container ul li.message {
     color: var(--message-color);
-    transition: color 1000ms ease-in-out;;
+    transition: color 1000ms ease-in-out;
+    ;
 }
 
 .chat-form-container {
@@ -182,7 +183,7 @@ li {
     flex: 1;
     border: none;
     color: var(--message-color);
-    background-color: var(--message-btn-50);
+    background-color: var(--message-btn-80);
     border-radius: 10px;
     transition: color 100ms ease-in-out;
 }
@@ -201,10 +202,12 @@ li {
     filter: brightness(1.10);
     background-color: var(--message-btn-100);
     /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1) */
+    cursor: pointer;
 }
 
 .message-send-btn:hover a {
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 /*--------------------- 
@@ -240,10 +243,11 @@ ServerHome
     min-width: 500px;
     max-width: 500px;
     width: 500px;
+    filter: brightness(0.7);
 }
 
 .main-content,
-.main-home-content{
+.main-home-content {
     font-size: 15px;
     font-weight: 600;
     color: var(--message-color);
@@ -293,7 +297,7 @@ ServerHome
     position: relative;
     top: 19px;
     left: 20px;
-    backdrop-filter: brightness(0.70) ;
+    backdrop-filter: brightness(0.70);
     color: var(--text-highlight);
     height: 40px;
     width: 40px;
@@ -339,18 +343,23 @@ ServerHome
     justify-content: center;
 }
 
+
+/* -----------------
+Event card, inspired: https://codepen.io/choogoor/pen/YWBxAg
+-------------------- */
+
 .card {
     float: left;
     font-family: 'Whitney', sans-serif;
-  }
+}
 
-  .card .add-event {
+.card .add-event {
     text-align: center;
     font-size: 20px;
     position: relative;
     top: 10px;
     left: 230px;
-    backdrop-filter: brightness(0.20) ;
+    backdrop-filter: brightness(0.20);
     color: var(--text-highlight);
     height: 40px;
     width: 40px;
@@ -364,24 +373,31 @@ ServerHome
     color: #fff;
     cursor: pointer;
 }
+
 .card .menu-content {
-margin: 0;
-padding: 0;
-list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
-.card .menu-content::before, .card .menu-content::after {
-content: '';
-display: table;
-}
+
+.card .menu-content::before,
 .card .menu-content::after {
-clear: both;
+    content: '';
+    display: table;
 }
+
+.card .menu-content::after {
+    clear: both;
+}
+
 .card .menu-content li {
-display: inline-block;
+    display: inline-block;
 }
+
 .card .menu-content a {
-color: #000;
+    color: #000;
 }
+
 .card .menu-content span {
     position: absolute;
     left: 50%;
@@ -389,9 +405,10 @@ color: #000;
     font-size: 10px;
     font-weight: 700;
     -webkit-transform: translate(-50%, 0);
-            transform: translate(-50%, 0);
-  }
-  .card .wrapper {
+    transform: translate(-50%, 0);
+}
+
+.card .wrapper {
     background-color: #000;
     min-height: 300px;
     min-width: 280px;
@@ -399,53 +416,69 @@ color: #000;
     position: relative;
     overflow: hidden;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
-  }
-  .card .wrapper:hover .data {
+}
+
+.card .wrapper:hover .data {
     -webkit-transform: translateY(40px);
-            transform: translateY(40px);
-  }
-  .card .data {
+    transform: translateY(40px);
+}
+
+.card .wrapper:hover .content {
+    transition: filter 600ms ease-in-out;
+    filter: opacity(0.85);
+    backdrop-filter: blur(10px);
+}
+
+.card .data {
     width: 100%;
     -webkit-transform: translateY(calc(220px + 1em));
-            transform: translateY(calc(220px + 1em));
+    transform: translateY(calc(220px + 1em));
     -webkit-transition: -webkit-transform 0.3s;
     transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
     transition: transform 0.3s, -webkit-transform 0.3s;
-  }
-  .card .data .content {
+}
+
+.card .data .content {
     padding: 1em;
     position: relative;
     z-index: 1;
     border-radius: 10px;
-  }
-  .card .location {
+    transition: filter 500ms ease-in-out;
+}
+
+.card .location {
     font-size: 12px;
     font-weight: 600;
-    
-  }
-  .card .title {
+
+}
+
+.card .title {
     margin-top: 10px;
     font-weight: 650;
-    font-size: 20px;
-  }
-  .card .text {
+    font-size: 25px;
+}
+
+.card .text {
     height: 220px;
     margin: 0;
-  }
+}
 
-  .card .text p.text {
-      margin-bottom: 10px;
-      height: auto;
-  }
-  .card input[type='checkbox'] {
+.card .text p.text {
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.card input[type='checkbox'] {
     display: none;
-  }
-  .card input[type='checkbox']:checked + .menu-content {
+}
+
+.card input[type='checkbox']:checked+.menu-content {
     -webkit-transform: translateY(-60px);
-            transform: translateY(-60px);
-  }
-  .example-1 .date {
+    transform: translateY(-60px);
+}
+
+.example-1 .date {
     position: absolute;
     top: 0;
     left: 0;
@@ -453,31 +486,38 @@ color: #000;
     border-radius: 0 0 5px 0;
     color: #fff;
     padding: 0.8em;
-  }
-  .example-1 .date span {
+}
+
+.example-1 .date span {
     display: block;
     text-align: center;
-  }
-  .example-1 .date .day {
+}
+
+.example-1 .date .day {
     font-weight: 700;
     font-size: 24px;
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
-  }
-  .example-1 .date .month {
+}
+
+.example-1 .date .month {
     text-transform: uppercase;
-  }
-  .example-1 .date .month,
-  .example-1 .date .year {
+}
+
+.example-1 .date .month,
+.example-1 .date .year {
     font-size: 12px;
-  }
-  .example-1 .content {
+}
+
+.example-1 .content {
     background-color: var(--message-btn-100);
     box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
-  }
-  .example-1 .title a {
-    color: gray;
-  }
-  .example-1 .menu-button {
+}
+
+.example-1 .title a {
+    color: var(--message-color);
+}
+
+.example-1 .menu-button {
     position: absolute;
     z-index: 999;
     top: 16px;
@@ -485,8 +525,9 @@ color: #000;
     width: 25px;
     text-align: center;
     cursor: pointer;
-  }
-  .example-1 .menu-button span {
+}
+
+.example-1 .menu-button span {
     width: 5px;
     height: 5px;
     background-color: gray;
@@ -494,8 +535,10 @@ color: #000;
     position: relative;
     display: inline-block;
     border-radius: 50%;
-  }
-  .example-1 .menu-button span::after, .example-1 .menu-button span::before {
+}
+
+.example-1 .menu-button span::after,
+.example-1 .menu-button span::before {
     content: '';
     display: block;
     width: 5px;
@@ -503,14 +546,17 @@ color: #000;
     background-color: currentColor;
     position: absolute;
     border-radius: 50%;
-  }
-  .example-1 .menu-button span::before {
+}
+
+.example-1 .menu-button span::before {
     left: -10px;
-  }
-  .example-1 .menu-button span::after {
+}
+
+.example-1 .menu-button span::after {
     right: -10px;
-  }
-  .example-1 .menu-content {
+}
+
+.example-1 .menu-content {
     text-align: center;
     position: absolute;
     top: 0;
@@ -522,27 +568,38 @@ color: #000;
     transition: transform 0.3s;
     transition: transform 0.3s, -webkit-transform 0.3s;
     -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-  .example-1 .menu-content li {
+    transform: translateY(0);
+}
+
+.example-1 .menu-content li {
     width: 33.333333%;
     float: left;
     background-color: #77d7b9;
     height: 60px;
     position: relative;
-  }
-  .example-1 .menu-content a {
+}
+
+.example-1 .menu-content a {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     font-size: 24px;
-  }
-  .example-1 .menu-content span {
+}
+
+.example-1 .menu-content span {
     top: -10px;
-  }
-  
+}
+
+.popover-event-form {
+    padding: 10px;
+}
+
+.popover-event-form .ant-form-item-control-input-content .ant-btn {
+    margin: 0 10px;
+}
+
 
 .whiteboard {
     position: relative;
@@ -552,10 +609,13 @@ color: #000;
 
 
 ::-webkit-scrollbar {
-    width: 2px;  /* Remove scrollbar space */
+    width: 2px;
+    /* Remove scrollbar space */
     border-radius: 1px;
-    background: transparent;  /* Optional: just make scrollbar invisible */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
 }
+
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #444444;

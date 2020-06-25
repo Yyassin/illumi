@@ -105,7 +105,7 @@ class InnerHeader extends React.Component {
     }
 
     addRoomBtn = () => {
-        if (this.props.page.rooms.length < 1) return    <Tooltip placement="rightTop" title='Add room'>
+        if (this.props.page.rooms.length < 1) return    <Tooltip placement="bottom" title='Add room'>
                                                             <span onClick={this.addRoom}><WechatOutlined className="page-settings-icon" /></span>                                            
                                                         </Tooltip>
     }
@@ -117,9 +117,16 @@ class InnerHeader extends React.Component {
                     <Breadcrumb.Item className="header-bold">{ this.props.server.name }</Breadcrumb.Item>
                     <Breadcrumb.Item className="header-light">{ this.props.page.title }</Breadcrumb.Item>
                     <div className="menu-icon-tray" style={{display: "inline-block"}}>
-                        <span onClick={this.editForm}><SettingOutlined className="page-settings-icon"/></span>
-                        <span onClick={this.deletePage}><CloseOutlined className="page-settings-icon"/></span>
-                        <span onClick={this.createForm}><PlusOutlined className="page-settings-icon" /></span>    
+                        <Tooltip placement="bottom" title='Edit Page'>
+                            <span onClick={this.editForm}><SettingOutlined className="page-settings-icon"/></span>
+                        </Tooltip>
+                        <Tooltip placement="bottom" title='Delete Page'>
+                            <span onClick={this.deletePage}><CloseOutlined className="page-settings-icon"/></span>
+                        </Tooltip>
+                        <Tooltip placement="bottom" title='Create New Page'>
+                            <span onClick={this.createForm}><PlusOutlined className="page-settings-icon" /></span>    
+                        </Tooltip>
+                        
                         {
                             this.addRoomBtn()
                         }

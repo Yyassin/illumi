@@ -149,7 +149,7 @@ class EventCard extends React.Component {
                     { 
                         (isAdmin) ? 
                         <div>
-                            <Button id="submit" onClick={this.updateEvent} htmlType="submit">
+                            <Button id="submit" type="primary" onClick={this.updateEvent} htmlType="submit">
                                 Update
                             </Button>
 
