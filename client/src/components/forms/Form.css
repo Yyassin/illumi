@@ -1,0 +1,12 @@
+form .upload {
+    display: flex;
+    flex-direction: row;
+}
+
+.displayed-image {
+    border: 1px solid #fff;
+    padding: 5px;
+    margin: auto;
+    position: relative;
+    top: -15px
+}

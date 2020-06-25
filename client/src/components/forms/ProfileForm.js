@@ -1,10 +1,11 @@
 import React from 'react';
 import { Modal, Form, Input} from 'antd';
+import UploadImage from '../forms/UploadImage'
 
 class ProfileForm extends React.Component {
     
     state = {
-        initFields: {}
+        initFields: {},
     }
 
     componentDidMount = () => {
@@ -27,6 +28,7 @@ class ProfileForm extends React.Component {
     }
 
     render() {
+
         return (
             <div className="profile-form">
                 <Modal
@@ -57,6 +59,10 @@ class ProfileForm extends React.Component {
                         >
                             <Input id='thumbnail' onChange={this.props.onModalChange} placeholder={this.props.user.thumbnail} />
                         </Form.Item>
+
+                        <UploadImage 
+                        form={this.props.formRef}/>
+                        
 
                         <Form.Item
                             name="password"

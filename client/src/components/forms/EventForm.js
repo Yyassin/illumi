@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Modal, Form, Input, Select, DatePicker, TimePicker } from 'antd';
+import UploadImage from './UploadImage'
 
 class EventForm extends React.Component {
     
@@ -98,6 +99,9 @@ class EventForm extends React.Component {
                         >
                             <Input id='thumbnail' onChange={this.onModalChange} placeholder="Thumbnail" />
                         </Form.Item>
+
+                        <UploadImage
+                            form={this.props.formRef} />
 
                         <Row>
                             <Col span={12}>

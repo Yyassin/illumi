@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input} from 'antd';
+import UploadImage from '../forms/UploadImage'
 
 class ServerForm extends React.Component {
     
@@ -66,6 +67,9 @@ class ServerForm extends React.Component {
                         >
                             <Input id='thumbnail' onChange={this.props.onModalChange} placeholder="Thumbnail" />
                         </Form.Item>
+
+                        <UploadImage
+                            form={this.props.formRef}/>
 
                         <Form.Item
                             name="outline"

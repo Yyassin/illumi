@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input, Select } from 'antd';
+import UploadImage from './UploadImage'
 
 class PageForm extends React.Component {
     
@@ -76,6 +77,10 @@ class PageForm extends React.Component {
                         >
                             <Input id='image' onChange={this.props.onModalChange} placeholder="Image" />
                         </Form.Item>
+
+                        <UploadImage
+                            form={this.props.formRef}
+                            page={true} />
 
                         <Form.Item
                             name="video"

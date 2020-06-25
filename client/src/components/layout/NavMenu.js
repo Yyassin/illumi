@@ -29,6 +29,7 @@ class NavMenu extends React.Component {
     handleOk = async(e) => {        
         console.log(this.formRef.current)
         const formData = this.formRef.current.getFieldsValue()
+        console.log(formData)
 
         if(JSON.stringify(formData) !== JSON.stringify(this.state.initFields)) {
             console.log("editing user")

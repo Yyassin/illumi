@@ -1,5 +1,6 @@
 import React from 'react'
 import './Dash.css'
+import UploadImage from '../forms/UploadImage'
 
 import {Popover, Form, Button, DatePicker, TimePicker, Input, Row, Col} from 'antd'
 import {
@@ -91,6 +92,9 @@ class EventCard extends React.Component {
                     >
                         <Input.TextArea id='thumbnail' onChange={this.onModalChange} placeholder="thumbnail" />
                     </Form.Item>
+
+                    <UploadImage 
+                        form={this.formRef} />
 
                     <Row>
                         <Col span={12}>
