@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
 
 
-.Titlebar {
+.TitlebarWin {
     /* -webkit-app-region: drag; */
 }
 
-.Titlebar-drag-region {
+.TitlebarWin-drag-region {
     top: 0;
     left: 0;
     display: block;
@@ -90,7 +90,11 @@
     align-items: center;
 }
 
-.Title-Bar__section-windows-control {
+.TitlebarWin .section-windows-control_box:hover {
+    backdrop-filter: brightness(1.2);
+}
+
+.Title-Bar-Win__section-windows-control {
     /* background-color: green; */
     display: flex;
     flex-direction: row;
@@ -99,6 +103,7 @@
     /* needs no-drag for color changing div*/
     -webkit-app-region: no-drag;
 }
+
 
 [class^="section-windows-control_box-"]{
     width: 45px;
@@ -201,9 +206,9 @@
     transition: all 0.05s ease-in;
 }
 
-.Titlebar svg path, 
-.Titlebar svg rect, 
-.Titlebar svg polygon {
+.TitlebarWin svg path, 
+.TitlebarWin svg rect, 
+.TitlebarWin svg polygon {
     fill: #ffffff60;
     /* stroke: #ffffff40;
     stroke-width: 1; */
@@ -216,7 +221,7 @@
     fill: #fff;
 }
 
-.Titlebar svg {
+.TitlebarWin svg {
   width: 10px;
   height: 10px;
 }

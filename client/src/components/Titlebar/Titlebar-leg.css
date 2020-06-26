@@ -110,11 +110,6 @@
     transition: all 0.05s ease-in;
 }
 
-/*only if windows */
-.section-windows-control_box:hover {
-    backdrop-filter: brightness(1.2);
-}
-
 .minimize-active_logo {
     fill: #525252;
     transition: all 0.05s ease-in;
@@ -194,4 +189,3 @@
     fill: #F35D58;
     transition: all 0.05s ease-in;
 }
-

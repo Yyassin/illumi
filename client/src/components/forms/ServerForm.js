@@ -19,6 +19,7 @@ class ServerForm extends React.Component {
     }
 
     handleUpdate = async () => {
+        if (!this.props.welcome)
         await this.setState({initFields: {
             name: this.props.server.name,
             thumbnail: this.props.server.thumbnail,

@@ -1,21 +1,44 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
-import { Card, Row } from 'antd';
+import { Card, Row, Tooltip } from 'antd';
+import {
+    PlusOutlined,
+} from '@ant-design/icons';
 import './Welcome.css'
 
 import {signOut} from "../../store/actions/authActions";
-import {init, toggleLoading, selectServer, selectPage, acceptInvite, declineInvite} from "../../store/actions/coreActions";
+import {init, toggleLoading, selectServer, selectPage, addServer, acceptInvite, declineInvite} from "../../store/actions/coreActions";
 import {connect} from "react-redux";
 
 import Titlebar from '../Titlebar/Titlebar'
 import AcceptInvite from './AcceptInvite'
+import ServerForm from '../forms/ServerForm'
 
 import io from 'socket.io-client';
 
 
 class WelcomeLayout extends React.Component {
+    formRef = React.createRef();
+    initServer = React.createRef();
 
     socket;
+
+    state = {
+        showModal: false,
+
+        formType: '',
+
+        member: '', //alernative            ?       ?       ?
+
+        server: '',
+        serverIndex: 0,
+
+        // modal fields
+        name: '',
+        description: '',
+        outline: '',
+        thumbnail: 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png',
+    }
 
     // socket
     componentDidMount = () => {
@@ -55,6 +78,11 @@ class WelcomeLayout extends React.Component {
         this.props.clearSession()
       }
 
+    //server
+    addServer = async(serverData) => {
+        this.props.addServer(serverData, this.props.uid, this.props.accessToken)
+    }
+
     // invites
     acceptInvite = async(inviteID) => {
         this.props.acceptInvite(inviteID, this.props.accessToken)
@@ -85,6 +113,48 @@ class WelcomeLayout extends React.Component {
         )
     }
 
+    createForm = async () => {
+        this.setState({
+            showModal: true,
+            formType: 'create',
+            server: '',
+        });        
+    }
+
+    // modal controller
+
+    onModalChange = values => {
+        this.setState({[values.target.id]: values.target.value})
+    }
+
+    handleOk = async (e) => {
+        this.setState({
+            showModal: false,
+        });
+
+        const formData = this.formRef.current.getFieldsValue()
+        await this.addServer(formData)
+
+
+        this.setState({
+            showModal: false,
+            name: '',
+            description: '',
+            outline: '',
+            thumbnail: 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png',
+        });
+    };
+
+    handleCancel = e => {
+        this.setState({
+            showModal: false,
+        });
+
+        // if(this.formRef.current) {
+        //     this.formRef.current.resetFields()
+        // }
+    };
+
     render() {
         //return <Redirect to='/'/>
         if (!this.props.auth) return <Redirect to='/'/> 
@@ -102,10 +172,29 @@ class WelcomeLayout extends React.Component {
                     </Card>   
                 </Row>
 
+                <Tooltip placement="rightTop" title="Create Server">
+                    <li id="create" onClick={this.createForm}>
+                        <p  className="server-thumbnail create-server"
+                            style={{background: `#333`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'}}><PlusOutlined /></p>
+                    </li>
+                </Tooltip>
+
                 <AcceptInvite
                     user={this.props.data.user}
                     acceptInvite={this.acceptInvite}
                     declineInvite={this.declineInvite}
+                />
+                <ServerForm
+                    ref = {this.initServer}
+                    visible={this.state.showModal}
+                    handleOk={this.handleOk}
+                    handleCancel={this.handleCancel}
+                    onModalChange={this.onModalChange}
+                    formRef={this.formRef}
+                    formType={this.state.formType}
+                    welcome={true}
                 />
             </div>
         )
@@ -135,6 +224,8 @@ const mapDispatchToProps = (dispatch) => {
         toggleLoading: () => dispatch(toggleLoading()),
         selectServer: (index) => dispatch(selectServer(index)),
         selectPage: (index) => dispatch(selectPage(index)),
+
+        addServer: (serverData, uid, token) => dispatch(addServer(serverData, uid, token)),
 
         acceptInvite: (inviteID, token) => dispatch(acceptInvite(inviteID, token)),
         declineInvite: (inviteID, token) => dispatch(declineInvite(inviteID, token)),

@@ -52,6 +52,7 @@ export const selectPage = (index) => {
 }
 
 export const addServer = (serverData, uid, token) => {
+    console.log(token)
     return async (dispatch) => {
         try {
             const query = queries.addServer(serverData, uid);

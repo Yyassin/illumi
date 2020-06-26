@@ -19,12 +19,13 @@ class UploadImage extends React.Component {
         fileList.forEach((file) => {
             formData.append('file', fileList[0]);
             formData.append('upload_preset', 'qvfwjbwg');
+            formData.append('upload_preset', 'darwin');
         });
     
         this.setState({
           uploading: true,
         });
-        
+
         const options = {
           method: 'POST',
           body: formData,
@@ -44,7 +45,7 @@ class UploadImage extends React.Component {
         };
 
         // change to https://api.cloudinary.com/v1_1/dppx2a9sm/image/upload at deploy
-        return fetch('https://api.cloudinary.com/v1_1/nedy123/image/upload', options)
+        return fetch('https://api.cloudinary.com/v1_1/dppx2a9sm/image/upload', options)
         .then(res => res.json())
         .then(res => {
             this.setState({

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Titlebar.css'
+import './Titlebar-leg.css'
 
 const ipcRenderer = window.require('electron').ipcRenderer
 
