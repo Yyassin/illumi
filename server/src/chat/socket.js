@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const io = require('socket.io')
+
 dotenv.config({path: './config.env'});
 const chat_port = parseInt(process.env.CHAT_PORT) || 4000;
 const server = io.listen(chat_port)
@@ -14,6 +15,7 @@ server.on("connection", socket => {
 
     socket.on('forceDisconnect', () => {
         console.log('disconnected')
+
         socket.client.close();
         socket.client.close(true);
     })

@@ -44,7 +44,7 @@ class RegisterForm extends React.Component {
   // remove in production
   autoSignIn = async () => {
     await this.props.authenticate({
-      email: 'test@gmail.com',
+      email: 'test4@gmail.com',
       password: 'password'
     }, 'signin')
     this.sendMessage()

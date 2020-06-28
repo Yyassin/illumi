@@ -42,6 +42,7 @@ class MainLayout extends React.Component {
 
   componentDidMount = () => {
     this.socket = io.connect("http://localhost:4000");
+    console.log(this.socket.connected)
     this.initSocket();
   }
 

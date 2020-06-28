@@ -11,10 +11,11 @@ import {init, toggleLoading, selectServer, selectPage, addServer, acceptInvite, 
 import {connect} from "react-redux";
 
 import Titlebar from '../Titlebar/Titlebar'
+import Animation from '../register/Animation'
 import AcceptInvite from './AcceptInvite'
 import ServerForm from '../forms/ServerForm'
 
-import io from 'socket.io-client';
+import io from 'socket.io-client'
 
 
 class WelcomeLayout extends React.Component {
@@ -161,8 +162,10 @@ class WelcomeLayout extends React.Component {
         if (!this.props.data) return this.renderLoading()        
         if (this.checkServers()) return <Redirect to='/home'/>
         return (
-            <div>
-                <Titlebar bg={["#171a1c", "#141618"]} title={"illumi"} />
+            <div>                              
+                <div className="register-bg"></div>
+                <Animation/>
+                <Titlebar bg={"transparent"} />
 
                 <Row className="welcome-page">
                     <Card bordered={false} className="welcome-card">
@@ -196,6 +199,7 @@ class WelcomeLayout extends React.Component {
                     formType={this.state.formType}
                     welcome={true}
                 />
+                 
             </div>
         )
     }
