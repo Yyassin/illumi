@@ -43,7 +43,7 @@ class WelcomeLayout extends React.Component {
 
     // socket
     componentDidMount = () => {
-        this.socket = io.connect("http://localhost:4000");
+        this.socket = io.connect("http://illumi2.canadaeast.cloudapp.azure.com/");
         this.initSocket();
         this.fetchData();
       }

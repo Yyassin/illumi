@@ -26,7 +26,7 @@ class Chat extends React.Component {
     inputField = React.createRef()
 
     componentDidMount = () => {   
-        this.socket = io.connect("http://localhost:4000");      
+        this.socket = io.connect("http://illumi2.canadaeast.cloudapp.azure.com/");      
         this.handleUpdate();
         this.initSocket();
     }
