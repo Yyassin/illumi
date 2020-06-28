@@ -27,7 +27,7 @@ app.on('before-quit', function () {
 app.on('ready', () => {
   mainWindow = config.createWindow();
 
-  const iconPath = path.join(__dirname, 'illumi-logo.png');
+  const iconPath = path.join(__dirname, 'icon.png');
   Tray = new tray(iconPath);
   Tray.setIgnoreDoubleClickEvents(true)
 
