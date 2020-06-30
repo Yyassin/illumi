@@ -89,7 +89,7 @@ class AcceptInvite extends React.Component {
     acceptInvites = async () => {
         const rowData = this.state.selectedRows          
 
-        if(!rowData || rowData.length === 0) return
+        if(!rowData || !rowData.map || rowData.length === 0) return
 
         rowData.map((invite, index) => {
             this.props.acceptInvite(invite.id)
@@ -99,7 +99,7 @@ class AcceptInvite extends React.Component {
     declineInvites = async () => {
         const rowData = this.state.selectedRows          
 
-        if(!rowData || rowData.length === 0) return
+        if(!rowData || !rowData.map || rowData.length === 0) return
 
         rowData.map((invite, index) => {
             this.props.declineInvite(invite.id)
@@ -113,13 +113,19 @@ class AcceptInvite extends React.Component {
                     rowSelection={this.rowSelection}
                     columns={this.columns}
                     dataSource={this.state.data}
+                    pagination={!this.props.hidepage}
+                    style={{paddingBottom:"24px"}}
+                    className="accept-invite"
                 />
-                <Button type="primary" onClick={this.acceptInvites}>
-                    Accept Invites
-                </Button>
-                <Button onClick={this.declineInvites}>
-                    Decline Invites
-                </Button>
+
+                <div>
+                    <Button className="register-btn" style={{float: 'left'}} type="primary" onClick={this.acceptInvites}>
+                        Accept Invites
+                    </Button>
+                    <Button className="register-btn" style={{float: 'right'}} onClick={this.declineInvites}>
+                        Decline Invites
+                    </Button>
+                </div>
             </div>
         )
     }
@@ -127,7 +133,7 @@ class AcceptInvite extends React.Component {
     render() {
         return (
             <div>  
-                <h2>Invite Requests</h2>                    
+                <h2>{this.props.title ? this.props.title : 'Invite Requests'}</h2>                    
                 {this.renderInviteTable()}                        
             </div>
         )

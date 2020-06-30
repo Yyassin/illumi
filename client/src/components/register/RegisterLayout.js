@@ -27,10 +27,6 @@ class RegisterLayout extends React.Component {
 
                 <Titlebar bg={"transparent"} />
             </div>
-
-
-
-
         )
     }
 }

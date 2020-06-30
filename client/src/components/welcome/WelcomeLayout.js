@@ -1,21 +1,23 @@
-import React from 'react';
+import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { Card, Row, Tooltip } from 'antd';
+import { Card, Row, Tooltip, Button } from 'antd'
 import {
     PlusOutlined,
-} from '@ant-design/icons';
+} from '@ant-design/icons'
 import './Welcome.css'
 
-import {signOut} from "../../store/actions/authActions";
+import {signOut} from "../../store/actions/authActions"
 import {init, toggleLoading, selectServer, selectPage, addServer, acceptInvite, declineInvite} from "../../store/actions/coreActions";
-import {connect} from "react-redux";
+import {connect} from "react-redux"
 
 import Titlebar from '../Titlebar/Titlebar'
 import AcceptInvite from './AcceptInvite'
 import ServerForm from '../forms/ServerForm'
+import Animation from '../register/Animation'
 
-import io from 'socket.io-client';
+import io from 'socket.io-client'
 
+const path = require('path')
 
 class WelcomeLayout extends React.Component {
     formRef = React.createRef();
@@ -28,7 +30,7 @@ class WelcomeLayout extends React.Component {
 
         formType: '',
 
-        member: '', //alernative            ?       ?       ?
+        member: '',
 
         server: '',
         serverIndex: 0,
@@ -45,38 +47,36 @@ class WelcomeLayout extends React.Component {
         this.socket = io.connect("http://localhost:4000");
         this.initSocket();
         this.fetchData();
-      }
+    }
     
-      componentWillUnmount = () => {
-        
+    componentWillUnmount = () => {
         this.socket.emit('forceDisconnect')
-        this.socket.close();
-      
-      }
+        this.socket.close();    
+    }
     
-      initSocket = () => {
+    initSocket = () => {
         this.socket.on('invalid token', () => {
             this.endSession();                    
         })
-    
+
         this.socket.on("refresh", () => {
-          this.fetchData()
+            this.fetchData()
         })
-      }
-    
-      fetchData = async() => {
+    }
+
+    fetchData = async() => {
         await this.props.toggleLoading()
         this.props.init(this.props.uid, this.props.accessToken);
-      }
-    
-      endSession = async() => {
+    }
+
+    endSession = async() => {
         console.log('end session')
         this.socket.emit('forceDisconnect')
-    
+
         await this.props.signOut()  
         console.log(this.props.uid)
         this.props.clearSession()
-      }
+    }
 
     //server
     addServer = async(serverData) => {
@@ -162,30 +162,35 @@ class WelcomeLayout extends React.Component {
         if (this.checkServers()) return <Redirect to='/home'/>
         return (
             <div>
-                <Titlebar bg={["#171a1c", "#141618"]} title={"illumi"} />
+                <div className="register-bg"></div>
+                <Titlebar bg={"transparent"} />
 
-                <Row className="welcome-page">
-                    <Card bordered={false} className="welcome-card">
-                        <h1 className="welcome-title">Welcome Page</h1>
-                        <p className="welcome-greet">Nice to see you again!</p>
-                        <a href="/signin">Go Back</a>
-                    </Card>   
+                <Animation />
+                <img src={path.join(__dirname, '../icon.png')}
+                 className="logo-img"
+                 alt=""/>
+                <h1 className="logo">illumi</h1>
+
+                <Row className="register-page">
+                    <Card bordered={false} className="register-card">
+                        <h1 className="register-title">Join a server</h1>
+                        <p className="register-greet">Join a server or create your own.</p>                                                                                   
+
+                        <AcceptInvite
+                            user={this.props.data.user}
+                            acceptInvite={this.acceptInvite}
+                            declineInvite={this.declineInvite}
+                            title={' '}
+                            hidepage={true}
+                        />
+
+                        <div style={{paddingTop: '48px'}}>
+                            <a onClick={this.createForm} style={{float: 'left'}}>Create Server</a> 
+                            <a href="/signin" style={{float: 'right'}}>Back to Login</a>
+                        </div>
+                    </Card> 
                 </Row>
 
-                <Tooltip placement="rightTop" title="Create Server">
-                    <li id="create" onClick={this.createForm}>
-                        <p  className="server-thumbnail create-server"
-                            style={{background: `#333`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center'}}><PlusOutlined /></p>
-                    </li>
-                </Tooltip>
-
-                <AcceptInvite
-                    user={this.props.data.user}
-                    acceptInvite={this.acceptInvite}
-                    declineInvite={this.declineInvite}
-                />
                 <ServerForm
                     ref = {this.initServer}
                     visible={this.state.showModal}
