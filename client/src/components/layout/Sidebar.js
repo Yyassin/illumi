@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
         name: '',
         description: '',
         outline: '',
-        thumbnail: 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png',
+        thumbnail: '',
     }
     
     selectServer = async (e) => {        
@@ -82,6 +82,11 @@ class Sidebar extends React.Component {
         });
 
         const formData = this.formRef.current.getFieldsValue()
+
+        if (formData.thumbnail === ''){
+            formData.thumbnail = 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png';
+        }
+
         let initialFields;
         
         if (this.initServer.current) {

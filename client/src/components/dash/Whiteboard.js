@@ -25,7 +25,7 @@ class Whiteboard extends React.Component {
         if (this.canvas.current) {
             this.c = this.canvas.current
             this.ctx = this.c.getContext('2d')
-            this.c.height = window.innerHeight;
+            this.c.height = window.innerHeight - 110;
             this.c.width = window.innerWidth;
 
              //events Listen (mouse action)

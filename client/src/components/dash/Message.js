@@ -9,7 +9,6 @@ class Message extends React.Component {
 
     state = {
         roleColors: {
-            "student" : '#fff',
             "admin" : '#00a5a7',
         },
         visible: false,

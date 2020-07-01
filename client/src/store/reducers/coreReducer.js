@@ -1,5 +1,6 @@
 const initState = {
     loading: false,
+    dark: true,
     data: null,
     serverIndex: 0,
     pageIndex: 0,
@@ -74,6 +75,18 @@ const coreReducer = (state = initState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+
+        case 'DARK_THEME':
+            return {
+                ...state,
+                dark: true
+            }
+        
+        case 'LIGHT_THEME':
+            return {
+                ...state,
+                dark: false
             }
 
         default:

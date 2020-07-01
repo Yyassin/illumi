@@ -14,17 +14,17 @@ class UploadImage extends React.Component {
 
     handleUpload = () => {
         const { fileList } = this.state;
-        console.log(fileList)
         const formData = new FormData();
         fileList.forEach((file) => {
-            formData.append('file', fileList[0]);
+            formData.append('file', file);
             formData.append('upload_preset', 'qvfwjbwg');
             formData.append('upload_preset', 'darwin');
         });
     
         this.setState({
-          uploading: true,
+            uploading: true,
         });
+        
 
         const options = {
           method: 'POST',
@@ -44,8 +44,7 @@ class UploadImage extends React.Component {
           },
         };
 
-        // change to https://api.cloudinary.com/v1_1/dppx2a9sm/image/upload at deploy
-        return fetch('https://api.cloudinary.com/v1_1/dppx2a9sm/image/upload', options)
+        return fetch('https://api.cloudinary.com/v1_1/dppx2a9sm/', options)
         .then(res => res.json())
         .then(res => {
             this.setState({
@@ -93,10 +92,24 @@ class UploadImage extends React.Component {
             });
         },
         beforeUpload: (file) => {
-            this.setState(state => ({
-            fileList: [...state.fileList, file],
-            }));
-            return false;
+            let imageType;
+            console.log(file.name.split('.')[1])
+            console.log((file.name.split('.')[1] in ['jpg']))
+            if (['jpg', 'png'].indexOf(file.name.split('.')[1]) === -1) {
+                imageType = false;
+            } else {
+                imageType = true;
+            }
+
+            if (imageType) {
+                this.setState(state => ({
+                fileList: [...state.fileList, file],
+                }));
+                return false;
+            } else {
+                return message.error('Please upload an image file (.jpg or .png).');
+            }
+
         },
         fileList,
         };

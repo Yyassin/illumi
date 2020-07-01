@@ -7,6 +7,18 @@ export const toggleLoading = () => {
     }
 }
 
+export const darkTheme = () => {
+    return async (dispatch) => {
+        return dispatch({type: 'DARK_THEME'})
+    }
+}
+
+export const lightTheme = () => {
+    return async (dispatch) => {
+        return dispatch({type: 'LIGHT_THEME'})
+    }
+}
+
 export const init = (uid, token) => {
     return async (dispatch) => {
         try {

@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+:root{
+    --default: #ffffff60;
+    --hover-fg: #fff;
+    --hover-bg: 1.5;
+}
 
+.light-theme {
+    --default: #00000080;
+    --hover-fg: #000;
+    --hover-bg: 0.8;
+}
 
 .TitlebarWin {
     /* -webkit-app-region: drag; */
@@ -91,7 +101,7 @@
 }
 
 .TitlebarWin .section-windows-control_box:hover {
-    backdrop-filter: brightness(1.2);
+    backdrop-filter: brightness(var(--hover-bg)) !important;
 }
 
 .Title-Bar-Win__section-windows-control {
@@ -118,106 +128,28 @@
 .section-windows-control_box-min:hover,
 .section-windows-control_box-unmax:hover,
 .section-windows-control_box-max:hover {
-    backdrop-filter: brightness(1.5);
+    backdrop-filter: brightness(var(--hover-bg));
 }
 
 .section-windows-control_box-close:hover {
     background-color: red;
 }
 
-
-.minimize-active_logo {
-    fill: #525252;
-    transition: all 0.05s ease-in;
-}
-
-.minimize-active_logo:hover {
-    fill: #F8B92B;
-    transition: all 0.05s ease-in;
-}
-
-.minimize-inactive_logo {
-    fill: #3f3f3f;
-    transition: all 0.05s ease-in;
-}
-
-.minimize-inactive_logo:hover {
-    fill: #F8B92B;
-    transition: all 0.05s ease-in;
-}
-
-.maximize-active_logo {
-    fill: #525252;
-    transition: all 0.05s ease-in;
-}
-
-.maximize-active_logo:hover {
-    fill: #2BC73B;
-    transition: all 0.05s ease-in;
-}
-
-.maximize-inactive_logo {
-    fill: #3f3f3f;
-    transition: all 0.05s ease-in;
-}
-
-.maximize-inactive_logo:hover {
-    fill: #2BC73B;
-    transition: all 0.05s ease-in;
-}
-
-.unmaximize-active_logo {
-    fill: #525252;
-    transition: all 0.05s ease-in;
-}
-
-.unmaximize-active_logo:hover {
-    fill: #2BC73B;
-    transition: all 0.05s ease-in;
-}
-
-.unmaximize-inactive_logo {
-    fill: #3f3f3f;
-    transition: all 0.05s ease-in;
-}
-
-.unmaximize-inactive_logo:hover {
-    fill: #2BC73B;
-    transition: all 0.05s ease-in;
-}
-
-.close-active_logo {
-    fill: #525252;
-    transition: all 0.05s ease-in;
-}
-
-.close-active_logo:hover {
-    fill: #F35D58;
-    transition: all 0.05s ease-in;
-}
-
-.close-inactive_logo {
-    fill: #3f3f3f;
-    transition: all 0.05s ease-in;
-}
-
-.close-inactive_logo:hover {
-    fill: #F35D58;
-    transition: all 0.05s ease-in;
-}
-
 .TitlebarWin svg path, 
 .TitlebarWin svg rect, 
 .TitlebarWin svg polygon {
-    fill: #ffffff60;
+    fill: var(--default);
     /* stroke: #ffffff40;
     stroke-width: 1; */
 }
 
 .section-windows-control_box-min:hover svg rect,
 .section-windows-control_box-unmax:hover svg path,
-.section-windows-control_box-max:hover svg path,
-.section-windows-control_box-close:hover svg polygon{
+.section-windows-control_box-max:hover svg path{
+    fill: var(--hover-fg);
+}
+
+.section-windows-control_box-close:hover svg polygon {
     fill: #fff;
 }
 

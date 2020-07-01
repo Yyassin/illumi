@@ -13,7 +13,8 @@ import {
   addEvent, editEvent, deleteEvent,
   editProfile, deleteMessage,
   editMember, addInvite, acceptInvite,
-  declineInvite
+  declineInvite, 
+  darkTheme, lightTheme
 } from "../../store/actions/coreActions";
 
 import {connect} from "react-redux";
@@ -43,6 +44,13 @@ class MainLayout extends React.Component {
   componentDidMount = () => {
     this.socket = io.connect("http://localhost:4000");
     this.initSocket();
+    this.handleUpdate();
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.dark !== this.props.dark){
+      this.handleUpdate()
+    }
   }
 
   componentWillUnmount = () => {
@@ -50,6 +58,16 @@ class MainLayout extends React.Component {
     this.socket.emit('forceDisconnect')
     this.socket.close();
   
+  }
+
+  handleUpdate = () => {
+    if (this.props.dark) {
+      document.body.classList.add('dark-theme')
+      document.body.classList.remove('light-theme')
+    } else {
+      document.body.classList.add('light-theme')
+      document.body.classList.remove('dark-theme')
+    }
   }
 
   initSocket = () => {
@@ -146,11 +164,19 @@ class MainLayout extends React.Component {
     this.props.declineInvite(inviteID, this.props.accessToken)
   }
 
+  toggleDark = () => {
+    this.props.darkTheme()
+  }
+
+  toggleLight = () => {
+    this.props.lightTheme()
+  }
+
   render() {
     if (!this.props.auth) return <Redirect to='/'/> 
       return (        
         <div>
-          <Titlebar bg={["#171a1c", "#141618"]} title={"illumi"} />
+          <Titlebar bg={this.props.dark ? ["#171a1c", "#141618"] : ["#ECECEC", "#DCDCDC"]} fg={this.props.dark ? "#fff" : "#000"} title={"illumi"} />
           <Layout className="main-layout">            
               <Sidebar
                 bg={["#171a1c", "#141618"]}
@@ -176,6 +202,8 @@ class MainLayout extends React.Component {
                 addInvite={this.addInvite}
                 acceptInvite={this.acceptInvite}
                 declineInvite={this.declineInvite}
+                toggleDark={this.toggleDark}
+                toggleLight={this.toggleLight}
                 />
 
               <Layout className="inner-layout">
@@ -220,6 +248,7 @@ const mapStateToProps = (state) => {
 
         // core state
         loading: state.core.loading,
+        dark: state.core.dark,
         data: state.core.data,
         serverIndex: state.core.serverIndex,
         pageIndex: state.core.pageIndex
@@ -257,7 +286,10 @@ const mapDispatchToProps = (dispatch) => {
         deleteServer: (serverID, serverIndex, token) => dispatch(deleteServer(serverID, serverIndex, token)),
         deletePage: (pageID, token) => dispatch(deletePage(pageID, token)),
         deleteEvent: (eventID, token) => dispatch(deleteEvent(eventID, token)),
-        deleteMessage: (messageID, token) => dispatch(deleteMessage(messageID, token))
+        deleteMessage: (messageID, token) => dispatch(deleteMessage(messageID, token)),
+
+        darkTheme: () => dispatch(darkTheme()),
+        lightTheme: () => dispatch(lightTheme())
     }
 }
 
