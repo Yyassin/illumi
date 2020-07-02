@@ -12,7 +12,7 @@ class Whiteboard extends React.Component {
     painting = false;
 
     componentDidMount = () => {   
-        this.socket = io.connect("http://localhost:4000");      
+        this.socket = io.connect("http://illumi2.canadaeast.cloudapp.azure.com/");      
         this.initCanvas();
     }
 
