@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu, Tooltip, Dropdown} from "antd";
+import {Layout, Menu, Tooltip, Dropdown, message} from "antd";
 import {
     PlusOutlined,
 } from '@ant-design/icons';
@@ -49,10 +49,12 @@ class Sidebar extends React.Component {
     // context menu methods
     menuDeleteServer = async() => {
         await this.props.deleteServer(this.state.server.id, this.state.serverIndex)
+        message.success("Deleted Server!")
     }
 
     menuLeaveServer = async() => {
         await this.props.leaveServer(this.state.member.id, this.state.serverIndex)
+        message.success("Left Server!")
     }
 
     createForm = async () => {
@@ -95,9 +97,11 @@ class Sidebar extends React.Component {
 
         if (this.state.formType === 'create') {
             await this.props.addServer(this.state)
+            message.success("Created Server!")
 
         } else if(JSON.stringify(formData) !== JSON.stringify(initialFields)) {
             await this.props.editServer(formData, this.state.server.id)
+            message.success("Edited Server!")
         }
 
         this.setState({

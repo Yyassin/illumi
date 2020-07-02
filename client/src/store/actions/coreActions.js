@@ -22,8 +22,6 @@ export const lightTheme = () => {
 export const init = (uid, token) => {
     return async (dispatch) => {
         try {
-            // console.log('init token ' + token)
-            // console.log('init uid ' + uid)
 
             const query = queries.init(uid);
             const result = await axios.post("/api", { query }, {headers:{'token': token}});
@@ -33,13 +31,10 @@ export const init = (uid, token) => {
             }
 
             const data = result.data.data
-            
-            // console.log(data)
         
             dispatch({type: 'FETCH_SUCCESS', data: data })
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -64,7 +59,6 @@ export const selectPage = (index) => {
 }
 
 export const addServer = (serverData, uid, token) => {
-    console.log(token)
     return async (dispatch) => {
         try {
             const query = queries.addServer(serverData, uid);
@@ -77,7 +71,6 @@ export const addServer = (serverData, uid, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Created server.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -96,7 +89,6 @@ export const editServer = (serverData, serverID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Edited server.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -115,7 +107,6 @@ export const deleteServer = (serverID, serverIndex, token) => {
             dispatch({type: 'DELETE_SERVER', serverIndex: serverIndex, msg: 'Deleted server.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -135,7 +126,6 @@ export const leaveServer = (memberID, serverIndex, token) => {
             dispatch({type: 'DELETE_SERVER', serverIndex: serverIndex, msg: 'Left Server.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -154,7 +144,6 @@ export const addPage = (pageData, serverID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Created page.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -173,7 +162,6 @@ export const editPage = (pageData, pageID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Edited page.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -192,7 +180,6 @@ export const deletePage = (pageID, token) => {
             dispatch({type: 'DELETE_PAGE', msg: 'Deleted page.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -212,7 +199,6 @@ export const addRoom = (pageID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Created room.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -231,7 +217,6 @@ export const addEvent = (eventData, serverID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Created event.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -250,7 +235,6 @@ export const editEvent = (eventData, eventID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Edited event.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -269,7 +253,6 @@ export const deleteEvent = (eventID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Deleted event.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -288,16 +271,15 @@ export const editProfile = (profileData, uid, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Edited profile.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
 }
 
-export const deleteMessage = (pageID, token) => {
+export const deleteMessage = (messageID, token) => {
     return async (dispatch) => {
         try {
-            const query = queries.deleteMessage(pageID);
+            const query = queries.deleteMessage(messageID);
             const result = await axios.post("/api", { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
@@ -307,7 +289,6 @@ export const deleteMessage = (pageID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Deleted message.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -326,7 +307,6 @@ export const editMember = (memberData, memberID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Edited member.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -338,14 +318,14 @@ export const addInvite = (inviteData, senderID, token) => {
             const query = queries.addInvite(inviteData, senderID);
             const result = await axios.post("/api", { query }, {headers:{'token': token}});
 
+
             if (result.data.errors) {
-                return dispatch({type: 'FETCH_ERROR'})
+                return dispatch({type: 'FETCH_ERROR', coreMsg: result.data.errors[0].message})
             }
         
-            dispatch({type: 'EDIT_SUCCESS', msg: 'Sent invite.'})
+            dispatch({type: 'EDIT_SUCCESS', msg: 'Sent invite!'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -364,7 +344,6 @@ export const acceptInvite = (inviteID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Accepted invite.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }
@@ -383,7 +362,6 @@ export const declineInvite = (inviteID, token) => {
             dispatch({type: 'EDIT_SUCCESS', msg: 'Declined invite.'})
             
         } catch (error) {
-            console.log(error.response)
             return dispatch({type: 'FETCH_ERROR'})
         }
     }

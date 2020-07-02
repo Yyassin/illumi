@@ -4,9 +4,7 @@ import EventForm from '../forms/EventForm'
 import EventCard from './EventCard'
 import './Dash.css'
 
-import {List} from 'antd'
-import DescriptionsItem from 'antd/lib/descriptions/Item';
-
+import {List, message} from 'antd'
 
 const { shell } = window.require('electron')
 
@@ -76,12 +74,6 @@ class ServerHome extends React.Component {
         });
 
         const formData = this.formRef.current.getFieldsValue()
-        console.log(formData)
-        let initialFields;
-        
-        if (this.initEvent.current) {
-            initialFields = this.initEvent.current.state.initFields
-        }
 
         formData.startDate = this.parseDate(formData.startDate)
         formData.endDate = this.parseDate(formData.endDate)            
@@ -90,6 +82,7 @@ class ServerHome extends React.Component {
 
         if (this.state.formType === 'create') {
             await this.props.addEvent(formData)
+            message.success("Created Event!")
 
         } 
         // else if(JSON.stringify(formData) !== JSON.stringify(initialFields)) {
@@ -150,7 +143,6 @@ class ServerHome extends React.Component {
                             dataSource={this.state.events}
                             renderItem={item => (
                             <List.Item>
-                                {console.log(DescriptionsItem)}
                                 <EventCard 
                                     item = {item}
                                     member={this.props.member}

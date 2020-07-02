@@ -13,7 +13,6 @@ const validate = (token) => {
         return true;
         
     } catch (error){
-        console.log(error.message)
         return false;
     }
 }
@@ -61,9 +60,10 @@ exports.addMessage = async (msgInput) => {
             date: date,
         })
 
-        message.save()
+        const savedMsg = await message.save()
 
         return {
+            id: savedMsg.id,
             content: msgInput.content,
             date: date,
             roomID: msgInput.roomID,
@@ -79,7 +79,6 @@ exports.addMessage = async (msgInput) => {
             }
         }
     } catch(error) {
-        console.log(error.message)
         return error.message
     }  
 }

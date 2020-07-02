@@ -57,13 +57,11 @@ exports.createWindow = () => {
       }, 0); //idk if we want a delay but wtv
   
     //remove once local
-    globalShortcut.register('Alt+1', () =>
-        mainWindow.webContents.openDevTools({mode: 'detach'})
-    );
-
-    globalShortcut.register('Alt+2', () =>
-        console.log(mainWindow.webContents.getURL())
-    );
+    globalShortcut.register('Alt+1', () => {
+        if (isDev) {
+          mainWindow.webContents.openDevTools({mode: 'detach'})
+        }
+      });
 
     mainWindow.on('maximize', () => {
         mainWindow.webContents.send('maximized')

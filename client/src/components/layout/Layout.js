@@ -21,7 +21,6 @@ import {connect} from "react-redux";
 import io from 'socket.io-client';
 
 import InnerRouter from '../../router/InnerRouter'
-import Page from '../dash/Page'
 import Sidebar from "./Sidebar";
 import InnerSidebar from './InnerSidebar';
 import InnerHeader from './InnerHeader';
@@ -85,11 +84,9 @@ class MainLayout extends React.Component {
   }
 
   endSession = async() => {
-    console.log('end session')
     this.socket.emit('forceDisconnect')
 
     await this.props.signOut()  
-    console.log(this.props.uid)
     this.props.clearSession()
   }
 
@@ -153,7 +150,7 @@ class MainLayout extends React.Component {
   }
 
   addInvite = async(inviteData, senderID) => {
-    this.props.addInvite(inviteData, senderID, this.props.accessToken)
+    await this.props.addInvite(inviteData, senderID, this.props.accessToken)
   }
 
   acceptInvite = async(inviteID) => {
@@ -204,6 +201,7 @@ class MainLayout extends React.Component {
                 declineInvite={this.declineInvite}
                 toggleDark={this.toggleDark}
                 toggleLight={this.toggleLight}
+                msg={this.props.msg}
                 />
 
               <Layout className="inner-layout">
@@ -251,7 +249,8 @@ const mapStateToProps = (state) => {
         dark: state.core.dark,
         data: state.core.data,
         serverIndex: state.core.serverIndex,
-        pageIndex: state.core.pageIndex
+        pageIndex: state.core.pageIndex,
+        msg: state.core.msg
     }
 }
 

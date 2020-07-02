@@ -1,9 +1,6 @@
 import React from 'react';
-import { Layout, Breadcrumb, Tooltip } from 'antd';
+import { Layout, Breadcrumb, Tooltip, message } from 'antd';
 import {
-    DesktopOutlined,
-    PieChartOutlined,
-    TeamOutlined,
     PlusOutlined,
     SettingOutlined,
     CloseOutlined,
@@ -32,6 +29,7 @@ class InnerHeader extends React.Component {
 
     deletePage = async(e) => {
         await this.props.deletePage(this.props.page.id)
+        message.success("Deleted Page!")
     }
 
     // modal controller
@@ -64,11 +62,11 @@ class InnerHeader extends React.Component {
 
         if (this.state.formType === 'create') {
             await this.props.addPage(this.state, this.props.server.id)
-            console.log('create page')
+            message.success("Created Page!")
 
         } else if(JSON.stringify(formData) !== JSON.stringify(initialFields)) {
             await this.props.editPage(formData, this.props.page.id)
-            console.log('edit page')
+            message.success("Edited Page!")
         }
 
         this.setState({
@@ -102,6 +100,7 @@ class InnerHeader extends React.Component {
 
     addRoom = async () => {
         await this.props.addRoom(this.props.page.id)
+        message.success("Added Room!")
     }
 
     addRoomBtn = () => {

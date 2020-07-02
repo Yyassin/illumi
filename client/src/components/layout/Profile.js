@@ -13,7 +13,8 @@ class Profile extends React.Component {
                 declineInvite={this.props.declineInvite}
                 editProfile={this.props.editProfile}           
                 toggleDark={this.props.toggleDark}
-                toggleLight={this.props.toggleLight}         
+                toggleLight={this.props.toggleLight}     
+                msg={this.props.msg}    
             />
         )
     }

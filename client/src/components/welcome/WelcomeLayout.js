@@ -1,9 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { Card, Row, Tooltip, Button } from 'antd'
-import {
-    PlusOutlined,
-} from '@ant-design/icons'
+import { Card, Row } from 'antd'
 import './Welcome.css'
 
 import {signOut} from "../../store/actions/authActions"
@@ -70,11 +67,9 @@ class WelcomeLayout extends React.Component {
     }
 
     endSession = async() => {
-        console.log('end session')
         this.socket.emit('forceDisconnect')
 
         await this.props.signOut()  
-        console.log(this.props.uid)
         this.props.clearSession()
     }
 

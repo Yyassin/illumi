@@ -1,5 +1,5 @@
 import React from 'react';
-import {Popover, Dropdown, Menu, Form, Input, Select, Button} from "antd";
+import {Popover, Dropdown, Menu, Form, Select, Button, message} from "antd";
 import './Dash.css'
 
 
@@ -13,15 +13,16 @@ class Message extends React.Component {
         },
         visible: false,
     }
-     //replace with member roles later**
 
     deleteMessage = async () => {
         await this.props.deleteMessage(this.props.message.id)
+        message.success("Deleted Message!")
     }
 
     updateRole = async () => {
         const formData = this.formRef.current.getFieldsValue()
         await this.props.editMember(formData, this.props.message.member.id)
+        message.success("Updated Role!")
 
         this.setState({visible: false})
     }
@@ -172,7 +173,7 @@ class Message extends React.Component {
         return(
             <li className='message-container'>  
                 {this.renderAvatar()}     
-                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['contextMenu']} overlay={this.renderContextMenu()} onContextMenu={()=> console.log('oi')}>
+                <Dropdown className = "dropdown-menu ant-dropdown-open" trigger={['contextMenu']} overlay={this.renderContextMenu()}>
                     <div className="message-content">
                         {this.renderMeta()}
                         {this.renderDate()}

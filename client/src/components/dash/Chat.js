@@ -11,7 +11,6 @@ import {
 } from '@ant-design/icons';
 
 const ipcRenderer = window.require('electron').ipcRenderer
-const path = require('path');
 
 class Chat extends React.Component {
 
@@ -62,8 +61,6 @@ class Chat extends React.Component {
 
         this.socket.on("chat noti", (msg) => {
             if(this.props.uid !== msg.member.user.id) {
-                console.log('props uid: ' + this.props.uid)
-                console.log('msg uid: ' + msg.member.user.id)
                 this.notificationHandler(msg)
             }
         })

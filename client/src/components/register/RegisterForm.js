@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { authenticate } from "../../store/actions/authActions";
@@ -44,7 +44,7 @@ class RegisterForm extends React.Component {
   // remove in production
   autoSignIn = async () => {
     await this.props.authenticate({
-      email: 'test3@gmail.com',
+      email: 'test@gmail.com',
       password: 'password'
     }, 'signin')
     this.sendMessage()
@@ -75,7 +75,8 @@ class RegisterForm extends React.Component {
             placeholder="Password"
           />
         </Form.Item>
-        <Form.Item>
+
+        {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox style={{float: 'left'}}>Remember me</Checkbox>
           </Form.Item>
@@ -83,7 +84,7 @@ class RegisterForm extends React.Component {
           <Button type="link" className="login-form-forgot" onClick={this.autoSignIn} style={{float: 'right'}}>
             Auto Signin
           </Button>
-        </Form.Item>
+        </Form.Item> */}
   
         <Form.Item style={{marginBottom: '7px'}}>
           <Button id="signin" onClick={this.onSignIn} htmlType="submit" className="register-btn" style={{float: 'left'}}>

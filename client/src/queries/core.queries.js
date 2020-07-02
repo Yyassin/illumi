@@ -76,7 +76,6 @@ const queries = {
 
     addServer: (serverData, uid) => {
         const { name, description, outline, thumbnail } = serverData
-        //console.log(name + description + outline + thumbnail)
         return(
             `
             mutation{addServer(
@@ -95,7 +94,6 @@ const queries = {
 
     editServer: (serverData, serverID) => {
         const { name, description, outline, thumbnail } = serverData
-        //console.log(name + description + outline + thumbnail)
         return(
             `
             mutation{editServer(
@@ -250,7 +248,6 @@ const queries = {
 
     editProfile: (userData, uid) => {
         const { name, thumbnail, password } = userData
-        //console.log(name + description + outline + thumbnail)
         return(
             `
             mutation{editProfile(

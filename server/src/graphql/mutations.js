@@ -442,11 +442,41 @@ module.exports = new GraphQLObjectType({
                 email: { type: GraphQLString },
                 role: { type: GraphQLString },
             },
-            async resolve(parent, args) {               
+            async resolve(parent, args) {      
                 const user = await User.findOne({email: args.email})
 
                 if(!user) {
+                    console.log('user w email not exist')
                     return Error("User with that email does not exist.")
+                }
+                    
+                const sender = await Member.findById(args.senderID)
+                const server = await Server.findById(sender.serverID)
+                const serverMembers = await Member.find({serverID: server.id})
+                
+                const invites = await Invite.find({targetID: user.id})
+
+                let badInvite = false;
+
+                serverMembers.map( member => {
+                    if (user.id === member.userID) {
+                        badInvite = true;
+                        return console.log('member in server')
+                    }
+                })
+
+                for (let i=0; i <invites.length; i++) {
+                    let inviteMember = await Member.findById(invites[i].senderID)
+                    let inviteServer = await Server.findById(inviteMember.serverID)
+                    
+                    if (server.id === inviteServer.id) {
+                        badInvite = true;
+                        return Error('Member already invited to this server') 
+                    }
+                }
+
+                if (badInvite) {
+                    return Error("This user is already in your server.")
                 }
 
                 const invite = await new Invite({

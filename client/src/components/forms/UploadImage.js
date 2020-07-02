@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Button, Upload, message} from 'antd';
+import { Form, Button, Upload, message} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import './Form.css'
 
@@ -52,8 +52,6 @@ class UploadImage extends React.Component {
                 imageAlt: `An image of ${res.original_filename}`,
                 fileList: [],
                 uploading: false,
-                }, () => {
-                    console.log(this.state.initFields)
                 });
                 
                 this.props.page ? (
@@ -70,7 +68,6 @@ class UploadImage extends React.Component {
                 
         })
         .catch(err => {
-            console.log(err)
             this.setState({
                 uploading: false,
               });
@@ -93,8 +90,6 @@ class UploadImage extends React.Component {
         },
         beforeUpload: (file) => {
             let imageType;
-            console.log(file.name.split('.')[1])
-            console.log((file.name.split('.')[1] in ['jpg']))
             if (['jpg', 'png'].indexOf(file.name.split('.')[1]) === -1) {
                 imageType = false;
             } else {

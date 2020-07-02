@@ -1,6 +1,5 @@
 import React from 'react';
 import Chat from './Chat';
-import ServerHome from './ServerHome';
 
 const { shell } = window.require('electron')
 
