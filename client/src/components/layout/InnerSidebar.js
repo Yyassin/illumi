@@ -1,17 +1,13 @@
 import React from 'react';
 import {NavLink, Redirect} from 'react-router-dom'
-import {Layout, Menu, Dropdown} from "antd";
+import {Layout, Menu} from "antd";
 
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import Profile from './Profile'
 
 import {
-    DesktopOutlined,
     PieChartOutlined,
     TeamOutlined,
-    DownOutlined,
-    SettingOutlined,
-    CloseOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -141,6 +137,9 @@ class InnerSidebar extends React.Component {
                     acceptInvite={this.props.acceptInvite}
                     declineInvite={this.props.declineInvite}
                     editProfile = {this.props.editProfile}
+                    toggleDark={this.props.toggleDark}
+                    toggleLight={this.props.toggleLight}
+                    msg={this.props.msg}
                     />                
             </Sider>
         )

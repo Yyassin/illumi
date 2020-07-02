@@ -13,7 +13,7 @@ class RegisterLayout extends React.Component {
             <div>    
                 <div className="register-bg"></div>
                 <Animation />
-                <img src={path.join(__dirname, '../illumi-logo.png')}
+                <img src={path.join(__dirname, '../icon.png')}
                  className="logo-img"
                  alt=""/>
                 <h1 className="logo">illumi</h1>
@@ -27,10 +27,6 @@ class RegisterLayout extends React.Component {
 
                 <Titlebar bg={"transparent"} />
             </div>
-
-
-
-
         )
     }
 }

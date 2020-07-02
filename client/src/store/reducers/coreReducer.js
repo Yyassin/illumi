@@ -1,5 +1,6 @@
 const initState = {
     loading: false,
+    dark: true,
     data: null,
     serverIndex: 0,
     pageIndex: 0,
@@ -13,9 +14,8 @@ const coreReducer = (state = initState, action) => {
         case 'FETCH_ERROR':
             return {
                 ...state,
-                data: null,
                 loading: false,
-                msg: "Error making request."
+                msg: action.coreMsg || "Error making request."
             }
 
         case 'FETCH_SUCCESS':
@@ -23,7 +23,6 @@ const coreReducer = (state = initState, action) => {
                 ...state,
                 data: action.data,
                 loading: false,
-                msg: '',
             }        
         
         case 'SELECT_SERVER':
@@ -46,7 +45,7 @@ const coreReducer = (state = initState, action) => {
             }
 
         case 'DELETE_SERVER':
-            if((state.serverIndex == action.serverIndex ) && (state.serverIndex != 0)) {
+            if((state.serverIndex === action.serverIndex ) && (state.serverIndex !== 0)) {
                 return {
                     ...state,
                     serverIndex: state.serverIndex - 1,
@@ -74,6 +73,18 @@ const coreReducer = (state = initState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+
+        case 'DARK_THEME':
+            return {
+                ...state,
+                dark: true
+            }
+        
+        case 'LIGHT_THEME':
+            return {
+                ...state,
+                dark: false
             }
 
         default:

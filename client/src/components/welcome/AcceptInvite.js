@@ -1,7 +1,5 @@
 import React from 'react';
-import { Drawer, Form, Button, Space, Input, Select, Table } from 'antd';
-import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
-import {  MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Table } from 'antd';
 
 class AcceptInvite extends React.Component {
 
@@ -17,16 +15,12 @@ class AcceptInvite extends React.Component {
     }
     
     componentDidUpdate = (prevProps, prevState) => {
-        console.log('comp did update')
         if (prevProps.user.invites !== this.props.user.invites) {
-            console.log(prevProps.user.invites)
-            console.log(this.props.user.invites)
             this.handleUpdate();
         }
     }
 
     handleUpdate = () => {
-        console.log('handle update')        
         let data = []
 
         this.props.user.invites.map((invite, index) => {
@@ -76,7 +70,6 @@ class AcceptInvite extends React.Component {
 
     rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-            //console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             this.setState({selectedRows: selectedRows})
         },
         getCheckboxProps: record => ({
@@ -89,20 +82,24 @@ class AcceptInvite extends React.Component {
     acceptInvites = async () => {
         const rowData = this.state.selectedRows          
 
-        if(!rowData || rowData.length === 0) return
+        if(!rowData || !rowData.map || rowData.length === 0) return
 
         rowData.map((invite, index) => {
-            this.props.acceptInvite(invite.id)
+            if (invite) {
+                this.props.acceptInvite(invite.id)
+            }
         })
     }
 
     declineInvites = async () => {
         const rowData = this.state.selectedRows          
 
-        if(!rowData || rowData.length === 0) return
+        if(!rowData || !rowData.map || rowData.length === 0) return
 
         rowData.map((invite, index) => {
-            this.props.declineInvite(invite.id)
+            if (invite) {
+                this.props.declineInvite(invite.id) 
+            }
         })
     }
 
@@ -113,13 +110,19 @@ class AcceptInvite extends React.Component {
                     rowSelection={this.rowSelection}
                     columns={this.columns}
                     dataSource={this.state.data}
+                    pagination={!this.props.hidepage}
+                    style={{paddingBottom:"24px"}}
+                    className="accept-invite"
                 />
-                <Button type="primary" onClick={this.acceptInvites}>
-                    Accept Invites
-                </Button>
-                <Button onClick={this.declineInvites}>
-                    Decline Invites
-                </Button>
+
+                <div>
+                    <Button className="register-btn" style={{float: 'left'}} type="primary" onClick={this.acceptInvites}>
+                        Accept Invites
+                    </Button>
+                    <Button className="register-btn" style={{float: 'right'}} onClick={this.declineInvites}>
+                        Decline Invites
+                    </Button>
+                </div>
             </div>
         )
     }
@@ -127,7 +130,7 @@ class AcceptInvite extends React.Component {
     render() {
         return (
             <div>  
-                <h2>Invite Requests</h2>                    
+                <h2>{this.props.title ? this.props.title : 'Invite Requests'}</h2>                    
                 {this.renderInviteTable()}                        
             </div>
         )

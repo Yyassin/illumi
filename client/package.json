@@ -1,6 +1,9 @@
 {
   "name": "illumi",
-  "version": "0.1.0",
+  "productName": "illumi",
+  "version": "1.0.0",
+  "author": "Shrish Mohapatra & Yousef Yassin",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.6.4",
@@ -30,7 +33,11 @@
     "test": "craco test",
     "eject": "craco eject",
     "dev": "concurrently \"SET BROWSER=none&&npm start \" \"wait-on http://localhost:3000 && electron .\"",
-    "dev-guest": "wait-on http://localhost:3000 && electron ."
+    "dev-guest": "wait-on http://localhost:3000 && electron .",
+    "electron-pack": "npm run build --em.main=build/electron.js",
+    "preelectron-pack": "yarn build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder build/electron.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,9 +61,24 @@
     "wait-on": "^5.0.0"
   },
   "build": {
-    "appId": "illumi",
+    "appId": "com.illumi.app",
     "mac": {
-      "category": "messaging"
+      "category": "messaging",
+      "icon": "build/icon.ico"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png",
+      "publisherName": "Shrish&Yousef"
+    },
+    "files": [
+      "**/*",
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
     }
   },
   "main": "public/electron.js"

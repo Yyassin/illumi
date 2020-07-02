@@ -2,7 +2,7 @@ import React from 'react'
 import './Dash.css'
 import UploadImage from '../forms/UploadImage'
 
-import {Popover, Form, Button, DatePicker, TimePicker, Input, Row, Col} from 'antd'
+import {Popover, Form, Button, DatePicker, TimePicker, Input, Row, Col, message} from 'antd'
 import {
     EditOutlined
 } from '@ant-design/icons';
@@ -36,7 +36,6 @@ class EventCard extends React.Component {
         // moment().month("July").format("M");
         strDate = strDate.split(' ')
         strDate = `${strDate[3]}-${moment().month(strDate[1]).format('MM')}-${strDate[2]}`
-        console.log(strDate)
         
         return moment(strDate, 'YYYY-MM-DD')
     }
@@ -46,7 +45,6 @@ class EventCard extends React.Component {
     }
 
     renderPopover = (item) => {
-        console.log(item)
         const isAdmin = (this.props.member.role === 'admin')
 
         return(
@@ -174,10 +172,6 @@ class EventCard extends React.Component {
         )
     }
 
-    onChange = values => {
-        console.log(values)
-        //this.setState({[values.target.id]: values.target.value})
-      }
 
     updateEvent = async () => {
         const formData = this.formRef.current.getFieldsValue()
@@ -189,6 +183,7 @@ class EventCard extends React.Component {
 
         if (formData !== this.formRef.current.initialValues) {
             await this.props.editEvent(formData, this.props.item.id)
+            message.success("Edited Event!")
         }
 
         this.setState({visible: false})
@@ -200,7 +195,6 @@ class EventCard extends React.Component {
     }
 
     render() {
-        console.log('render event card')
         return(
             
                <div class="example-1 card">

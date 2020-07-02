@@ -19,7 +19,6 @@ class PageForm extends React.Component {
     }
 
     handleUpdate = async () => {
-        console.log('handle update')
         if(this.props.formType === 'edit') {
             await this.setState({initFields: {
                 title: this.props.page.title,

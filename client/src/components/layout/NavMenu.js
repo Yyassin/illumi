@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Dropdown, Drawer } from 'antd';
+import { Menu, Dropdown, message} from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 
 import ProfileForm from '../forms/ProfileForm'
@@ -27,13 +27,14 @@ class NavMenu extends React.Component {
     }; 
 
     handleOk = async(e) => {        
-        console.log(this.formRef.current)
         const formData = this.formRef.current.getFieldsValue()
-        console.log(formData)
+        if (formData.thumbnail === ''){
+            formData.thumbnail = 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80';
+        }
 
         if(JSON.stringify(formData) !== JSON.stringify(this.state.initFields)) {
-            console.log("editing user")
             await this.props.editProfile(formData)
+            message.succes("Edited User!")
         }
         
         this.setState({
@@ -70,8 +71,8 @@ class NavMenu extends React.Component {
                     
                     <SubMenu title="Themes">
                         <Menu.ItemGroup title="Themes">
-                            <Menu.Item>Light Theme</Menu.Item>
-                            <Menu.Item>Dark Theme</Menu.Item>
+                            <Menu.Item className="tag" key="4" onClick={this.props.toggleLight}>Light Theme</Menu.Item>
+                            <Menu.Item className="tag" key="5" onClick={this.props.toggleDark}>Dark Theme</Menu.Item>
                         </Menu.ItemGroup>
                     </SubMenu>
                     <Menu.Item className="close-tag" key="4">Close</Menu.Item>
@@ -103,6 +104,7 @@ class NavMenu extends React.Component {
                     declineInvite={this.props.declineInvite}
                     onClose={this.drawerClose}
                     visible={this.state.showDrawer}
+                    msg={this.props.msg}
                 />
                 
             </li>

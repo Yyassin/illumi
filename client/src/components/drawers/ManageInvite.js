@@ -1,8 +1,17 @@
 import React from 'react';
-import { Drawer, Form, Button, Space, Input, Select, Table } from 'antd';
+import { Drawer, Form, Button, Space, Input, Select, Table, message } from 'antd';
 import SidebarScrollbar from '../scrollbars/SidebarScrollbar'
 import {  MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './Popup.css'
+/*
+check self
+check if already in
+check if invite made to him
+check if exist
+declining more than 1 inv
+delete msg after send
+delete server on login
+*/
 
 class ManageInvite extends React.Component {
 
@@ -18,16 +27,12 @@ class ManageInvite extends React.Component {
     }
     
     componentDidUpdate = (prevProps, prevState) => {
-        console.log('comp did update')
         if (prevProps.user.invites !== this.props.user.invites) {
-            console.log(prevProps.user.invites)
-            console.log(this.props.user.invites)
             this.handleUpdate();
         }
     }
 
-    handleUpdate = () => {
-        console.log('handle update')        
+    handleUpdate = () => {       
         let data = []
 
         this.props.user.invites.map((invite, index) => {
@@ -76,8 +81,7 @@ class ManageInvite extends React.Component {
 
 
     rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            //console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        onChange: (selectedRowKeys, selectedRows) => {            
             this.setState({selectedRows: selectedRows})
         },
         getCheckboxProps: record => ({
@@ -87,20 +91,34 @@ class ManageInvite extends React.Component {
         }),
     };
 
-    onFinish = () => {
+    sendMessage = () => {
+        if (this.props.msg === "Sent invite!"){
+            message.success(this.props.msg, 3)
+        }
+        else if(this.props.msg !== "") {
+            message.error(this.props.msg, 3)
+        }
+    }    
+
+    onFinish = async () => {
         const formData = this.formRef.current.getFieldsValue()
 
-        if(!formData.invites || formData.invites.length === 0) return;
+        if(!formData.invites || formData.invites.length === 0) return message.error('Please fill out the invite fields!');
 
-        formData.invites.map((invite, index) => {
+        formData.invites.map( async (invite, index) => {
             const senderID = this.getSenderID(invite);
-            this.props.addInvite(invite, senderID)
+            
+            //check if self
+            if (invite.email !== this.props.user.email) {
+                await this.props.addInvite(invite, senderID)
+                this.sendMessage();
+            } else {
+                message.error("Can't try inviting yourself!")
+            }
+            
         })
         
         this.formRef.current.resetFields()
-
-        //Add confirmation or something
-        
     }
 
     acceptInvites = async () => {
@@ -109,7 +127,9 @@ class ManageInvite extends React.Component {
         if(!rowData || rowData.length === 0) return
 
         rowData.map((invite, index) => {
-            this.props.acceptInvite(invite.id)
+            if (invite) {
+                this.props.acceptInvite(invite.id)
+            }
         })
     }
 
@@ -119,7 +139,9 @@ class ManageInvite extends React.Component {
         if(!rowData || rowData.length === 0) return
 
         rowData.map((invite, index) => {
-            this.props.declineInvite(invite.id)
+            if (invite) {
+                this.props.declineInvite(invite.id)
+            }
         })
     }
 

@@ -11,11 +11,8 @@ console.log(`Socket listening on port ${chat_port}`);
 
 server.on("connection", socket => {
     const { id } = socket.client;
-    console.log('user connected: ' + id)
 
     socket.on('forceDisconnect', () => {
-        console.log('disconnected')
-
         socket.client.close();
         socket.client.close(true);
     })
@@ -25,7 +22,6 @@ server.on("connection", socket => {
     })
 
     socket.on('friendMouseup', () => {
-        console.log('mouseup')
         socket.broadcast.emit('friendMouseup')
     })
 
@@ -36,7 +32,6 @@ server.on("connection", socket => {
             server.emit("chat message", msg)
             server.emit("chat noti", msg)
         } else {
-            //console.log(server.clients)
             server.to(id).emit('invalid token')
         }
     })

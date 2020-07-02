@@ -19,7 +19,6 @@ class EventForm extends React.Component {
     }
 
     handleUpdate = async () => {
-        console.log('handle update')
         if(this.props.formType === 'edit') {
             await this.setState({initFields: {
                 title: this.props.page.title,
@@ -41,14 +40,6 @@ class EventForm extends React.Component {
         if(this.props.formRef.current) {
             this.props.formRef.current.setFieldsValue(this.state.initFields)
         }
-    }
-
-    onModalChange = () => {
-        // if(this.props.formRef.current) {
-        //     console.log(this.props.formRef.current.getFieldsValue())
-        //     console.log(this.props.formRef.current.getFieldsValue()
-        //         .start.toString())
-        // }
     }
 
     render() {

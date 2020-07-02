@@ -4,13 +4,14 @@
     --chat-form-bg: #ffffff07;
     --message-btn-100: #161616;
     --message-btn-80: #16161680;
-
 }
 
 .light-theme {
     --message-color: #000;
     --chat-container-bg: #fff;
     --chat-form-bg: #23232320;
+    --message-btn-100: #777777;
+    --message-btn-80: #77777780;
 }
 
 .page {
@@ -92,6 +93,7 @@ li {
     padding-top: 10px;
     font-size: 14px;
     padding-right: 8px;
+    color: var(--message-color);
 }
 
 .message-name:hover {
@@ -198,7 +200,7 @@ li {
 }
 
 .message-send-btn:hover {
-    color: plum;
+    color: var(--text-highlight);
     filter: brightness(1.10);
     background-color: var(--message-btn-100);
     /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1) */
@@ -394,10 +396,6 @@ Event card, inspired: https://codepen.io/choogoor/pen/YWBxAg
     display: inline-block;
 }
 
-.card .menu-content a {
-    color: #000;
-}
-
 .card .menu-content span {
     position: absolute;
     left: 50%;
@@ -409,7 +407,6 @@ Event card, inspired: https://codepen.io/choogoor/pen/YWBxAg
 }
 
 .card .wrapper {
-    background-color: #000;
     min-height: 300px;
     min-width: 280px;
     max-width: 280px;
@@ -457,6 +454,7 @@ Event card, inspired: https://codepen.io/choogoor/pen/YWBxAg
     margin-top: 10px;
     font-weight: 650;
     font-size: 25px;
+    color: var(--title-col)
 }
 
 .card .text {
@@ -514,7 +512,7 @@ Event card, inspired: https://codepen.io/choogoor/pen/YWBxAg
 }
 
 .example-1 .title a {
-    color: var(--message-color);
+    color: #fff;
 }
 
 .example-1 .menu-button {

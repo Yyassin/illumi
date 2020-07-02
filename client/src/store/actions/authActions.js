@@ -26,8 +26,6 @@ export const authenticate = (user, type) => {
             dispatch({type: 'AUTH_SUCCESS', accessToken: token, uid: uid })
             
         } catch (error) {
-            console.log(error)
-            
             try {
                 dispatch({type: 'AUTH_ERROR', authMsg: error.response.data.errors[0].message})
             } catch (error){

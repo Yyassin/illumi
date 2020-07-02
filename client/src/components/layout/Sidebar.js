@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu, Tooltip, Dropdown} from "antd";
+import {Layout, Menu, Tooltip, Dropdown, message} from "antd";
 import {
     PlusOutlined,
 } from '@ant-design/icons';
@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
         name: '',
         description: '',
         outline: '',
-        thumbnail: 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png',
+        thumbnail: '',
     }
     
     selectServer = async (e) => {        
@@ -49,10 +49,12 @@ class Sidebar extends React.Component {
     // context menu methods
     menuDeleteServer = async() => {
         await this.props.deleteServer(this.state.server.id, this.state.serverIndex)
+        message.success("Deleted Server!")
     }
 
     menuLeaveServer = async() => {
         await this.props.leaveServer(this.state.member.id, this.state.serverIndex)
+        message.success("Left Server!")
     }
 
     createForm = async () => {
@@ -82,6 +84,11 @@ class Sidebar extends React.Component {
         });
 
         const formData = this.formRef.current.getFieldsValue()
+
+        if (formData.thumbnail === ''){
+            formData.thumbnail = 'https://images-platform.99static.com//rQ20qavEFmVRazKkSzI0jmA7l50=/654x67:1154x567/fit-in/590x590/projects-files/33/3395/339514/fd6c37dc-e06c-4af0-9616-bf1d1217b8ba.png';
+        }
+
         let initialFields;
         
         if (this.initServer.current) {
@@ -90,9 +97,11 @@ class Sidebar extends React.Component {
 
         if (this.state.formType === 'create') {
             await this.props.addServer(this.state)
+            message.success("Created Server!")
 
         } else if(JSON.stringify(formData) !== JSON.stringify(initialFields)) {
             await this.props.editServer(formData, this.state.server.id)
+            message.success("Edited Server!")
         }
 
         this.setState({

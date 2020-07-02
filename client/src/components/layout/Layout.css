@@ -15,6 +15,8 @@
     --menu-bg: #1f1f1f;
     --group-title-col: rgba(255, 255, 255, 0.45);
     --tooltip-col: #181716;
+    --page-set-bg: rgb(44, 44, 44);
+    --disabled:  rgba(255, 255, 255, 0.05);
 }
 
 .light-theme {
@@ -28,10 +30,12 @@
     --profile-bg: #DCDCDC;
     --text-highlight: #7289da;
     --head-shadow: rgba(41, 41, 41, .2);
-    --selected: #5c555210;
+    --selected: #5c555230;
     --menu-bg: #ECECEC;
     --group-title-col: #000;
-    --tooltip-col: #2a2727;
+    --tooltip-col: #DCDCDC;
+    --page-set-bg: rgb(199, 199, 199);
+    --disabled:  rgba(0, 0, 0, 0.2);
 }
 
 .ant-layout {
@@ -108,7 +112,7 @@
 }
 
 .menu-icon-tray span:hover {
-    background-color: rgb(44, 44, 44);
+    background-color: var(--page-set-bg);
     cursor: pointer;
 }
 
@@ -195,6 +199,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--chat-container-bg) !important;
     height: 53px;
     width: 53px;
     line-height: 53px;
@@ -213,8 +218,8 @@
     border-radius: 0px 3px 3px 0px;
     transform-origin: left;
     transform: scale(0, 0.2);
-    background-color: #fff;
-    color: #fff;
+    background-color: var(--text-color);
+    color: var(--text-color);
 
     transition: transform 150ms ease-in-out;
 }
@@ -238,8 +243,8 @@
     height: 18px;
     border-radius: 0px 3px 3px 0px;
     transform: scale(1, 2);
-    background-color: #fff;
-    color: #fff;
+    background-color: var(--text-color);
+    color: var(--text-color);
 }
 
 .create-server {
@@ -464,7 +469,10 @@ li.server-leave-tag{
     color: #A64452;
 }
 
-
+li.server-edit-tag,
+li.server-invite-tag {
+    color: var(--text-color)
+}
 
 .ant-layout-sider-children {
     display: flex;
@@ -480,6 +488,7 @@ li.server-leave-tag{
     display: flex;
     justify-content: center;
     background-color: var(--side-bg);
+    color: var(--text-color);
     border: none !important;
 }
 
@@ -517,7 +526,7 @@ li.server-leave-tag{
 }
 
 .popover-content .popover-dark .popover-email {
-    color: currentColor;
+    color: var(--text-color);
     font-weight: 500;
     font-size: 13px;
     padding-top: 10px;
@@ -540,8 +549,19 @@ li.server-leave-tag{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: var(--profile-bg);
 }
 
 .popover-form button {
     margin-left: 10px;
+    color: var(--text-color);
+}
+
+span.ant-select-selection-item,
+span.ant-select-arrow {
+    color: var(--text-color);
+}
+
+.ant-select-disabled {
+    background-color: var(--disabled);
 }
