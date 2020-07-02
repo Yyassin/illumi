@@ -1,6 +1,9 @@
 import axios from 'axios';
 import queries from '../../queries/core.queries';
 
+const API_URL = 'http://illumi2.canadaeast.cloudapp.azure.com'
+
+
 export const toggleLoading = () => {
     return async (dispatch) => {
         return dispatch({type: 'IS_LOADING'})
@@ -24,7 +27,7 @@ export const init = (uid, token) => {
         try {
 
             const query = queries.init(uid);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -62,7 +65,7 @@ export const addServer = (serverData, uid, token) => {
     return async (dispatch) => {
         try {
             const query = queries.addServer(serverData, uid);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -80,7 +83,7 @@ export const editServer = (serverData, serverID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.editServer(serverData, serverID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -98,7 +101,7 @@ export const deleteServer = (serverID, serverIndex, token) => {
     return async (dispatch) => {
         try {
             const query = queries.deleteServer(serverID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -116,7 +119,7 @@ export const leaveServer = (memberID, serverIndex, token) => {
     return async (dispatch) => {
         try {
             const query = queries.leaveServer(memberID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -135,7 +138,7 @@ export const addPage = (pageData, serverID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.addPage(pageData, serverID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -153,7 +156,7 @@ export const editPage = (pageData, pageID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.editPage(pageData, pageID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -171,7 +174,7 @@ export const deletePage = (pageID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.deletePage(pageID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -190,7 +193,7 @@ export const addRoom = (pageID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.addRoom(pageID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -208,7 +211,7 @@ export const addEvent = (eventData, serverID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.addEvent(eventData, serverID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -226,7 +229,7 @@ export const editEvent = (eventData, eventID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.editEvent(eventData, eventID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -244,7 +247,7 @@ export const deleteEvent = (eventID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.deleteEvent(eventID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -262,7 +265,7 @@ export const editProfile = (profileData, uid, token) => {
     return async (dispatch) => {
         try {
             const query = queries.editProfile(profileData, uid);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -280,7 +283,7 @@ export const deleteMessage = (messageID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.deleteMessage(messageID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -298,7 +301,7 @@ export const editMember = (memberData, memberID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.editMember(memberData, memberID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -316,7 +319,7 @@ export const addInvite = (inviteData, senderID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.addInvite(inviteData, senderID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
 
             if (result.data.errors) {
@@ -335,7 +338,7 @@ export const acceptInvite = (inviteID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.acceptInvite(inviteID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})
@@ -353,7 +356,7 @@ export const declineInvite = (inviteID, token) => {
     return async (dispatch) => {
         try {
             const query = queries.declineInvite(inviteID);
-            const result = await axios.post("/api", { query }, {headers:{'token': token}});
+            const result = await axios.post(`${API_URL}/api`, { query }, {headers:{'token': token}});
 
             if (result.data.errors) {
                 return dispatch({type: 'FETCH_ERROR'})

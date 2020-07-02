@@ -3,6 +3,8 @@ import { Form, Button, Upload, message} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import './Form.css'
 
+const keys = require('../../config/keys')
+
 class UploadImage extends React.Component {
 
     state = {
@@ -44,7 +46,7 @@ class UploadImage extends React.Component {
           },
         };
 
-        return fetch('https://api.cloudinary.com/v1_1/dppx2a9sm/', options)
+        return fetch(`https://api.cloudinary.com/v1_1/${keys.cloudURL}/image/upload`, options)
         .then(res => res.json())
         .then(res => {
             this.setState({

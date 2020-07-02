@@ -15,10 +15,13 @@ const docs_route = require('./src/docs/docs.route')
 const apiLock = require('./src/middleware/apiLock')
 const validate = require('./src/middleware/validate')
 const socket = require('./src/chat/socket')
+const cors = require('cors')
 
 dotenv.config({path: './config.env'});
 
 const app = express();
+
+app.use(cors())
 
 app.use('/public', express.static('./public'))
 

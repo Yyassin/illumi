@@ -64,6 +64,7 @@
     "appId": "com.illumi.app",
     "mac": {
       "category": "messaging",
+      "target": "dmg",
       "icon": "build/icon.ico"
     },
     "win": {
