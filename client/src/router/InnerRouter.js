@@ -45,7 +45,8 @@ const InnerRouter = (props) => (
                 editEvent={props.editEvent}
                 deleteEvent={props.deleteEvent}
                 deleteMessage={props.deleteMessage}
-                editMember={props.editMember}/>
+                editMember={props.editMember}
+                dark={props.dark}/>
         }></Route>
     </Switch>
 )

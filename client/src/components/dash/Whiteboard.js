@@ -11,9 +11,21 @@ class Whiteboard extends React.Component {
     ctx;
     painting = false;
 
+    state = {
+        dark: true,
+    }
+
     componentDidMount = () => {   
-        this.socket = io.connect("http://localhost:4000");      
+        this.socket = io.connect("http://illumi2.canadaeast.cloudapp.azure.com/");      
         this.initCanvas();
+        this.handleUpdate();
+    }
+
+    handleUpdate = (prevProps, prevState) => {
+        console.log(this.props)
+        if (prevProps !== this.props) {
+            this.setState({dark: this.props.dark})
+        }
     }
 
     componentWillUnmount = () => {
@@ -69,7 +81,7 @@ class Whiteboard extends React.Component {
 
     draw = (x, y) => {
         this.ctx.lineWidth = 5;
-        this.ctx.strokeStyle = "#fff";
+        this.state.dark ? this.ctx.strokeStyle = "#fff" : this.ctx.strokeStyle = "#000"; 
         // ctx.lineCap = 'round'
     
         

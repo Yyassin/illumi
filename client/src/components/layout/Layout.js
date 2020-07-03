@@ -227,6 +227,7 @@ class MainLayout extends React.Component {
                         editEvent={this.editEvent}
                         deleteMessage={this.deleteMessage}
                         editMember={this.editMember}
+                        dark={this.props.dark}
                         />
                   </Content>
 
