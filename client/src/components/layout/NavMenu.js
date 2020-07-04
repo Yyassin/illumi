@@ -34,7 +34,7 @@ class NavMenu extends React.Component {
 
         if(JSON.stringify(formData) !== JSON.stringify(this.state.initFields)) {
             await this.props.editProfile(formData)
-            message.succes("Edited User!")
+            message.success("Edited User!")
         }
         
         this.setState({

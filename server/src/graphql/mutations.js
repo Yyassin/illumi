@@ -206,10 +206,20 @@ module.exports = new GraphQLObjectType({
                 let member = await Member.findById(args.memberID)
                 let server = await Server.findById(member.serverID)
 
+                
+                let members = await Member.find({serverID: server.id})
+
+                let pages = await Page.find({serverID: member.serverID})
+                
+                pages.map( async (page) => {
+                    let room = await Room.find({pageID: page.id})
+                    if(room[0]) {
+                        await Message.deleteMany({memberID : member.id})
+                    }
+                })
+
                 await member.delete()
                 message += "Successfully deleted member."
-
-                let members = await Member.find({serverID: server.id})
                 
                 if(members.length < 1) {
                     console.log(members.length)
