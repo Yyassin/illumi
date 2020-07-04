@@ -26,14 +26,23 @@
 - Manage members through an **invitation** system.
 - Servers also features a page to share **events** to promote planning.
 - Tutorials and lessons can be shared through **Pages** where users can upload the content they desire. An option to add a **Room** within a page allows for community discussion.
-- Each server also boasts a whiteboard for collaboration and problem-solving.
+- Each server also boasts a **shared-realtime-whiteboard** for collaboration and problem-solving.
 - All user uploaded content, including messages and whiteboard-drawing, are rendered and saved in real-time.
-- Image uploading with Cloudinary.
+- **Image uploading** with Cloudinary.
 
 ### Native Application
 - A beatifully crafted UI and custom made titlebars for Windows and Mac.
 - Taskbar support for Windows.
 - Native desktop notifications anytime a user sends a message in one of your servers.
+
+## Demo
+<span title="illumi login-page">
+ <p align="left">
+  <img src="./client/public/illumi-demo.gif" alt="illumi-img">
+ </p>
+</span>
+
+- View full [demo video](https://drive.google.com/file/d/11Tpckd5a3gp5Wl3fnLgkU2zpxzba3vAI/view?usp=sharing).
 
 ## Installation
 - Download the latest version [here](https://github.com/MarcoPixel/illumi/releases) or visit our [official site](http://illumi2.canadaeast.cloudapp.azure.com/).
@@ -52,6 +61,28 @@ git clone https://github.com/Yyassin/illumi.git
 ```
 cd ~/illumi
 ```
+
+* Create a config folder under ```client/src``` with file ```keys.js``` within it. Here place your cloudinary bucket name for image uploads:
+```
+module.exports = {
+    cloudURL = '<YOUR.CLOUDINARY.NAME>'
+}
+```
+
+
+* Create another config folder under ```server``` with file ```keys.js``` within it. Here place your mongo URI for connection to the database and also an API key, to secure REST access:
+```
+module.exports = {
+    api: {
+        key: 'secret_string'
+    },
+
+    database: {
+        uri: `mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority`,
+    },
+}
+```
+
 * Install the required dependencies in both the server and client directories:
 ```
 cd ~/illumi/client && npm i
@@ -66,6 +97,16 @@ cd ~/illumi/server && npm run dev
 Visit `localhost:5000/api` while the app is running for further app and API documentation. Alternatively, head over to the deployed site [here](http://illumi2.canadaeast.cloudapp.azure.com/).
   
 * Enjoy! 🎉
+
+**Note** : The backend server is routinely turned off from 10 PM to 8 AM. The app will not function during these hours.
+
+## Issues & feature requests
+
+If you still experience any issues, we encourage you to report them [here](https://github.com/Yyassin/illumi/issues).Please follow the existing template, otherwise the issue will be closed without notice. 
+
+Any ideas to grow the app? You can also request by adding a **request label** and we'll take a look! Developers are welcome to submit a pull request.
+
+##### [Here are our currently open issues](https://github.com/Yyassin/illumi/issues).
 
 ## Built With
 
@@ -83,13 +124,15 @@ Visit `localhost:5000/api` while the app is running for further app and API docu
 email: demo@gmail.com
 password: 123456
 ```
-* Otherwise, create a user at the registration page. You will be greeted by a welcome page where you cna create your first server, or accept any server-invitations.
-* Once you've joined a server, you will be redirected to the main dashboard.
-* You can change servers by selecting the appropriate icon on the leftmost sidebar. Server-pages can be navigated by selecting the corresponding one in the inner-sidebar.
-* Creating more servers can be achieved by the clicking the "+" icon beneath all your servers. Edit, delete, invite or leave a server by right-clicking.
-* Pages can be managed by selecting one of the page-actions featured in the top-header to edit your current page or create a new one.
-* Your user can be editted by clicking on the settings icon featured in the profile section, at the bottom of the inner-sidebar.
-* You can interact with others by sending messages in pages with rooms. Deleting a message is as easy as right-clicking and selecting delete.
-* Finally, you can view and edit your server specific member by clicking on your avatar or name in a message. Admins can edit all members within a server.
+<span title="illumi login-page">
+ <p align="center">
+  <img height="602px" width="800px" src="https://i.imgur.com/mfmOR1k.png" alt="illumi-img">
+ </p>
+</span>
 
-* These are the basic features that'll help you get started, we encourage you to explore the app further and cannot wait to let us know what you think!
+* Otherwise, create a user at the registration page. You will be greeted by a welcome page where you can create your first server, or accept any server-invitations.
+* Create more servers through the plus-icon on the left-most sidebar. Pages can be editted by the controls at the top-header.
+* Servers, server members and messages can be edited by right-clicking to bring up a context menu.
+* Your user can be editted by clicking on the settings icon featured in the profile section, at the bottom of the inner-sidebar.
+
+* These are the basic features that'll help you get started, there's much more to experience in the application!
