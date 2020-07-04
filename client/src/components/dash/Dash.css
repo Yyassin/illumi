@@ -127,6 +127,7 @@ li {
     flex: 8;
     display: flex;
     justify-content: left;
+    text-align: left;
     align-items: center;
     min-width: 50%;
 }
