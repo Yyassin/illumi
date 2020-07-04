@@ -126,6 +126,7 @@ li {
     font-weight: 500;
     flex: 8;
     display: flex;
+    text-align: left;
     justify-content: left;
     align-items: center;
     min-width: 50%;
