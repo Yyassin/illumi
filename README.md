@@ -15,6 +15,20 @@
 
 > A social desktop application made with students in mind. Illumi was designed to help simplify online-learning and the delivery of course content through a digital means. Students are grouped into servers corresponding to their enrolled courses, within which they are able to interact in real-time with their colleagues. Within each server, a catalog of course information, events, lessons, tutorials can be found along with optional real-time messaging rooms and a shared-user whiteboard.
 
+## Table of Contents
+<!--ts-->
+   * [Requirements](#minimum-requirements)
+   * [Features](#features)
+      * [Functionality](#functionality)
+      * [Native Application](#native-application)
+   * [Demo](#demo)
+   * [Installation](#installation)
+      * [Running in Development](#running-in-development)
+      * [Documentation](#documentation)
+   * [Built With](#built-with)
+   * [Using the Project](#using-project)
+<!--te-->
+
 ## Minimum Requirements:
  - Windows 7 or higher.
  - macOS 10.13 or later.
@@ -102,7 +116,7 @@ Visit `localhost:5000/api` while the app is running for further app and API docu
 
 ## Issues & feature requests
 
-If you still experience any issues, we encourage you to report them [here](https://github.com/Yyassin/illumi/issues).Please follow the existing template, otherwise the issue will be closed without notice. 
+If you still experience any issues, we encourage you to report them [here](https://github.com/Yyassin/illumi/issues). Please follow the existing template, otherwise the issue will be closed without notice. 
 
 Any ideas to grow the app? You can also request by adding a **request label** and we'll take a look! Developers are welcome to submit a pull request.
 
@@ -118,18 +132,17 @@ Any ideas to grow the app? You can also request by adding a **request label** an
 * Azure (Deployment)
 
 ## Using Project
-
-* A demo user has already been created with the credentials below incase you don't want to create one yourself.
-```
-email: demo@gmail.com
-password: 123456
-```
 <span title="illumi login-page">
  <p align="center">
   <img height="602px" width="800px" src="https://i.imgur.com/mfmOR1k.png" alt="illumi-img">
  </p>
 </span>
 
+* A demo user has already been created with the credentials below incase you don't want to create one yourself.
+```
+email: demo@gmail.com
+password: 123456
+```
 * Otherwise, create a user at the registration page. You will be greeted by a welcome page where you can create your first server, or accept any server-invitations.
 * Create more servers through the plus-icon on the left-most sidebar. Pages can be editted by the controls at the top-header.
 * Servers, server members and messages can be edited by right-clicking to bring up a context menu.
