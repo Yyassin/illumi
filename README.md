@@ -79,7 +79,7 @@ cd ~/illumi
 * Create a config folder under ```client/src``` with file ```keys.js``` within it. Here place your cloudinary bucket name for image uploads:
 ```
 module.exports = {
-    cloudURL = '<YOUR.CLOUDINARY.NAME>'
+    cloudURL: '<YOUR.CLOUDINARY.NAME>'
 }
 ```
 
