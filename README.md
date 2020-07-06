@@ -118,7 +118,7 @@ Visit `localhost:5000/api` while the app is running for further app and API docu
 
 If you still experience any issues, we encourage you to report them [here](https://github.com/Yyassin/illumi/issues). Please follow the existing template, otherwise the issue will be closed without notice. 
 
-Any ideas to grow the app? You can also request by adding a **request label** and we'll take a look! Developers are welcome to submit a pull request.
+Any ideas to grow the app? You can also request features by adding a **request label** and we'll take a look! Developers are welcome to submit a pull request.
 
 ##### [Here are our currently open issues](https://github.com/Yyassin/illumi/issues).
 
@@ -134,7 +134,7 @@ Any ideas to grow the app? You can also request by adding a **request label** an
 ## Using Project
 <span title="illumi login-page">
  <p align="center">
-  <img height="602px" width="800px" src="https://i.imgur.com/mfmOR1k.png" alt="illumi-img">
+  <img src="https://i.imgur.com/mfmOR1k.png" alt="illumi-img">
  </p>
 </span>
 
