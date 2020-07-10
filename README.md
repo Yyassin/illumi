@@ -59,7 +59,7 @@
 - View full [demo video](https://drive.google.com/file/d/11Tpckd5a3gp5Wl3fnLgkU2zpxzba3vAI/view?usp=sharing).
 
 ## Installation
-- Download the latest version [here](https://github.com/MarcoPixel/illumi/releases) or visit our [official site](http://illumi2.canadaeast.cloudapp.azure.com/).
+- Download the latest version [here](https://github.com/yyassin/illumi/releases) or visit our [official site](http://illumi2.canadaeast.cloudapp.azure.com/).
 - Run the downloaded setup file and then launch the app from the created shortcut.
 - You're done! 🎉
 
