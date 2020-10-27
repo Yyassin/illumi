@@ -7,7 +7,7 @@
 # Illumi
 <span title="illumi login-page">
  <p align="center">
-  <img src="https://i.imgur.com/eWtDIYc.png" alt="illumi-img">
+  <img src="https://i.imgur.com/O8a3eOe.png" alt="illumi-img">
  </p>
 </span>
 
