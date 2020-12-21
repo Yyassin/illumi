@@ -134,7 +134,7 @@ Any ideas to grow the app? You can also request features by adding a **request l
 ## Using Project
 <span title="illumi login-page">
  <p align="center">
-  <img src="https://i.imgur.com/mfmOR1k.png" alt="illumi-img">
+  <img src="https://i.imgur.com/EqUYvaB.png" alt="illumi-img">
  </p>
 </span>
 
