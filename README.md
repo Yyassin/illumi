@@ -4,7 +4,7 @@
  </p>
 </span>
 
-# Illumi
+<h1 align="center" style="margin-top: 0px;">illumi</h1>
 <span title="illumi login-page">
  <p align="center">
   <img width="800vw" src="https://i.imgur.com/O8a3eOe.png" alt="illumi-img">
